@@ -87,5 +87,3 @@
 		doplot = TRUE, width = 0.5)
 	fit
 
-
-	

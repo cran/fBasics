@@ -13,15 +13,15 @@
 #
 
 
-# ------------------------------------------------------------------------------
-
-
+################################################################################
 # Settings:
 
 	# Investigate Correlations in Time Series
 	# Data: NYSE Composite Index log Returns
 	data(nyseres)
 
+	
+################################################################################
 # Correlation Tests:
 
 	x = nyseres[6000:7000, 1]
@@ -29,17 +29,22 @@
 	x = (x-mean(x))/sqrt(var(x)) 
 	lag = 1
 	print(corTest(x[1:(length(x)-lag)], x[(1+lag):length(x)], 
-		alternative="two.sided", method="spearman"))
+		alternative = "two.sided", method = "spearman"))
 	print(corTest(x[1:(length(x)-lag)], x[(1+lag):length(x)], 
-		alternative="two.sided", method="kendall"))
+		alternative = "two.sided", method = "kendall"))
 
+		
+################################################################################
 # Compare with Resampled Series:	
 
 	# Resampled Empirical Time Series
 	x = sample(x)
 	print(corTest(x[1:(length(x)-lag)], x[(1+lag):length(x)], 
-		alternative="two.sided", method="spearman"))
+		alternative = "two.sided", method = "spearman"))
 	print(corTest(x[1:(length(x)-lag)], x[(1+lag):length(x)], 
-		alternative="two.sided", method="kendall"))
+		alternative = "two.sided", method = "kendall"))
+
+
+################################################################################
 
 		

@@ -1,5 +1,6 @@
-\name{timeDateMethods}
+\name{TimeDateMethods}
 
+\alias{TimeDateMethods}
 \alias{timeDateMethods}
 
 \alias{[.timeDate}
@@ -32,9 +33,11 @@
 
 \description{
     
-    A collection of methods for objects of class 'timeDate'. Included
-    are S3 methods for mathematical operations and for transformations
-    between different representations of date/time objects.
+    A collection and description of methods for 
+    objects of class 'timeDate'. Included are S3 
+    methods for mathematical operations and for 
+    transformations between different representations 
+    of date/time objects.
     \cr
     
     IMPORTANT: \cr
@@ -47,63 +50,36 @@
     Library.
     \cr
     
-    The methods are:
+    The methods for Math Operations with 'timeDate' Objects are:
 
-    \tabular{rll}{   
-    		\tab
-    		\tab	\cr
-    		\tab
-    		\tab	\bold{Math Operations with 'timeDate' Objects:} \cr
-         1  \tab    \code{[.timeDate}   
-            \tab    Extracts, replaces subsets from 'timeDate' objects, \cr
-         2  \tab    \code{+.timeDate}   
-            \tab    Performs arithmetic + ops on 'timeDate' objects, \cr
-         3  \tab    \code{-.timeDate}   
-            \tab    Performs arithmetic - ops on 'timeDate' objects, \cr
-         4  \tab    \code{Ops.timeDate}         
-            \tab    'Ops' generic functions for 'timeDate' objects, \cr
-         5  \tab    \code{diff.timeDate}        
-            \tab    Returns suitably lagged and iterated differences, \cr
-         6  \tab    \code{difftimeDate}     
-            \tab    Returns a difference of two 'timeDate' objects, \cr
-         7  \tab    \code{c.timeDate}   
-            \tab    Concatenates objects of class 'timeDate', \cr
-         8  \tab    \code{rep.timeDate}         
-            \tab    Replicates objects of class 'timeDate', \cr
-         9  \tab    \code{start.timeDate}       
-            \tab    Extracts the first object of a 'timeDate' vector, \cr
-        10  \tab    \code{end.timeDate}         
-            \tab    Extracts the last object of a 'timeDate' vector, \cr
-        11  \tab    \code{modify.timeDate}       
-            \tab    Sorts, rounds or truncates a 'timeDate' object, \cr
-        12  \tab    \code{rev.timeDate}         
-            \tab    Reverts  a 'timeDate' vector object. \cr           
-     		\tab
-    		\tab	\cr
-    		\tab
-        	\tab	\bold{Transformations of 'timeDate' Objects:} \cr 
-         1  \tab    \code{as.character.timeDate}        
-            \tab    Returns a 'timeDate' object as character string, \cr
-         2  \tab    \code{as.data.frame.timeDate}       
-            \tab    Returns a 'timeDate' object as data frame, \cr
-         3  \tab    \code{as.POSIXct.timeDate}      
-            \tab    Returns a 'timeDate' object as POSIXct object, \cr
-         4  \tab    \code{as.POSIXlt}       
-            \tab    As POSIXlt, Use Method (Overwrite), \cr
-         5  \tab    \code{as.POSIXlt.default}       
-            \tab    Default method for POSIXlt, \cr
-         6  \tab    \code{julian.timeDate}      
-            \tab    Returns Julian day counts since 1970-01-01, \cr
-         7  \tab    \code{julian.POSIXt}        
-            \tab    A Julian Patch, \cr
-         8  \tab    \code{atoms.timeDate}       
-            \tab    Returns date/time atoms from a 'timeDate' object, \cr
-         9  \tab    \code{atoms}        
-            \tab    Extract atoms, Use Method, \cr
-        10  \tab    \code{atoms.default}        
-            \tab    Default method for atoms, \cr
-        11  \tab    \code{months.timeDate}      
-            \tab    Extract months atom from a 'timeDate' object.}
+    \tabular{ll}{   
+ 	\code{[.timeDate} \tab Extracts, replaces subsets from 'timeDate' objects, \cr
+	\code{+.timeDate} \tab Performs arithmetic + ops on 'timeDate' objects, \cr
+	\code{-.timeDate} \tab  Performs arithmetic - ops on 'timeDate' objects, \cr
+	\code{Ops.timeDate} \tab 'Ops' generic functions for 'timeDate' objects, \cr
+	\code{diff.timeDate} \tab Returns suitably lagged and iterated differences, \cr
+	\code{difftimeDate} \tab Returns a difference of two 'timeDate' objects, \cr
+	\code{c.timeDate} \tab Concatenates objects of class 'timeDate', \cr
+	\code{rep.timeDate} \tab Replicates objects of class 'timeDate', \cr
+	\code{start.timeDate} \tab Extracts the first object of a 'timeDate' vector, \cr
+	\code{end.timeDate} \tab Extracts the last object of a 'timeDate' vector, \cr
+	\code{modify.timeDate} \tab Sorts, rounds or truncates a 'timeDate' object, \cr
+	\code{rev.timeDate} \tab Reverts  a 'timeDate' vector object. }          
+     		
+    The methods for Transformations of 'timeDate' Objects are:
+        
+    \tabular{ll}{       
+	\code{as.character.timeDate} \tab Returns a 'timeDate' object as character string, \cr
+	\code{as.data.frame.timeDate} \tab Returns a 'timeDate' object as data frame, \cr
+	\code{as.POSIXct.timeDate} \tab Returns a 'timeDate' object as POSIXct object, \cr
+	\code{as.POSIXlt} \tab As POSIXlt, Use Method (Overwrite), \cr
+	\code{as.POSIXlt.default} \tab Default method for POSIXlt, \cr
+	\code{julian.timeDate} \tab Returns Julian day counts since 1970-01-01, \cr
+	\code{julian.POSIXt} \tab A Julian Patch, \cr
+	\code{atoms.timeDate} \tab Returns date/time atoms from a 'timeDate' object, \cr
+	\code{atoms} \tab Extract atoms, Use Method, \cr
+	\code{atoms.default} \tab Default method for atoms, \cr
+	\code{months.timeDate} \tab Extract months atom from a 'timeDate' object. }
 
 }
 
@@ -284,8 +260,7 @@ difftimeDate(time1, time2,
 }
 
 
-\details
-{
+\details{
 
     \bold{Mathematical Operations:}
     \cr\cr
@@ -313,7 +288,7 @@ difftimeDate(time1, time2,
 }
 
 
-\notes{
+\note{
 
     These functions were written for Rmetrics users using R and Rmetrics
     under Microsoft's Windows XP operating system where timze zones, 
@@ -330,8 +305,8 @@ difftimeDate(time1, time2,
 }
 
 
-\references
-{
+\references{
+
 Bateman R.,  (2000);
     \emph{Time Functionality in the Standard C Library},
     Novell AppNotes, September 2000 Issue, 73--85.
@@ -353,6 +328,7 @@ Ripley B.D., Hornik K. (2001);
 Zivot, E., Wang J. (2003);
 	\emph{Modeling Financial Time Series with S-Plus},
 	Springer, New-York.
+	
 }
 
 
@@ -424,7 +400,7 @@ Zivot, E., Wang J. (2003);
 
 \author{
 
-    Diethelm Wuertz for this R-port.
+    Diethelm Wuertz for the Rmetrics \R-port.
     
 }
 

@@ -1,6 +1,6 @@
-\name{holidayCalendars}
+\name{HolidayCalendars}
 
-\alias{holidayCalendars}
+\alias{HolidayCalendars}
 
 \alias{easter}
 \alias{holiday}
@@ -30,66 +30,50 @@
 
 \description{
     
-    A collection of functions and methods dealing with holiday calendars. 
-    Included are functions for the computation of the date of easter
-    and related feasts. These functions allow the generation of holiday 
-    calendars. Included are some utility functions to compute special 
-    dates from n-dates, and to manage dates formatted in the ISO-8601 
-    integer \code{CCYYMMDD} calendar format. Furthermore, functions are 
-    available to convert Julian counts to formatted calendar dates and 
-    vice versa. These are SPlus like functions.
+    A collection and description of functions and methods 
+    dealing with holiday calendars. Included are functions 
+    for the computation of the date of easter and related 
+    feasts. These functions allow the generation of holiday 
+    calendars. Included are some utility functions to compute 
+    special dates from n-dates, and to manage dates formatted 
+    in the ISO-8601 integer CCYYMMDD calendar format. 
+    Furthermore, functions are available to convert Julian 
+    counts to formatted calendar dates and  vice versa. 
+    These are SPlus like functions.
+    \cr
     
-    The functions and methods are:   
+    The functions for the generation of holiday calendars are: 
+      
+    \tabular{ll}{   
+	\code{easter} \tab Returns date of easter or related feasts as 'sdate'-s, \cr
+	\code{holiday} \tab Returns a holiday date of G7 and CH as 'sdate', \cr
+	\code{holiday.NYSE} \tab Computes 'timeDate' object for full-day NYSE holidays. }       
+    	
+    The N-Day functions are: 
+      
+    \tabular{ll}{ 		
+	\code{on.or.after} \tab Date in month that is a "n-day" on-or-after a "date", \cr
+	\code{on.or.before} \tab Date in month that is a "n-day" on-or-before a "date", \cr
+	\code{nth.of.nday} \tab The "n-th" ocurrance of a "n"day in year/month, \cr
+	\code{last.of.nday} \tab The last "n"day in a given year/month. }
+            
+    The ISO-8601 day functions and methods are: 
+      
+    \tabular{ll}{ 	       
+	\code{sjulian} \tab Julian day counts from ISO formatted dates, \cr
+	\code{sdate} \tab ISO-8601 formatted dates from Julian day counts, \cr
+	\code{sday.of.week} \tab day of week from \code{CCYYMMDD} formatted dates, \cr
+	\code{sleap.year} \tab Decides if \code{CCYYMMDD} is a leap year or not, \cr
+	\code{print} \tab S3 Print method for objects of class \code{sdate}. }           
+            
+    SPlus like Functions are:    
     
-    \tabular{rll}{   
-    		\tab
-    		\tab	\bold{Generation of Holiday Calendars:} \cr
-         1  \tab    \code{easter}   
-            \tab    Returns date of easter or related feasts as 'sdate'-s, \cr
-         2  \tab    \code{holiday}  
-            \tab    Returns a holiday date of G7 and CH as 'sdate', \cr
-         3  \tab    \code{holiday.NYSE}    
-            \tab    Computes 'timeDate' object for full-day NYSE holidays. \cr           
-    		\tab
-    		\tab	\cr
-    		\tab
-    		\tab	\bold{N-Day Functions:} \cr
-         1  \tab    \code{on.or.after}  
-            \tab    Date in month that is a "n-day" on-or-after a "date", \cr
-         2  \tab    \code{on.or.before}     
-            \tab    Date in month that is a "n-day" on-or-before a "date", \cr
-         3  \tab    \code{nth.of.nday}  
-            \tab    The "n-th" ocurrance of a "n"day in year/month, \cr
-         4  \tab    \code{last.of.nday}     
-            \tab    The last "n"day in a given year/month. \cr
-            \tab
-    		\tab	\cr
-    		\tab
-    		\tab	\bold{ISO-8601 Day FRunctions:} \cr
-         1  \tab    \code{sjulian}      
-            \tab    Julian day counts from ISO formatted dates, \cr
-         2  \tab    \code{sdate}        
-            \tab    ISO-8601 formatted dates from Julian day counts, \cr
-         3  \tab    \code{sday.of.week}     
-            \tab    day of week from \code{CCYYMMDD} formatted dates, \cr
-         4  \tab    \code{sleap.year}   
-            \tab    Decides if \code{CCYYMMDD} is a leap year or not, \cr
-         5  \tab    \code{print}    
-            \tab    S3 Print method for objects of class \code{sdate}. \cr           
-            \tab
-    		\tab	\cr
-    		\tab
-    		\tab	\bold{SPlus like Functions:} \cr
-        1	\tab	\code{fjulian} 		 
-			\tab  	Calculates Julian counts from different formats, \cr
-		2	\tab	\code{.julian} 		 
-			\tab 	Converts formatted calendar dates to Julian counts, \cr
-    	3	\tab	\code{month.day.year} 
-    		\tab  	Returns months, days, and years from Julian counts, \cr
-		4	\tab	\code{leap.year} 	 
-			\tab  	Deciding if a year is a leap year or not, \cr
-		5	\tab	\code{day.of.week}	 
-			\tab  	Determines the day of week, starting with Sunday as 0.}
+    \tabular{ll}{   
+	\code{fjulian} \tab Calculates Julian counts from different formats, \cr
+	\code{.julian} \tab Converts formatted calendar dates to Julian counts, \cr
+	\code{month.day.year} \tab Returns months, days, and years from Julian counts, \cr
+	\code{leap.year} \tab Deciding if a year is a leap year or not, \cr
+	\code{day.of.week} \tab Determines the day of week, starting with Sunday as 0. }
                 
 }
 
@@ -111,7 +95,7 @@ sleap.year(sdates)
 
 \method{print}{sdate}(x, \dots)
 
-fjulian(fdates, origin = 19600101, order = 'mdy', cc = 20)
+fjulian(fdates, origin = 19600101, order = 'mdy', cc = NULL, swap = 20)
 .julian(m, d, y, origin = c(month = 1, day = 1, year = 1960)
 
 month.day.year(jul, origin = c(month = 1, day = 1, year = 1960))
@@ -122,9 +106,12 @@ day.of.week(month, day, year)
 
 \arguments{
 
-    \item{cc}{
+    \item{cc, swap}{
     	[fjulian] - \cr
-		a numeric value denoting the century.
+		originally a numeric value denoting the century. Is now 
+		obsolete with the introduction of \code{swap}. \code{swap}
+		is an integer value which determines when we swap from the
+		19th to 20th century, by default 20, i.e. we swap 1920.
 		}
 	\item{day}{ 
         an integer vector of day numbers, [DD].
@@ -274,52 +261,53 @@ day.of.week(month, day, year)
     The following ecclestial and public \code{[HOLIDAY]} functions 
     in the G7 countries and Switzerland are available: 
     \cr\cr
+    
     \emph{Holidays Related to Easter:} 
     \cr
     Septuagesima, Quinquagesima, AshWednesday, PalmSunday,
     GoodFriday,  EasterSunday, Easter, EasterMonday, 
     RogationSunday, Ascension, Pentecost, PentecostMonday, 
     TrinitySunday CorpusChristi. 
-    \cr 
+     
     \emph{Holidays Related to Christmas:} 
     \cr
     ChristTheKing, Advent1st, Advent1st, Advent3rd, 
     Advent4th, ChristmasEve, ChristmasDay, BoxingDay, 
     NewYearsDay. 
-    \cr
+    
     \emph{Other Ecclestical Feasts:} 
     \cr
     SolemnityOfMary, Epiphany, PresentationOfLord, 
     Annunciation, TransfigurationOfLord, AssumptionOfMary, 
     AssumptionOfMary, BirthOfVirginMary, CelebrationOfHolyCross, 
     MassOfArchangels, AllSaints, AllSouls. 
-    \cr
+    
     \emph{CHZurich - Public Holidays:} 
     \cr
     CHBerchtoldsDay, CHSechselaeuten, CHAscension, 
     CHConfederationDay, CHKnabenschiessen. 
-    \cr
+    
     \emph{GBLondon - Public Holidays:} 
     \cr
     GBMayDay, GBBankHoliday, GBSummerBankHoliday, 
     GBNewYearsEve.
-    \cr
+
     \emph{DEFrankfurt - Public Holidays:} 
     \cr
     DEAscension, DECorpusChristi, DEGermanUnity, DEChristmasEve,
     DENewYearsEve. 
-    \cr
+    
     \emph{FRParis - Public Holidays:} 
     \cr
     FRFetDeLaVictoire1945, FRAscension, FRBastilleDay, 
     FRAssumptionVirginMary, FRAllSaints, FRArmisticeDay. 
-    \cr
+    
     \emph{ITMilano - Public Holidays:} 
     \cr
     ITEpiphany, ITLiberationDay, ITRepublicAnniversary, 
     ITAssumptionOfVirginMary, ITAllSaints, ITWWIVictoryAnniversary, 
     ITStAmrose, ITImmaculateConception. 
-    \cr
+    
     \emph{USNewYork/USChicago - Public Holidays:} 
     \cr
     USNewYearsDay, USInaugurationDay, USMLKingsBirthday, 
@@ -327,12 +315,12 @@ day.of.week(month, day, year)
     USIndependenceDay, USLaborDay,  USColumbusDay, USElectionDay, 
     USVeteransDay, USThanksgivingDay, USChristmasDay, 
     USCPulaskisBirthday, USGoodFriday. 
-    \cr
+    
     \emph{CAToronto/CAMontreal - Public Holidays:} 
     \cr
     CAVictoriaDay, CACanadaDay, CACivicProvincialHoliday, 
     CALabourDay, CAThanksgivingDay, CaRemembranceDay. 
-    \cr
+    
     \emph{JPTokyo/JPOsaka - Public Holidays:} 
     \cr
     JPNewYearsDay, JPGantan, JPBankHolidayJan2, JPBankHolidayJan3,
@@ -346,7 +334,7 @@ day.of.week(month, day, year)
     JPBunkaNoHi, JPThanksgivingDay, JPKinrouKanshaNohi, 
     JPKinrou-kansha-no-hi, JPEmperorsBirthday,
     JPTennou-tanjyou-bi, JPTennou-tanjyou-bi. 
-    \cr
+    
     All the holiday functions are listed in the data file \code{holidays.R}.
     Additional holidays, which are not yet available there, can be added
     to this data base file.
@@ -357,22 +345,23 @@ day.of.week(month, day, year)
     \cr\cr
     The function \code{on.or.after}
     calculates the date in a given month and year that is a n-day 
-    ON OR AFTER a given date.\cr    
+    ON OR AFTER a given date.
+        
     The function \code{on.or.before}
     calculates the date in a given month and year that is a n-day 
-    ON OR BEFORE a given date. \cr  
+    ON OR BEFORE a given date. 
+      
     The function \code{nth.of.nday}
     calculates the n-th ocurrance of a n-day in a given month and 
-    year. \cr   
+    year. 
+       
     The function code{last.of.nday}
     calculates the last n-day in a given month and year.
-    \cr
-    
-    
-    \bold{sdate Class:}
     \cr\cr
-    
-    \code{"sdates"} represent a class of integer formatted \code{CCYYMMDD}
+       
+    \bold{sdate Class:}
+    \cr\cr   
+    \code{"sdates"} represents a class of integer formatted \code{CCYYMMDD}
     ISO-8601 calendar dates.
     Note, that the \code{s*} indicates "standard" or "simple" ISO-8601 
     date format where \code{CC} denotes the century, \code{YY} the year, 
@@ -384,7 +373,7 @@ day.of.week(month, day, year)
 }
 
 
-\notes{
+\note{
 
 	Most of the functions were written for R Version 1.5. With the new
 	\code{Date Class} becoming available in R 1.9.0 these functions will 
@@ -449,18 +438,21 @@ Therneau T. (1991);
    # What date had the last Monday in September, 2002?
    last.of.nday(year = 1996, month = 9, lastday = 31, nday = 1)  
    
-## fdates - fjulian -
+## fdates - 
+## fjulian -
    xmpBasics("\nStart: Convert Formatted Gregorian Dates > ")
    fdates = c("8/11/73", "08-11-73", "August 11 1973", "Aug11/73")
    fdates
    fjulian(fdates) 
    
-## fdates - fjulian -
+## fdates - 
+## fjulian -
    xmpBasics("\nNext: Convert with 'dmy' Order > ")
    fdates = c("11/8/73", "11-08-73", "11 August 1973", "11Aug73")
    fjulian(fdates, order = 'dmy')
    
-## .julian - day.of.week -
+## .julian - 
+## day.of.week -
    xmpBasics("\nNext: Day of Week > ")
    # The number of days from January 1, 1990 to each of:
    # January 15, 1990, February 15, 1991, March 15, 1992, etc.
@@ -473,7 +465,7 @@ Therneau T. (1991);
 \author{
 
     Therry Therneau for the C program used by \code{fjulian},\cr
-	Diethelm Wuertz for this \R-Port.
+	Diethelm Wuertz for the Rmetrics \R-port.
     
 }
 

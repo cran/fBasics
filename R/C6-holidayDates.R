@@ -16,25 +16,15 @@
 
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#	  iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#	  General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#	sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
 ################################################################################
@@ -49,53 +39,57 @@
 
 
 Septuagesima = function(year) {
-	ans = easter(year, -63)}
+	ans = easter(year, -63)
+	ans }
 Quinquagesima = function(year) {
-	ans = easter(year, -49)}
+	ans = easter(year, -49)
+	ans }
 AshWednesday = function(year) {
-	ans = easter(year, -46)}
+	ans = easter(year, -46)
+	ans }
 PalmSunday = function(year) {
-	ans = easter(year, -7)}
+	ans = easter(year, -7)
+	ans }
 GoodFriday = function(year) {
 	ans = easter(year, -2)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 Easter = function(year) {
 	ans = easter(year)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 EasterSunday = function(year) {
 	ans = easter(year)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 EasterMonday = function(year) {
 	ans = easter(year, 1)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 RogationSunday = function(year) {
 	ans = easter(year, 35)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 Ascension = function(year) {
 	ans = easter(year, 39)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 Pentecost = function(year) {
 	ans = easter(year, 49)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 PentecostMonday	<- function(year) {
 	ans = easter(year, 50)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 TrinitySunday = function(year) {
 	ans = easter(year, 56)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 CorpusChristi = function(year) {
 	ans = easter(year, 60)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 
 	
 # ------------------------------------------------------------------------------
@@ -104,27 +98,27 @@ CorpusChristi = function(year) {
 ChristTheKing = function(year) {
 	ans = on.or.after(year, 11, 20, 0)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 Advent1st = function(year) {
 	ans = on.or.after(year, 11, 27, 0)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 Advent2nd = function(year) {
 	ans = on.or.after(year, 12,  4, 0)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 Advent3rd = function(year) {
 	ans = on.or.after(year, 12, 11, 0)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 Advent4th = function(year) {
 	ans = on.or.after(year, 12, 18, 0)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 ChristmasEve = function(year) {
 	ans = year*10000 + 1224
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 ChristmasDay = function(year) {
 	ans = year*10000 + 1225
 	class(ans) = "sdate"
@@ -212,12 +206,11 @@ CHSechselaeuten	= function(year) {
 			theDate = nth.of.nday(y, 4, 1, 4) }
 		ans = c(ans, theDate) }
 	class(ans) = "sdate"
-	ans
-	}
+	ans }
 CHAscension = function(year) {
 	ans = easter(year, 39)
 	class(ans) = "sdate" 
-	ans}
+	ans }
 CHConfederationDay = function(year) {
 	ans = year*10000 + 0801
 	class(ans) = "sdate"
@@ -225,7 +218,7 @@ CHConfederationDay = function(year) {
 CHKnabenschiessen = function(year) {
 	ans = nth.of.nday(year, 9, 1, 2)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 
 		
 # ------------------------------------------------------------------------------
@@ -234,15 +227,15 @@ CHKnabenschiessen = function(year) {
 GBMayDay = function(year) {
 	ans = nth.of.nday(year, 5, 1, 1)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 GBBankHoliday = function(year) {
 	ans = last.of.nday(year, 5, 31, 1)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 GBSummerBankHoliday = function(year) {
 	ans = last.of.nday(year, 8, 31, 1)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 GBMilleniumDay = function(year) {
 	ans = 19991231
 	class(ans) = "sdate"
@@ -255,11 +248,11 @@ GBMilleniumDay = function(year) {
 DEAscension = function(year) {
 	ans = easter(year, 39)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 DECorpusChristi	<- function(year) {
 	ans = easter(year, 60)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 DEGermanUnity = function(year) {
 	ans = year*10000 + 1003
 	class(ans) = "sdate"
@@ -282,7 +275,8 @@ FRFetDeLaVictoire1945 = function(year) {
 	class(ans) = "sdate"
 	ans }
 FRAscension = function(year) {
-	easter(year, 39)}
+	ans = easter(year, 39)
+	ans }
 FRBastilleDay = function(year) {
 	ans = year*10000 + 0714
 	class(ans) = "sdate"
@@ -344,7 +338,7 @@ USInaugurationDay = function(year) {
 USMLKingsBirthday = function(year) {
 	ans = nth.of.nday(year, 1, 1, 3)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 USLincolnsBirthday = function(year) {
 	ans = year*10000 + 0212
 	class(ans) = "sdate"
@@ -352,11 +346,11 @@ USLincolnsBirthday = function(year) {
 USWashingtonsBirthday = function(year) {
 	ans = nth.of.nday(year, 2, 1, 3)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 USMemorialDay = function(year) {
 	ans = last.of.nday(year, 5, 31, 1)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 USIndependenceDay = function(year) {
 	ans = year*10000 + 0704
 	class(ans) = "sdate"
@@ -364,21 +358,22 @@ USIndependenceDay = function(year) {
 USLaborDay = function(year) {
 	ans = nth.of.nday(year, 9, 1, 1)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 USColumbusDay = function(year) {
 	ans = nth.of.nday(year, 10, 1, 2)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 USElectionDay = function(year) {
 	ans = on.or.after(year, 11, 2, 2)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 USVeteransDay = function(year) {
 	ans = year*10000 + 1111
 	class(ans) = "sdate"
 	ans }
 USThanksgivingDay  = function(year) {
-	ans = nth.of.nday(year, 11, 4, 4)}
+	ans = nth.of.nday(year, 11, 4, 4)
+	ans }
 USChristmasDay = function(year) {
 	ans = year*10000 + 1225
 	class(ans) = "sdate"
@@ -390,7 +385,7 @@ USCPulaskisBirthday = function(year) {
 USGoodFriday = function(year) {
 	ans = easter(year, -2)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 USPresidentsDay = function(year) {
 	ans = nth.of.nday(year, 2, 1, 3) 
 	class(ans) = "sdate" 
@@ -407,7 +402,7 @@ USDecorationMemorialDay = function(year) {
 CAVictoriaDay = function(year) {
 	ans = on.or.before(year, 5, 24, 1)
 	class(ans) = "sdate" 
-	ans}
+	ans } 
 CACanadaDay = function(year) {
 	ans = year*10000 + 0701
 	class(ans) = "sdate"
@@ -417,7 +412,8 @@ CACivicProvincialHoliday = function(year) {
 	class(ans) = "sdate" 
 	ans }
 CALabourDay = function(year) {
-	nth.of.nday(year, 9, 1, 1)}
+	ans = nth.of.nday(year, 9, 1, 1)
+	ans }
 CAThanksgivingDay = function(year) {
 	ans = nth.of.nday(year, 10, 1, 2)
 	class(ans) = "sdate" 

@@ -1,6 +1,6 @@
-\name{basicPlots}
+\name{BasicPlots}
 
-\alias{basicPlots}
+\alias{BasicPlots}
 
 \alias{tsPlot}
 \alias{histPlot}
@@ -20,34 +20,26 @@
 
 \description{ 
 
-	A collection of several plot functions and utilities which may
-	be useful for the explorative data analysis of financial and 
-	economic market data. Listed are also three utility functions
-	displaying tables for characters, plot symbols, and colors.
+    A collection and description of several plot functions 
+    and utilities which may be useful for the explorative 
+    data analysis of financial and economic market data. 
+    Listed are also three utility functions displaying 
+    tables for characters, plot symbols, and colors.
     \cr
     
     The functions are:
-	
-	\tabular{rll}{
-		1 	\tab 	\code{tsPlot} 			
-			\tab 	Time Series Plot, \cr
-		2 	\tab 	\code{histPlot}   		
-			\tab 	Histogram Plot of (Series) Data, \cr
-		3 	\tab 	\code{densityPlot} 		
-			\tab 	Kernel Density Estimate Plot, \cr
-		4 	\tab 	\code{circlesPlot} 		
-			\tab 	Scatterplot of Circles Indexing a 3rd Variable, \cr
-		5 	\tab 	\code{perspPlot} 			
-			\tab 	Perspective Plot in 2 Dimensions, \cr
-		6 	\tab 	\code{characterTable}		
-			\tab 	Table of Numerical Equivalents to Latin Characters, \cr
-		7 	\tab 	\code{plotcharacterTable}	
-			\tab 	Table of plot characters, plot symbols, \cr
-		8 	\tab 	\code{colorTable} 		
-			\tab 	Table of Color Codes and Plot Colors itself, \cr
-		9 	\tab 	\code{splusLikePlot}		
-			\tab 	Scales plotting and symbols.}
-	
+    
+    \tabular{ll}{
+    \code{tsPlot} \tab Time Series Plot, \cr
+    \code{histPlot} \tab Histogram Plot of (Series) Data, \cr
+    \code{densityPlot} \tab Kernel Density Estimate Plot, \cr
+    \code{circlesPlot} \tab Scatterplot of Circles Indexing a 3rd Variable, \cr
+    \code{perspPlot} \tab Perspective Plot in 2 Dimensions, \cr
+    \code{characterTable} \tab Table of Numerical Equivalents to Latin Characters, \cr
+    \code{plotcharacterTable} \tab Table of plot characters, plot symbols, \cr
+    \code{colorTable} \tab Table of Color Codes and Plot Colors itself, \cr
+    \code{splusLikePlot} \tab Scales plotting and symbols.}
+    
 }
 
 
@@ -55,6 +47,9 @@
 tsPlot(x, type = "l", labels = TRUE, \dots) 
 histPlot(x, col = "steelblue4", border = "white", \dots)
 densityPlot(x, \dots)
+
+
+
 circlesPlot(x, y, size = 1, \dots)
 perspPlot(x, y, z, theta = -40, phi = 30, col = "steelblue4", ps = 9, \dots)
 
@@ -68,103 +63,103 @@ splusLikePlot(scale = 0.8))
 
 \arguments{
   
-	\item{col, border, type}{
-	  	two character strings, defining the colors used to fill the
-	  	bars and to plot the borders of the bars for the \code{histPlot},
-	  	or color and linetype as used by the function \code{plot}.
-	  	}
-	\item{font, cex}{
-		an integer value, the number of the \code{font}, by default font 
-		number 1, the standard font for the \code{characterTable}
-		or the current plot character font for the 
-		\code{plotcharacterTable}. The character size is determined by
-		the numeric value \code{cex}, the default size is 0.7.
-		}	
-	\item{labels}{
-		a logical. If set to \code{TRUE} labels are generated automatically,
-		otherwise not. Default value is \code{TRUE}.
-		}	
-	\item{scale}{
-		a numeric value, by default 0.8, to scale fonts and symbols in
-		plots to make them more Splus like.
-		}
-	\item{size}{
-		a numeric vector like \code{z}, the third variable in the 
-		function \code{circlesPlot}. The argument gives the size of the 
-		circles, by default all values are set to 1.
-		}
-	\item{theta, phi, ps}{
-	  	plot parameters for the function \code{perspPlot} as used by the
-	  	function \code{persp}.
-	  	}
-	\item{x, y}{
-		numeric vectors.
-		In the case of the \code{thermometerPlot} \code{x} holds the
-		current values of the n-bars.
-		}
-	\item{z}{
-	    a matrix containing the values to be plotted by the function
-	    \code{perspPlot}.
-	    }
-	\item{\dots}{
-	    arguments to be passed to the underlying plot function.
-	    }
+    \item{col, border, type}{
+        two character strings, defining the colors used to fill the
+        bars and to plot the borders of the bars for the \code{histPlot},
+        or color and linetype as used by the function \code{plot}.
+        }
+    \item{font, cex}{
+        an integer value, the number of the \code{font}, by default font 
+        number 1, the standard font for the \code{characterTable}
+        or the current plot character font for the 
+        \code{plotcharacterTable}. The character size is determined by
+        the numeric value \code{cex}, the default size is 0.7.
+        }   
+    \item{labels}{
+        a logical. If set to \code{TRUE} labels are generated automatically,
+        otherwise not. Default value is \code{TRUE}.
+        }   
+    \item{scale}{
+        a numeric value, by default 0.8, to scale fonts and symbols in
+        plots to make them more Splus like.
+        }
+    \item{size}{
+        a numeric vector like \code{z}, the third variable in the 
+        function \code{circlesPlot}. The argument gives the size of the 
+        circles, by default all values are set to 1.
+        }
+    \item{theta, phi, ps}{
+        plot parameters for the function \code{perspPlot} as used by the
+        function \code{persp}.
+        }
+    \item{x, y}{
+        numeric vectors.
+        In the case of the \code{thermometerPlot} \code{x} holds the
+        current values of the n-bars.
+        }
+    \item{z}{
+        a matrix containing the values to be plotted by the function
+        \code{perspPlot}.
+        }
+    \item{\dots}{
+        arguments to be passed to the underlying plot function.
+        }
     
 }
 
 
 \value{
-	
-	\code{tsPlot}
-	\cr
-	plots a time series. Just a synonyme call to the function
-	\code{ts.plot} changing plot type to \code{l}ines and plot color 
-	to \code{steelblue3}.
-	\cr
-	
-	\code{histPlot}
-	\cr
-	plots a histogram. This is a synonyme function call for R's 
-	histogram plot, calling the function \code{hist}. Returns an 
-	object of class \code{"histogram"}, see \code{hist}.
-	\cr
-	
-	\code{densityPlot}
-	\cr
-	returns an object of class \code{"density"}, see \code{density}.
-	\cr
-	
-	\code{circlesPlot}
-	\cr
-	a simple pseudo three dimensional scatterplot of circels whose
-	sizes index a thrid variable.
-	\cr
-	
-	\code{perspPlot}
-	\cr
-	draws perspective plots of surfaces over the x-y plane.
-	\cr
-	
-	\code{characterTable}
-	\cr
-	displays a table with the characters of the requested font.
-  	The character on line "xy" and column "z" of the table has 
-  	code \code{"\xyz"}, e.g \code{cat("\\126")} prints: V for font 
-  	number 1. These codes can be used as any other characters.
-  	\cr 
-  	
-  	\code{plotcharacterTable}
-  	\cr
-  	displays a table with the plot characters numbered from 0 to 255.
-  	\cr
-  	
-  	\code{colorTable}
-  	\cr
+    
+    \code{tsPlot}
+    \cr
+    plots a time series. Just a synonyme call to the function
+    \code{ts.plot} changing plot type to \code{l}ines and plot color 
+    to \code{steelblue3}.
+    \cr
+    
+    \code{histPlot}
+    \cr
+    plots a histogram. This is a synonyme function call for R's 
+    histogram plot, calling the function \code{hist}. Returns an 
+    object of class \code{"histogram"}, see \code{hist}.
+    \cr
+    
+    \code{densityPlot}
+    \cr
+    returns an object of class \code{"density"}, see \code{density}.
+    \cr
+    
+    \code{circlesPlot}
+    \cr
+    a simple pseudo three dimensional scatterplot of circels whose
+    sizes index a thrid variable.
+    \cr
+    
+    \code{perspPlot}
+    \cr
+    draws perspective plots of surfaces over the x-y plane.
+    \cr
+    
+    \code{characterTable}
+    \cr
+    displays a table with the characters of the requested font.
+    The character on line "xy" and column "z" of the table has 
+    code \code{"\xyz"}, e.g \code{cat("\\126")} prints: V for font 
+    number 1. These codes can be used as any other characters.
+    \cr 
+    
+    \code{plotcharacterTable}
+    \cr
+    displays a table with the plot characters numbered from 0 to 255.
+    \cr
+    
+    \code{colorTable}
+    \cr
     displays a table with the plot colors with the associated color number.
     \cr
     
     \code{splusLikePlot}
-    \cr	 
+    \cr  
     scales plotting and symbols to make plots more Splus like.
     
 }
@@ -172,64 +167,64 @@ splusLikePlot(scale = 0.8))
 
 \details{
 
-	\bold{Series Plots:}
-	\cr\cr
-	\code{tsPlot} plots time series on a common plot. Unlike \code{plot.ts} 
-	the series can have a different time bases, but they should have the 
-	same frequency. \code{tsPlot} is a synonyme function call for R's 
-	\code{ts.plot} from the the \code{ts} package.
-	\cr
-	
-	\bold{Histogram and Density Plots:}
-	\cr\cr
-	\code{histPlot} and \code{densityPlot} show (return) distributions in form 
-	of a  histogram and density plots. The first is a synonyme function call 
-	for R's histogram plot, calling the function \code{hist}. The outlook 
-	of the plot is more SPlus like. The second creates a density Plot 
-	with underlying kernel density estimation. It is a function call to  
-	R's \code{density} function.
-	\cr
- 	
-	\bold{Three Dimensional Plots:}
-	\cr\cr
-	\code{circlesPlot} and \code{perspPlot}, see also \code{contour},
-	are functions to plot 3 dimensional data sets. The first is
-	simple scatterplot with points replaced with variable circles, 
-	whose size indexes a third variable. The second aloows to create
-	a perspective 3 dimensional plot. It is a function call to R's
-	\code{persp} plot, but the parameters are setted to produce a
-	more SPlis like outlook of the plot. \code{contour} is the call
-	to R's contour plot from the \code{base} package.
-	\cr
+    \bold{Series Plots:}
+    \cr\cr
+    \code{tsPlot} plots time series on a common plot. Unlike \code{plot.ts} 
+    the series can have a different time bases, but they should have the 
+    same frequency. \code{tsPlot} is a synonyme function call for R's 
+    \code{ts.plot} from the the \code{ts} package.
+    \cr
+    
+    \bold{Histogram and Density Plots:}
+    \cr\cr
+    \code{histPlot} and \code{densityPlot} show (return) distributions in form 
+    of a  histogram and density plots. The first is a synonyme function call 
+    for R's histogram plot, calling the function \code{hist}. The outlook 
+    of the plot is more SPlus like. The second creates a density Plot 
+    with underlying kernel density estimation. It is a function call to  
+    R's \code{density} function.
+    \cr
+    
+    \bold{Three Dimensional Plots:}
+    \cr\cr
+    \code{circlesPlot} and \code{perspPlot}, see also \code{contour},
+    are functions to plot 3 dimensional data sets. The first is
+    simple scatterplot with points replaced with variable circles, 
+    whose size indexes a third variable. The second aloows to create
+    a perspective 3 dimensional plot. It is a function call to R's
+    \code{persp} plot, but the parameters are setted to produce a
+    more SPlis like outlook of the plot. \code{contour} is the call
+    to R's contour plot from the \code{base} package.
+    \cr
 
-	\bold{Plot Utilities:}
-	\cr\cr
-	\code{characterTable}, \code{plotcharacterTable} and \code{colorTable}
+    \bold{Plot Utilities:}
+    \cr\cr
+    \code{characterTable}, \code{plotcharacterTable} and \code{colorTable}
     are three helpful utilities for using characters and colors in plots.
-	The first function displays a table of numerical equivalents to Latin 
-	characters, the second displays a table of plot characters, i.e. 
-	the symbols used in plots, and the third displays a table with the
-	codes of the default plot colors.
-	
+    The first function displays a table of numerical equivalents to Latin 
+    characters, the second displays a table of plot characters, i.e. 
+    the symbols used in plots, and the third displays a table with the
+    codes of the default plot colors.
+    
 }
 
 
 \author{
  
-  	Gordon Smyth for the circlesPlot, \cr
-	Pierre Joyet for the characterTable, and \cr
-	Diethelm Wuertz for this \R-port.
-	
+    Gordon Smyth for the circlesPlot, \cr
+    Pierre Joyet for the characterTable, and \cr
+    Diethelm Wuertz for the Rmetrics \R-port.
+    
 }
 
 
 \seealso{
   
-	\code{\link{plot}},
-	\code{\link{persp}},  
-  	\code{\link{contour}},
-  	\code{\link{par}}.
-  	
+    \code{\link{plot}},
+    \code{\link{persp}},  
+    \code{\link{contour}},
+    \code{\link{par}}.
+    
 }
 
 
@@ -237,11 +232,10 @@ splusLikePlot(scale = 0.8))
 ## tsPlot -
    xmpBasics("\nStart: European Stock Markets > ")
    # Show multiple plot:
-   par(mfrow=c(1, 1))
+   par(mfrow = c(1, 1), cex = 0.7)
    data(EuStockMarkets)
    tsPlot(EuStockMarkets, gpars = list(col = c(2:4, 6)), labels = FALSE)
    title(main = "European Stock Markets")
-   
    
 ## histPlot -
    xmpBasics("\nNext: Histogram Plot of Normal Random Numbers > ")
@@ -254,14 +248,14 @@ splusLikePlot(scale = 0.8))
 ## circlesPlot -
    xmpBasics("\nNext: 3D Circles Plot of Normal Random Numbers > ")
    circlesPlot(x = rnorm(50), y = rnorm(50), size = abs(rnorm(50)),
-   	 main = "Circles Plot")
+     main = "Circles Plot")
 
 ## perspPlot -
    xmpBasics("\nNext: Perspective Plot > ")
    par(mfrow = c(1, 1), ps = 11)
    x = y = seq(-10, 10, length=51)
    f = function(x, y) { r = sqrt(x^2+y^2); 10 * sin(r)/r }
-   z = outer(x, y, f)	
+   z = outer(x, y, f)   
    perspPlot(x, y, z)
    title(main = "Perspective Plot", line = -3)
    

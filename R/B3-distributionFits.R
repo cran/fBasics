@@ -16,25 +16,15 @@
 
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#	  iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#	  General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#	sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
 ################################################################################
@@ -42,7 +32,6 @@
 #  tFit					 Fits Parameters of a Student-t Density
 #  hypFit				 Fits Parameters of a hyperbolic Density
 #  nigFit				 Fits Parameters of a normal inverse Gaussian Density
-#  hypStats              Computes statistics of a hyperbolic Density
 ################################################################################
 
 
@@ -54,15 +43,18 @@ function(x, df, doplot = TRUE, span = seq(from = -10, to = 10, by = 0.1), ...)
 	#	Return Maximum log-likelihood estimated
    	#	Paramters for Student-t Distribution:
    	  
-	# Function Calls: 
-	#	nlminb(), density() 
+	# Notes:
+	#   Function Calls: nlminb(), density() 
    	
 	# FUNCTION:
+	
+	# Transform:
+	x = as.vector(x)
 	
 	# Internal Function:
 	.nlopt = function(start.p, objective.f, ...) {
 		opt = nlm(f = objective.f, p = start.p, ...)
-		list(estimate=opt$estimate, objective=opt$minimum, 			
+		list(estimate = opt$estimate, objective = opt$minimum, 			
 		gradient = opt$gradient, message = opt$code) }
 	
 	# Settings:
@@ -115,11 +107,13 @@ doplot = TRUE, span = seq(from = -10, to = 10, by = 0.1), ...)
 	#	Return Maximum log-likelihood estimated
    	#	Paramters for Hyperbolic Distribution:
    	   
-	# Note:
-	#	Function Calls: 
-	#	density() 
+	# Notes:
+	#	Function Calls: density() 
 
 	# FUNCTION:
+	
+	# Transform:
+	x = as.vector(x)
 	
 	# Internal Function:
 	.nlopt = function(start.p, objective.f, ...) {
@@ -185,6 +179,9 @@ doplot = TRUE, span = seq(from = -10, to = 10, by = 0.1), ...)
    	
 	# FUNCTION:
 	
+	# Transform:
+	x = as.vector(x)
+	
 	# Internal Function:
 	.nlopt = function(start.p, objective.f, ...) {
 		opt = nlm(f = objective.f, p = start.p, ...)
@@ -209,7 +206,7 @@ doplot = TRUE, span = seq(from = -10, to = 10, by = 0.1), ...)
 		beta, delta, mu), print.level = 0, y = x)
 		
 	# Optional Plot:
-	if(doplot) {
+	if (doplot) {
 		par(err=-1)
 		z = density(x, n=100, ...)
 		x = z$x[z$y>0]
@@ -231,40 +228,5 @@ doplot = TRUE, span = seq(from = -10, to = 10, by = 0.1), ...)
 }
 
 
-# ------------------------------------------------------------------------------
+# ******************************************************************************
 
-
-hypStats = 
-function (alpha = 1, beta = 0, delta = 1, mu = 0)
-{	# A function implemented by Diethelm Wuertz
-
-  	# Description:
-	#	Returns basic statistics for a Hyperbolic PDF:
-	#	i.e. mean and variance.
- 
-	# Arguments:
-	#	|beta| <= alpha  - Shape Parameters
-	#	0 <= delta       - Scale Parameter
-	#	mu               - Location Parameter
-
-	# Notes:
-	#	Function Calls:
-	#	SUBROUTINE SHYP(xmean, xvar, alpha, beta, delta)
-
-   	# FUNCTION:
-   	
-   	# Compute
-	result = .Fortran("shyp",
-	  	as.double(0),
-	  	as.double(0),
-	  	as.double(alpha),
-	 	as.double(beta),
-	  	as.double(delta),
-	  	PACKAGE = "fBasics")
-  	
-	# Return Value:
-    list(mean = mu+result[[1]], var = result[[2]])
-}
-
-
-# ------------------------------------------------------------------------------

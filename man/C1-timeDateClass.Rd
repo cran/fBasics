@@ -1,12 +1,13 @@
-\name{timeDateClass}
+\name{TimeDateClass}
 
-\alias{timeDateClass}
+\alias{TimeDateClass}
 
 \alias{rulesFinCenter}
 \alias{listFinCenter}
 
 \alias{timeDate}
 \alias{timeDate-class}
+
 \alias{timeCalendar}
 \alias{timeSequence}
 \alias{Sys.timeDate}
@@ -28,13 +29,15 @@
 
 \description{
     
-    A collection of functions for managing date and time around the
-    globe for any financial center. The concept allows for dealing
-    with time zones, day light saving time and holiday calendars
-    independent of the date and time specifications of the operating 
-    system implemented on your computer. This is an important issue
-    especially for R running under Microsoft's Windows operating
-    system.
+    A collection and description of functions for 
+    managing date and time around the globe for any 
+    financial center. The concept allows for dealing
+    with time zones, day light saving time and 
+    holiday calendars independent of the date and 
+    time specifications of the operating system 
+    implemented on your computer. This is an important 
+    issue especially for R running under Microsoft's 
+    Windows operating system.
     
     IMPORTANT: \cr
     The \code{timeDate} and \code{timeSeries} classes are so far
@@ -46,55 +49,36 @@
     Library.
     \cr
     
-    The functions are:
+    The functions for Financial Centers are:
 
-    \tabular{rll}{   
-    		\tab
-    		\tab	\cr
-    		\tab
-    		\tab	\bold{Financial Centers:} \cr
-        1   \tab    \code{rulesFinCenter}   
-            \tab    Returns DST rules for a financial center, \cr
-        2   \tab    \code{listFinCenter}    
-            \tab    Lists all supported financial centers. \cr  
-    		\tab
-    		\tab	\cr
-    		\tab		
-    		\tab	\bold{Generation of 'timeDate' Objects:} \cr   
-        1   \tab    \code{timeDate}         
-            \tab    S4: Creates 'timeDate' object from a character vector, \cr
-        2   \tab    \code{timeCalendar}     
-            \tab    S4: Creates 'timeDate' object from calendar atoms, \cr
-        3   \tab    \code{timeSequence}         
-            \tab    S4: Creates regularly spaced object of class 'timeDate', \cr
-        4   \tab    \code{Sys.timeDate}         
-            \tab    Returns system time as an object of class 'timeDate'. \cr           
-    		\tab
-    		\tab	\cr
-    		\tab
-    		\tab	\bold{Special Monthly 'timeDate' Sequences:} \cr                
-		1   \tab    \code{timeLastDayInMonth}   
-            \tab    Computes the last day in a given month and year, \cr
-        2   \tab    \code{timeNdayOnOrAfter}        
-            \tab    Computes date that is a "on-or-after" n-day, \cr  
-        3   \tab    \code{timeNdayOnOrBefore}       
-            \tab    Computes date that is a "on-or-before" n-day, \cr
-        4   \tab    \code{timeNthNdayInMonth}       
-            \tab    Computes n-th ocurrance of a n-day in year/month, \cr
-        5   \tab    \code{timeLastNdayInMonth}      
-            \tab    Computes the last n-day in year/month. \cr            
-            \tab
-    		\tab	\cr
-    		\tab
-    		\tab	\bold{Representation of 'timedate' Objects:} \cr                
-       	1   \tab    \code{is.timeDate}      
-            \tab    Checks if the object is of class 'timeDate', \cr
-       	2   \tab    \code{print.timeDate}       
-            \tab    Prints 'timeDate', 'FinCenter' and 'Data' Slot, \cr
-        3   \tab    \code{summary.timeDate}         
-            \tab    Summarizes details of a 'timeDate' object, \cr
-        4   \tab    \code{format.timeDate}      
-            \tab    Formats 'timeDate' as ISO conform character string.}
+    \tabular{ll}{   
+    \code{rulesFinCenter} \tab Returns DST rules for a financial center, \cr
+    \code{listFinCenter} \tab Lists all supported financial centers. }
+    
+    The functions for the Generation of 'timeDate' Objects are:
+    
+    \tabular{ll}{
+    \code{timeDate} \tab S4: Creates 'timeDate' object from a character vector, \cr
+    \code{timeCalendar} \tab S4: Creates 'timeDate' object from calendar atoms, \cr
+    \code{timeSequence} \tab S4: Creates regularly spaced object of class 'timeDate', \cr
+    \code{Sys.timeDate} \tab Returns system time as an object of class 'timeDate'. }         
+
+    The functions for Special Monthly 'timeDate' Sequences are:
+    
+    \tabular{ll}{
+    \code{timeLastDayInMonth} \tab Computes the last day in a given month and year, \cr
+    \code{timeNdayOnOrAfter} \tab Computes date that is a "on-or-after" n-day, \cr  
+    \code{timeNdayOnOrBefore} \tab Computes date that is a "on-or-before" n-day, \cr
+    \code{timeNthNdayInMonth} \tab Computes n-th ocurrance of a n-day in year/month, \cr
+    \code{timeLastNdayInMonth} \tab Computes the last n-day in year/month. }           
+         
+    The functions for the Representation of 'timedate' Objects are:
+    
+    \tabular{ll}{       
+    \code{is.timeDate} \tab Checks if the object is of class 'timeDate', \cr
+    \code{print.timeDate} \tab S4: Prints 'timeDate', 'FinCenter' and 'Data' Slot, \cr
+    \code{summary.timeDate} \tab S4: Summarizes details of a 'timeDate' object, \cr
+    \code{format.timeDate} \tab Formats 'timeDate' as ISO conform character string. }
         
 }
 
@@ -114,11 +98,11 @@ timeLastDayInMonth(charvec, format = "\%Y-\%m-\%d", FinCenter = "GMT")
 timeNdayOnOrAfter(charvec, nday = 1, format = "\%Y-\%m-\%d", FinCenter = "GMT")
 timeNdayOnOrBefore(charvec, nday = 1, format = "\%Y-\%m-\%d", FinCenter = "GMT")
 timeNthNdayInMonth(charvec, nday = 1, nth = 1, format = "\%Y-\%m-\%d", 
-	FinCenter = "GMT")
+    FinCenter = "GMT")
 timeLastNdayInMonth(charvec, nday = 1, format = "\%Y-\%m-\%d", FinCenter = "GMT")
 
 is.timeDate(object) 
-\method{print}{timeDate}(x, \dots) 
+\method{print}{timeDate}(x, \dots)
 \method{summary}{timeDate}(object, \dots)
 \method{format}{timeDate}(x, \dots)
 }
@@ -163,18 +147,18 @@ is.timeDate(object)
         an integer vector numbering the n-th occurence.
         }     
     \item{object}{
-    	[is.timeData][summary] - \cr
-    	an object of class \code{timeDate}.
-    	}
+        [is.timeData][summary] - \cr
+        an object of class \code{timeDate}.
+        }
     \item{pattern}{
         a pattern character string which can be recognized
         by the \code{grep} function. Wild cards are allowed.
         }
     \item{x}{
-    	[format][print] - \cr
-    	an object of class \code{timeDate}.
-    	}
-   	\item{y, m, d}{
+        [format][print] - \cr
+        an object of class \code{timeDate}.
+        }
+    \item{y, m, d}{
         calendar years (e.g. 1997), defaults are 1960,
         calendar months (1-12), defaults are 1, and 
         calendar days (1-31), defaults are 1. 
@@ -233,13 +217,13 @@ is.timeDate(object)
     argument is of \code{timeDate} type or not.
     \cr
     
-    \emph{Print method:}
+    \emph{Print Method:}
     \cr
     prints the financial center and date and time vector for a 
     \code{timeDate} object.
     \cr
     
-    \emph{Summary method:}
+    \emph{Summary Method:}
     \cr
     returns a summary report of the details of a \code{timeDate} 
     object. This includes the starting and end date, the number of 
@@ -353,7 +337,7 @@ is.timeDate(object)
     
     \bold{Tests and Representation of timeDate Objects:}
     \cr\cr
-    We have implemented four S3 methods to test and represent
+    We have implemented four methods to test and represent
     \code{timeDate} objects. The method \code{is.timeDate} checks if 
     a given object is of class \code{"timeDate"}. The print method 
     returns the date/time in square \code{"[]"} brackets to dsitinguish
@@ -366,7 +350,7 @@ is.timeDate(object)
 }
 
 
-\notes{
+\note{
 
     These functions were written for Rmetrics users using R and Rmetrics
     under Microsoft's Windows XP operating system where timze zones, 
@@ -392,8 +376,8 @@ is.timeDate(object)
 }
 
 
-\references
-{
+\references{
+
 Bateman R., (2000);
     \emph{Time Functionality in the Standard C Library},
     Novell AppNotes, September 2000 Issue, 73--85.
@@ -413,16 +397,16 @@ Ripley B.D., Hornik K. (2001);
     R-News, Vol. 1/2 June 2001, 8--12.
     
 Zivot, E., Wang J. (2003);
-	\emph{Modeling Financial Time Series with S-Plus},
-	Springer, New-York.
+    \emph{Modeling Financial Time Series with S-Plus},
+    Springer, New-York.
 }
 
 
-\seealso
-{
-	We recommend to inspect the help pages for the POSIX time and date 
-	class, \code{?Dates},  and the help pages from the contributed R packages
-	\code{chron} and \code{date}.
+\seealso{
+
+    We recommend to inspect the help pages for the POSIX time and date 
+    class, \code{?Dates},  and the help pages from the contributed R packages
+    \code{chron} and \code{date}.
 }
 
 
@@ -468,7 +452,7 @@ Zivot, E., Wang J. (2003);
 
 \author{
 
-    Diethelm Wuertz for this R-port.
+    Diethelm Wuertz for the Rmetrics \R-port.
     
 }
 

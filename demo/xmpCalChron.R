@@ -34,19 +34,18 @@
 #
 
 
-# ------------------------------------------------------------------------------
-
-
 ################################################################################
-## 1 Introduction - Requirements
+# 1 Introduction - Requirements
 
 	
     # Don't forget to load the chron package!
-	require(chron)
+	loaded = require(chron)
+	if (!loaded) {
+		stop("\nLibrary "chron" required!")
 	
 
 ################################################################################   
-## 2 Generation of Objects
+# 2 Generation of Objects
    
 
    # Controls:
@@ -135,7 +134,7 @@
    
    
 ################################################################################   
-## 3 Representation of Objects
+# 3 Representation of Objects
    
 
    # "format" - Convert to character, internal functions 
@@ -213,7 +212,7 @@
  
        
 ################################################################################   
-## 4 Mathematical Operations
+# 4 Mathematical Operations
  
      
    # "[" - Extracts or replaces subsets from objects
@@ -325,7 +324,7 @@
    
    
 ################################################################################   
-## 4 Object Conversions
+# 5 Object Conversions
    
   
    # "as.character" - Returns Object as Character Vector:
@@ -370,7 +369,7 @@
 
    
 ################################################################################   
-## 6 Object Transformations
+# 6 Object Transformations
   
    
    # "julian" - Extracts Julian time in days since 1970-01-01
@@ -385,8 +384,8 @@
    
    # Is 1970 the default Julian origin?
    julian(1, 1, 1970) 
-   julian(chron("1/1/1970", "00:00:00"))
-   julian(dates("1/1/1970"))
+   julian(as.POSIXlt(chron("1/1/1970", "00:00:00")))
+   julian(as.POSIXlt(dates("1/1/1970")))
    # Returns for all three:
    # [1] 0
    # Origin:
@@ -414,21 +413,17 @@
    #   month day year
    # 1     1   1 2000
    # Works also for Vectors:
-   month.day.year(jul = julian(Chron))
-   month.day.year(jul = julian(Dates))
+   mdy = month.day.year(jul = as.integer(julian(as.POSIXlt(Chron))))
+   mdy
+   mdy = month.day.year(jul = as.integer(julian(as.POSIXlt(Dates))))
+   mdy
    ###
    
    
    # "day.of.week" - Day of Week Function:
-   day.of.week(m, d, y)
+   day.of.week(month = mdy$month, day= mdy$day, year=mdy$year)
    # November 12, 98, was a Wednesday.
-   day.of.week(m = 11, d = 12, y = 98)
-   # November 12, 1998, was a Thursday.
-   day.of.week(m = 11, d = 12, y = 1998)
-   # Use dates and chron objects:
-   dow(Dates); dow(Chron)
-   # Take care of the timzone!
-   Chron[1]; dow(Chron[1], tz=""); dow(Chron[1], tz="GMT")
+   day.of.week(month = 11, day = 12, year = 1998)
    ###
    
     
@@ -461,11 +456,8 @@
    days(x); months(x); quarters(x); years(x) # includes levels
    ###
    
+}
 
-   # "wdydy", "yeardays" - SPlus Like Functions:
-   # Create weekday-yeardays-year Data Frame:
-   wdydy(Dates); wdydy(Chron)
-   # Extracts the day number of the year:
-   yeardays(Dates); yeardays(Chron)	
-   ###
-   
+
+################################################################################
+

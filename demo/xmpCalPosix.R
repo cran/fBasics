@@ -33,11 +33,8 @@
 #
 
 
-# ------------------------------------------------------------------------------
-
-
 ################################################################################
-## 1 Introduction
+# 1 Introduction
 
    
    # Note, POSIX is part of the base package!
@@ -50,7 +47,7 @@
 	
 
 ################################################################################  
-## 2 Generation of Objects
+# 2 Generation of Objects
   
  
    # Create Character Vectors and Format Specification:
@@ -149,7 +146,7 @@
   
    
 ################################################################################		 
-## 3 Representation of Objects
+# 3 Representation of Objects
  
 
    # "print" - Prints Objects:
@@ -210,17 +207,16 @@
    # USE: diff(x, lag=1, differences=1, ...) 
    lt[2] - lt[1]
    # Time difference of 4369.473 days
-   diff(lt)
-   # ???
+   diff(as.POSIXct(lt))
+   # next
    ct[2] - ct[1]
    # Time difference of 4369.473 days
    diff(ct)
-   # ???
    ###
    
    
    # "=="  "!="  "<"  "<="  ">"  ">=" - Perform Logical Operations: 
-   lt[lt > strptime("2000-01-01 00:00:00", format)]
+   lt[lt > strptime("2000-01-01 00:00:00", format = "%Y-%m-%d %H:%M:%S")]
    lt
    # [1] "2001-09-15 10:34:02 GMT" "2004-08-30 08:30:00 GMT"
    # More Logical Operations ...
@@ -273,7 +269,7 @@
    
    
 ################################################################################
-## 5 Object Transformations
+# 5 Object Transformations
 
    
    # Create 'POSIXt' Objects:
@@ -337,4 +333,7 @@
    # [1] "1970-01-01 GMT"
    ####
    
-   
+ 
+################################################################################
+
+ 

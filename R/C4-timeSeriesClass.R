@@ -16,25 +16,15 @@
 
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#     iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#     General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#   sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
 ################################################################################
@@ -42,6 +32,7 @@
 #  setClass             S4 Class definition for a 'timeSeries' object
 #  timeSeries           Creates a 'timeSeries' object from scratch
 #  read.timeSeries      Reads from a spreadsheet and creates a 'timeSeries'
+# METHODS:
 #   as.timeSeries       S3: Creates a dummy 'time Series' from a 'matrix'
 #   is.timeSeries       S3: Tests for a 'timeSeries' object
 #   print.timeSeries    S3: Print method for a 'timeSeries' object
@@ -49,11 +40,12 @@
 #   lines.timeSeries    S3: Lines method for a 'timeSeries' object
 #   Ops.timeSeries      S3: Arith method for a 'timeSeries' object
 #   [.timeSeries        S3: [ method for a 'timeSeries' object
-#	head.timeSeries     S3: returns the head of a 'timeSeries' object
-#	tail.timeSeries     S3: returns the tail of a 'timeSeries' object
+#   head.timeSeries     S3: returns the head of a 'timeSeries' object
+#   tail.timeSeries     S3: returns the tail of a 'timeSeries' object
 # FUNCTION:            REPRESENTATION OF TIME SERIES OBJECTS:
 #  seriesData           Extracts data slot from 'timeSeries' object
 #  seriesPositions      Extracts positions slot from 'timeSeries' object
+# METHODS:
 #  start.timeSeries     S3: Extracts start date of a 'timeSeries' object 
 #  end.timeSeries       S3: Extracts end date of a 'timeSeries' object 
 #  as.vector.timeSeries S3: Converts a univariate 'timeSeries' to a vector
@@ -65,9 +57,9 @@
 #  mergeSeries          Merges a 'timeSeries' object with a 'matrix'
 #  returnSeries         Computes returns from a 'timeSeries' object
 #  revSeries            Reverts a 'timeSeries' object
-#  diffSeries     		Differences a 'timeSeries' object
-#  lagSeries      		Lags a 'timeSeries' object
-# FUNCTION:            DAILY OPERATIONS:
+#  diffSeries           Differences a 'timeSeries' object
+#  lagSeries            Lags a 'timeSeries' object
+# FUNCTION:            FOR DAILY OPERATIONS:
 #  alignDailySeries     Aligns a 'timeSeries' object to new positions 
 #  ohlcDailyPlot        Plots open–high–low–close bar chart         
 ################################################################################
@@ -86,7 +78,12 @@
 #   Date and time is managed in the same way as for 'timeDate' objects.
 
 
+# ------------------------------------------------------------------------------
+
 require(methods)
+
+
+# ------------------------------------------------------------------------------
 
 
 setClass("timeSeries", 
@@ -212,8 +209,8 @@ documentation = "", sep = ";")
     #       recorded.
     #   FinCenter - a character with the the location of the  
     #       financial center named as "continent/city". By default
-    #		an empty string which means that internally "GMT" will
-    #		be used.
+    #       an empty string which means that internally "GMT" will
+    #       be used.
     #   title - an optional title string, if not specified the inputs 
     #       data name is deparsed.
     #   documentation - optional documentation string.
@@ -231,7 +228,7 @@ documentation = "", sep = ";")
     if (FinCenter == "") FinCenter = "GMT"
     
     # Read Data:
-	zfile = zip.file.extract(file, "Rdata.zip")
+    zfile = zip.file.extract(file, "Rdata.zip")
     header = scan(zfile, what = "", nlines = 1, sep = sep, quiet = TRUE)
     x = read.table(zfile, header = TRUE, sep = sep)
     n = dim(x)[2]
@@ -266,9 +263,9 @@ function(x, dimnames = TRUE, format = "")
     # Arguments:
     #   x - a 'matrix' object to be converted.
     #   dimnames - a logical, if TRUE the dimension names of the
-    #		matrix are assigned to the time series object
+    #       matrix are assigned to the time series object
     #   format - a character string with the format in POSIX 
-    #		notation to be passed to the time series object
+    #       notation to be passed to the time series object
     
     # Value:
     #   Returns a S4 object of class 'timeSeries'.
@@ -277,24 +274,24 @@ function(x, dimnames = TRUE, format = "")
     
     # Time Series Decoration: 
     if (dimnames) {
-	    colNames = colnames(x)[-1]
-	    rowNames = as.vector(x[, 1])
-	    data = as.matrix(x[, -1])}
-	else {
-    	data = as.matrix(x)
-    	rows = dim(data)[1]
-    	cols = dim(data)[2]
-    	colNames = as.character(1:cols)
-    	rowNames = as.character(1:rows) }
+        colNames = colnames(x)[-1]
+        rowNames = as.vector(x[, 1])
+        data = as.matrix(x[, -1])}
+    else {
+        data = as.matrix(x)
+        rows = dim(data)[1]
+        cols = dim(data)[2]
+        colNames = as.character(1:cols)
+        rowNames = as.character(1:rows) }
     colnames(data) = colNames
-	rownames(data) = rowNames 
-	    
+    rownames(data) = rowNames 
+        
     # Return Value:
     # new("timeSeries", Data = data, positions = as.character(rowNames), 
     #     format = format, FinCenter = "GMT", units = colNames, 
     #     title = as.character(""), documentation = as.character(""))
     timeSeries(data = data, charvec = as.character(rowNames), 
-    	units = colNames, format = format, zone = myFinCenter)
+        units = colNames, format = format, zone = myFinCenter)
 }
    
 
@@ -356,37 +353,93 @@ function(x, reference.grid = TRUE, lty = 1, ...)
 {   # A function implemented by Diethelm Wuertz
 
     # Description:
-    #   Plot method for an S4 object of class "timeSeries"
+    #   Plot method for an object of class "timeSeries"
         
     # Arguments:
     #   x - a "timeSeries" object
-    #   # minor.tick - adds minor ticks, a numeric vector of three 
-    #   #   elements. The first and second are integers and number
-    #   #   additional tick on the x and y axis repectively. The
-    #   #   third elment is the tick.ratio by default half of the
-    #   #   length of the major ticks. [ Not yet implemented ]
     #   reference.grid - a logical value. Should a grid be
     #       added to the plot?
-        
+    
+    # Example:
+    #   data(DowJones30); x = as.timeSeries(DowJones30)
+    #   par(mfrow = c(2, 1)); plot(x[,1:3]); plot(x[,3])
+    
     # Value:
     #   Plots a 'timeSeries' object.
     
     # FUNCTION:
     
-    # Convert and use its[requires Hmisc] ...
-    sink("@sink@")
-    required = require(its) 
-    sink()
-    unlink("@sink@")
-    # 
-    
+    # Internal Functions:
+    # Partial Copy from "its" Package
+    # Makes "its" and "Hmisc" obsolete
+    # ... these internal functions will be replaced in a future version!
+    setClass("its", 
+        representation("matrix", dates = "POSIXt"))
+    # Time Series:
+    .its <<-  
+    function(x, dates = as.POSIXct(x = strptime(dimnames(x)[[1]], format = 
+    "%Y-%m-%d")), names=dimnames(x)[[2]], format = "%Y-%m-%d",...) {
+        if(!is(dates, "POSIXt")) stop("dates should be in POSIX format")
+        dates = as.POSIXct(dates)
+        if(is.null(dim(x))){dim(x) = c(length(x),1)}
+        # addDimnames:
+        if(is.null(dimnames(x))) {dimnames(x) = list(NULL,NULL)}
+        if(is.null(dimnames(x)[[1]])&(nrow(x)>0)) dimnames(x)[[1]] = 1:nrow(x)
+        if(is.null(dimnames(x)[[2]])&(ncol(x)>0)) dimnames(x)[[2]] = 1:ncol(x) 
+        # Continue:
+        if(!(nrow(x) == length(dates))) 
+            {stop("dates length must match matrix nrows")}
+        if(!(ncol(x) == length(names))) 
+            {stop("names length must match matrix ncols")}
+        dimnames(x)[[1]] = format(dates,format=format,...)
+        dimnames(x)[[2]] = names
+        return(new("its" ,x, dates = dates)) }
+    # Time Series Plot:
+    .itsPlot <<- 
+    function(x, y, colvec = 1:ncol(x), type = "l", ltypvec = 1, lwdvec = 1, 
+    yrange, format, at, reference.grid, ...) {
+        if (missing(yrange)){ylim = range(x, na.rm = TRUE)} else {ylim = yrange}
+        firstp = TRUE
+        xdates = x@dates
+        n = dim(x)[1]
+        m = dim(x)[2]
+        # Make line control parameters correct length
+        colveclong = rep(colvec, length.out = m)
+        ltypveclong = rep(ltypvec, length.out = m)
+        lwdveclong = rep(lwdvec, length.out = m)
+        for (i in 1:m){
+            vpoints = c(1,which(!is.na(x[,i])),n)
+            xxx = x[,i] 
+            for (j in 1:ncol(xxx)) {
+                if(!firstp){par(new = TRUE)} else {firstp = FALSE}
+                plot(x = xdates[vpoints], y = xxx[vpoints, j], type = type,
+                    col = colveclong[i], ylim = ylim, lty = ltypveclong[i],
+                    lwd = lwdveclong[i], xaxt = "n", ...) } }
+        if (reference.grid) grid()
+        axis.POSIXct(x = xdates[vpoints], side = 1, at = at, format = format) }
+    # "[" Method:   
+    "[.its" <<- function(x, i, j, drop, ...) {
+        if (match("dates", names(list(...)),0) > 0) {
+            dates = list(...)[["dates"]]
+            if (!missing(i)) stop("cannot specify both dates and i")
+            if (!is(dates, "POSIXt")) stop("dates should be in POSIX format")
+            dates = as.POSIXct(dates)
+            i = match(dates, dates(x))
+            if (any(is.na(i))) stop("some dates are not found") }
+        if (missing(drop)) {drop = FALSE}
+        if (missing(i)) {i = min(1,nrow(x)):nrow(x)}
+        if (missing(j)) {j = min(1,ncol(x)):ncol(x)}
+          subx <- x@.Data[i, j, drop = drop]
+    	  dates <- x@dates[i]
+    	  ans <- new("its", subx, dates = dates)
+        return(ans) }
+        
     # Transform:
-    x.its = its(x@Data, dates = as.POSIXct(seriesPositions(x)), 
-    	format = x@format)
-    	   	
+    x.its = .its(x@Data, dates = as.POSIXct(seriesPositions(x)), 
+        format = x@format)
+            
     # Plot:
-    plot(x.its, ltypvec = lty, ...)
-    if (reference.grid) grid()
+    .itsPlot(x.its, ltypvec = lty, reference.grid = reference.grid, ...)
    
     # Return Value:
     invisible(x)
@@ -401,7 +454,7 @@ function(x, ...)
 {   # A function implemented by Diethelm Wuertz
 
     # Description:
-    #   Plot method for an S4 object of class "timeSeries"
+    #   Plot method for an object of class "timeSeries"
         
     # Arguments:
     #   x - a "timeSeries" object
@@ -425,7 +478,7 @@ function(x, ...)
  
 
 Ops.timeSeries = 
-function(e1, e2)
+function(e1, e2 = 1)
 {   # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -440,7 +493,8 @@ function(e1, e2)
     # FUNCTION:
     
     # Save:
-    s1 = e1; s2 = e2
+    s1 = e1
+    s2 = e2
     
     # Which one is a 'timeSeries' object?
     i1 = inherits(e1, "timeSeries")
@@ -635,7 +689,7 @@ function(x, k = 1, trim = FALSE, colNames = NULL)
     # Lag on each Column:
     z = NULL
     for (i in 1:Dim) {
-    	ts = tslagMat( y[, i], k = k)     #, trim = FALSE)
+        ts = tslagMat( y[, i], k = k)     #, trim = FALSE)
         z = cbind(z, ts) }
     
     # Add Names:
@@ -646,21 +700,21 @@ function(x, k = 1, trim = FALSE, colNames = NULL)
     ans = timeSeries(data = z, charvec = rownames(z), units = colnames(z),
         format = x@format, FinCenter = x@FinCenter,
         title = x@title, documentation = x@documentation)
-  	
+    
     # Trim:
     if (trim) {
-	  	idx = !is.na(apply(ans@Data, 1, sum))
-	  	ans = ans[idx,] }
-	  	
-	# Augment Colnames:
-	a = colnames(z)
-	kcols = rep(k, times = ncol(y))
-	b = paste("[", kcols, "]", sep="") 
-	ab = paste(a, b, sep = "")
-	colnames(ans@Data) <- ab
-	
-	# Return Value:
-  	ans      
+        idx = !is.na(apply(ans@Data, 1, sum))
+        ans = ans[idx,] }
+        
+    # Augment Colnames:
+    a = colnames(z)
+    kcols = rep(k, times = ncol(y))
+    b = paste("[", kcols, "]", sep="") 
+    ab = paste(a, b, sep = "")
+    colnames(ans@Data) <- ab
+    
+    # Return Value:
+    ans      
 }
 
 
@@ -672,12 +726,10 @@ function(x, ...)
 {   # A function implemented by Diethelm Wuertz
     
     # Description:
-    #   returns the head of a 'timeSeries' objects
+    #   Returns the head of a 'timeSeries' objects
     
     # Arguments:
     #   x - a 'timeSeries' object.
-    #   length - an integer indicating the length of the head 
-    #       By default 5.
     
     # Value:
     #   Returns the head of an object of class 'timeSeries'.
@@ -685,9 +737,7 @@ function(x, ...)
     # FUNCTION:
     
     # Head:
-    length = 3
-    ans = x[1:length, ]
-    colnames(ans@Data) = colnames(x@Data)
+    ans = head(as.data.frame(x), ...)
     
     # Return Value:
     ans
@@ -702,23 +752,18 @@ function(x, ...)
 {   # A function implemented by Diethelm Wuertz
     
     # Description:
-    #   returns the tail of a 'timeSeries' object
+    #   Returns the tail of a 'timeSeries' object
     
     # Arguments:
     #   x - a 'timeSeries' object.
-    #   length - an integer indicating the length of the tail 
-    #       By default 5.
     
     # Value:
     #   Returns the tail of an object of class 'timeSeries'.
  
     # FUNCTION:
     
-    # Head:
-    length = 3
-    nRows = nrow(x@Data)
-    ans = x[(nRows+1-length):nRows, ]
-    colnames(ans@Data) = colnames(x@Data)
+    # Tail:
+    ans = tail(as.data.frame(x), ...)
     
     # Return Value:
     ans
@@ -920,7 +965,7 @@ function(x, row.names = NULL, optional = NULL)
     
     # Arguments:
     #   x - a 'timeSeries' object
-    #	row.names, optional - not used
+    #   row.names, optional - not used
     
     # Value:
     #   Returns the data slot of a 'timesSeries' object as a data frame.
@@ -952,7 +997,7 @@ function(x, row.names = NULL, optional = NULL)
 
 
 applySeries =
-function(x, from = NULL, to = NULL, FUN = colMeans, colNames = NULL, ...)
+function(x, from = NULL, to = NULL, FUN = colAvgs, colNames = NULL, ...)
 {   # A function implemented by Diethelm Wuertz
     
     # Description:
@@ -969,7 +1014,7 @@ function(x, from = NULL, to = NULL, FUN = colMeans, colNames = NULL, ...)
     #   MARGIN - a vector giving the subscripts which the function 
     #       will be applied over. '1' indicates rows, '2' indicates 
     #       columns, 'c(1,2)' indicates rows and columns.
-    #   FUN - function to use for aggregation, by default 'sum'
+    #   FUN - function to use for aggregation, by default 'colAvgs'
     #   include.from, include.to - two logicals, should the
     #       endpoints of the investigation be included? By 
     #       default, the starting point is included, the endpoint 
@@ -995,9 +1040,9 @@ function(x, from = NULL, to = NULL, FUN = colMeans, colNames = NULL, ...)
     fun = match.fun(FUN)
     
     # Blocks:
-    j.pos = as.integer(julian(seriesPositions(x)))
-    j.from = as.integer(julian(from))
-    j.to = as.integer(julian(to))
+    j.pos = as.POSIXct(seriesPositions(x))
+    j.from = as.POSIXct(from)
+    j.to = as.POSIXct(to)
     
     # Iterate:
     y = x@Data
@@ -1006,7 +1051,8 @@ function(x, from = NULL, to = NULL, FUN = colMeans, colNames = NULL, ...)
     rowBind = NULL
     for (i in 1:from@Dim) {
         test = (j.pos >= j.from[i] & j.pos <= j.to[i])
-        cutted = y[test, ]
+        # make sure that cutted is a matrix ...
+        cutted = as.matrix(y[test, ])
         ### if (sum(test)>0) rownames(cutted) <- rowNames[test]
         ans = fun(cutted, ...)
         rowBind = rbind(rowBind, ans) 
@@ -1099,9 +1145,8 @@ function(x, y, units = NULL)
         colnames(y) <- paste("Y", 1:(dim(y)[2]), sep="")
     colnames(x@Data) <- c(x@units, colnames(y))
     if (!is.null(units)) {
-    	x@units = units
-    	colnames(x@Data) <- units }
-    	
+        x@units = units
+        colnames(x@Data) <- units }     
     
     # Return Value:
     new("timeSeries", 
@@ -1202,7 +1247,7 @@ trim = TRUE, digits = 4)
 alignDailySeries = 
 function (x, method = c("before", "after", "interp", "fillNA"), 
 include.weekends = FALSE) 
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
     
     # Description:
     #   Aligns an univariate 'timeSeries' object to new positions
@@ -1222,94 +1267,95 @@ include.weekends = FALSE)
     
     # FUNCTION:
     
-	# Internal Function
-	# Univariate Time Series Alignment:
-	alignDailySeries.OneColumn = 
-	function (x, method = method, include.weekends = include.weekends) {
-		# Settings:
-		units = x@units
-		FinCenter = x@FinCenter
-		# Units:
-		myUnits <<- "days"
-		# Fill with NAs:
-		if (method == "fillNA") {
-		    colsX = 1
-		    dtCount = as.integer(julian(seriesPositions(x)))
-		    cbind(dtCount, x@Data)
-		    newX = rep(NA, times = colsX * (max(dtCount) - min(dtCount) + 1))
-		    newX = matrix(newX, ncol = colsX)
-		    index = dtCount - min(dtCount) + 1
-		    newX[index, ] = x@Data
-		    colnames(newX) = colnames(x@Data)
-		    newPos = (min(dtCount):max(dtCount)) * 24 * 3600
-		    class(newPos) = "POSIXct"
-		    newPos = as.POSIXlt(newPos)
-		    td = timeSeries(newX, newPos, units = colnames(newX), 
-		        zone = x@FinCenter, FinCenter = x@FinCenter)}
-		# Interpolate with real Values:
-		else {
-			# Wich method ?
-		    if (method == "interp") {
-		        method = "linear"
-		        f = 0.5 }
-		    if (method == "before") {
-		        method = "constant"
-		        f = 0 }
-		    if (method == "after") {
-		        method = "constant"
-		        f = 1 }
-		    # Get Positions and Data:
-		    positions = seriesPositions(x)
-		    u = as.integer(julian(positions))
-		    v = as.vector(x@Data[, 1])
-		    # Approximate:
-	        #   method - specifies the interpolation method to be used.  
-	        #       Choices are "linear" or "constant".
-	        #   f - For method="constant" a number between 0 and 1 inclusive,
-	        #       indicating a compromise between left- and right-continuous
-	        #       step functions. If 'y0' and 'y1' are the values to the left
-	        #       and right of the point then the value is 'y0*(1-f)+y1*f' so
-	        #       that 'f=0' is right-continuous and 'f=1' is left-continuous.    
-        	x = u[1]:u[length(u)]
-		    y = approx(u, v, xout = x, method = method, f = f)$y
-		    # Create timeSeries:
-		    poschar = as.character(positions)
-		    td = timeSeries(y, timeSequence(from = poschar[1], 
-		    	to = poschar[length(poschar)], FinCenter = FinCenter, 
-		    	format = "%Y-%m-%d"), FinCenter = FinCenter)
-		    td@format = "%Y-%m-%d" }
-		# Handle Weekends:
-		if (!include.weekends) {
-		    # Internal Functions:
-		    is.weekday = function(x) {
-		        # x - a 'timeDate' object
-		        wday = as.POSIXlt(as.POSIXct(x))$wday
-		        return(!(wday == 0 | wday == 6)) }
-		    # Test:
-		    test = is.weekday(seriesPositions(td))
-		    td@Data = as.matrix(td@Data[test, 1])
-		    td@positions = td@positions[test] }
-		# Units:
-		td@units = units
-		colnames(td@Data) = units
-		ans = td
-		# Return Value:
-		ans }
-		
-	# First Column:
-	ans = alignDailySeries.OneColumn(x = x[, 1], method = method, 
-		include.weekends = include.weekends)
-		
-	# Next Columns:
-	DimX = dim(x@Data)[2]
-	if ( DimX > 1 ) {
-		for ( i in 2:DimX ) {
-			ans.add = alignDailySeries.OneColumn(x = x[, i], 
-				method = method, include.weekends = include.weekends)
-			ans = mergeSeries(ans, ans.add@Data) }			}
-	
-	# Return Value:
-	ans
+    # Internal Function
+    # Univariate Time Series Alignment:
+    alignDailySeries.OneColumn = 
+    function (x, method = method, include.weekends = include.weekends) {
+        # Settings:
+        units = x@units
+        FinCenter = x@FinCenter
+        # Units:
+        # myUnits <<- "days"
+        myUnits <- "days"
+        # Fill with NAs:
+        if (method == "fillNA") {
+            colsX = 1
+            dtCount = as.integer(julian(seriesPositions(x)))
+            cbind(dtCount, x@Data)
+            newX = rep(NA, times = colsX * (max(dtCount) - min(dtCount) + 1))
+            newX = matrix(newX, ncol = colsX)
+            index = dtCount - min(dtCount) + 1
+            newX[index, ] = x@Data
+            colnames(newX) = colnames(x@Data)
+            newPos = (min(dtCount):max(dtCount)) * 24 * 3600
+            class(newPos) = "POSIXct"
+            newPos = as.POSIXlt(newPos)
+            td = timeSeries(newX, newPos, units = colnames(newX), 
+                zone = x@FinCenter, FinCenter = x@FinCenter)}
+        # Interpolate with real Values:
+        else {
+            # Wich method ?
+            if (method == "interp") {
+                method = "linear"
+                f = 0.5 }
+            if (method == "before") {
+                method = "constant"
+                f = 0 }
+            if (method == "after") {
+                method = "constant"
+                f = 1 }
+            # Get Positions and Data:
+            positions = seriesPositions(x)
+            u = as.integer(julian(positions))
+            v = as.vector(x@Data[, 1])
+            # Approximate:
+            #   method - specifies the interpolation method to be used.  
+            #       Choices are "linear" or "constant".
+            #   f - For method="constant" a number between 0 and 1 inclusive,
+            #       indicating a compromise between left- and right-continuous
+            #       step functions. If 'y0' and 'y1' are the values to the left
+            #       and right of the point then the value is 'y0*(1-f)+y1*f' so
+            #       that 'f=0' is right-continuous and 'f=1' is left-continuous.    
+            x = u[1]:u[length(u)]
+            y = approx(u, v, xout = x, method = method, f = f)$y
+            # Create timeSeries:
+            poschar = as.character(positions)
+            td = timeSeries(y, timeSequence(from = poschar[1], 
+                to = poschar[length(poschar)], FinCenter = FinCenter, 
+                format = "%Y-%m-%d"), FinCenter = FinCenter)
+            td@format = "%Y-%m-%d" }
+        # Handle Weekends:
+        if (!include.weekends) {
+            # Internal Functions:
+            is.weekday = function(x) {
+                # x - a 'timeDate' object
+                wday = as.POSIXlt(as.POSIXct(x))$wday
+                return(!(wday == 0 | wday == 6)) }
+            # Test:
+            test = is.weekday(seriesPositions(td))
+            td@Data = as.matrix(td@Data[test, 1])
+            td@positions = td@positions[test] }
+        # Units:
+        td@units = units
+        colnames(td@Data) = units
+        ans = td
+        # Return Value:
+        ans }
+        
+    # First Column:
+    ans = alignDailySeries.OneColumn(x = x[, 1], method = method, 
+        include.weekends = include.weekends)
+        
+    # Next Columns:
+    DimX = dim(x@Data)[2]
+    if ( DimX > 1 ) {
+        for ( i in 2:DimX ) {
+            ans.add = alignDailySeries.OneColumn(x = x[, i], 
+                method = method, include.weekends = include.weekends)
+            ans = mergeSeries(ans, ans.add@Data) }          }
+    
+    # Return Value:
+    ans
    
 }
 
@@ -1321,20 +1367,21 @@ ohlcDailyPlot =
 function(x, volume = TRUE, colOrder = c(1:5), units = 1e6, xlab = 
 c("Date", "Date"), ylab = c("Price", "Volume"), main = c("O-H-L-C", "Volume"), 
 grid.nx = 7, grid.lty = "solid", ...) 
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
     
-	# Description:
-	#	Plots open–high–low–close bar chart 
-	
-	# Reference:
-	#	Build on top of Adrian Trapletti's plotOHLC()
-	#	function from his R-package "tseries".
-	
-	# FUNCTION:
-	
-	# Units:
-	myUnits <<- "days"
-	
+    # Description:
+    #   Plots open–high–low–close bar chart 
+    
+    # Reference:
+    #   Build on top of Adrian Trapletti's plotOHLC()
+    #   function from his R-package "tseries".
+    
+    # FUNCTION:
+    
+    # Units:
+    # myUnits <<- "days"
+    myUnits <<- "days"
+    
     # Internal Function:
     addDailyNA = function(x) {
         # Fill:
@@ -1365,39 +1412,39 @@ grid.nx = 7, grid.lty = "solid", ...)
     ylab, col = par("col"), bg = par("bg"), axes = TRUE, frame.plot = 
     axes, ann = par("ann"), main = NULL, date = c("calendar", "julian"), 
     format = "%Y-%m-%d", origin = "1899-12-30", ...) {
-	    if ((!is.mts(x)) || (colnames(x)[1] != "Open") || (colnames(x)[2] != 
-	        "High") || (colnames(x)[3] != "Low") || (colnames(x)[4] != 
-	        "Close")) stop("x is not a open/high/low/close time series")
-	    xlabel <- if (!missing(x)) deparse(substitute(x)) else NULL
-	    if (missing(ylab)) ylab <- xlabel
-	    date <- match.arg(date)
-	    time.x <- time(x)
-	    dt <- min(lag(time.x) - time.x)/3
-	    if (is.null(xlim)) xlim <- range(time.x)
-	    if (is.null(ylim)) ylim <- range(x[is.finite(x)])
-	    plot.new()
-	    plot.window(xlim, ylim, ...)
-	    segments(time.x, x[, "High"], time.x, x[, "Low"], col = col[1], bg = bg)
-	    segments(time.x - dt, x[, "Open"], time.x, x[, "Open"], col = col[1], 
-	        bg = bg)
-	    segments(time.x, x[, "Close"], time.x + dt, x[, "Close"], 
-	        col = col[1], bg = bg)
-	    if (ann) title(main = main, xlab = xlab, ylab = ylab, ...)
-	    if (axes) {
-	        if (date == "julian") {
-	            axis(1, ...)
-	            axis(2, ...) }
-	        else {
-	            n <- NROW(x)
-	            lab.ind <- round(seq(1, n, length = 5))
-	            D <- as.vector(time.x[lab.ind] * 86400) + as.POSIXct(origin, 
-	                tz = "GMT")
-	            DD <- format.POSIXct(D, format = format, tz = "GMT")
-	            axis(1, at = time.x[lab.ind], lab = DD, ...)
-	            axis(2, ...) } }
-	    if (frame.plot) box(...) }
-	
-	# Plot OHLC: 
+        if ((!is.mts(x)) || (colnames(x)[1] != "Open") || (colnames(x)[2] != 
+            "High") || (colnames(x)[3] != "Low") || (colnames(x)[4] != 
+            "Close")) stop("x is not a open/high/low/close time series")
+        xlabel <- if (!missing(x)) deparse(substitute(x)) else NULL
+        if (missing(ylab)) ylab <- xlabel
+        date <- match.arg(date)
+        time.x <- time(x)
+        dt <- min(lag(time.x) - time.x)/3
+        if (is.null(xlim)) xlim <- range(time.x)
+        if (is.null(ylim)) ylim <- range(x[is.finite(x)])
+        plot.new()
+        plot.window(xlim, ylim, ...)
+        segments(time.x, x[, "High"], time.x, x[, "Low"], col = col[1], bg = bg)
+        segments(time.x - dt, x[, "Open"], time.x, x[, "Open"], col = col[1], 
+            bg = bg)
+        segments(time.x, x[, "Close"], time.x + dt, x[, "Close"], 
+            col = col[1], bg = bg)
+        if (ann) title(main = main, xlab = xlab, ylab = ylab, ...)
+        if (axes) {
+            if (date == "julian") {
+                axis(1, ...)
+                axis(2, ...) }
+            else {
+                n <- NROW(x)
+                lab.ind <- round(seq(1, n, length = 5))
+                D <- as.vector(time.x[lab.ind] * 86400) + as.POSIXct(origin, 
+                    tz = "GMT")
+                DD <- format.POSIXct(D, format = format, tz = "GMT")
+                axis(1, at = time.x[lab.ind], lab = DD, ...)
+                axis(2, ...) } }
+        if (frame.plot) box(...) }
+    
+    # Plot OHLC: 
     plotOHLC(X, origin = "1970-01-01", xlab = xlab[1], ylab = ylab[1])
     print(axTicks(1))
     print(axTicks(2))
@@ -1417,5 +1464,5 @@ grid.nx = 7, grid.lty = "solid", ...)
 }   
 
    
-# ------------------------------------------------------------------------------ 
+################################################################################
 

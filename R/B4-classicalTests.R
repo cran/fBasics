@@ -16,25 +16,15 @@
 
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#     iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#     General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#   sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
 ################################################################################
@@ -46,18 +36,22 @@
 #  pearsonTest           Pearson chi-square normality test 
 #  sfTest                Shapiro-Francia normality test     
 #  dagoTest              D'Agostino normality test
+#  normalTest            S-Plus like function 
 # FUNCTION:             DESCRIPTION:
 #  bartlettTest          Bartlett's test for differences in variances
 #  flignerTest           Fligner-Killeen's test for differences in variances
 #  varTest               F test for differences in variances
 #  ansariTest            Ansari-Bradley's test for differences in scale
 #  moodTest              Mood's test for differences in scale
+# FUNCTION:
 #  corTest               A test for association between paired samples
-#  ksTest                One or two sample Kolmogorov-Smirnov tests      
+#  ksTest                One or two sample Kolmogorov-Smirnov tests    
+#                        ... for SPlus we need the tests from R's 'stats'  
 # FUNCTION:             DESCRIPTION:
-#  runsTest              Runs test for detecting non-randomness
+#  runsTest              Runs test for detecting non-randomness [tseries]
 #  gofnorm               Reports on several tests of normality
 ################################################################################
+
 
 
 shapiroTest = 
@@ -75,8 +69,32 @@ function(x)
     
     # FUNCTION:
     
+    # Transform:
+    x = as.vector(x)
+    
+    # A Copy from stats for SPlus compatibility
+    DNAME = deparse(substitute(x))
+    x = sort(x[complete.cases(x)])
+    n = length(x)
+    if (n < 3 || n > 5000) 
+        stop("sample size must be between 3 and 5000")
+    rng = x[n] - x[1]
+    if (rng == 0) 
+        stop(paste("all", sQuote("x[]"), "are identical"))
+    if (rng < 1e-10) 
+        x = x/rng
+    n2 = n%/%2
+    sw = .C("swilk", init = FALSE, as.single(x), n, n1 = as.integer(n), 
+        as.integer(n2), a = single(n2), w = double(1), pw = double(1), 
+        ifault = integer(1), PACKAGE = "stats")
+    if (sw$ifault && sw$ifault != 7) 
+        stop(paste("ifault=", sw$ifault, ". This should not happen"))
+    RVAL = list(statistic = c(W = sw$w), p.value = sw$pw, 
+        method = "Shapiro-Wilk normality test", data.name = DNAME)
+    class(RVAL) = "htest"
+ 
     # Return Value:
-    shapiro.test(x = x)
+    RVAL
 }
 
 
@@ -85,7 +103,7 @@ function(x)
 
 adTest =
 function (x) 
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Anderson-Darling normality test
@@ -104,6 +122,9 @@ function (x)
     
     # FUNCTION:
     
+    # Transform:
+    x = as.vector(x)
+    
     # Test:
     DNAME = deparse(substitute(x))
     x = sort(x[complete.cases(x)])
@@ -114,16 +135,16 @@ function (x)
     A = -n - mean(h)
     AA = (1 + 0.75/n + 2.25/n^2) * A
     if (AA < 0.2) {
-        pval = 1 - exp(-13.436 + 101.14 * AA - 223.73 * AA^2)}
-    else if (AA < 0.34) {
-        pval = 1 - exp(-8.318 + 42.796 * AA - 59.938 * AA^2) }
-    else if (AA < 0.6) {
-        pval = exp(0.9177 - 4.279 * AA - 1.38 * AA^2) }
-    else {
+        pval = 1 - exp(-13.436 + 101.14 * AA - 223.73 * AA^2)
+    } else if (AA < 0.34) {
+        pval = 1 - exp(-8.318 + 42.796 * AA - 59.938 * AA^2) 
+    } else if (AA < 0.6) {
+        pval = exp(0.9177 - 4.279 * AA - 1.38 * AA^2) 
+    } else {
         pval = exp(1.2937 - 5.709 * AA + 0.0186 * AA^2) }
     RVAL = list(
-    	statistic = c(A = A), 
-    	p.value = pval, 
+        statistic = c(A = A), 
+        p.value = pval, 
         method = "Anderson-Darling normality test", 
         data.name = DNAME)
     class(RVAL) = "htest"
@@ -138,7 +159,7 @@ function (x)
 
 cvmTest = 
 function(x) 
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Cramer-von Mises normality test
@@ -146,16 +167,21 @@ function(x)
     # Arguments:
     #   x - a numeric vector of data values.
     
-    # Source:
-    #   Package: nortest
-    #   Title: Tests for Normality
-    #   Version: 1.0
-    #   Author: Juergen Gross
-    #   Description: 5 omnibus tests for the composite hypothesis of normality
-    #   Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
-    #   License: GPL version 2 or newer
+    # Notes:
+    #   A copy from contributed R-package 'nortest'
+    #   Source:
+    #       Package: nortest
+    #       Title: Tests for Normality
+    #       Version: 1.0
+    #       Author: Juergen Gross
+    #       Description: 5 omnibus tests for the composite hypothesis of normality
+    #       Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
+    #       License: GPL version 2 or newer
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Test:
     DNAME = deparse(substitute(x))
@@ -174,8 +200,8 @@ function(x)
     else {
         pval = exp(1.111 - 34.242 * WW + 12.832 * WW^2)}
     RVAL = list(
-    	statistic = c(W = W), 
-    	p.value = pval, 
+        statistic = c(W = W), 
+        p.value = pval, 
         method = "Cramer-von Mises normality test", 
         data.name = DNAME)
     class(RVAL) = "htest"
@@ -190,7 +216,7 @@ function(x)
 
 lillieTest = 
 function(x) 
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Lilliefors (Kolmogorov-Smirnov) normality test  
@@ -198,16 +224,21 @@ function(x)
     # Arguments:
     #   x - a numeric vector of data values.
     
-    # Source:
-    #   Package: nortest
-    #   Title: Tests for Normality
-    #   Version: 1.0
-    #   Author: Juergen Gross
-    #   Description: 5 omnibus tests for the composite hypothesis of normality
-    #   Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
-    #   License: GPL version 2 or newer
+    # Notes:
+    #   A copy from contributed R-package 'nortest'
+    #   Source:
+    #       Package: nortest
+    #       Title: Tests for Normality
+    #       Version: 1.0
+    #       Author: Juergen Gross
+    #       Description: 5 omnibus tests for the composite hypothesis of normality
+    #       Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
+    #       License: GPL version 2 or newer
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Test:
     DNAME = deparse(substitute(x))
@@ -243,8 +274,8 @@ function(x)
         else {
             pvalue = 0 } }
     RVAL = list(
-    	statistic = c(D = K), 
-    	p.value = pvalue, 
+        statistic = c(D = K), 
+        p.value = pvalue, 
         method = "Lilliefors (Kolmogorov-Smirnov) normality test", 
         data.name = DNAME)
     class(RVAL) = "htest"
@@ -259,7 +290,7 @@ function(x)
 
 pearsonTest = 
 function (x, n.classes = ceiling(2 * (n^(2/5))), adjust = TRUE) 
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Pearson chi-square normality test   
@@ -274,26 +305,31 @@ function (x, n.classes = ceiling(2 * (n^(2/5))), adjust = TRUE)
     #       chi-square distribution with n.classes-1 degrees of 
     #       freedom. 
 
-
-    # Source:
-    #   Package: nortest
-    #   Title: Tests for Normality
-    #   Version: 1.0
-    #   Author: Juergen Gross
-    #   Description: 5 omnibus tests for the composite hypothesis of normality
-    #   Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
-    #   License: GPL version 2 or newer
+    # Notes:
+    #   A copy from contributed R-package 'nortest'
+    #   Source:
+    #       Package: nortest
+    #       Title: Tests for Normality
+    #       Version: 1.0
+    #       Author: Juergen Gross
+    #       Description: 5 omnibus tests for the composite hypothesis of normality
+    #       Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
+    #       License: GPL version 2 or newer
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Test:
     DNAME = deparse(substitute(x))
     x = x[complete.cases(x)]
     n = length(x)
     if (adjust == TRUE) {
-        dfd = 2 }
-    else {
-        dfd = 0 }
+        dfd = 2 
+    } else {
+        dfd = 0 
+    }
     num = floor(1 + n.classes * pnorm(x, mean(x), sd(x)))
     count = tabulate(num, n.classes)
     prob = rep(1/n.classes, n.classes)
@@ -302,8 +338,8 @@ function (x, n.classes = ceiling(2 * (n^(2/5))), adjust = TRUE)
     P = sum(h)
     pvalue = pchisq(P, n.classes - dfd - 1, lower.tail = FALSE)
     RVAL = list(
-    	statistic = c(P = P), 
-    	p.value = pvalue, 
+        statistic = c(P = P), 
+        p.value = pvalue, 
         method = "Pearson chi-square normality test", 
         data.name = DNAME, 
         n.classes = n.classes, 
@@ -320,7 +356,7 @@ function (x, n.classes = ceiling(2 * (n^(2/5))), adjust = TRUE)
 
 sfTest = 
 function(x) 
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Shapiro-Francia normality test  
@@ -328,16 +364,21 @@ function(x)
     # Arguments:
     #   x - a numeric vector of data values.
     
-    # Source:
-    #   Package: nortest
-    #   Title: Tests for Normality
-    #   Version: 1.0
-    #   Author: Juergen Gross
-    #   Description: 5 omnibus tests for the composite hypothesis of normality
-    #   Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
-    #   License: GPL version 2 or newer
+    # Notes:
+    #   A copy from contributed R-package 'nortest'
+    #   Source:
+    #       Package: nortest
+    #       Title: Tests for Normality
+    #       Version: 1.0
+    #       Author: Juergen Gross
+    #       Description: 5 omnibus tests for the composite hypothesis of normality
+    #       Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
+    #       License: GPL version 2 or newer
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Test:
     DNAME = deparse(substitute(x))
@@ -354,8 +395,8 @@ function(x)
     z = (log(1 - W) - mu)/sig
     pval = pnorm(z, lower.tail = FALSE)
     RVAL = list(
-    	statistic = c(W = W), 
-    	p.value = pval, 
+        statistic = c(W = W), 
+        p.value = pval, 
         method = "Shapiro-Francia normality test", 
         data.name = DNAME)
     class(RVAL) = "htest"
@@ -365,12 +406,12 @@ function(x)
 }
 
 
-# ------------------------------------------------------------------------------
+# ******************************************************************************
 
 
 dagoTest =
 function(x, method = c("omnibus", "skewness", "kurtosis"))  
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     # Description:
     #   D'Agostino Test
@@ -386,6 +427,9 @@ function(x, method = c("omnibus", "skewness", "kurtosis"))
     #   http://adela.karlin.mff.cuni.cz/~klaster/vyuka/
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Settings:
     method = method[1]
@@ -489,6 +533,58 @@ function(x, method = c("omnibus", "skewness", "kurtosis"))
     # Return Value:
     ans }
 
+    
+# ------------------------------------------------------------------------------
+
+
+normalTest =
+function(x, method = c("sw", "jb")) 
+{    # A function implemented by Diethelm Wuertz
+
+    # Description:
+    #   Shapiro-Wilk and Jarque-Bera Test
+    
+    # Notes:
+    #   This function is for S-Plus compatibility
+    
+    # Transform:
+    x = as.vector(x)
+       
+    # FUNCTION:
+    
+    # Test:
+    if (method[1] == "sw") {
+        ans = shapiroTest(x) 
+    }
+    # jbTest can be found in time series tests (tseriesTests)
+    # A Copy for SPlus compatibility:
+    if (method[1] == "jb") {
+        if (NCOL(x) > 1) 
+            stop("x is not a vector or univariate time series")
+        if (any(is.na(x))) 
+            stop("NAs in x")
+        DNAME = deparse(substitute(x))
+        n = length(x)
+        m1 = sum(x)/n
+        m2 = sum((x - m1)^2)/n
+        m3 = sum((x - m1)^3)/n
+        m4 = sum((x - m1)^4)/n
+        b1 = (m3/m2^(3/2))^2
+        b2 = (m4/m2^2)
+        STATISTIC = n * b1/6 + n * (b2 - 3)^2/24
+        names(STATISTIC) = "X-squared"
+        PARAMETER = 2
+        names(PARAMETER) = "df"
+        PVAL = 1 - pchisq(STATISTIC, df = 2)
+        METHOD = "Jarque Bera Test"
+        ans = structure(list(statistic = STATISTIC, parameter = PARAMETER, 
+            p.value = PVAL, method = METHOD, data.name = DNAME), 
+            class = "htest")
+    }
+        
+    # Return Value:
+    ans
+}
 
 # ******************************************************************************
 
@@ -504,9 +600,12 @@ function(x, y, ...)
     #   x - a numeric vector of data values.
     
     # Note:
-    #   A function linked to "stats"
+    #   A function copied from "stats" for SPlus compatibility
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Return Value:
     ansari.test(x = x, y = y, ...)
@@ -530,6 +629,9 @@ function(x, g, ...)
     #   # A function linked to "stats"
 
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Return Value:
     bartlett.test(x = x, g = g, ...)
@@ -555,12 +657,15 @@ method = c("pearson", "kendall", "spearman"), ...)
     
     # FUNCTION:
     
+    # Transform:
+    x = as.vector(x)
+    
     # Test:
     alternative = alternative[1]
     method = method[1]
     ans = cor.test(x = x, y = y, alternative = alternative, 
-    	method = method, ...)
-    	
+        method = method, ...)
+        
     # Return Value:
     ans
 }
@@ -583,6 +688,9 @@ function(x, g, ...)
     #   A function linked to "stats"
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Test:
     ans = fligner.test(x = x, g = g, ...)
@@ -610,6 +718,9 @@ function(x, y, alternative = c("two.sided", "less", "greater"), ...)
     
     # FUNCTION:
     
+    # Transform:
+    x = as.vector(x)
+    
     # Test:
     alternative = alternative[1]
     ans = ks.test(x = x, y = y, alternative = alternative, ...)
@@ -633,6 +744,9 @@ function(x, y, alternative = c("two.sided", "less", "greater"), ...)
     #   x - a numeric vector of data values.
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Test:
     alternative = alternative[1]
@@ -661,6 +775,9 @@ function(x, y, alternative = c("two.sided", "less", "greater"), ...)
     
     # FUNCTION:
     
+    # Transform:
+    x = as.vector(x)
+    
     # Test:
     alternative = alternative[1]
     ans = var.test(x = x, y = y, alternative = alternative, ...)
@@ -678,12 +795,12 @@ function (x)
 {   # A function implemented by Diethelm Wuertz
     
     # Description:
-    #	Performs a runs test
+    #   Performs a runs test
     
     # Arguments:
     #   x - a numeric vector of data values.
     
-    # Details:
+    # Notes:
     #   Implementing Trapletti's tseries R-Package
 
     # Note:
@@ -692,33 +809,36 @@ function (x)
     
     # FUNCTION:
     
+    # Transform:
+    x = as.vector(x)
+    
     # runs.test() copied from A. Traplettis tseries package
     runs.test = function (x, alternative = c("two.sided", "less", "greater")) {
         if (!is.factor(x)) stop("x is not a factor")
         if (any(is.na(x))) stop("NAs in x")
         if (length(levels(x)) != 2) stop("x does not contain dichotomous data")
-        alternative <- match.arg(alternative)
-        DNAME <- deparse(substitute(x))
-        n <- length(x)
-        R <- 1 + sum(as.numeric(x[-1] != x[-n]))
-        n1 <- sum(levels(x)[1] == x)
-        n2 <- sum(levels(x)[2] == x)
-        m <- 1 + 2 * n1 * n2/(n1 + n2)
-        s <- sqrt(2 * n1 * n2 * (2 * n1 * n2 - n1 - n2)/((n1 + n2)^2 * 
+        alternative = match.arg(alternative)
+        DNAME = deparse(substitute(x))
+        n = length(x)
+        R = 1 + sum(as.numeric(x[-1] != x[-n]))
+        n1 = sum(levels(x)[1] == x)
+        n2 = sum(levels(x)[2] == x)
+        m = 1 + 2 * n1 * n2/(n1 + n2)
+        s = sqrt(2 * n1 * n2 * (2 * n1 * n2 - n1 - n2)/((n1 + n2)^2 * 
             (n1 + n2 - 1)))
-        STATISTIC <- (R - m)/s
-        METHOD <- "Runs Test"
+        STATISTIC = (R - m)/s
+        METHOD = "Runs Test"
         if (alternative == "two.sided") 
-            PVAL <- 2 * pnorm(-abs(STATISTIC))
+            PVAL = 2 * pnorm(-abs(STATISTIC))
         else if (alternative == "less") 
-            PVAL <- pnorm(STATISTIC)
+            PVAL = pnorm(STATISTIC)
         else if (alternative == "greater") 
-            PVAL <- pnorm(STATISTIC, lower.tail = FALSE)
+            PVAL = pnorm(STATISTIC, lower.tail = FALSE)
         else stop("irregular alternative")
-        names(STATISTIC) <- "Standard Normal"
+        names(STATISTIC) = "Standard Normal"
         structure(list(
-        	statistic = STATISTIC, 
-        	alternative = alternative, 
+            statistic = STATISTIC, 
+            alternative = alternative, 
             p.value = PVAL, 
             method = METHOD, 
             data.name = DNAME), 
@@ -768,6 +888,9 @@ function(x, doprint = TRUE)
     #
     
     # FUNCTION:
+    
+    # Transform:
+    x = as.vector(x)
     
     # Settings:
     lp1 = length(x)+1
@@ -825,5 +948,4 @@ function(x, doprint = TRUE)
 }
 
 
-# ------------------------------------------------------------------------------
-
+# ##############################################################################

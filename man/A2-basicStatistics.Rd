@@ -1,6 +1,6 @@
-\name{basicStatistics}
+\name{BasicStatistics}
 
-\alias{basicStatistics}
+\alias{BasicStatistics}
 
 \alias{basicStats}
 
@@ -37,35 +37,34 @@
 
 \description{
 
-	A collection of functions which compute basic statistical properties. 
-	Missing functions in R to calculate skewness and kurtosis are added, 
-	a function which creates a summary statistics, and functions to calculate 
-	column statistcs.
-	\cr
-	
-	The functions are:
-	
-	\tabular{rll}{
-		1	\tab 	\code{skewness} 		
-			\tab 	Returns value of skewness, \cr
-		2	\tab 	\code{kurtosis} 		
-			\tab 	Returns value of kurtosis, \cr	
-		3	\tab 	\code{basicStats} 	
-			\tab 	Computes an overview of basic statistical values, \cr	
-		4	\tab 	\code{rowStats}, \code{colStats} 		
-			\tab 	Calculates row/column statistics, \cr
-		5	\tab 	\code{rowAvgs}, \code{colAvgs} 		
-			\tab 	Calculates row/column means, \cr
-		6	\tab 	\code{rowVars}, \code{colVars} 		
-			\tab 	Calculates row/column variances, \cr
-		7	\tab 	\code{rowStdevs}, \code{colStdevs} 		
-			\tab 	Calculates row/column standard deviations, \cr
-		8	\tab 	\code{rowSkewness}, \code{colSkewness} 	
-			\tab 	Calculates row/column skewness, \cr
-		9	\tab 	\code{rowKurtosis}, \code{colKurtosis} 	
-			\tab 	Calculates row/column kurtosis, \cr
-	   10 	\tab 	\code{rowCumsums}, \code{colCumsums} 	
-	   		\tab 	Calculates row/column cumulated Sums. }
+    A collection and description of functions which compute 
+    basic statistical properties. Missing functions in R to 
+    calculate skewness and kurtosis are added, a function 
+    which creates a summary statistics, and functions to 
+    calculate column statistics.
+    \cr
+    
+    The functions are:
+    
+    \tabular{ll}{
+    \code{skewness} \tab returns value of skewness, \cr
+    \code{kurtosis} \tab returns value of kurtosis, \cr 
+    \code{basicStats} \tab computes an overview of basic statistical values, \cr    
+    \code{rowStats}\tab calculates row statistics, \cr
+    \code{colStats} \tab calculates column statistics, \cr
+    \code{rowAvgs} \tab calculates row means, \cr
+    \code{colAvgs} \tab calculates column means, \cr
+    \code{rowVars} \tab calculates row variances, \cr
+    \code{colVars} \tab calculates column variances, \cr
+    \code{rowStdevs} \tab calculates row standard deviations, \cr
+    \code{colStdevs} \tab calculates column standard deviations, \cr
+    \code{rowSkewness} \tab calculates row skewness, \cr
+    \code{colSkewness} \tab calculates column skewness, \cr
+    \code{rowKurtosis} \tab calculates row kurtosis, \cr
+    \code{colKurtosis} \tab calculates column kurtosis, \cr
+    \code{rowCumsums} \tab calculates row cumulated Sums, \cr
+    \code{colCumsums} \tab calculates column cumulated Sums. }
+    
 }
 
 
@@ -104,80 +103,80 @@ colCumsums(x, na.rm = FALSE, \dots)
 
 \arguments{
   
-	\item{ci}{
-		confidence interval, a numeric value, by default 0.95, 
-		i.e. 95 percent.
-		}
-	\item{FUN}{
-	    the statistical function to be applied.
-	    }
-		\item{na.rm}{
-		a logical. Should missing values be removed?
-		}
-	\item{x}{
-		a numeric vector, or a matrix for column statistics.
-		}
-	\item{\dots}{
-	    arguments to be passed.
-	    }
-	    
+    \item{ci}{
+        confidence interval, a numeric value, by default 0.95, 
+        i.e. 95 percent.
+        }
+    \item{FUN}{
+        the statistical function to be applied.
+        }
+        \item{na.rm}{
+        a logical. Should missing values be removed?
+        }
+    \item{x}{
+        a numeric vector, or a matrix for column statistics.
+        }
+    \item{\dots}{
+        arguments to be passed.
+        }
+        
 }
 
 
 \value{
-	
-	\code{skewness}, \code{kurtosis}
-	\cr
-	returns the value of the statistics, a numeric value.
-	\cr
-	
-	\code{basicsStats}
-	\cr
-	returns data frame with the following entries and row names:
-	nobs, NAs, Minimum, Maximum , 1. Quartile, 3. Quartile,
-	Mean, Median, Sum, SE Mean, LCL Mean, UCL Mean, Variance,
-	Stdev, Skewness, Kurtosis.
-	\cr
-	
-	\code{rowStats}, \code{rowAvgs}, \code{rowVars}, \code{rowStdevs},\cr
-	\code{rowSkewness}, \code{rowKurtosis}, \code{rowCumsum}
-	\cr 
-	computes sample statistics by column. Missing values can be
-	handled.
-	\cr
-	
-	\code{colStats}, \code{colAvgs}, \code{colVars}, \code{colStdevs},\cr
-	\code{colSkewness}, \code{colKurtosis}, \code{colCumsum}
-	\cr 
-	computes sample statistics by column. Missing values can be
-	handled. 
-	
+    
+    \code{skewness}, \code{kurtosis}
+    \cr
+    returns the value of the statistics, a numeric value.
+    \cr
+    
+    \code{basicsStats}
+    \cr
+    returns data frame with the following entries and row names:
+    nobs, NAs, Minimum, Maximum , 1. Quartile, 3. Quartile,
+    Mean, Median, Sum, SE Mean, LCL Mean, UCL Mean, Variance,
+    Stdev, Skewness, Kurtosis.
+    \cr
+    
+    \code{rowStats}, \code{rowAvgs}, \code{rowVars}, \code{rowStdevs},\cr
+    \code{rowSkewness}, \code{rowKurtosis}, \code{rowCumsum}
+    \cr 
+    computes sample statistics by column. Missing values can be
+    handled.
+    \cr
+    
+    \code{colStats}, \code{colAvgs}, \code{colVars}, \code{colStdevs},\cr
+    \code{colSkewness}, \code{colKurtosis}, \code{colCumsum}
+    \cr 
+    computes sample statistics by column. Missing values can be
+    handled. 
+    
 }
 
 
 \note{
 
-	\R's-base package contains a function \code{colMeans} with an
-	additional argument \code{dim=1}. Therefore, the function used 
-	here to compute column means (averages) is named \code{colAvgs}.
-	
+    \R's-base package contains a function \code{colMeans} with an
+    additional argument \code{dim=1}. Therefore, the function used 
+    here to compute column means (averages) is named \code{colAvgs}.
+    
 }
 
 
 \author{
 
-	Diethelm Wuertz for this \R-port.
-	
+    Diethelm Wuertz for the Rmetrics \R-port.
+    
 }
 
 
 \seealso{
 
-	\code{\link{colMeans}},
-	\code{\link{mean}},
-	\code{\link{median}},
-	\code{\link{var}}.
-	
+    \code{\link{colMeans}},
+    \code{\link{mean}},
+    \code{\link{median}},
+    \code{\link{var}}.
+    
 }
 
 

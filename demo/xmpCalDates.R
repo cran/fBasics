@@ -33,11 +33,8 @@
 #
 
 
-# ------------------------------------------------------------------------------
-
-
 ################################################################################
-## PART I: Formatted Gregorian Dates to Julian Date Numbers
+# PART I: Formatted Gregorian Dates to Julian Date Numbers
 
     
    # Convert Formatted Gregorian Dates
@@ -51,7 +48,7 @@
    
    
 ################################################################################
-## PART II: Dates in Standard Date Format
+# PART II: Dates in Standard Date Format
 
 
    # Handling a Single Date:
@@ -73,7 +70,7 @@
    
    
 ################################################################################
-## Part III: Date/Time in Extended Date/Time Format
+# Part III: Date/Time in Extended Date/Time Format
 
 
    # ISO-8601 ISO DATE/TIME FORMAT:
@@ -87,7 +84,7 @@
 
 
 ################################################################################
-## PART IV: Manage Holiday Calendars
+# PART IV: Manage Holiday Calendars
 
 
    # What date has Monday (nday=1) on.or.after March 15, 1986? 

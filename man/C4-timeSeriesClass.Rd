@@ -1,9 +1,10 @@
-\name{timeSeriesClass}
+\name{TimeSeriesClass}
 
-\alias{timeSeriesClass}
+\alias{TimeSeriesClass}
 
 \alias{timeSeries}
 \alias{timeSeries-class}
+
 \alias{read.timeSeries}
 
 \alias{as.timeSeries}
@@ -41,11 +42,12 @@
 
 \description{
     
-    A collection of functions and methods dealing with regular and
-    irregular 'timeSeries' objects. Dates and times are implemented
-    as 'timeDate' objects. Included are functions and methods for 
-    the generation and representation of 'timeSeries' objects, and
-    for mathematical operations.          
+    A collection and description of functions and methods 
+    dealing with regular and irregular 'timeSeries' objects. 
+    Dates and times are implemented as 'timeDate' objects. 
+    Included are functions and methods for the generation 
+    and representation of 'timeSeries' objects, and for 
+    mathematical operations.          
     \cr
     
     IMPORTANT: \cr
@@ -58,75 +60,44 @@
     Library.
     \cr
     
-    The functions and methods are:         
+    The functions and methods for the Generation of 'timeSeries' Objects are:         
 
-    \tabular{rll}{   
-            \tab
-            \tab    \cr
-            \tab
-            \tab    \bold{Generation of 'timeSeries' Objects:} \cr
-        1   \tab    \code{timeSeries}   
-            \tab    Creates a 'timeSeries' object from scratch, \cr
-        2   \tab    \code{read.timeSeries}  
-            \tab    Reads a 'timeSeries' from a spreadsheet, \cr
-        3   \tab    \code{as.timeSeries}    
-            \tab    S3: Creates dummy 'time Series' from a 'matrix', \cr
-        4   \tab    \code{is.timeSeries}    
-            \tab    S3: Tests for a 'timeSeries' object, \cr
-        5   \tab    \code{print.timeSeries}     
-            \tab    S3: Print method for a 'timeSeries' object, \cr
-        6   \tab    \code{plot.timeSeries}  
-            \tab    S3: Plot method for a 'timeSeries' object, \cr
-        7   \tab    \code{lines.timeSeries}     
-            \tab    S3: Lines method for a 'timeSeries' object, \cr
-        8   \tab    \code{Ops.timeSeries}   
-            \tab    S3: Arith method for a 'timeSeries' object, \cr
-        9   \tab    \code{[.timeSeries}     
-            \tab    S3: "[" method for a 'timeSeries' object, \cr
-        10  \tab    \code{head.timeSeries}  
-            \tab    S3: returns the head of a 'timeSeries' object, \cr
-        11  \tab    \code{tail.timeSeries}   
-            \tab    S3: returns the tail of a 'timeSeries' object. \cr           
-            \tab
-            \tab    \cr
-            \tab
-            \tab    \bold{Representation of 'timeSeries' Objects:} \cr
-         1  \tab    \code{seriesData}       
-            \tab    Extracts data slot from a 'timeSeries', \cr
-         2  \tab    \code{seriesPositions}      
-            \tab    Extracts positions slot from a 'timeSeries', \cr
-         3  \tab    \code{start.timeSeries}         
-            \tab    S3: Extracts start date of a 'timeSeries', \cr
-         4  \tab    \code{end.timeSeries}       
-            \tab    S3: Extracts end date of a 'timeSeries', \cr
-         5  \tab    \code{as.vector.timeSeries}         
-            \tab    S3: Converts a 'timeSeries' to a vector, \cr
-         6  \tab    \code{as.matrix.timeSeries}         
-            \tab    S3: Converts a 'timeSeries' to a matrix, \cr
-         7  \tab    \code{as.data.frame.timeSeries}         
-            \tab    S3: Converts a 'timeSeries' to a data.frame. \cr           
-            \tab
-            \tab    \cr
-            \tab
-            \tab    \bold{Math Operations of 'timeSeries' Objects:} \cr
-         1  \tab    \code{applySeries}      
-            \tab    Applies a function to margins of a 'timeSeries', \cr
-         2  \tab    \code{alignDailySeries}         
-            \tab    Aligns a daily 'timeSeries' to new positions, \cr             
-         3  \tab    \code{cutSeries}        
-            \tab    Cuts out a piece from a 'timeSeries' object, \cr\       
-         4  \tab    \code{mergeSeries}      
-            \tab    Merges a 'timeSeries' object with a 'matrix', \cr
-         5  \tab    \code{ohlcDailyPlot}      
-            \tab    Plots open–high–low–close bar chart, \cr
-         6  \tab    \code{revSeries}   
-            \tab    S3: rev method for a 'timeSeries' object, \cr
-         7  \tab    \code{diffSeries}  
-            \tab    S3: diff method for a 'timeSeries' object, \cr
-         8  \tab    \code{lagSeries}   
-            \tab    S3: lag method for a 'timeSeries' object, \cr
-         9  \tab    \code{returnSeries}         
-            \tab    Computes returns from a 'timeSeries' object. }
+    \tabular{ll}{   
+    \code{timeSeries} \tab Creates a 'timeSeries' object from scratch, \cr
+    \code{read.timeSeries} \tab Reads a 'timeSeries' from a spreadsheet, \cr
+    \code{as.timeSeries} \tab S3: Creates dummy 'time Series' from a 'matrix', \cr
+    \code{is.timeSeries} \tab S3: Tests for a 'timeSeries' object, \cr
+    \code{print.timeSeries} \tab S3: Print method for a 'timeSeries' object, \cr
+    \code{plot.timeSeries} \tab S3: Plot method for a 'timeSeries' object, \cr
+    \code{lines.timeSeries} \tab S3: Lines method for a 'timeSeries' object, \cr
+    \code{Ops.timeSeries} \tab S3: Arith method for a 'timeSeries' object, \cr
+    \code{[.timeSeries} \tab S3: "[" method for a 'timeSeries' object, \cr
+    \code{head.timeSeries} \tab S3: returns the head of a 'timeSeries' object, \cr
+    \code{tail.timeSeries} \tab S3: returns the tail of a 'timeSeries' object. }           
+            
+    The functions and methods for the Representation of 'timeSeries' Objects are:         
+            
+    \tabular{ll}{        
+    \code{seriesData} \tab Extracts data slot from a 'timeSeries', \cr
+    \code{seriesPositions} \tab Extracts positions slot from a 'timeSeries', \cr
+    \code{start.timeSeries} \tab S3: Extracts start date of a 'timeSeries', \cr
+    \code{end.timeSeries} \tab S3: Extracts end date of a 'timeSeries', \cr
+    \code{as.vector.timeSeries} \tab S3: Converts a 'timeSeries' to a vector, \cr
+    \code{as.matrix.timeSeries} \tab S3: Converts a 'timeSeries' to a matrix, \cr
+    \code{as.data.frame.timeSeries} \tab S3: Converts a 'timeSeries' to a data.frame. }          
+           
+    The functions and methods for Math Operations of 'timeSeries' Objects are:         
+            
+    \tabular{ll}{         
+    \code{applySeries} \tab Applies a function to margins of a 'timeSeries', \cr
+    \code{alignDailySeries} \tab Aligns a daily 'timeSeries' to new positions, \cr             
+    \code{cutSeries} \tab Cuts out a piece from a 'timeSeries' object, \cr\       
+    \code{mergeSeries} \tab Merges a 'timeSeries' object with a 'matrix', \cr
+    \code{ohlcDailyPlot} \tab Plots open–high–low–close bar chart, \cr
+    \code{revSeries} \tab S3: rev method for a 'timeSeries' object, \cr
+    \code{diffSeries} \tab S3: diff method for a 'timeSeries' object, \cr
+    \code{lagSeries} \tab S3: lag method for a 'timeSeries' object, \cr
+    \code{returnSeries} \tab Computes returns from a 'timeSeries' object. }
         
 }
 
@@ -156,7 +127,7 @@ seriesPositions(object)
 \method{as.matrix}{timeSeries}(x)
 \method{as.data.frame}{timeSeries}(x, row.names = NULL, optional = NULL)
 
-applySeries(x, from, to, FUN = colMeans, colNames = NULL, ...) 
+applySeries(x, from = NULL, to = NULL, FUN = colAvgs, colNames = NULL, ...) 
 cutSeries(x, from, to)
 diffSeries(x, lag = 1, diff = 1, trim = FALSE, pad = NA)
 lagSeries(x, k = 1, trim = FALSE, colNames = NULL)
@@ -235,7 +206,7 @@ ohlcDailyPlot(x, volume = TRUE, colOrder = c(1:5), units = 1e6,
         }
     \item{FUN}{ 
         [applySeries] - \cr
-        a function to use for aggregation, by default \code{sum}.
+        a function to use for aggregation, by default \code{colAvgs}.
         }
     \item{grid.lty, grid.nx}{
         [ohlcDailyPlot] - \cr
@@ -435,6 +406,7 @@ ohlcDailyPlot(x, volume = TRUE, colOrder = c(1:5), units = 1e6,
 
     \bold{Generation of Time Series Objects:}
     \cr\cr
+    
     We have defined a \code{timeSeries} class which is in many aspects similar
     to the S-Plus class with the same name, but has also some important
     differeneces. The class has seven Slots, the 'Data' slot which holds 
@@ -448,7 +420,7 @@ ohlcDailyPlot(x, volume = TRUE, colOrder = c(1:5), units = 1e6,
 }
 
 
-\notes{
+\note{
 
     These functions were written for Rmetrics users using R and Rmetrics
     under Microsoft's Windows operating system where timze zones, 
@@ -470,14 +442,14 @@ ohlcDailyPlot(x, volume = TRUE, colOrder = c(1:5), units = 1e6,
 ## data - 
    xmpBasics("\nStart: Load Microsoft Data > ")
    data(msft.dat)
+   myFinCenter = "GMT"
    msft.dat[1:3, ]
 
 ## timeSeries -
    xmpBasics("\nNext: Create a timeSeries Object > ")
-   myFinCenter = "GMT"
    close = msft.dat[, 5]
-   ts = timeSeries(close, as.character(msft.dat[, 1]), 
-     format = "\%m/\%d/\%Y", units = "MSFT")
+   ts = timeSeries(close, as.character(msft.dat[, 1]), format = "\%m/\%d/\%Y", 
+     units = "MSFT", zone = "GMT", FinCenter = "GMT")
    class(ts)
    ts[1:3,]
    c(start(ts), end(ts))
@@ -527,7 +499,7 @@ ohlcDailyPlot(x, volume = TRUE, colOrder = c(1:5), units = 1e6,
    xmpBasics("\nNext: Aggregate weekly > ")
    GoodFriday(2001)
    to = timeSequence(from = "2001-04-11", length.out = 3, 
-     by = "weeks", format = "\%Y-\%m-\%d") 
+     by = "weeks", format = "\%Y-\%m-\%d", FinCenter = "GMT") 
    from = to - 6*24*3600
    data.frame(from, to)
    applySeries(ts.ret, from, to, FUN = sum)
@@ -536,7 +508,7 @@ ohlcDailyPlot(x, volume = TRUE, colOrder = c(1:5), units = 1e6,
 
 \author{
 
-    Diethelm Wuertz for this R-port.
+    Diethelm Wuertz for the Rmetrics \R-port.
     
 }
 

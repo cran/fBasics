@@ -5,7 +5,7 @@
 #
 # Description: 
 #	This example shows how to perform a Runs Test using Traplettis
-#  	function implemented from his tsereies R-package.
+#  	function implemented from his 'tseries' R-package.
 #
 # Author:
 #	(C) 2002, Diethelm Wuertz, GPL

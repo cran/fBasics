@@ -1,6 +1,6 @@
-\name{holidayDatabase}
+\name{HolidayDatabase}
 
-\alias{holidayDatabase}
+\alias{HolidayDatabase}
 
 
 \alias{Septuagesima}
@@ -125,8 +125,8 @@
 
 \description{
     
-    A collection of functions and methods dealing with holiday 
-    calendars. 
+    A collection and description of functions and methods 
+    dealing with holiday calendars. 
    
 }
 
@@ -271,13 +271,15 @@ JPBankHolidayDec31(year)
 
 
 \examples{
-## no examples ...
+## CHSechselaeuten -
+   # Sechselaeuten a half Day Bank Holiday in Switzerland
+   CHSechselaeuten(2000:2010)
 }
 
 
 \author{
 
-    Diethelm Wuertz for this R-port.
+    Diethelm Wuertz for the Rmetrics \R-port.
     
 }
 

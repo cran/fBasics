@@ -17,7 +17,7 @@
 #
 
 
-# ------------------------------------------------------------------------------
+################################################################################
 # Monthly Data:  
 
  
@@ -62,7 +62,7 @@
    ###
    
      
-    # Merge 'timeSeries' with matrix:
+   # Merge 'timeSeries' with matrix:
    args(mergeSeries)
    ts2 = mergeSeries(x = ts, y = round(log(ts@Data), 4))
    ts2@units = c("JJ", "logJJ")
@@ -78,20 +78,18 @@
    ###
     
    
-# ------------------------------------------------------------------------------
+################################################################################
 # Daily Data:
 	
 
-	# Load SP 500 Data from 'evir' package
-	require(evir)
+	# Load SP 500 Data:
 	data(sp.raw)
-	sp.raw[1:3]
-	attr(sp.raw, "times")[1:3]
 	###
 	
 	
 	# Create a 'timeSeries' Object:
-	ts = timeSeries(sp.raw, attr(sp.raw, "times"), units = "SP500")
+	ts = timeSeries(sp.raw[,2], sp.raw[,1], units = "SP500", 
+		format = "%m/%d/%Y")
 	class(ts)
 	ts[1:3,]
 	c(start(ts), end(ts))
@@ -101,7 +99,6 @@
 	# Cut out April Data from 1980:
 	ts.Apr80 = cutSeries(ts, "1980-04-01", "1980-04-30") 
 	ts.Apr80
-	# colnames are missing ...
 	###
 	
 	
@@ -125,6 +122,7 @@
 		y = returnSeries(ts.APR80, trim = FALSE)@Data,
 		units = c("SP500", "Returns"))
 	ts.merged
+	###
 	
 	
 	# Align with NA:
@@ -161,13 +159,5 @@
 	###
 	
 
-# ------------------------------------------------------------------------------
+################################################################################
 
-
-	
-	
-	
-	
-
-
-    

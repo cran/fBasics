@@ -16,25 +16,15 @@
 
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#     iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#     General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#   sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
 ################################################################################

@@ -26,28 +26,35 @@
 #
 
 
-# ------------------------------------------------------------------------------
-
-
+################################################################################
 # Settings:
 
 	# Goodness-Of-Fit Suite for Testing Normality
 	data(nyseres)
 
+
+################################################################################
 # GoF Testing financial market log-returns:
 
 	x = nyseres[4001:5000, 1]
 	x = (x-mean(x))/sqrt(var(x))
   	r = gofnorm(x, doprint = TRUE)
 
+  	
+################################################################################
 # GoF Testing normal innovations:
 
   	x = rnorm(length(x))
   	r = gofnorm(x, doprint = TRUE)
   
+
+################################################################################
 # GoF Testing t-distributed innovations:
 
 	x = rt(length(x), df = 2)
   	r = gofnorm(x, doprint = TRUE)
 
-  	
+ 
+################################################################################
+
+ 	

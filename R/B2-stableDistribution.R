@@ -16,28 +16,18 @@
 
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#	  iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#	  General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#	sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
-########################|#######################################################
+################################################################################
 # FUNCTION:		   		DESCRIPTION:
 #  dsymstb	   			 Returns density for symmetric stable DF
 #   psymstb	   			  Returns probabilities for symmetric stable DF
@@ -47,7 +37,6 @@
 #   pstable	   			  Returns probabilities for stable DF
 #   qstable	   			  Returns quantiles for stable DF
 #   rstable	   			  Returns random variates for stable DF
-
 ################################################################################
 
 
@@ -70,14 +59,17 @@ function (x, alpha)
 
 	# FUNCTION:
 	
-	# Return Value:
-	.Fortran("symstb",
+	# Density:
+	ans = .Fortran("symstb",
 	  	as.double(x),
 	  	as.double(1:length(x)),
 	  	as.double(1:length(x)),
 	  	as.integer(length(x)),
 	  	as.double(alpha),
 	  	PACKAGE = "fBasics")[[3]]
+	  	
+	# Return Value:
+	ans
 }
 
 
@@ -105,13 +97,16 @@ function (q, alpha)
 	# FUNCTION:
 	
 	# Return Value:
-	.Fortran("symstb",
+	ans = .Fortran("symstb",
 	  	as.double(q),
 	  	as.double(1:length(q)),
 	  	as.double(1:length(q)),
 	  	as.integer(length(q)),
 	  	as.double(alpha),
 	  	PACKAGE = "fBasics")[[2]]
+	  	
+	# Return Value:
+	ans
 }
 
 
@@ -361,8 +356,11 @@ function(x, alpha, beta, gamma = 1, delta = 0, pm = 0)
       				if (x[i] < 0) result[i] = 
       					fct(xarg=-x[i], alpha=alpha, beta=-beta) }}
   	
+    # Result:
+    ans = result/gamma
+    
     # Return Value:
-    result/gamma
+	ans
 }
 
 
@@ -564,8 +562,11 @@ function(p, alpha, beta, gamma = 1, delta = 0, pm = 0)
 		}
 	}
 	
+	# Result:
+	ans = result*gamma+delta
+	
 	# Return Value:
-	result*gamma+delta
+	ans
 }
 
 
@@ -598,10 +599,13 @@ function(n, alpha, beta, gamma = 1, delta = 0, pm = 0)
 		# Use Parametrization 0:
 		result = result - beta * tan(alpha*pi/2)}
   	
-	# Return Value:
-    result * gamma + delta
+	# Result:
+    ans = result * gamma + delta
+    
+    # Return Value:
+	ans
 }
 	
 
-# ------------------------------------------------------------------------------
+# ******************************************************************************
 

@@ -32,9 +32,6 @@
 #
 
 
-# ------------------------------------------------------------------------------
-
-
 ################################################################################
 ## Part I: Symmetric Stable Distribution
 
@@ -49,12 +46,12 @@
    d.cauchy = dcauchy(x)
    plot(x, log(d), type="l", main="DSYMSTB(1.01) - Close Cauchy")
    density = density(r, from = -10, to = 10, n = 256)
-   points(density$x, log(density$y), col = 4)
+   points(density$x, log(density$y), col = "steelblue4")
    lines(x, log(d.cauchy), col = 6)
    p = psymstb(x, alpha = 1.01)
    p.cauchy = pcauchy(x)
    plot(x, p, type="l", main="PSYMSTB(1.01) - Close Cauchy")
-   points(sort(r), (1:length(r))/length(r), col = 4)
+   points(sort(r), (1:length(r))/length(r), col = "steelblue4")
    lines(x, p.cauchy, col = 6)
     
    # RSYMSTB(1.99) - Symmetric Stable Distribution - Close Cauchy: 
@@ -65,12 +62,12 @@
    d.norm = dnorm(x, sd = sqrt(2))
    plot(x, log(d), type = "l", main = "DSYMSTB(1.99) - Close Normal")
    density = density(r, from = -5, to = 5, n = 256)
-   points(density$x, log(density$y), col = 4)
+   points(density$x, log(density$y), col = "steelblue4")
    lines(x, log(d.norm), col = 6)
    p = psymstb(x, alpha = 1.99)
    p.norm = pnorm(x, sd = sqrt(2))
    plot(x, p, type="l", main="PSYMSTB(1.99) - Close Normal")
-   points(sort(r), (1:length(r))/length(r), col = 4)
+   points(sort(r), (1:length(r))/length(r), col = "steelblue4")
    lines(x, p.norm, col = 6)
    
 
@@ -125,7 +122,7 @@
    plot(x, y, xlim = c(-120, 120), main = "Close Cauchy")
    x = seq(from = -100, to = 100, by = 1)
    lines(x, pcauchy(x), col = 5)
-   lines(x, psymstb(x, alpha = 1.001), col = 4)
+   lines(x, psymstb(x, alpha = 1.001), col = "steelblue4")
 
    # CDF of Symmetric Stable Deviates with alpha=1.999
    # Comparison with Gaussian Probability Function, Note: sd=sqrt(2)!
@@ -135,8 +132,8 @@
    y = (1:n)/n
    plot(x, y, xlim = c(-10, 10), main = "Close Gaussian")
    x = seq(from = -10, to = 10, by = 0.25)
-   lines(x, pnorm(x, sd = sqrt(2)), col = 4)
-   lines(x, psymstb(x, alpha=1.999), col = 4)
+   lines(x, pnorm(x, sd = sqrt(2)), col = "steelblue4")
+   lines(x, psymstb(x, alpha=1.999), col = "steelblue4")
  
 
 ################################################################################   
@@ -169,10 +166,10 @@
    d = dstable(x, alpha = 0.4, beta = 0.5)
    plot(x, log(d), type = "l", main = "DSTABLE (0.4,0.5)")
    density = density(r[abs(r)<10], n = 100)
-   points(density$x, log(density$y), col = 4)    
+   points(density$x, log(density$y), col = "steelblue4")    
    p = pstable(x, alpha=0.4, beta = 0.5)
    plot(x, p, type = "l", ylim = c(0, 1), main = "PSTABLE (0.4,0.5)")
-   points(sort(r), (1:length(r))/length(r), col = 4)
+   points(sort(r), (1:length(r))/length(r), col = "steelblue4")
 
    # RSTABLE(1.1, 0.5) - Stable Distribution:   
    x = seq(from = -10, to = 10, length = 100) 
@@ -181,10 +178,10 @@
    d = dstable(x, alpha = 1.1, beta = 0.5, gamma = 1.5, delta = -1.0)
    plot(x, log(d), type = "l", main = "DSTABLE (1.1,0.5,1.5,-1.0)")
    density = density(r[abs(r)<10], n = 100)
-   points(density$x, log(density$y), col = 4)    
+   points(density$x, log(density$y), col = "steelblue4")    
    p = pstable(x, alpha = 1.1, beta = 0.5, gamma = 1.5, delta = -1.0)
    plot(x, p, type = "l", ylim = c(0, 1), main = "PSTABLE (1.1,0.5,1.5,-1.0)")
-   points(sort(r), (1:length(r))/length(r), col = 4)
+   points(sort(r), (1:length(r))/length(r), col = "steelblue4")
 
    # RSTABLE(1.9, 0.5) - Stable Distribution: 
    x = seq(from = -5, to = 5, length = 100)   
@@ -193,8 +190,8 @@
    d = dstable(x, alpha = 1.9, beta = 0.5)
    plot(x, log(d), type = "l", main = "DSTABLE (1.9,0.5)")
    density = density(r, n = 200)
-   points(density$x, log(density$y), col = 4)    
+   points(density$x, log(density$y), col = "steelblue4")    
    p = pstable(x, alpha = 1.9, beta = 0.5)
    plot(x, p, type = "l", main = "PSTABLE (1.9,0.5)")
-   points(sort(r), (1:length(r))/length(r), col = 4)
+   points(sort(r), (1:length(r))/length(r), col = "steelblue4")
 

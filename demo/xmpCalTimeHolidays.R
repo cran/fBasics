@@ -8,10 +8,8 @@
 #
 
 
-# ------------------------------------------------------------------------------
-
-
-## Time Zone:
+################################################################################
+# Time Zone:
 
     # Note we need "GMT" as time zone
     # Test:
@@ -27,7 +25,8 @@
     # Ok -> Ok -> Ok
    
 
-## Easter:
+################################################################################
+# Easter:
 
    currentYear         # prints current year as integer
    easter()            # date of easter this year
@@ -37,7 +36,8 @@
    timeDate(easter())  # Convert to timeDate
     
     
-## Holidays:
+################################################################################
+# Holidays:
 
    holiday()
    holiday(2000:2009, "USLaborDay")
@@ -45,14 +45,16 @@
    print(USLaborDay(2000:2009))
     
     
-## Time Zones and Day Light Saving Times:
+################################################################################
+# Time Zones and Day Light Saving Times:
    
    Sys.getenv("TZ")
    Sys.timezone()
    if (Sys.timezone() != "GMT") warning("Set timezone to GMT!")
     
    
-## Convert to/from Local Time:
+################################################################################
+# Convert to/from Local Time:
 
    # Start with character string:
    charvec = "2004-08-01 00:00:00"
@@ -70,7 +72,8 @@
    NYC
 
  
-## Convert Within the Same Time Zone:
+################################################################################
+# Convert Within the Same Time Zone:
 
    # What time was it in Berlin at April 5th and 6th, 1980, 
    # at 4:00 PM Zurich time?
@@ -86,7 +89,8 @@
    # contrast, to GermaNYC!
 
 
-## Investigate changeover to DST:
+################################################################################
+# Investigate changeover to DST:
 
    TIME = c("27 23:00:00", "27 23:15:00", "27 23:30:00", "27 23:45:00",
             "28 00:00:00", "28 00:15:00", "28 00:30:00", "28 00:45:00",
@@ -101,7 +105,8 @@
    cbind(GMT, LONDON=as.character(LONDON@Data), GMT2=as.character(GMT2@Data))
 
 
-## Some Additional Time Zone Abbreviations:
+################################################################################
+# Some Additional Time Zone Abbreviations:
 
    # -------------------------------------------------------------------------
    # Time Zone Name     Other abbreviations  Time Zone    Use
@@ -127,4 +132,7 @@
    # PDT   Pacific Daylight Time        HAP  UTC-7 hours 
    # -------------------------------------------------------------------------
     
-    
+  
+################################################################################
+
+  

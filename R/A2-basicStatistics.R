@@ -16,82 +16,75 @@
 
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#	  iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#	  General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#	sources obtained from a few dozens of websites 	
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file  
 
 
 ################################################################################
-# FUNCTION:		   		DESCRIPTION:
-#  skewness	   			 Returns a number which is the skewness of the data
-#   skewness.default
-#   skewness.data.frame
-#   skewness.POSIXct
-#   skewness.POSIXlt
-#  kurtosis	   			 Returns a number which is the kurtosis of the data
-#   kurtosis.default
-#   kurtosis.data.frame
-#   kurtosis.POSIXct
-#   kurtosis.POSIXlt
-#  basicStats	   		 Returns a basic statistics summary
 # FUNCTION:             DESCRIPTION:
-#  rowStats		 		 Computes sample statistics by row
-#   rowAvgs				  Computes sample mean by row
-#   rowVars			 	  Computes sample variance by row
-#   rowStdevs			  Computes sample variance by row
-#   rowSkewness		 	  Computes sample skewness by row
-#   rowKurtosis		 	  Computes sample kurtosis by row
-#   rowCumsums		 	  Computes sample cumulated sums by row
+#  skewness              Returns a number which is the skewness of the data
+#   skewness.default      Default method
+#   skewness.data.frame   Method for objects of class data.frame
+#   skewness.POSIXct      Method for objects of class POSIXct 
+#   skewness.POSIXlt      Method for objects of class POSIXlt 
+#  kurtosis              Returns a number which is the kurtosis of the data
+#   kurtosis.default      Default method
+#   kurtosis.data.frame   Method for objects of class data.frame
+#   kurtosis.POSIXct      Method for objects of class POSIXct
+#   kurtosis.POSIXlt      Method for objects of class POSIXlt
+#  basicStats            Returns a basic statistics summary
 # FUNCTION:             DESCRIPTION:
-#  colStats		 		 Computes sample statistics by column
-#   colAvgs				  Computes sample mean by column
-#   colVars			 	  Computes sample variance by column
-#   colStdevs			  Computes sample variance by column
-#   colSkewness		 	  Computes sample skewness by column
-#   colKurtosis		 	  Computes sample kurtosis by column
-#   colCumsums		 	  Computes sample cumulated sums by column
+#  rowStats              Computes sample statistics by row
+#   rowAvgs               Computes sample mean by row
+#   rowVars               Computes sample variance by row
+#   rowStdevs             Computes sample variance by row
+#   rowSkewness           Computes sample skewness by row
+#   rowKurtosis           Computes sample kurtosis by row
+#   rowCumsums            Computes sample cumulated sums by row
+# FUNCTION:             DESCRIPTION:
+#  colStats              Computes sample statistics by column
+#   colAvgs               Computes sample mean by column
+#   colVars               Computes sample variance by column
+#   colStdevs             Computes sample variance by column
+#   colSkewness           Computes sample skewness by column
+#   colKurtosis           Computes sample kurtosis by column
+#   colCumsums            Computes sample cumulated sums by column
 ################################################################################
 
 
 kurtosis =
 function (x, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
 
-	# FUNCTION:
-	
-	UseMethod("kurtosis")
+    # FUNCTION:
+    
+    UseMethod("kurtosis")
 }
+
+
+# ------------------------------------------------------------------------------
 
 
 kurtosis.default =
 function (x, na.rm = FALSE, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
   
-  	# Description:
-	#	Returns the value of the kurtosis of a
-  	#	distribution function. Missing values
-  	#	can be handled.
-	
-	# FUNCTION:
+    # Description:
+    #   Returns the value of the kurtosis of a
+    #   distribution function. Missing values
+    #   can be handled.
     
-	# Warnings:
-	if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
+    # FUNCTION:
+    
+    # Warnings:
+    if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
         warning("argument is not numeric or logical: returning NA")
         return(as.numeric(NA))}
         
@@ -113,9 +106,9 @@ function (x, na.rm = FALSE, ...)
 
 kurtosis.data.frame = 
 function (x, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
 
-	sapply(x, kurtosis, ...)
+    sapply(x, kurtosis, ...)
 }
 
 
@@ -124,9 +117,9 @@ function (x, ...)
 
 kurtosis.POSIXct =
 function (x, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
 
-	structure(kortosis(unclass(x), ...), class = c("POSIXt", "POSIXct"))
+    structure(kortosis(unclass(x), ...), class = c("POSIXt", "POSIXct"))
 }
 
 
@@ -135,38 +128,39 @@ function (x, ...)
 
 kurtosis.POSIXlt =
 function (x, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
 
-	as.POSIXlt(kurtosis(as.POSIXct(x), ...))
+    as.POSIXlt(kurtosis(as.POSIXct(x), ...))
 }
 
 
-# ------------------------------------------------------------------------------
+# ******************************************************************************
 
 
 skewness =
 function (x, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
 
-	UseMethod("skewness")
+    UseMethod("skewness")
 }
 
 
 # ------------------------------------------------------------------------------
 
+
 skewness.default =
 function (x, na.rm = FALSE, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
   
-  	# Description:
-	#	Returns the value of the skewness of a
-  	#	distribution function. Missing values
-  	#	can be handled.
-	
-	# FUNCTION:
+    # Description:
+    #   Returns the value of the skewness of a
+    #   distribution function. Missing values
+    #   can be handled.
     
-	# Warnings:
-	if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
+    # FUNCTION:
+    
+    # Warnings:
+    if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
         warning("argument is not numeric or logical: returning NA")
         return(as.numeric(NA))}
         
@@ -188,9 +182,9 @@ function (x, na.rm = FALSE, ...)
 
 skewness.data.frame = 
 function (x, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
 
-	sapply(x, skewness, ...)
+    sapply(x, skewness, ...)
 }
 
 
@@ -199,9 +193,9 @@ function (x, ...)
 
 skewness.POSIXct =
 function (x, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
 
-	structure(skewness(unclass(x), ...), class = c("POSIXt", "POSIXct"))
+    structure(skewness(unclass(x), ...), class = c("POSIXt", "POSIXct"))
 }
 
 
@@ -210,9 +204,9 @@ function (x, ...)
 
 skewness.POSIXlt =
 function (x, ...) 
-{	# A function implemented by D. Wuertz
+{   # A function implemented by D. Wuertz
 
-	as.POSIXlt(skewness(as.POSIXct(x), ...))
+    as.POSIXlt(skewness(as.POSIXct(x), ...))
 }
 
 
@@ -221,52 +215,53 @@ function (x, ...)
 
 basicStats = 
 function(x, ci = 0.95) 
-{	# A function implemented by D. Wuertz
-	
-	# Description:
-	#	Calculates Basic Statistics
-	
-	# FUNCTION:
-	
-	# CL Levels:	
-	cl.vals = function(x, ci){
-		x = x[!is.na(x)]
-		n = length(x)
-		if(n <= 1) return(c(NA, NA))
-		se.mean = sqrt(var(x)/n)
-		t.val = qt((1 - ci)/2, n - 1)
-		mn = mean(x)
-		lcl = mn + se.mean * t.val
-		ucl = mn - se.mean * t.val
-		c(lcl, ucl)}		
-	
-	# Observations:
-	x.length = length(x)
-	x = x[!is.na(x)]
-	x.na = x.length - length(x)
-	
-	# Basic Statistics:
-	z = c(
-		x.length, x.na, min(x), max(x),
-		as.numeric(quantile(x, prob=0.25, na.rm=TRUE)),	
-		  as.numeric(quantile(x, prob=0.75, na.rm=TRUE)), 
-		mean(x), median(x), sum(x), sqrt(var(x)/length(x)), 
-		cl.vals(x, ci)[1], cl.vals(x, ci)[2], var(x), 
-		sqrt(var(x)), skewness(x), kurtosis(x) )	
-	
-	# Row Names:
-	 znames = c(
-		"nobs", "NAs", 	"Minimum", "Maximum", 
-		"1. Quartile", 	"3. Quartile", 	"Mean",	"Median", 
-		"Sum", 	"SE Mean", "LCL Mean", "UCL Mean", 
-		"Variance", "Stdev", "Skewness", "Kurtosis")
-		
-	# Output as data.frame
-	ans = data.frame(z, row.names = znames)
-	
-	# Return Value:
-	ans
-	
+{   # A function implemented by D. Wuertz
+    
+    # Description:
+    #   Calculates Basic Statistics
+    
+    # FUNCTION:
+    
+    # CL Levels:    
+    cl.vals = function(x, ci) {
+        x = x[!is.na(x)]
+        n = length(x)
+        if(n <= 1) return(c(NA, NA))
+        se.mean = sqrt(var(x)/n)
+        t.val = qt((1 - ci)/2, n - 1)
+        mn = mean(x)
+        lcl = mn + se.mean * t.val
+        ucl = mn - se.mean * t.val
+        c(lcl, ucl)
+    }        
+    
+    # Observations:
+    x.length = length(x)
+    x = x[!is.na(x)]
+    x.na = x.length - length(x)
+    
+    # Basic Statistics:
+    z = c(
+        x.length, x.na, min(x), max(x),
+        as.numeric(quantile(x, prob = 0.25, na.rm = TRUE)), 
+          as.numeric(quantile(x, prob = 0.75, na.rm = TRUE)), 
+        mean(x), median(x), sum(x), sqrt(var(x)/length(x)), 
+        cl.vals(x, ci)[1], cl.vals(x, ci)[2], var(x), 
+        sqrt(var(x)), skewness(x), kurtosis(x) )    
+    
+    # Row Names:
+    znames = c(
+        "nobs", "NAs",  "Minimum", "Maximum", 
+        "1. Quartile",  "3. Quartile",  "Mean", "Median", 
+        "Sum",  "SE Mean", "LCL Mean", "UCL Mean", 
+        "Variance", "Stdev", "Skewness", "Kurtosis")
+        
+    # Output as data.frame
+    ans = data.frame(z, row.names = znames)
+    
+    # Return Value:
+    ans
+    
 }
 
 
@@ -275,21 +270,24 @@ function(x, ci = 0.95)
 
 rowStats = 
 function(x, FUN, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample statistics by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 1, FUN = FUN, ...) 
-	else
-		result = apply(x, MARGIN = 1, FUN = FUN, ...) 
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample statistics by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 1, FUN = FUN, ...) 
+    else
+        result = apply(x, MARGIN = 1, FUN = FUN, ...) 
+        
+    # Return Value:
+    result
 }
 
 
@@ -298,24 +296,27 @@ function(x, FUN, na.rm = FALSE, ...)
 
 rowAvgs = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample mean by column
-	
-	# Note:
-	#	R's base package comes already with a colMeans!
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 1, FUN = mean, ...) 
-	else
-		result = apply(x, MARGIN = 1, FUN = mean, ...) 
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample mean by column
+    
+    # Note:
+    #   R's base package comes already with a colMeans!
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 1, FUN = mean, ...) 
+    else
+        result = apply(x, MARGIN = 1, FUN = mean, ...) 
+        
+    # Return Value:
+    result
 }
 
 
@@ -324,21 +325,24 @@ function(x, na.rm = FALSE, ...)
 
 rowVars = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample variance by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 1, FUN = var, ...) 
-	else
-		result = apply(x, MARGIN = 1, FUN = var, ...) 
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample variance by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 1, FUN = var, ...) 
+    else
+        result = apply(x, MARGIN = 1, FUN = var, ...) 
+        
+    # Return Value:
+    result
 }
 
 
@@ -347,21 +351,24 @@ function(x, na.rm = FALSE, ...)
 
 rowStdevs = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample standard deviation by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = sqrt(apply(na.remove(x), MARGIN = 1, FUN = var, ...))
-	else
-		result = sqrt(apply(x, MARGIN = 1, FUN = var, ...))
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample standard deviation by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = sqrt(apply(na.remove(x), MARGIN = 1, FUN = var, ...))
+    else
+        result = sqrt(apply(x, MARGIN = 1, FUN = var, ...))
+        
+    # Return Value:
+    result
 }
 
 
@@ -370,21 +377,24 @@ function(x, na.rm = FALSE, ...)
 
 rowSkewness = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample skewness by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 1, FUN = skewness, ...) 
-	else
-		result = apply(x, MARGIN = 1, FUN = skewness, ...) 
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample skewness by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 1, FUN = skewness, ...) 
+    else
+        result = apply(x, MARGIN = 1, FUN = skewness, ...) 
+        
+    # Return Value:
+    result
 }
 
 
@@ -393,21 +403,24 @@ function(x, na.rm = FALSE, ...)
 
 rowKurtosis = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample kurtosis by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 1, FUN = kurtosis, ...) 
-	else
-		result = apply(x, MARGIN = 1, FUN = kurtosis, ...) 
-		
-	# Return Value:
-	result 
+    # Description:
+    #   Computes sample kurtosis by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 1, FUN = kurtosis, ...) 
+    else
+        result = apply(x, MARGIN = 1, FUN = kurtosis, ...) 
+        
+    # Return Value:
+    result 
 }
 
 
@@ -416,21 +429,24 @@ function(x, na.rm = FALSE, ...)
 
 rowCumsums = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample cumulated sums by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
-	else
-		result = apply(x, MARGIN = 2, FUN=cumsum, ...) 
-		
-	# Return Value:
-	result 
+    # Description:
+    #   Computes sample cumulated sums by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
+    else
+        result = apply(x, MARGIN = 2, FUN=cumsum, ...) 
+        
+    # Return Value:
+    result 
 }
 
 
@@ -439,21 +455,24 @@ function(x, na.rm = FALSE, ...)
 
 colStats = 
 function(x, FUN, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample statistics by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN=2, FUN=FUN, ...) 
-	else
-		result = apply(x, MARGIN=2, FUN=FUN, ...) 
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample statistics by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN=2, FUN=FUN, ...) 
+    else
+        result = apply(x, MARGIN=2, FUN=FUN, ...) 
+        
+    # Return Value:
+    result
 }
 
 
@@ -462,24 +481,27 @@ function(x, FUN, na.rm = FALSE, ...)
 
 colAvgs = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample mean by column
-	
-	# Note:
-	#	R's base package comes already with a colMeans!
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 2, FUN = mean, ...) 
-	else
-		result = apply(x, MARGIN = 2, FUN = mean, ...) 
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample mean by column
+    
+    # Note:
+    #   R's base package comes already with a colMeans!
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 2, FUN = mean, ...) 
+    else
+        result = apply(x, MARGIN = 2, FUN = mean, ...) 
+        
+    # Return Value:
+    result
 }
 
 
@@ -488,21 +510,24 @@ function(x, na.rm = FALSE, ...)
 
 colVars = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample variance by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 2, FUN = var, ...) 
-	else
-		result = apply(x, MARGIN = 2, FUN = var, ...) 
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample variance by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 2, FUN = var, ...) 
+    else
+        result = apply(x, MARGIN = 2, FUN = var, ...) 
+        
+    # Return Value:
+    result
 }
 
 
@@ -511,21 +536,24 @@ function(x, na.rm = FALSE, ...)
 
 colStdevs = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample standard deviation by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = sqrt(apply(na.remove(x), MARGIN = 2, FUN = var, ...))
-	else
-		result = sqrt(apply(x, MARGIN = 2, FUN = var, ...))
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample standard deviation by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = sqrt(apply(na.remove(x), MARGIN = 2, FUN = var, ...))
+    else
+        result = sqrt(apply(x, MARGIN = 2, FUN = var, ...))
+        
+    # Return Value:
+    result
 }
 
 
@@ -534,21 +562,24 @@ function(x, na.rm = FALSE, ...)
 
 colSkewness = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample skewness by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 2, FUN = skewness, ...) 
-	else
-		result = apply(x, MARGIN = 2, FUN = skewness, ...) 
-		
-	# Return Value:
-	result
+    # Description:
+    #   Computes sample skewness by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 2, FUN = skewness, ...) 
+    else
+        result = apply(x, MARGIN = 2, FUN = skewness, ...) 
+        
+    # Return Value:
+    result
 }
 
 
@@ -557,21 +588,24 @@ function(x, na.rm = FALSE, ...)
 
 colKurtosis = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample kurtosis by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 2, FUN = kurtosis, ...) 
-	else
-		result = apply(x, MARGIN = 2, FUN = kurtosis, ...) 
-		
-	# Return Value:
-	result 
+    # Description:
+    #   Computes sample kurtosis by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 2, FUN = kurtosis, ...) 
+    else
+        result = apply(x, MARGIN = 2, FUN = kurtosis, ...) 
+        
+    # Return Value:
+    result 
 }
 
 
@@ -580,21 +614,24 @@ function(x, na.rm = FALSE, ...)
 
 colCumsums = 
 function(x, na.rm = FALSE, ...) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Computes sample cumulated sums by column
-	
-	# FUNCTION:
-	
-	# Column Statistics:
-	if (na.rm) 
-		result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
-	else
-		result = apply(x, MARGIN = 2, FUN=cumsum, ...) 
-		
-	# Return Value:
-	result 
+    # Description:
+    #   Computes sample cumulated sums by column
+    
+    # FUNCTION:
+    
+    # Transform:
+    x = as.matrix(x)
+    
+    # Statistics:
+    if (na.rm) 
+        result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
+    else
+        result = apply(x, MARGIN = 2, FUN=cumsum, ...) 
+        
+    # Return Value:
+    result 
 }
 
 

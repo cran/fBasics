@@ -17,12 +17,8 @@
 #
 
 
-# ------------------------------------------------------------------------------
-
-
-
 ################################################################################
-## 1 Autocorrelation and Partial Autocorrelations
+# 1 Autocorrelation and Partial Autocorrelations
 
 
 	# This example plots the autocorrelation function and the 
@@ -39,7 +35,7 @@
 
 	
 ################################################################################
-## 2 Taylor Effect
+# 2 Taylor Effect
 
 
 	# This example Investigates the Taylor effect of the  
@@ -50,18 +46,21 @@
 	# Settings:
 	par(mfrow = c(2, 1))
 	data(nyseres)
+	###
 
 	# Taylor Effect / NYSE Residuals:	
 	# Figure 1 - NYSE Residuals
-	teffectPlot(nyseres, lag.max=6, ymax=0.3, standardize=F)
+	teffectPlot(nyseres, lag.max = 6, ymax = 0.3, standardize = FALSE)
+	###
 
 	# Compare with t-distributed iid Time Series:
 	# Figure 2 - t-distributed Random Variates
-	teffectPlot(rt(length(x),4), lag.max=6, ymax=0.3)
+	teffectPlot(rt(length(nyseres[, 1]), df = 4), lag.max = 6, ymax = 0.3)
+	###
 
 
 ################################################################################
-##  3 Long Memory Behaviour
+# 3 Long Memory Behaviour
 
 
 	# This example plots the long memory autocorrelation function 
@@ -74,15 +73,21 @@
 	# Data: NYSE Composite Index log Returns
 	par(mfrow = c(3, 1))
 	data(nyseres)
+	###
 	
 	# Long Memory Autocorrelation Function:	
 	result = lmacfPlot(abs(nyseres), lag.max = 126, ci = 0.95, 
 		main = "ACF NYSE-Index", doprint = TRUE)
+	###
 
 	# Program Test - Try a time series which exhibits no long memory:
 	# Data: Gaussian Random Numbers
-	x = rnorm(n=dim(nyseres)[1])
-	result = lmacfPlot(abs(x), lag.max = 126, ci = 0.95, 
+	x = rnorm(n = dim(nyseres)[1])
+	result = lmacfPlot(abs(nyseres), lag.max = 126, ci = 0.95, 
 		main = "ACF iid Gauss", doprint = TRUE)
+	###
+
+
+################################################################################
 
 		

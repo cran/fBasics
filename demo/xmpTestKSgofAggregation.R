@@ -29,7 +29,7 @@
 	AggregationLevels = 8
 	x = x[1:2^13]
 	# Further Settings:
-		x.length = x.kurtosis = x.statistic = x.pvalue = rep(NA, times=8)	
+		x.length = x.kurtosis = x.statistic = x.pvalue = rep(NA, times = 8)	
    		statistic.gof = function(x, ...) ksgof.test(x, ...)$statistic	
 		pvalue.gof = function(x, ...) ksgof.test(x, ...)$p.value	
 	# Investigate for all data subsets:		
@@ -40,15 +40,15 @@
 			if(i==1) 
 				x.aggregated = x
 			else
-				x.aggregated = apply(matrix(x, byrow=T, ncol=ncol), 
-					MARGIN=1, FUN=sum)
+				x.aggregated = apply(matrix(x, byrow = TRUE, ncol = ncol), 
+					MARGIN = 1, FUN = sum)
 			# Remove ties:
 			x.aggregated = unique(x.aggregated)
 			x.kurtosis[i] = kurtosis(x.aggregated)
 			x.mean = mean(x.aggregated)
 			x.sdev = sqrt(var(x.aggregated))
-			ksgof = ksTest(x=x.aggregated, y="pnorm", x.mean, 
-				x.sdev, alternative="two.sided")
+			ksgof = ksTest(x = x.aggregated, y = "pnorm", x.mean, 
+				x.sdev, alternative = "two.sided")
 			x.statistic[i] = ksgof$statistic
 			x.pvalue[i] = ksgof$p.value 
 			}

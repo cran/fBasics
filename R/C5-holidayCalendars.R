@@ -14,28 +14,17 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA  02111-1307  USA
 
-
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#     iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#     General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#   sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
 ################################################################################
@@ -730,7 +719,7 @@ function(x, ...)
 
 
 fjulian = 
-function(fdates, origin = 19600101, order = 'mdy', cc = 20)
+function(fdates, origin = 19600101, order = 'mdy', cc = NULL, swap = 20)
 {	# # A function implemented by Diethelm Wuertz
 
 	# Description:
@@ -738,6 +727,10 @@ function(fdates, origin = 19600101, order = 'mdy', cc = 20)
  	#	as 8/11/73 11Aug1973, ... into ISO-8601 Gregorian dates
  	#	... makes use of C-Program char_date.c implemented by 
 	#	Terry Therneau
+	
+	# Notes:
+	#	cc - Century, becoming obsolete with the introduction of
+	#		swap.
  
 	# Requirements:
 	#	R-package "date"
@@ -758,30 +751,36 @@ function(fdates, origin = 19600101, order = 'mdy', cc = 20)
  		'dmy'= c(3,2,1),
  		stop("Invalid value for 'order' option"), 
  		PACKAGE = "fBasics")
- 		nn = length(fdates)
- 		temp = .C("char_date", 
- 			as.integer(nn),
- 			as.integer(order.vec),
- 			as.character(fdates),
- 			month = integer(nn),
- 			day = integer(nn),
- 			year = integer(nn),
- 			PACKAGE = "fBasics")
- 		month = temp[[4]]
- 		day = temp[[5]]
- 		year = temp[[6]]
- 		yy = year - 100 * floor (year/100)
- 		year = cc*100 + yy
+	nn = length(fdates)
+	temp = .C("char_date", 
+		as.integer(nn),
+		as.integer(order.vec),
+		as.character(fdates),
+		month = integer(nn),
+		day = integer(nn),
+		year = integer(nn),
+		PACKAGE = "fBasics")
+	month = temp[[4]]
+	day = temp[[5]]
+	year = temp[[6]]
+	yy = year - 100 * floor (year/100)
+	
+	# Swap:
+	cc = 19 + trunc(sign(swap-yy)+1)/2
+	year = cc*100 + yy
  	
 	# Origin:
- 		cc0 = origin%/%1000000
- 		yymmdd0 = origin-cc0*1000000
- 		yy0 = yymmdd0%/%10000
- 		mm0 = yymmdd0%/%100-yy0*100
- 		dd0 = yymmdd0-yy0*10000-mm0*100
+	cc0 = origin %/% 1000000
+	yymmdd0 = origin - cc0*1000000
+	yy0 = yymmdd0 %/% 10000
+	mm0 = yymmdd0 %/% 100 - yy0*100
+	dd0 = yymmdd0 - yy0*10000 - mm0*100
 
-	# Return Value:
- 	.julian(month, day, year, origin = c(mm0, dd0, cc0*100+yy0))
+	# Result:
+ 	ans = .julian(month, day, year, origin = c(mm0, dd0, cc0*100+yy0))
+ 	
+ 	# Return Value:
+ 	ans
 }
 
 
@@ -797,7 +796,7 @@ function(m, d, y, origin = c(month = 1, day = 1, year = 1960))
 	#	same list of arguments.
 	
 	# Note:
-	#	SPlus like.
+	#	SPlus like function.
 
 	# FUNCTION:
 	
@@ -849,7 +848,7 @@ function(jul, origin = c(month = 1, day = 1, year = 1960))
 	#	the same list of arguments.
 	
 	# Note:
-	#	Splus like.
+	#	Splus like function.
 	
 	# FUNCTION:	
 	
@@ -896,9 +895,12 @@ function(y)
 	
 	# FUNCTION:
 	
-	# Return Value:
+	# Result:
 	y = month.day.year(as.numeric(y), origin = origin(y))$year
-	y %% 4 == 0 & (y %% 100 != 0 | y %% 400 == 0)
+	ans = y %% 4 == 0 & (y %% 100 != 0 | y %% 400 == 0)
+	
+	# Return Value:
+	ans
 }
 
 
@@ -917,10 +919,13 @@ function(month, day, year)
 
 	# FUNCTION:
 	
-	# ReturnValue:
-	sday.of.week(year*10000+month*100+day)
+	# Result:
+	ans = sday.of.week(year * 10000 + month * 100 + day)
+	
+	# Return Value:
+	ans
 }
 
 
-# ------------------------------------------------------------------------------
+# ******************************************************************************
 

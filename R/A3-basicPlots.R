@@ -16,25 +16,15 @@
 
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#     iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#     General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#   sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
 ################################################################################
@@ -43,9 +33,6 @@
 #  tsPlot                Returns a time series plot
 #  histPlot              Returns a histogram plot
 #  densityPlot           Returns a kernel density estimate plot
-#  logpdfPlot            Returns a pdf plot on logarithmic scale(s)
-#  qqgaussPlot           Returns a Gaussian Quantile-Quantile plot
-#  scalinglawPlot        Evaluates and displays a scaling law behavior
 # FUNCTION:             DESCRIPTION 3D PLOTS:
 #  circlesPlot           Returns a scatterplot of circles indexing a 3rd variable
 #  perspPlot             Returns a perspective plot in 2 dimensions
@@ -98,6 +85,9 @@ function(x, type = "l", labels = TRUE, ...)
     # Description:
     #   Returns a time series plot
     
+    # Notes:
+    #	A synonyme call for function 'ts.plot'
+    
     # FUNCTION:
     
     # Settings:
@@ -146,10 +136,16 @@ function(x, col = "steelblue4", border = "white", ...)
     # Description:
     #   Returns a histogram plot
     
+    # Notes:
+    #	A synonyme call for function 'hist'
+    
     # FUNCTION:
     
     # Settings:
     # if (SPLUSLIKE) splusLikePlot(TRUE)
+    
+    # Transform 'timeSeries':
+    if (is.timeSeries(x)) x = seriesData(x)
     
     # Histogram Plot:
     ans = hist(x = x, col = col, border = border, ...) 
@@ -169,176 +165,19 @@ function(x, ...)
     # Description:
     #   Returns a kernel density estimate plot
 
+    # Notes:
+    #	A synonyme call for method 'plot.density'
+    
     # FUNCTION:
     
     # Settings:
     # if (SPLUSLIKE) splusLikePlot(TRUE)
-    doplot = TRUE
     
     # Plot:
-    if (doplot) {
-        return(plot(density(x), ...)) }
-    else {
-        return(density(x, ...)) }
+    plot(density(x), ...)
     
     # Return Value:
     invisible()
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-logpdfPlot = 
-function(x, n = 50, doplot = TRUE, type = c("lin-log", "log-log"), ...)
-{   # A function implemented by D. Wuertz
-    
-    # Description:
-    #   Returns a pdf plot on a lin-log scale in
-    #   comparisin to a Gaussian density plot
-    #   and return the break-midpoints and the
-    #   counts obtained from the histogram of
-    #   the empirical data.
-    
-    # FUNCTION:
-    
-    # Settings:
-    # if (SPLUSLIKE) splusLikePlot(TRUE)
-    
-    # Select Type:
-    type = type[1]
-    
-    # Internal Function Log-LogPlot:
-    loglogpdfPlot = function(x, n = 50, doplot = TRUE, ...) {
-        # Internal FUNCTION:
-        .hist = function(x, cells="FD", include.lowest=FALSE) { result = 
-            hist(x, breaks=cells, include.lowest=include.lowest, plot=FALSE)
-            prob.counts = result$counts/sum(result$counts) /
-                diff(result$breaks)[1]
-            list(breaks=result$breaks, counts=prob.counts) }
-        # Histogram Count & Breaks:
-        histogram = .hist(x, cells="fd", include.lowest=FALSE)
-            yh = histogram$counts; xh = histogram$breaks
-            xh = xh[1:(length(xh)-1)] + diff(xh)/2
-            xh = xh[yh > 0]; yh = yh[yh > 0]
-            yh1 = yh[xh < 0]; xh1 = abs(xh[xh < 0])
-            yh2 = yh[xh > 0]; xh2 = xh[xh > 0]
-            plot(log(xh1), log(yh1), type="p", ...) 
-            par(err=-1); points(log(xh2), log(yh2), col=2) 
-        # Compare with a Gaussian plot:
-        xg = seq(from=min(xh1[1], xh[2]), 
-            to=max(xh1[length(xh1)], xh2[length(xh2)]), length=n)
-        xg = xg[xg > 0]
-            yg = log(dnorm(xg, mean(x), sqrt(var(x))))
-        par(err=-1); lines(log(xg), yg, col=3)
-        # Return Value:
-        invisible(list(breaks = c(xh1, xh2), counts = c(yh1, yh2), 
-            fbreaks=c(-rev(xg), xg), fcounts=c(-rev(yg), yg))) }
-        
-    # Internal FUNCTION:
-    .hist = function(x, cells="FD", include.lowest=FALSE) { 
-        result = hist(x, breaks = cells, include.lowest = include.lowest, 
-            plot = FALSE)
-        prob.counts = result$counts/sum(result$counts)/diff(result$breaks)[1]
-        list(breaks = result$breaks, counts = prob.counts) }
-
-    # Lin-Log Plot:
-    if (type == "lin-log") {
-        # Histogram Count & Break-Midpoints:
-        histogram = .hist(x, cells = "FD", include.lowest = FALSE)
-            yh = histogram$counts
-            xh = histogram$breaks
-            xh = xh[1:(length(xh)-1)] + diff(xh)/2
-            xh = xh[yh>0]
-            yh = log(yh[yh > 0])
-            if (doplot) {
-                par(err=-1)
-                plot(xh, yh, type = "p", ...)} 
-        # Compare with a Gaussian Plot:
-        xg = seq(from = xh[1], to = xh[length(xh)], length = n)
-            yg = log(dnorm(xg, mean(x), sqrt(var(x))))
-            if (doplot) { 
-                par(err=-1)
-                lines(xg, yg, col=2)}
-        # Result:
-        result = invisible(list(breaks = xh, counts = yh, 
-            fbreaks = xg, fcounts = yg))}
-    
-    # Log-Log Plot:
-    if (type == "log-log") {
-        result = loglogpdfPlot(x = x, n = n, doplot = doplot, ...) }
-    
-    # Return Value:
-    result
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-qqgaussPlot = 
-function(x, span = 5, ...)
-{   # A function implemented by D. Wuertz
-    
-    # Description:
-    #   Returns a Quantile-Quantile plot.
-
-    # FUNCTION:
-    
-    # Settings:
-    # if (SPLUSLIKE) splusLikePlot(TRUE)
-    
-    # Standardized qqnorm():
-    y = (x-mean(x)) / sqrt(var(x))
-    lim = c(-span, span)
-    qqnorm(y[abs(y) < span], xlim = lim, ylim = lim, ...)
-    
-    # Return Value:
-    invisible(qqline(y, col = 2))
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-scalinglawPlot =
-function(x, span = ceiling(log(length(x)/252)/log(2)), doplot = TRUE, ...)
-{   # A function implemented by D. Wuertz
-  
-    # Description:
-    #   Investigates the scaling law.
-    #   The input "x" requires log-returns.
-
-    # FUNCTION: 
-    
-    # Settings:
-    # if (SPLUSLIKE) splusLikePlot(TRUE)
-    logtimesteps = span
-    xmean = mean(x)
-    
-    # x have to be logarithmic returns
-    y = (x-xmean)
-    logprices = cumsum(y)
-    
-    # Scaling Power Low:
-    scale = function (nx, logprices) {
-        sum(abs(diff(logprices, lag = (2^nx))))}
-        
-    nx = 0:logtimesteps; x = nx*log(2)
-    y = log(apply(matrix(nx), 1, scale, logprices))
-    fit = lsfit(x, y)$coefficients
-    # Robust Fit:       
-    # fit = l1fit(x, y)$coefficients
-    alfa = 1.0/fit[2]
-    if (doplot) { 
-        plot(x, y, xlab = "log-time", ylab = "log-volatility", ...)
-        title(main = "Scaling Law Plot", ...)
-        grid()
-        abline(fit[1], fit[2], col=2)
-        abline(fit[1], 0.5, col=3) }
-    
-    # Return Value:
-    list(exponent = as.numeric(alfa), fit = fit)
 }
 
 
@@ -380,7 +219,10 @@ function(x, y, z, theta = -40, phi = 30, col = "steelblue4", ps = 9, ...)
     # Description:
     #   Returns a perspecvtive plot
     
-    # FUNCTION:
+    # Notes:
+    #	A synonyme call for function 'persp'
+    
+    # FUNCTION:   
     
     # Settings:
     # if (SPLUSLIKE) splusLikePlot(TRUE)
@@ -391,9 +233,12 @@ function(x, y, z, theta = -40, phi = 30, col = "steelblue4", ps = 9, ...)
     if (!exists("expand")) expand = 0.6
     if (!exists("r")) r = 500
     
-    # Return Value:
+    # Plot:
     persp(x = x, y = y, z = z, theta = theta, phi = phi, 
         col = col, ticktype = ticktype, expand = expand, ...) 
+        
+    # Return Value:
+    invisible()
 }
 
                         
@@ -428,7 +273,7 @@ function(font = 1, cex = 0.7)
 
     # FUNCTION:
     
-    # Settings:
+    # Table:
     v = 40:377
     v = v[v %% 100 < 80 & v %% 10 < 8]
     par(mar = c(5, 5, 4, 2) + 0.1)
@@ -501,7 +346,7 @@ function(font = par('font'), cex = 0.7)
 
     # FUNCTION:
     
-    # Compute:
+    # Table:
     plot(0, 0, xlim = c(-1, 11), ylim = c(0, 26), type = 'n', 
         axes = FALSE, xlab = '', ylab = '', main = "Table of Plot Characters")
     j = -1
@@ -516,5 +361,5 @@ function(font = par('font'), cex = 0.7)
 }
 
 
-# ------------------------------------------------------------------------------
+# ******************************************************************************
 

@@ -21,6 +21,6 @@
 
 # Runs Test:
 
-	runsTest(nyseres[, 1], doprint = TRUE)
+	runsTest(nyseres[, 1])
 
 	

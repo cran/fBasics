@@ -14,28 +14,17 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA  02111-1307  USA
 
-
 # Copyrights (C)
 # for this R-port: 
+#   1999 - 2004, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
+#   info@rmetrics.org
+#   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
-#   R: see R's copyright and license file
-#   date: Terry Therneau <therneau@mayo.edu>
-#     R port by Th. Lumley <thomas@biostat.washington.edu>  K. Halvorsen 
-#       <khal@alumni.uv.es>, and Kurt Hornik <Kurt.Hornik@R-project.org>
-#   ts: Collected by Brian Ripley. See SOURCES
-#   tseries: Compiled by Adrian Trapletti <a.trapletti@bluewin.ch>
-# for ical:
-#   libical: Libical is an Open Source implementation of the IETF's 
-#     iCalendar Calendaring and Scheduling protocols. (RFC 2445, 2446, 
-#     and 2447). It parses iCal components and provides a C API for 
-#     manipulating the component properties, parameters, and subcomponents.
-#   Olsen's VTIMEZONE: These data files are released under the GNU 
-#     General Public License, in keeping with the license options of 
-#     libical. 
-# for the holiday database:
-#   holiday information collected from the internet and governmental 
-#   sources obtained from a few dozens of websites
+#   see R's copyright and license files
+# for the code accessed (or partly included) from contributed R-ports
+# and other sources
+#   see Rmetrics's copyright file
 
 
 ################################################################################
@@ -54,10 +43,11 @@
 #  timeNdayOnOrBefore   Computes date in month that is a n-day ON OR BEFORE date
 #  timeNthNdayInMonth   Computes n-th ocurrance of a n-day in year/month
 #  timeLastNdayInMonth  Computes the last n-day in year/month
-# FUNCTION:            TEST AND REPRESENTATION OF OBJECTS:
-#  is.timeDate          Checks if the object is of class 'timeDate'
+# S3 METHODS:          REPRESENTATION OF OBJECTS:
 #  print.timeDate       Prints 'timeDate' including 'FinCenter' and 'Data' Slot
 #  summary.timeDate     Summarizes details of a 'timeDate' object
+# S3 METHODS:          TEST AND REPRESENTATION OF OBJECTS:
+#  is.timeDate          Checks if the object is of class 'timeDate'
 #  format.timeDate      Formats 'timeDate' as ISO conform character string
 ################################################################################
 
@@ -947,7 +937,7 @@ function(charvec, nday = 1, format = "%Y-%m-%d", FinCenter = "GMT")
 
 ################################################################################
 # TESTS AND REPRESENTATION OF OBJECTS:
-#   We have implemented four S3 methods to test and represent 'timeDate'
+#   We have implemented four methods to test and represent 'timeDate'
 #   objects. The methods check if a given object is of class 'timeDate',
 #   print 'timeDate' objects including 'FinCenter' and 'Data' Slot,
 #   summarize details of a 'timeDate' object, and format 'timeDate' 
@@ -984,7 +974,7 @@ function(object)
 # ------------------------------------------------------------------------------
 
 
-print.timeDate =
+print.timeDate = 
 function(x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
@@ -1009,7 +999,7 @@ function(x, ...)
     
     # Return Value:
     print(layout, quote = FALSE, ...) 
-}   
+}
     
 
 # ------------------------------------------------------------------------------

@@ -15,6 +15,7 @@
 
 # ------------------------------------------------------------------------------
 
+
 # Settings:
 	
 	par(mfcol = c(3, 2))
@@ -30,7 +31,7 @@
 	d = dnig(x, alpha = 1, beta = 0, delta = 1, mu = 0)
 	plot(x, log(d), type="l", main="DNIG(1, 0, 1, 0)")
 	density = density(r, from = -5, to = 5, n = 128)
-	points(density$x, log(density$y), col = steelblue4")
+	points(density$x, log(density$y), col = "steelblue4")
 	
 	p = pnig(x, alpha=1, beta=0, delta=1, mu=0)
 	plot(x, p, type = "l", main = "PNIG(1, 0, 1, 0)")
@@ -54,3 +55,5 @@
 	points(sort(r), (1:length(r))/length(r), col = "steelblue4")
 
 	
+# ------------------------------------------------------------------------------
+
