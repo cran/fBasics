@@ -16,9 +16,8 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2007, Diethelm Wuertz, GPL
+#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   info@rmetrics.org
 #   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
 #   see R's copyright and license files
@@ -28,8 +27,7 @@
 
 
 ################################################################################
-# FUNCTION:             NORMALITY TESTS:
-#  normalTest            Test suite for normality tests S-Plus compatible
+# FUNCTION:             DESCRIPTION:
 #  ksnormTest            One sample Kolmogorov-Smirnov normality test
 #  shapiroTest           Shapiro-Wilk normality test
 #  jarqueberaTest        Jarque-Bera normality test
@@ -49,68 +47,10 @@
 ################################################################################
 
 
-################################################################################
-# FUNCTION:             NORMALITY TESTS:
-#  normalTest            Test suite for normality tests S-Plus compatible
-#  ksnormTest            One sample Kolmogorov-Smirnov normality test
-#  shapiroTest           Shapiro-Wilk normality test
-#  jarqueberaTest        Jarque-Bera normality test
-#  dagoTest              D'Agostino normality test
-#   .skewness.test        ... internal function called by dagoTest
-#   .kurtosis.test        ... internal function called by dagoTest
-#   .omnibus.test         ... internal function called by dagoTest
-
-
-normalTest =
-function(x, method = c("sw", "jb"), na.rm = FALSE) 
-{   # A function implemented by Diethelm Wuertz
-
-    # Description:
-    #   Shapiro-Wilk and Jarque-Bera Test
-    
-    # Notes:
-    #   This function is also for S-Plus compatibility
-
-    # FUNCTION:
-    
-    # Convert Type:
-    if (class(x) == "fREG") x = residuals(x)
-    x = as.vector(x)
-    if (na.rm) x = x[!is.na(x)]
-    
-    # Method:
-    # Don't use: method = match.arg(method)
-    method = method[1]
-    
-    # Test:
-    if (method == "sw") {
-        ans = shapiroTest(x) 
-    } else if (method == "jb") {
-       ans = jarqueberaTest(x)
-    }
-    
-    # Additional Tests:
-    if (method == "ks") {
-        ans = ksnormTest(x)
-    }
-    if (method == "da") {
-        ans = dagoTest(x)
-    }
-    if (method == "ad") {
-        ans = adTest(x)
-    }
- 
-    # Return Value:
-    ans
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-ksnormTest =
-function(x, title = NULL, description = NULL)
-{   # A function implemented by Diethelm Wuertz
+ksnormTest <- 
+    function(x, title = NULL, description = NULL)
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Performs a one-sample Kolmogorov-Smirnov normality test
@@ -145,7 +85,7 @@ function(x, title = NULL, description = NULL)
 
     # Add:
     if (is.null(title)) title = test$method
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
         
     # Return Value:
     new("fHTEST",     
@@ -160,14 +100,15 @@ function(x, title = NULL, description = NULL)
 # ------------------------------------------------------------------------------
 
 
-.shapiro.test = 
-function (x) 
-{   # A copy from R:
+.shapiro.test <- 
+    function (x) 
+{   
+    # A copy from R:
 
     # FUNCTION:
     
+    # Time Series Name:
     DNAME <- deparse(substitute(x))
-    
     x <- sort(x[complete.cases(x)])
     n <- length(x)
     
@@ -190,8 +131,11 @@ function (x)
     if (sw$ifault && sw$ifault != 7) 
         stop(gettextf("ifault=%d. This should not happen", sw$ifault), 
             domain = NA)
-    RVAL <- list(statistic = c(W = sw$w), p.value = sw$pw, 
-        method = "Shapiro-Wilk normality test", data.name = DNAME)
+    RVAL <- list(
+        statistic = c(W = sw$w), 
+        p.value = sw$pw, 
+        method = "Shapiro-Wilk normality test", 
+        data.name = DNAME)
     class(RVAL) <- "htest"
     
     return(RVAL)
@@ -201,9 +145,10 @@ function (x)
 # ------------------------------------------------------------------------------
 
 
-shapiroTest = 
-function(x, title = NULL, description = NULL)
-{   # A function implemented by Diethelm Wuertz
+shapiroTest <- 
+    function(x, title = NULL, description = NULL)
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Performs the Shapiro-Wilk test for normality. 
@@ -233,7 +178,7 @@ function(x, title = NULL, description = NULL)
 
     # Add:
     if (is.null(title)) title = "Shapiro - Wilk Normality Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
         
     # Return Value:
     new("fHTEST",     
@@ -248,9 +193,10 @@ function(x, title = NULL, description = NULL)
 # ------------------------------------------------------------------------------
 
 
-jarqueberaTest =
-function(x, title = NULL, description = NULL) 
-{   # A function implemented by Diethelm Wuertz
+jarqueberaTest <- 
+    function(x, title = NULL, description = NULL) 
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #  Jarque-Bera Test for Normality
@@ -298,12 +244,15 @@ function(x, title = NULL, description = NULL)
     METHOD = "Jarque Bera Test"
     
     # Result:
-    test = list(statistic = STATISTIC,
-        p.value = PVAL, method = METHOD, data.name = DNAME)
+    test = list(
+        statistic = STATISTIC,
+        p.value = PVAL, 
+        method = METHOD, 
+        data.name = DNAME)
         
     # Add:
     if (is.null(title)) title = "Jarque - Bera Normalality Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
         
     # Return Value:
     new("fHTEST",     
@@ -315,9 +264,13 @@ function(x, title = NULL, description = NULL)
 }
 
 
-.skewness.test =
-function(x) 
-{   # Internal Function for D'Agostino Normality Test:
+# ------------------------------------------------------------------------------
+
+
+.skewness.test <- 
+    function(x) 
+{   
+    # Internal Function for D'Agostino Normality Test:
 
     # Note:
     #   D'Agostino Test
@@ -335,7 +288,6 @@ function(x)
     # FUNCTION:
     
     DNAME = deparse(substitute(x))
-    
     if (exists("complete.cases")) {
         test = complete.cases(x)
     } else {
@@ -358,8 +310,11 @@ function(x)
     names(Z3) = "Z3"
     
     # Result:
-    RVAL = list(statistic = Z3, p.value = pZ3,
-        method = "D'Agostino Skewness Normality Test", data.name = DNAME)
+    RVAL = list(
+        statistic = Z3, 
+        p.value = pZ3,
+        method = "D'Agostino Skewness Normality Test", 
+        data.name = DNAME)
         
     # Return Value:
     class(RVAL) = "htest"
@@ -370,9 +325,10 @@ function(x)
 # ------------------------------------------------------------------------------
 
 
-.kurtosis.test =
-function(x) 
-{   # Internal Function for D'Agostino Normality Test:
+.kurtosis.test <- 
+    function(x) 
+{   
+    # Internal Function for D'Agostino Normality Test:
     
     # FUNCTION:
     
@@ -400,8 +356,11 @@ function(x)
     names(Z4) = "Z4"
     
     # Result:
-    RVAL = list(statistic = Z4, p.value = pZ4,
-        method = "D'Agostino Kurtosis Normality Test", data.name = DNAME)
+    RVAL = list(
+        statistic = Z4, 
+        p.value = pZ4,
+        method = "D'Agostino Kurtosis Normality Test", 
+        data.name = DNAME)
         
     # Return Value:
     class(RVAL) = "htest"
@@ -412,14 +371,14 @@ function(x)
 # ------------------------------------------------------------------------------
 
 
-.omnibus.test =
-function(x) 
-{   # Internal Function for D'Agostino Normality Test:
+.omnibus.test <- 
+    function(x) 
+{   
+    # Internal Function for D'Agostino Normality Test:
 
     # FUNCTION:
     
     DNAME = deparse(substitute(x))
-    
     if (exists("complete.cases")) {
         test = complete.cases(x)
     } else {
@@ -451,8 +410,11 @@ function(x)
     names(omni) = "Chi2"
     
     # Result:
-    RVAL = list(statistic = omni, method = "D'Agostino Omnibus Normality Test",
-        p.value = pomni, data.name = DNAME)
+    RVAL = list(
+        statistic = omni, 
+        method = "D'Agostino Omnibus Normality Test",
+        p.value = pomni, 
+        data.name = DNAME)
     
     # Return Value:
     class(RVAL) = "htest"
@@ -464,8 +426,9 @@ function(x)
        
 
 dagoTest =
-function(x, title = NULL, description = NULL)  
-{   # A function implemented by Diethelm Wuertz
+    function(x, title = NULL, description = NULL)  
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Performs the D'Agostino normality test
@@ -514,7 +477,7 @@ function(x, title = NULL, description = NULL)
        
     # Add:
     if (is.null(title)) title = "D'Agostino Normality Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
         
     # Return Value:
     new("fHTEST",     
@@ -527,17 +490,13 @@ function(x, title = NULL, description = NULL)
 
 
 ################################################################################
-# FUNCTION:             FROM NORTEST PACKAGE:
-#  adTest                Anderson-Darling normality test
-#  cvmTest               Cramer-von Mises normality test
-#  lillieTest            Lilliefors (Kolmogorov-Smirnov) normality test 
-#  pchiTest              Pearson chi-square normality test 
-#  sfTest                Shapiro-Francia normality test     
+# FROM NORTEST PACKAGE:    
 
 
-adTest =
-function (x, title = NULL, description = NULL) 
-{   # A function implemented by Diethelm Wuertz
+adTest <- 
+    function (x, title = NULL, description = NULL) 
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Performs the Anderson-Darling normality test
@@ -556,6 +515,9 @@ function (x, title = NULL, description = NULL)
     #   Description: 5 omnibus tests for the composite hypothesis of normality
     #   Maintainer: Juergen Gross <gross@statistik.uni-dortmund.de>
     #   License: GPL version 2 or newer
+    
+    # Thanks:
+    #   to Spencer Grave for contributions.
   
     # FUNCTION:
     
@@ -573,42 +535,47 @@ function (x, title = NULL, description = NULL)
     x = sort(x)
     n = length(x)
     if (n < 8) stop("sample size must be greater than 7")
-    p = pnorm((x - mean(x))/sqrt(var(x)))
-    h = (2 * seq(1:n) - 1) * (log(p) + log(1 - rev(p)))
-    ### DW modified:
-    h = h[is.finite(h)]
-    n = length(h)
-    ### Continue:
-    A = -n - mean(h)
-    AA = (1 + 0.75/n + 2.25/n^2) * A
+    var.x <- var(x)
     
-    if (AA < 0.2) {
-        PVAL = 1 - exp(-13.436 + 101.14 * AA - 223.73 * AA^2)
-    } else if (AA < 0.34) {
-        PVAL = 1 - exp(-8.318 + 42.796 * AA - 59.938 * AA^2) 
-    } else if (AA < 0.6) {
-        PVAL = exp(0.9177 - 4.279 * AA - 1.38 * AA^2) 
+    if(var.x > 0){
+        p = pnorm((x - mean(x))/sqrt(var.x))
+        h = (2 * seq(1:n) - 1) * (log(p) + log(1 - rev(p)))
+        ### DW modified:
+        h = h[is.finite(h)]
+        n = length(h)
+        ### Continue:
+        A = -n - mean(h)
+        AA = (1 + 0.75/n + 2.25/n^2) * A
+    
+        if (AA < 0.2) {
+            PVAL = 1 - exp(-13.436 + 101.14 * AA - 223.73 * AA^2)
+        } else if (AA < 0.34) {
+            PVAL = 1 - exp(-8.318 + 42.796 * AA - 59.938 * AA^2) 
+        } else if (AA < 0.6) {
+            PVAL = exp(0.9177 - 4.279 * AA - 1.38 * AA^2) 
+        } else {
+            PVAL = exp(1.2937 - 5.709 * AA + 0.0186 * AA^2) 
+        } 
+        # Result:
+        if (PVAL > 1) {
+            PVAL = 1 # was NA, suggested by Spencer Graves to modify
+            W = NA
+        }
     } else {
-        PVAL = exp(1.2937 - 5.709 * AA + 0.0186 * AA^2) 
-    } 
-    names(PVAL) = ""
-    
-    # Result:
-    ### DW:
-    if (PVAL > 1) {
-        PVAL = NA
-        W = NA
+        A <- Inf
+        PVAL <- 0
     }
-    ###
+    names(PVAL) = ""
+
     test = list(
         statistic = c(A = A), 
-        p.value = PVAL, 
+        p.value = PVAL,
         method = "Anderson - Darling Normality Test", 
         data.name = DNAME)
-   
+    
     # Add:
     if (is.null(title)) title = "Anderson - Darling Normality Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
         
     # Return Value:
     ans = new("fHTEST",     
@@ -616,16 +583,17 @@ function (x, title = NULL, description = NULL)
         data = list(x = x), 
         test = test,
         title = as.character(title), 
-        description = as.character(description) ) 
+        description = as.character(description)) 
 }
 
 
 # ------------------------------------------------------------------------------
 
 
-cvmTest = 
-function(x, title = NULL, description = NULL) 
-{   # A function implemented by Diethelm Wuertz
+cvmTest <- 
+    function(x, title = NULL, description = NULL) 
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Performs the Cramer-von Mises normality test
@@ -677,23 +645,23 @@ function(x, title = NULL, description = NULL)
     } else {
         PVAL = exp(1.111 - 34.242 * WW + 12.832 * WW^2)
     }
-    names(PVAL) = ""
         
     # Result:
-    ### DW:
     if (PVAL > 1) {
-        PVAL = NA
+        PVAL = 1 
         W = NA
     }
-    ###
-    test = list(statistic = c(W = W), 
+    names(PVAL) = ""
+    
+    test = list(
+        statistic = c(W = W), 
         p.value = PVAL, 
         method = "Cramer - von Mises Test", 
         data.name = DNAME)
     
     # Add:
     if (is.null(title)) title = "Cramer - von Mises Normality Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
         
     # Return Value:
     new("fHTEST",     
@@ -708,9 +676,10 @@ function(x, title = NULL, description = NULL)
 # ------------------------------------------------------------------------------
 
 
-lillieTest = 
-function(x, title = NULL, description = NULL) 
-{   # A function implemented by Diethelm Wuertz
+lillieTest <- 
+    function(x, title = NULL, description = NULL) 
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Performs the Lilliefors (Kolmogorov-Smirnov) normality test  
@@ -782,12 +751,14 @@ function(x, title = NULL, description = NULL)
     names(PVAL) = ""
             
     # Result:
-    test = list(statistic = c(D = K),  p.value = PVAL, 
+    test = list(
+        statistic = c(D = K),  
+        p.value = PVAL, 
         method = "Lilliefors Test", data.name = DNAME)
     
     # Add:
     if (is.null(title)) title = "Lilliefors (KS) Normality Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
         
     # Return Value:
     new("fHTEST",     
@@ -802,9 +773,10 @@ function(x, title = NULL, description = NULL)
 # ------------------------------------------------------------------------------
 
 
-pchiTest = 
-function (x, title = NULL, description = NULL) 
-{   # A function implemented by Diethelm Wuertz
+pchiTest <- 
+    function (x, title = NULL, description = NULL) 
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Performs the Pearson chi-square normality test   
@@ -872,14 +844,14 @@ function (x, title = NULL, description = NULL)
     # Return Value:
     test = list(
         statistic = c(P = P), 
-        p.value = PVAL, 
+        p.value = PVAL,  
         method = "Pearson Chi-Square Normality Test", 
         data.name = DNAME, 
         parameter = n.classes)
     
     # Add:
     if (is.null(title)) title = "Pearson Chi-Square Normality Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
         
     # Return Value:
     new("fHTEST",     
@@ -894,9 +866,10 @@ function (x, title = NULL, description = NULL)
 # ------------------------------------------------------------------------------
 
 
-sfTest = 
-function(x, title = NULL, description = NULL) 
-{   # A function implemented by Diethelm Wuertz
+sfTest <- 
+    function(x, title = NULL, description = NULL) 
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Performs the Shapiro-Francia normality test  
@@ -948,12 +921,14 @@ function(x, title = NULL, description = NULL)
     names(PVAL) = ""
     
     # Test:
-    test = list(statistic = c(W = W), p.value = PVAL, 
+    test = list(
+        statistic = c(W = W), 
+        p.value = PVAL, 
         method = "Shapiro-Francia Normality Test", data.name = DNAME)
     
     # Add:
     if (is.null(title)) title = "Shapiro - Francia Normality Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = description()
     
     # Return Value:
     new("fHTEST",     
@@ -961,19 +936,18 @@ function(x, title = NULL, description = NULL)
         data = list(x = x), 
         test = test,
         title = as.character(title), 
-        description = as.character(description) ) 
+        description = as.character(description)) 
 }
 
 
 ################################################################################    
-# FUNCTION ADDON:       AUGMENTED FINITE SAMPLE JB TEST:
-#  jbTest                Performs finite sample adjusted JB LM and ALM test
-#  .jb.test               S3 version type finite sample adjusted JB test
+# AUGMENTED FINITE SAMPLE JB TEST:
 
 
-.jb.test =
-function(x)
-{   # A function implemented by Diethelm Wuertz
+.jb.test <- 
+    function(x)
+{   
+    # A function implemented by Diethelm Wuertz
 
     # Description:
     #   S3 version type finite sample adjusted JB test  
@@ -1024,15 +998,19 @@ function(x)
         
     # P Values:
     PVAL = 1 - pchisq(STATISTIC[1], df = 2)
-      
+    names(PVAL) = ""
+    
     # Method String:
     METHOD = "Jarque Bera Test"
     
     # Result:
     Digits = 3
-    RVAL = list(statistic = round(STATISTIC, digits = Digits), parameter = 
-        round(PARAMETER, digits = Digits), p.value = round(PVAL, 
-        digits = Digits), method = METHOD, data.name = DNAME)
+    RVAL = list(
+        statistic = round(STATISTIC, digits = Digits), 
+        parameter = round(PARAMETER, digits = Digits), 
+        p.value = round(PVAL, digits = Digits), 
+        method = METHOD, 
+        data.name = DNAME)
         
     # Return Value:
     class(RVAL) = "htest"
@@ -1043,8 +1021,8 @@ function(x)
 # ------------------------------------------------------------------------------
 
 
-jbTest = 
-function(x, title = NULL, description = NULL)
+jbTest <- 
+    function(x, title = NULL, description = NULL)
 {   # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -1080,10 +1058,8 @@ function(x, title = NULL, description = NULL)
     test$p.value = p.value
        
     # Add Title:
-    if (is.null(title)) 
-        title = "Jarque - Bera Normality Test"
-    if (is.null(description)) 
-        description = date()
+    if (is.null(title)) title = "Jarque - Bera Normality Test"
+    if (is.null(description)) description = description()
         
     # Return Value:
     new("fHTEST", 
