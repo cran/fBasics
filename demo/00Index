@@ -1,0 +1,42 @@
+funBasics					fBasics Functions Addon
+
+xmpImportCSV                Import CSV Data from Package Data Directories
+xmpImportEconomagic         Import Data from Economagic's Internet Site
+xmpImportYahoo              Import Data from Yahoo's Internet Site
+xmpImportForecasts          Import Data from Forecast's Internet Site
+
+xmpDistStatistics           Statistics and Aggregation of Time Series Data
+xmpDistDFstable             Symmetric and Skew Stable Distribution Functions
+xmpDistDFhyp                Hyperbolic Distribution Functions
+xmpDistDFnig                Normal Inverse Gaussian Distribution Functions
+xmpDistDFemp                Empirical Distribution Functions
+
+xmpDistMLEdist              MLE Estimates for t, hyp, and nig Density
+xmpDistQQgauss              Quantile-Quantile Plot and Basic Statistics
+xmpDistScalinglaw           Scaling Law Behavior of a Time Series
+
+xmpXtsDailyWeeklyHists      Intra-Daily/Weekly Volatility HF Data Histograms 
+xmpXtsInterpolation         Interpolation of Intra-Daily Data Records
+xmpXtsDeSeasonalization     De-Seasonalize Intra Day Series in Upsilon Time
+xmpXtsDeVolatilization      De-Volatilize a High Frequency Time Series
+xmpXtsFXFilter              Parse and Filter High Freuency FX Data
+
+xmpDependencies             Dependencies in the NYSE Composite Index
+
+xmpTestCorrelations         Perform Correlation Tests
+xmpTestGoFnorm              Goodness-Of-Fit Tests for Testing Normality
+xmpTestKSgofConvergence     Student's-t Distribution in the Gaussian Limit
+xmpTestKSgofAggregation     Aggregated NYSE Residuals in the Gaussian Limit
+xmpTestKSgofSubsamples      Compare Subsamples of Time Series by the KS Test
+xmpTestRuns                 Perform a Runs Test on Time Series Data
+xmpTestRunsExt              Perform an Extended Runs Test on Time Series Data
+
+xmpCalDates                 Manage ISO Integer formated Dates and Holidays
+xmpCalChron                 Manage Chronological Objects from R's chron Package
+xmpCalPosix                 Manage POSIXt Objects from R's base Package
+xmpCalTimeDate              Calendar Time Date Objects
+xmpCalTimeSeries            Calendar Time Series Objects
+xmpCalTimeHolidays          Holiday Calendars
+
+xmpZWChapter1               Zivot-Wang 2.1 Time Series Introduction
+xmpZWChapter2               Zivot-Wang 2.2 Time Series Management
