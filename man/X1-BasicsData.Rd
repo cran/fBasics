@@ -5,10 +5,11 @@
 \alias{audusd}
 \alias{bmwres}
 \alias{fdax9710}
+\alias{fdax97m}
+\alias{nyse}
 \alias{nyseres}
 \alias{usdthb}
 
-\alias{timezones.db}
 
 
 \title{fBasics Data Sets}
@@ -17,15 +18,9 @@
 \description{
 
 	A collection and description of data sets used in the  
-	examples of the 'fBasics' library. Included are two
-    data files with tick-by-tick FX data collected from
-    a Reuters data feed, minute-by minute DAX Futures
-    prices, minutely time and sales DAX Futures data,
-    daily log-returns of German BMW Stock Prices, and
-    daily log-returns of the NYSE Composite Index.
-    Additionally, this data collection holds the
-    timezone data file with all available ``Ical'' time
-    zone names.
+	examples. Included are data files for high frequency FX
+	data, time and sales data for financial Futures, and 
+	market returns for selected stock and market indexes.
 	\cr
 	
 	The data sets are:
@@ -36,15 +31,11 @@
 	\code{fdax9710.csv} \tab Minute-by-Minute DAX Futures Prices for 1997-10*, \cr
 	\code{fdax97m.csv} \tab Minutely Time and Sales DAX Futures for 1997, \cr
 	\code{bmwres.csv} \tab Daily log Returns of German BMW Stock Proces, \cr
+	\code{nyse.csv} \tab Daily Values of the NYSE Composite Index, \cr
 	\code{nyseres.csv} \tab Daily log Returns of the NYSE Composite Index. }
      		
     *The file \code{fdax97m.csv} is too large and therefore not part of 
     the \code{fBasics} distribution. Please contact \emph{inf@rmetrics.org}.
-        		
-	Additionally the timezone datafile is:
-	
-	\tabular{ll}{
-	\code{timezones.db} \tab file with all available Ical time zone names. }
 	
 }
 
@@ -93,19 +84,10 @@
 	Composite Index, both on a daily trading day time scale just numbering 
 	the log returns: A one column CSV file with column names \code{BMW} 
 	or \code{NYSERES}, respectively. The entries are the differences
-	of the logarithmic prices on two succeeding trading days.
+	of the logarithmic prices on two succeeding trading days. \code{nyse}
+	contains two column data recors, the date and the NYSE Composite Index.
 	\cr
 	
-	\bold{Calendar Data:}
-	\cr\cr
-	\code{holidays.db.R} is the database of world wide holidays with
-	informations collected from several sources on the internet.
-	\cr
-    \code{timezones.csv} is a list of timezones information extracted
-    from Olsen's database. Downloadable from
-    \cr
-    \emph{ftp://elsie.nci.nih.gov/pub/}
- 	
 }
 
 
@@ -128,6 +110,7 @@
 	\cr
 	The data were published in the EVIS software package.
 	
+	\code{nyse}\cr
 	\code{nyseres}
 	\cr
 	The data were downloaded from the web site of the New York Stock 
@@ -139,6 +122,9 @@
 
 
 \examples{
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.Z1-BasicsTools")
+
 ##  plot -
     xmpBasics("\nStart: Plot Residuals NYSE Composite Index > ")
     data(nyseres)

@@ -28,85 +28,58 @@
 
 
 ################################################################################
-# FUNCTION:		   		DESCRIPTION:
-#  myFinCenter 			 My financial Center
-#  currentYear           Date of the Current Year
-#  myUnits               Date Units
+# FUNCTION:             DESCRIPTION:
 #  xmpBasics             Sets prompt
 #  xmpfBasics            Popups the example menu
 # FUNCTION:             DESCRIPTION:
-#  modify                Modify a 'timeSeries' object
-#  modify.default        S3 Default Method
-#  atoms                 Extract atoms from 'timeSeries' object
-#  atoms.default         S3 Default Method
+#  unirootNA             One Dimensional Root (Zero) Finding
 ################################################################################
-
-
-# Requires:
-
-    require(methods)
-    
-    
-# Default Parameters:
-	
-	myFinCenter =  "Zurich"
-	currentYear = as.POSIXlt(Sys.time())$year + 1900
-	myUnits = "days"
-	
-	
-# Set a timezone if none found in environment variables or options()
-# ... as suggested by Dirk Eddelbuettel, thanks Dirk.
-
-    if (Sys.getenv("TZ") == "") {
-		if (is.null(getOption("TZ"))) {
-			cat("No timezone information found, using default of GMT\n")
-          	Sys.putenv("TZ" = "GMT") }
-       	else {
-          	cat("No timezone information found, applying option() value of",
-             	getOption("TZ"), "\n")
-       		Sys.putenv("TZ" = getOption("TZ")) } }
-
-
-# ------------------------------------------------------------------------------
 
 
 xmpBasics = 
 function(prompt = "") 
-{
-	invisible(prompt)
+{   # A function implemented by Diethelm WUertz
+
+    # Description:
+    #   Sets prompt
+    
+    # FUNCTION:
+    
+    # Return Value:
+    invisible(prompt)
 }
 
-	
+    
 # ------------------------------------------------------------------------------
 
 
 xmpfBasics = 
 function() 
-{ 	# A function implemented by Diethelm WUertz
+{   # A function implemented by Diethelm WUertz
 
-	# Description:
-	#	Popups the example menu
-	
-	# FUNCTION:
-	
-	# Popup:
-	path = paste(.Library,"/fBasics", sep = "") 
-	entries = .read.fBasics.00Index (file.path(path, "demoIndex"))    
-	example = select.list(entries[,1])
-	selected = 0
-	for (i in 1:length(entries[,1])) {
-		if (example == entries[i,1]) selected = i
-	}
-	if (example == "") {
-    	cat("\nNo demo selected\n")
+    # Description:
+    #   Popups the example menu
+    
+    # FUNCTION:
+    
+    # Popup:
+    path = paste(.Library,"/fBasics", sep = "") 
+    entries = .read.fBasics.00Index (file.path(path, "demoIndex"))    
+    example = select.list(entries[,1])
+    selected = 0
+    for (i in 1:length(entries[,1])) {
+        if (example == entries[i,1]) selected = i
+    }
+    if (example == "") {
+        cat("\nNo demo selected\n")
     } else {
-     	cat("\nLibrary: ", "fBasics", "\nExample: ", 
-       		entries[selected, 1], "\nTitle:   ", entries[selected, 2], "\n")
+        cat("\nLibrary: ", "fBasics", "\nExample: ", 
+            entries[selected, 1], "\nTitle:   ", entries[selected, 2], "\n")
         source(paste(path, "/demo/", example, ".R", sep = ""))
     }
     if (TRUE) {
-	    cat("\n") 
-	}
+        cat("\n") 
+    }
     
     # Return Value:
     invisible()
@@ -122,14 +95,14 @@ function (file)
     if (is.character(file)) {
         if (file == "") {
             file <- stdin()
-    	} else {
+        } else {
             file <- file(file, "r")
             on.exit(close(file))
         }
     }
     if (!inherits(file, "connection")) 
         stop(paste("argument", 
-        	sQuote("file"), "must be a character string or connection"))
+            sQuote("file"), "must be a character string or connection"))
     y <- matrix("", nr = 0, nc = 2)
     x <- paste(readLines(file), collapse = "\n")
     for (chunk in unlist(strsplit(x, "\n[       \n]*\n"))) {
@@ -140,9 +113,9 @@ function (file)
                 chunk <- gsub("\n[      ]+", "  ", chunk)
                 x <- strsplit(unlist(strsplit(chunk, "\n")), "[    ]")
                 cbind(unlist(lapply(x, "[[", 1)), unlist(lapply(x, 
-                  	function(t) {
-                    	paste(t[-c(1, which(nchar(t) == 0))], collapse = " ")
-                  	})))
+                    function(t) {
+                        paste(t[-c(1, which(nchar(t) == 0))], collapse = " ")
+                    })))
             }
         })
         if (!inherits(entries, "try-error") && NCOL(entries) == 2) 
@@ -152,55 +125,58 @@ function (file)
     y
 }
 
- 
 
 # ******************************************************************************
 # R - Modifications and Problems:
 
 
-modify =
-function(x, method, units) 
-{
-	UseMethod("modify")	
-}
+unirootNA = 
+function(f, interval, lower = min(interval), upper = max(interval), 
+tol = .Machine$double.eps^0.25, ...) 
+{   # A function implemented by Diethelm Wuertz
+    
+    # Description:
+    #   Searches the interval from lower to upper for a 
+    #   root (i.e., zero) of the function f with respect 
+    #   to its first argument. 
+    
+    # Arguments:
+    #   see 'uniroot'
+    
+    # Value:
+    #   Returns the x value of f where the root is located. If
+    #   now root exists NA will be returned. In the last case
+    #   the function doesn't terminate with an error like in the
+    #   case of the standard function uniroot.
+
+    # Details:
+    #   R:
+    #   uniroot(f, interval, lower = min(interval), upper = max(interval),
+    #       tol = .Machine$double.eps^0.25, 
+    #       maxiter = 1000, ...)
+    #   uniroot(f, interval, lower = min(interval), upper = max(interval), 
+    #       tol = .Machine$double.eps^.25, 
+    #       keep.xy = F, f.lower = NA,  f.upper = NA, ...) 
+
+    # Example:
+    #   unirootNA(sin, c(1, 2)); unirootNA(sin, c(-1, 1))
+        
+    # There is no Root:  
+    if (is.null(args(f))) {  
+        if (f(lower) * f(upper) >=0) return(NA)  
+    } else {
+        if (f(lower, ...) * f(upper, ...) >= 0) return(NA)
+    } 
+      
+    # There is a Root:  
+    ans = uniroot(f = f, interval = interval, lower = lower, 
+        upper = upper, tol = tol, ...)
+    
+    # Return Value:
+    ans$root
+}  
 
 
-# ------------------------------------------------------------------------------
+################################################################################
 
-
-modify.default =
-function(x, method = c("sort", "round", "trunc"), units = NULL )
-{	
-	# Modify:
-	ans = NA
-	if (method[1] == "sort") return(sort(x))
-	if (method[1] == "round") return(round(x))
-	if (method[1] == "trunc") return(trunc(x))
-	
-	# Return Value:
-	ans
-}	
-
-
-# ------------------------------------------------------------------------------
-
-
-atoms = 
-function(x, ...) 
-{
-	UseMethod("atoms")
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-atoms.default = 
-function(x, ...) 
-{
-	invisible(x)
-}
-
-
-# ------------------------------------------------------------------------------
-
+ 

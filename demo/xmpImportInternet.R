@@ -23,7 +23,8 @@
 #	    ^IXIC  NASDAQ Composite
 #	    ^NDX   NASDAQ 100 Index
 #	    ^NYA   NYSE Composite Index
-# 	PART II: Forecasts' Internet Site
+#   PART III: A Download Example for the St Louis Fed
+# 	PART IV: A Download function for Forecasts' Internet Site
 #
 # Note: 
 #	If the service provider changes the data file format
@@ -68,7 +69,43 @@
 
 
 ################################################################################
-## Part III: Forecasts's Internet Site
+## Part III: A Download Example for the St Louis Fed
+
+	
+    # Data Source:
+      source = "http://research.stlouisfed.org/fred2/series/"
+    # Let us download the US Prime Rate:
+      query = "DPRIME"
+    # Where to save ?
+      destfile = paste(query, ".csv", sep = "")
+    # File name:
+      queryFile = paste(query, "/downloaddata/", query, ".txt", sep = "")
+    # Download and temporarily store:
+      download.file(url = paste(source, queryFile, sep = ""), destfile = destfile)
+    # Scan the file:
+      x1 = scan(file = paste(query, ".csv", sep = ""), what = "", sep = "\n")
+    # Extract dates ^19XX and ^20XX:
+      x2 = x1[regexpr("^[12][90]", x1) > 0]
+      x1 = x2[regexpr(" .$", x2) < 0]
+    # Transform to one-column matrix:
+      z = matrix(as.numeric(substring(x1, 11, 999)), byrow = TRUE, ncol = 1)
+    # Add column names:
+      colNames = query
+      rowNames = paste(substring(x1, 1, 4), substring(x1, 6, 7),
+        substring(x1, 9, 10), sep = "")
+      dimnames(z) = list(rowNames, colNames)
+    # Save download in a table:
+      write.table(paste("%Y%m%d", query, sep = ";"), file = destfile,
+        quote = FALSE, row.names = FALSE, col.names = FALSE)
+      write.table(z, file = destfile, quote = FALSE, append = TRUE,
+        col.names = FALSE, sep = ";")
+    # Final result as data frame:
+      data.frame(cbind(DATE = rowNames, z), row.names = NULL)	
+      
+	
+################################################################################
+## PART IV: A Download function for Forecasts' Internet Site
+
 
 	# The R function can be found in "funBasics.R"
 	

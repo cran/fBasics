@@ -20,9 +20,10 @@
 
 \description{
         
-	Public data sets used for the examples from the book 
-	"Modeling Financial Time Series with S-Plus" by 
-	E. Zivot and J. Wang.
+	A collection and description of public data sets 
+	used in the examples of the book 'Modeling Financial 
+	Time Series with S-Plus' written by E. Zivot and 
+	J. Wang.
 	\cr
      
 	The data sets are:
@@ -163,6 +164,10 @@
 }
 
 \examples{
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.Z1-BasicsTools")
+
+\dontrun{
 ## DowJones30 - 
    xmpBasics("\nStart: Dow Jones Industrial Average > ")
    data(DowJones30)
@@ -170,6 +175,7 @@
    DowJones30.ts = as.timeSeries(DowJones30)
    class(DowJones30.ts)
    head(DowJones30.ts)
+}
 }
 
 

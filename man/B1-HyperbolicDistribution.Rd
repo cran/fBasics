@@ -2,10 +2,17 @@
 
 \alias{HyperbolicDistribution}
 
+\alias{dgh}
+\alias{pgh}
+\alias{qgh}
+\alias{rgh}
+
 \alias{dhyp}
 \alias{phyp}
 \alias{qhyp}
 \alias{rhyp}
+
+\alias{hypMode}
 
 \alias{dnig}
 \alias{pnig}
@@ -17,50 +24,79 @@
 
 \description{
     
-    A collection and description of functions to compute 
-    density, distribution function, quantile function 
-    and to generate random variates for two special cases 
-    of the generalized hyperbolic distribution: the hperbolic 
-    distribution and the normal inverse Gaussian distribution. 
+    A collection and description of functions to compute
+    density, distribution function, quantile function
+    and to generate random variates for three cases
+    of the generalized hyperbolic distribution: the 
+    generalized hyperbolic distribution itself, the 
+    hperbolic distribution and the normal inverse Gaussian 
+    distribution.
     \cr
     
     The functions are:
     
     \tabular{ll}{
+    \code{[dpqr]gh} \tab The generalized hyperbolic distribution, \cr
     \code{[dpqr]hyp} \tab The hyperbolic distribution, \cr
+    \code{hypMode} \tab the hyperbolic mode, \cr
     \code{[dpqr]nig} \tab The normal inverse Gaussian distribution.}
     
 }
 
 
 \usage{
-dhyp(x, alpha , beta , delta , mu = 0)
-phyp(q, alpha , beta , delta , mu = 0, ...)
-qhyp(p, alpha , beta , delta , mu = 0)
-rhyp(n, alpha , beta , delta , mu = 0)
+dgh(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
+pgh(q, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
+qgh(p, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
+rgh(n, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
 
-dnig(x, alpha, beta, delta, mu = 0)
-pnig(q, alpha, beta, delta, mu = 0)
-qnig(p, alpha, beta, delta, mu = 0)
-rnig(n, alpha, beta, delta, mu = 0)
+dhyp(x, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
+phyp(q, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4), ...)
+qhyp(p, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4), ...)
+rhyp(n, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
+
+hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
+
+dnig(x, alpha = 1, beta = 0, delta = 1, mu = 0)
+pnig(q, alpha = 1, beta = 0, delta = 1, mu = 0)
+qnig(p, alpha = 1, beta = 0, delta = 1, mu = 0)
+rnig(n, alpha = 1, beta = 0, delta = 1, mu = 0)
 }
 
 
 \arguments{
 
-    \item{alpha, beta, delta, mu}{
+    \item{alpha, beta, delta, mu, lambda}{
         shape parameter \code{alpha};
         skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0,alpha);
+        range (0, alpha);
         scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; and
-        location parameter \code{mu}, by default 0.
+        positive; 
+        location parameter \code{mu}, by default 0;
+        and lambda parameter \code{lambda}, by default 1.
+        These is the meaning of the parameters in the first 
+        parameterization \code{pm=1} which is the default 
+        parameterization selection.
+        In the second parameterization, \code{pm=2} \code{alpha}
+        and \code{beta} take the meaning of the shape parameters
+        (usually named) \code{zeta} and \code{rho}.
+        In the third parameterization, \code{pm=3} \code{alpha}
+        and \code{beta} take the meaning of the shape parameters
+        (usually named) \code{xi} and \code{chi}.
+        In the fourth parameterization, \code{pm=4} \code{alpha}
+        and \code{beta} take the meaning of the shape parameters
+        (usually named) \code{a.bar} and \code{b.bar}.
         }
     \item{n}{
         number of observations.
         } 
     \item{p}{
         a numeric vector of probabilities.
+        }
+    \item{pm}{
+        an integer value between \code{1} and \code{4} for the 
+        selection of the parameterization. The default takes the
+        first parameterization.       
         }
     \item{x, q}{
         a numeric vector of quantiles.
@@ -80,14 +116,26 @@ rnig(n, alpha, beta, delta, mu = 0)
     \code{q*} returns the quantile function, and
     \code{r*} generates random deviates.
     
+    \code{hyp*Mode} returns the mode in the appropriate
+    parameterization. A numeric value.
+    
+    All values have attributes named \code{"param"} listing
+    the values of the distributional parameters.
+    
 }
 
 
 \details{
   
+    \bold{Generalized Hyperbolic Distibution:}
+    \cr\cr
+    The generator \code{rgh} is based on the GH algorithm given 
+    by Scott (2004).
+    \cr
+    
     \bold{Hyperbolic Distibution:}
     \cr\cr
-    The generator \code{rhyperb} is based on the HYP algorithm given 
+    The generator \code{rhyp} is based on the HYP algorithm given 
     by Atkinson (1982).
     \cr
     
@@ -99,24 +147,41 @@ rnig(n, alpha, beta, delta, mu = 0)
 }
 
 
+\notes{
+
+	An undocumented R function for the modified Bessel function 
+	K1 named \code{.BesselK1(X)} is availalble, which is called
+	by the S-Plus version of the program. 
+}
+
+
 \examples{
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.B1-HyperbolicDistribution")
+## SOURCE("fBasics.Z1-BasicsTools")
+
+## gh -
+
+
 ## hyp -
    xmpBasics("\nStart: Hyperbolic Distribution > ")
    par(mfcol = c(3, 2), cex = 0.5)
    set.seed(1953)
    r = rhyp(1000, alpha = 1, beta = 0.3, delta = 1)
    plot(r, type = "l", col = "steelblue4",
-     main = "hyp: alpha =1 beta=0.3 delta=1")
+     main = "hyp: alpha=1 beta=0.3 delta=1")
    # Plot empirical density and compare with true density:
    hist(r, n = 25, probability = TRUE, border = "white", col = "steelblue4") 
-   x = seq(-5, 7, 0.2)
+   x = seq(-5, 5, 0.25)
    lines(x, dhyp(x, alpha = 1, beta = 0.3, delta = 1))
    # Plot df and compare with true df:
    plot(sort(r), (1:1000/1000), main = "Probability", col = "steelblue4")
    lines(x, phyp(x, alpha = 1, beta = 0.3, delta = 1))
    # Compute quantiles:
    qhyp(phyp(seq(-5, 7, 1), alpha = 1, beta = 0.3, delta = 1), 
-     alpha = 1, beta = 0.3, delta = 1) 
+     alpha = 1, beta = 0.3, delta = 1)
+   # Compute the mode: 
+   hypMode(alpha = 1, beta = 0.3, delta = 1)
  
      
 ## nig -
@@ -127,13 +192,13 @@ rnig(n, alpha, beta, delta, mu = 0)
      main = "nig: alpha=1 beta=0.3 delta=1")
    # Plot empirical density and compare with true density:
    hist(r, n = 25, probability = TRUE, border = "white", col = "steelblue4")
-   x = seq(-5, 5, 0.1)
+   x = seq(-5, 5, 0.25)
    lines(x, dnig(x, alpha = 1, beta = 0.3, delta = 1))
    # Plot df and compare with true df:
    plot(sort(r), (1:5000/5000), main = "Probability", col = "steelblue4")
    lines(x, pnig(x, alpha = 1, beta = 0.3, delta = 1))
    # Compute Quantiles:
-   qnig(pnig(seq(-5, 7, 1), alpha = 1, beta = 0.3, delta = 1), 
+   qnig(pnig(seq(-5, 5, 1), alpha = 1, beta = 0.3, delta = 1), 
      alpha = 1, beta = 0.3, delta = 1) 
 }
 

@@ -24,7 +24,7 @@
 	
 # HYP(1, 0, 1, 0) - Hyperbolic Distribution:	
 	
-	x = seq(-6, 6, length=256)
+	x = seq(-6, 6, length = 256)
 
 	r = rhyp(4096, alpha = 1, beta = 0, delta = 1, mu = 0)
 	plot(r, type = "l", main = "RHYP(1, 0, 1, 0) Series")

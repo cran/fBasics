@@ -2,10 +2,18 @@
 
 \alias{WebDataImport}
 
+\alias{fWEBDATA}
+\alias{fWEBDATA-class}
+
+\alias{show.fWEBDATA}
+\alias{show,fWEBDATA-method}
+
 \alias{economagicImport}
 \alias{yahooImport}
-\alias{keystatsImport}
 \alias{fredImport}
+
+\alias{keystatsImport}
+\alias{print.keystats}
 
 \title{Import Market Data from the Internet}
 
@@ -14,6 +22,10 @@
     
     A collection and description of functions to import 
     financial and economic market from the Internet.
+    Download functions are availalble for economic and
+    financial market data form Economagic's, from 
+    Yahoo's, and from the Federal Reserve's Internet
+    sites.
     \cr
     
     The functions are:
@@ -28,27 +40,32 @@
 
 
 \usage{
-economagicImport(file = "tempfile", 
-    source = "http://www.economagic.com/em-cgi/data.exe/", query, 
+economagicImport(query, file = "tempfile", 
+    source = "http://www.economagic.com/em-cgi/data.exe/",  
     frequency = c("quarterly", "monthly", "daily"), save = FALSE, 
     colname = "VALUE", try = TRUE)
     
-yahooImport(file = "tempfile", 
-    source = "http://chart.yahoo.com/table.csv?", query, save = FALSE,
+yahooImport(query, file = "tempfile", 
+    source = "http://chart.yahoo.com/table.csv?", save = FALSE,
     sep = ";", swap = 20, try = TRUE)
-keystatsImport(file = "tempfile", 
-    source = "http://finance.yahoo.com/q/ks?s=", query, save = FALSE, 
+keystatsImport(query, file = "tempfile", 
+    source = "http://finance.yahoo.com/q/ks?s=", save = FALSE, 
     try = TRUE) 
     
-fredImport(file = "tempfile", 
+fredImport(query, file = "tempfile", 
     source = "http://research.stlouisfed.org/fred2/series/", 
-    query, frequency = "daily", save = FALSE, sep = ";", try = TRUE) 
+    frequency = "daily", save = FALSE, sep = ";", try = TRUE) 
+    
+show.fWEBDATA(object)
+
+\method{print}{keystats}(x, \dots)
 }
 
 
 \arguments{
 
     \item{colname}{
+    	[economagicImport] - \cr
         a character string which defines the name of the value
         column. By default "VALUE".
         }
@@ -59,6 +76,9 @@ fredImport(file = "tempfile",
     \item{frequency}{
         a character string, one of "quarterly", "monthly", or "daily",
         defining the frequency of the data records.
+        }
+    \item{object}{
+        an S4 object of class \code{"fWEBDATA"}.
         }
     \item{query}{
         a character string, denoting the location of the data at the 
@@ -88,13 +108,46 @@ fredImport(file = "tempfile",
         a logical value, if set to TRUE the Internet access will be
         checked.
         }
-        
+    \item{x}{
+    	[print.keystats] - \cr
+    	an object of class \code{keystats} as returned by the function
+    	\code{keystatsImport}.
+    	}
+    \item{\dots}{
+    	optional arguments passed to the \code{print.keystats} function.
+		}        
 }
 
 
 \value{
 
-    A data frame with the downloaded data records or key statistics.
+    The functions \code{economagicImport}, \code{fredImport}, and
+    \code{yahooImport} return an S4 object of class \code{fWEBDATA} 
+    with the following slots:
+    
+    \item{@call}{
+		the function call.	
+		}
+	\item{@data}{
+        the data as downloaded formatted as a data.frame.
+        }
+    \item{@param}{
+    	a character vector whose elements contain the values of selected 
+    	parameters of the argument list.
+    	}
+    \item{@title}{
+    	a character string with the name of the download. This can be 
+    	overwritten specifying a user defined input argument.
+    	}
+    \item{@description}{
+    	a character string with an optional user defined description. 
+    	By default just the current date when the test was applied will
+    	be returned.}
+    	
+    The function \code{keystatsImport} returns an S3 object of class 
+    \code{keystsats} with two entries: \code{$query} holds the query
+    name, and \code{keystats} holds the dataframe with the statistical
+    values. 
     
 }
 
@@ -195,41 +248,43 @@ fredImport(file = "tempfile",
 
 \examples{
 \dontrun{
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.A1-WebDataImport")
+
 ## economagicImport -
    xmpBasics("\nStart: Daily Foreign Exchange Rates > ")
    USDEUR = economagicImport(query = "fedny/day-fxus2eu", 
-     frequency = "daily", colname = "USDEUR", try = TRUE)
-   # Print if Internet Download was Successful:
-   if(!is.null(USDEUR)) print(USDEUR[1:20, ])
+     frequency = "daily", colname = "USDEUR")
+   # Print Data Slot if Internet Download was Successful:
+   if (!is.null(USDEUR)) print(USDEUR@data[1:20, ])
 
 ## economagicImport -
    xmpBasics("\nNext: USFEDFUNDS Monthly US FedFunds Rates > ")
    USFEDFUNDS = economagicImport(query = "fedstl/fedfunds+2", 
-     frequency = "monthly", colname = "USFEDFUNDS", try = TRUE)
-   if(!is.null(USFEDFUNDS)) print(USFEDFUNDS[1:20, ])
+     frequency = "monthly", colname = "USFEDFUNDS")
+   if (!is.null(USFEDFUNDS)) print(USFEDFUNDS@data[1:20, ])
    
 ## economagicImport -
    xmpBasics("\nNext: USDGNP Quarterly GNP Data Records > ")
    USGNP = economagicImport(query = "fedstl/gnp", 
-     frequency = "quarterly", colname = "USGNP", try = TRUE)
-   if(!is.null(USGNP)) print(USGNP[1:20, ])  
+     frequency = "quarterly", colname = "USGNP")
+   if(!is.null(USGNP)) print(USGNP@data[1:20, ])  
      
 ## yahooImport -
    xmpBasics("\nNext: IBM Shares from Yahoo > ")
    # [test 19/20 century change 01-12-1999 -- 31-01-2000]
-   IBM = yahooImport(
-     query = "s=IBM&a=11&b=1&c=1999&d=0&q=31&f=2000&z=IBM&x=.csv", 
-     try = TRUE)
-   if (!is.null(IBM)) print(IBM[1:20, ])
+   query = "s=IBM&a=11&b=1&c=1999&d=0&q=31&f=2000&z=IBM&x=.csv"
+   IBM = yahooImport(query)  
+   if (!is.null(IBM)) print(IBM@data[1:20, ])
    
 ## keystatsImport -
    xmpBasics("\nNext: Key Statistics IBM Shares from Yahoo > ")  
-   keystatsImport(query = "IBM"  
+   keystatsImport("IBM")  
    
 ## fredImport -
    xmpBasics("\nNext: DPRIME Daily Bank Prime Load Rate Records > ")
-   DPRIME = fredImport(query = DPRIME)
-   if (!is.null(DPRIME)) print(DPRIME[1:20, ])       
+   DPRIME = fredImport("DPRIME")
+   if (!is.null(DPRIME)) print(DPRIME@data[1:20, ])       
 }
 }
 

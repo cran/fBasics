@@ -1,10 +1,12 @@
 funBasics					fBasics Functions Addon
 
+xmpTimeSeries               Representation of Time Series Data
 xmpImportCSV                Import CSV Data from Package Data Directories
 xmpImportInternet           Import Data from Internet Sites
 
 xmpDistStatistics           Statistics and Aggregation of Time Series Data
 xmpDistDFstable             Symmetric and Skew Stable Distribution Functions
+xmpDistDFgh                 Generalized Hyperbolic Distribution Functions
 xmpDistDFhyp                Hyperbolic Distribution Functions
 xmpDistDFnig                Normal Inverse Gaussian Distribution Functions
 xmpDistDFemp                Empirical Distribution Functions
@@ -12,9 +14,6 @@ xmpDistDFemp                Empirical Distribution Functions
 xmpDistMLEdist              MLE Estimates for t, hyp, and nig Density
 xmpDistQQgauss              Quantile-Quantile Plot and Basic Statistics
 xmpDistScalinglaw           Scaling Law Behavior of a Time Series
-
-xmpXtsBusinessTime          High frquency Data on a Business Time Scales
-xmpXtsFXFilter              Parse and Filter High Freuency FX Data
 
 xmpDependencies             Dependencies in the NYSE Composite Index
 
@@ -26,12 +25,4 @@ xmpTestKSgofSubsamples      Compare Subsamples of Time Series by the KS Test
 xmpTestRuns                 Perform a Runs Test on Time Series Data
 xmpTestRunsExt              Perform an Extended Runs Test on Time Series Data
 
-xmpCalDates                 Manage ISO Integer formated Dates and Holidays
-xmpCalChron                 Manage Chronological Objects from R's chron Package
-xmpCalPosix                 Manage POSIXt Objects from R's base Package
-xmpCalTimeDate              Calendar Time Date Objects
-xmpCalTimeSeries            Calendar Time Series Objects
-xmpCalTimeHolidays          Holiday Calendars
-
 xmpZWChapter01              Zivot-Wang Chapter 1 S and S-Plus
-xmpZWChapter02              Zivot-Wang Chapter 2 Time Series in S-Plus

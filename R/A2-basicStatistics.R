@@ -61,7 +61,7 @@
 
 kurtosis =
 function (x, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     # FUNCTION:
     
@@ -74,7 +74,7 @@ function (x, ...)
 
 kurtosis.default =
 function (x, na.rm = FALSE, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
   
     # Description:
     #   Returns the value of the kurtosis of a
@@ -106,7 +106,7 @@ function (x, na.rm = FALSE, ...)
 
 kurtosis.data.frame = 
 function (x, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     sapply(x, kurtosis, ...)
 }
@@ -117,7 +117,7 @@ function (x, ...)
 
 kurtosis.POSIXct =
 function (x, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     structure(kortosis(unclass(x), ...), class = c("POSIXt", "POSIXct"))
 }
@@ -128,7 +128,7 @@ function (x, ...)
 
 kurtosis.POSIXlt =
 function (x, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     as.POSIXlt(kurtosis(as.POSIXct(x), ...))
 }
@@ -139,7 +139,7 @@ function (x, ...)
 
 skewness =
 function (x, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     UseMethod("skewness")
 }
@@ -150,7 +150,7 @@ function (x, ...)
 
 skewness.default =
 function (x, na.rm = FALSE, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
   
     # Description:
     #   Returns the value of the skewness of a
@@ -182,7 +182,7 @@ function (x, na.rm = FALSE, ...)
 
 skewness.data.frame = 
 function (x, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     sapply(x, skewness, ...)
 }
@@ -193,7 +193,7 @@ function (x, ...)
 
 skewness.POSIXct =
 function (x, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     structure(skewness(unclass(x), ...), class = c("POSIXt", "POSIXct"))
 }
@@ -204,7 +204,7 @@ function (x, ...)
 
 skewness.POSIXlt =
 function (x, ...) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     as.POSIXlt(skewness(as.POSIXct(x), ...))
 }
@@ -215,7 +215,7 @@ function (x, ...)
 
 basicStats = 
 function(x, ci = 0.95) 
-{   # A function implemented by D. Wuertz
+{   # A function implemented by Diethelm Wuertz
     
     # Description:
     #   Calculates Basic Statistics
@@ -257,7 +257,7 @@ function(x, ci = 0.95)
         "Variance", "Stdev", "Skewness", "Kurtosis")
         
     # Output as data.frame
-    ans = data.frame(z, row.names = znames)
+    ans = data.frame(Value = z, row.names = znames)
     
     # Return Value:
     ans
@@ -628,12 +628,12 @@ function(x, na.rm = FALSE, ...)
     if (na.rm) 
         result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
     else
-        result = apply(x, MARGIN = 2, FUN=cumsum, ...) 
+        result = apply(x, MARGIN = 2, FUN = cumsum, ...) 
         
     # Return Value:
     result 
 }
 
 
-# ******************************************************************************
+################################################################################
 

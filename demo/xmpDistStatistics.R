@@ -85,12 +85,12 @@
 
 
 ################################################################################
-## Part III: Explore aggregation effection with CLT
+## Part III: Explore aggregation effect and the CLT
 
 
    # Settings:
    options(warn = -1)
-   par(mfrow = c(3, 3), cex = 0.6, err=-1)
+   par(mfrow = c(3, 3), cex = 0.6, err = -1)
    data(nyseres)
 
    # CLT Plot:     

@@ -37,112 +37,169 @@
 ################################################################################
 
 
+setClass("fWEBDATA", 
+    representation(
+        call = "call",
+        data = "data.frame",
+        param = "character",
+        title = "character",
+        description = "character")  
+)
+
+
+# ------------------------------------------------------------------------------
+
+
+show.fWEBDATA = 
+function(object)
+{   # A function implemented by Diethelm Wuertz
+
+    # FUNCTION:
+       
+    # Unlike print the argument for show is 'object'.
+    x = object
+    
+    # Title:
+    cat("\nTitle:\n", object@title, "\n", sep = "")
+    
+    # Parameter:
+    cat("\nParameter:\n")
+    param = cbind(object@param)
+    colnames(param) = "Value:"
+    print(param, quotes = FALSE) 
+    
+    # Description:
+    cat("\nDescription:\n", object@description, sep = "")   
+    cat("\n\n")
+    
+    # Return Value:
+    invisible()
+}
+
+
+setMethod("show", "fWEBDATA", show.fWEBDATA)
+
+
+# ------------------------------------------------------------------------------
+
+
 economagicImport =
-function (file = "tempfile", 
+function (query, file = "tempfile", 
 source = "http://www.economagic.com/em-cgi/data.exe/", 
-query, frequency = c("quarterly", "monthly", "daily"), 
+frequency = c("quarterly", "monthly", "daily"), 
 save = FALSE, colname = "VALUE", try = TRUE)
 {   # A function implemented by Diethelm Wuertz
+    
+    # Description:
+    #	Downloads market data from EconoMagic's web site
     
     # Notes:
     #   Note, only the first column is returned, the remaining are  
     #     usually percentual changes which can be calculated otherwise.
-    #   Required Functions:
-    #     fields() cuts a string in fields
-    
+
     # Examples:
     #   USDEUR Foreign Exchange Rate:
-    #   economagicImport(file = "USDEUR.CSV", query = "fedny/day-fxus2eu", 
-    #       frequency = "daily", save = TRUE, colname = "USDEUR")
+    #    economagicImport("fedny/day-fxus2eu", "USDEUR.CSV", 
+    #       frequency = "daily", colname = "USDEUR")
     #   USFEDFUNDS US FedFunds Rate:
-    #   EconomagicImport("USFEDFUNDS.CSV", query = "fedstl/fedfunds+2", 
-    #       frequency = "monthly", save = TRUE, colname = "USFEDFUNDS")
+    #    economagicImport("fedstl/fedfunds+2", "USFEDFUNDS.CSV", 
+    #       frequency = "monthly", colname = "USFEDFUNDS")
     #   USDGNP:
-    #   economagicImport(file = "USGNP.CSV", query = "fedstl/gnp", 
-    #       frequency = "quarterly", save = TRUE, colname = "USGNP")
+    #    economagicImport("fedstl/gnp", "USGNP.CSV", 
+    #       frequency = "monthly", colname = "USGNP")
 
     # FUNCTION:
     
+    # Frequency:
+    freq = frequency[1]
+	       
     # Download:
     if (try) {
         # First try if the Internet can be accessed:
-        z = try(economagicImport(file = file, source = source, 
-            query = query, frequency = frequency, 
+        z = try(economagicImport(query = query, 
+            file = file, source = source, frequency = freq, 
             save = save, colname = colname, try = FALSE)) 
-        if (class(z) == "try-error") {
-            print("No Internet Access")
-            return(NULL) }
-        else {
-            return(z) }}    
-    else {
-        # Internal Function:
-        fields = 
-        function (x, rm.spaces = TRUE, ignore.quotes = TRUE, sep = ",") {
-            # Remove White Spaces:
-            if(rm.spaces) { 
-                p = nchar(x); result = NULL
-                while (p > 0) {
-                    p = regexpr("\ ", x); x1 =substring(x, 1, p-1)
-                    x2 = substring(x, p+1); x =paste(x1 ,x2, sep="")}}   
-            # Ignore Quotation Marks:
-            if(ignore.quotes) { 
-                p = nchar(x); result = NULL
-                while (p > 0) {
-                    p = regexpr('\"', x); x1 =substring(x, 1, p-1)
-                    x2 = substring(x, p+1); x =paste(x1, x2, sep="")}}   
-            # Retrieve Individual Fields:
-            sep = paste("\\", sep, sep="")
-            p = nchar(x); result = NULL
-            while (p > 0) {
-                p = regexpr(sep, x); add =substring(x, 1, p-1)
-                x = substring(x, p+1)
-                if (p > 0) result = c(result, add)
-                else result = c(result, x)}
-            # Return Value:
-            result }
-        
+        if (class(z) == "try-error" || class(z) == "Error") {
+            return("No Internet Access") 
+        } else {
+            return(z) 
+        }
+    } else {  
         # Settings:
-        if (length(frequency) == 4) stop("Define frequency value")
-        if (frequency == "quarterly" || frequency == "monthly") n =2
-        if (frequency == "daily") n =3
-        if (n == 0) stop("no valid frequency value")
+        if (freq == "quarterly" || freq == "monthly") n = 2
+        if (freq == "daily") n = 3
        
-        # Download the file:
-        download.file(url = paste(source, query, sep = ""), destfile = file)
+        # For S-Plus Compatibility:
+        if (class(version) != "Sversion") {
+            # R:
+            method = NULL
+        } else { 
+            # SPlus
+            method = "lynx"
+        }
     
-        # Extract all the data records:
-        lines = grep("font color=white", scan(file, what = "", sep = "\n", 
-            quiet = TRUE))
+        # Download the file:
+        url = paste(source, query, sep = "")
+        download.file(url = url, destfile = file, method = method)
+        SCAN = scan(file, what = "", sep = "\n")
         
-        # Build the data table z:
-        z = scan(file, what = "", sep = "\n", quiet = TRUE)[lines]
-        z = gsub("font", "          ", x=z)         # remove irrelevant strings
-        z = gsub("<", " ", x=z)                     # remove irrelevant strings
-        z = gsub(">", " ", x=z)                     # remove irrelevant strings
-        z = gsub("color=white........", " ", x=z)   # remove irrelevant strings
-        for (i in 1:15) { z =gsub("  ", " ", x=z)}  # remove double blank spaces
-        for (i in 1:n) { z =sub(" ", "", x=z)}      # link date together
-        z = sub(" $", "", perl=TRUE, x=z)           # remove trailing spaces
-        n.rows =length(z)                           # count records
-        z = as.numeric(fields(z, rm.spaces = FALSE, sep = " "))
-        n.fields =length(z)     
-        z = matrix(z, ncol = n.fields/n.rows)       # create matrix
+        # Extract all the data records and build the table:
+        lines = grep("font color=white", SCAN)
+        z1 = SCAN[lines][-(1:2)]
+        
+        # Remove irrelevant HTML markup strings
+        z2 = gsub("font", "          ", x = z1)  
+        z1 = gsub("color=white........", " ", x = z2)      
+        z2 = gsub(">", " ", x = z1) 
+        z1 = gsub("<", " ", x = z2) 
+        
+        # Next - Compose Matrix: 
+        n.rows = length(z1)                         
+        z2 = unlist(apply(matrix(z1, ncol = 1), 2, strsplit, split = " "))
+        z1 = as.numeric(z2[z2 != ""])
+        n.fields = length(z1)     
+        z = matrix(z1, byrow = TRUE, ncol = n.fields/n.rows) 
+        if (n == 2) z = cbind(z[,1]*100+z[,2], z[,3])
+        if (n == 3) z = cbind(z[,1]*10000+z[,2]*100+z[,3], z[,4])
         
         # Create the dates in ISO-8601 format:
         # For quarterly data multiplay quarters by 3 to get monthly base
-        if (frequency == "quarterly") z[,1] =100*(z[,1]%/%100)+3*z[,1]%%100
-        z = data.frame(cbind(z[,1], z[,2]))
-        znames = as.character(1:(length(names(z)) - 1))
+        if (freq == "quarterly") z[,1] = 100*(z[,1]%/%100)+3*z[,1]%%100
+        z = data.frame(cbind(z[, 1], z[, 2]))
+        ## znames = as.character(1:(length(names(z)) - 1))
         names(z) = c("DATE", colname)   
+        # DW - add hyphens:
+        rowNames = as.character(z[, 1])
+        if (freq == "daily") {
+	        rowNames = paste(
+	        	substring(rowNames, 1, 4), "-",
+	        	substring(rowNames, 5, 6), "-",
+	        	substring(rowNames, 7, 8), sep = "")
+        } else {
+	        rowNames = paste(
+	        	substring(rowNames, 1, 4), "-",
+	        	substring(rowNames, 5, 6), "-01", sep = "")
+    	}
+        z[, 1] = rowNames	
         
         # Save to file:
         if (save) {
-            write.table(z, file, quote = FALSE, sep = ",", row.names = FALSE) }
-        else {
-            unlink(file) }
+            write.table(z, file, quote = FALSE, sep = ";", row.names = FALSE) 
+        } else {
+            unlink(file) 
+        }
         
         # Return Value:
-        return(z)
+        ans = new("fWEBDATA",     
+	        call = match.call(),
+	        param = c(
+	        	"Instrument Query" = query, 
+	        	"Frequency" = frequency, 
+	        	"Instrument Name" = colname),
+	        data = z, 
+	        title = "Web Data Import from Economagic", 
+	        description = as.character(date()) )
+	    return(ans)
     }
     
     # Return Value:
@@ -154,15 +211,16 @@ save = FALSE, colname = "VALUE", try = TRUE)
 
 
 yahooImport = 
-function (file = "tempfile", source = "http://chart.yahoo.com/table.csv?", 
-query, save = FALSE, sep = ";", swap = 20, try = TRUE)
+function (query, file = "tempfile", 
+source = "http://chart.yahoo.com/table.csv?", save = FALSE, sep = ";", 
+swap = 20, try = TRUE)
 {   # A function implemented by Diethelm Wuertz
 
     # Example:
     #   IBM SHARES, test 19/20 century change 01-12-1999 -- 31-01-2000:
-    #   yahooImport("IBM.CSV", 
-    #     query = "s=IBM&a=11&b=1&c=1999&d=0&q=31&f=2000&z=IBM&x=.csv", 
-    #   save = TRUE)
+    #   yahooImport(
+    #		query = "s=IBM&a=11&b=1&c=1999&d=0&q=31&f=2000&z=IBM&x=.csv", 
+    #		file = "IBM.CSV", save = TRUE)
 
     # Notes:
     #   Requires: fields() cuts a string in fields
@@ -183,309 +241,303 @@ query, save = FALSE, sep = ";", swap = 20, try = TRUE)
         # First try if the Internet can be accessed:
         z = try(yahooImport(file = file, source = source, 
             query = query, save = save, try = FALSE))
-        if (class(z) == "try-error") {
-            print("No Internet Access")
-            return(NULL) }
-        else {
-            return(z) }}    
-    else {
+        if (class(z) == "try-error" || class(z) == "Error") {
+            return("No Internet Access") 
+        } else {
+            return(z) 
+        }
+    } else {
+        # For S-Plus Compatibility:
+        if (class(version) != "Sversion") {
+            # R:
+            method = NULL
+        } else { 
+            # SPlus
+            method = "wget"
+        }
+    
         # Download the file:
-        download.file(url = paste(source, query, sep = ""), destfile = file)
-         
+        download.file(url = paste(source, query, sep = ""), 
+            destfile = file, method = method)
+        
         # Read from file and revert time order:
-        x = rev(scan(file, quiet = TRUE, what = "", skip = 1))
+        x1 = rev(scan(file, what = "", skip = 1))
         
         # Extract only date lines including dates:
-		x = strsplit(x[regexpr("-...-..,", x) > 0], ",")
-		
-		# Create a matrix from the list:
-		x = matrix(unlist(x), byrow = TRUE, nrow = length(x))
-		
-		# Transfer to numeric data.frame:
-		z = matrix(as.numeric(x[, -1]), ncol = dim(x)[2]-1)
-		
-		# Add row (by date) and column (by instrument) names:
-		rownames(z) <- as.character(sdate(fjulian(x[,1], order = "dmy", 
-			swap = swap)))
-		colnames(z) <- scan(file = file, n = dim(x)[2], quiet = TRUE, 
-			what = "", sep = ",")[-1]
-			
+        x2 = strsplit(x1[regexpr("-...-..,", x1) > 0], ",")
+        
+        # Create a matrix from the list:
+        x1 = matrix(unlist(x2), byrow = TRUE, nrow = length(x2))
+        
+        # Transfer to numeric data.frame:
+        z = matrix(as.numeric(x1[, -1]), ncol = dim(x1)[2]-1)
+        
+        # Add row (by date) and column (by instrument) names: 
+        # rowNames = as.character(sdate(fjulian(x1[, 1], order = "dmy", 
+        rowNames =  as.character(as.Date(x1[, 1], format = "%d-%b-%y"))
+
+        # DW - add hyphens:
+        # rowNames = paste(
+        #	substring(rowNames, 1, 4), "-",
+        #	substring(rowNames, 5, 6), "-",
+        #	substring(rowNames, 7, 8), sep = "")
+        # <
+        colNames = scan(file = file, n = dim(x1)[2],  what = "", sep = ",")[-1]
+        dimnames(z) = list(rowNames, colNames)
+            
         # Save Download ?
-		if (save) {
-		    # Header:
-		    write.table(t(c("%Y%m%d", colnames(z))), file, quote = FALSE, 
-		    	row.names = FALSE, col.names = FALSE, sep = sep)
-			# Data:
-			write.table(z, file, quote = FALSE, append = TRUE, 
-				col.names = FALSE, sep = sep) }
-		else {
-		    unlink(file) } 
-		
+        if (save) {
+            # Header:
+            write.table(t(c("%Y-%m-%d", colNames)), file, quote = FALSE, 
+                row.names = FALSE, col.names = FALSE, sep = ";")
+            # Data:
+            write.table(z, file, quote = FALSE, append = TRUE, 
+                col.names = FALSE, sep = ";") 
+        } else {
+            unlink(file) 
+        } 
+        
+        # Result:
+        z = data.frame(cbind(DATE = rowNames, z), row.names = NULL)
+        
         # Return Value:
-        return(as.data.frame(z))
+        ans = new("fWEBDATA",     
+	        call = match.call(),
+	        param = c("Instrument Query" = query),
+	        data = z, 
+	        title = "Web Data Import from Yahoo", 
+	        description = as.character(date()) )
+	    return(ans)
     }
     
     # Return Value:
     invisible()
 }
-
+    
 
 # ------------------------------------------------------------------------------
-# The old yahooImport function:
 
-
-.yahooImport = 
-function (file = "tempfile", source = "http://chart.yahoo.com/table.csv?", 
-query, save = FALSE, try = TRUE)
+    
+keystatsImport = 
+function(query, file = "tempfile", source = "http://finance.yahoo.com/q/ks?s=", 
+save = FALSE, try = TRUE) 
 {   # A function implemented by Diethelm Wuertz
 
+    # Description 
+    #   Downloads Key Statistics on shares from Yahoo's Internet site
+    # 
     # Example:
-    #   IBM SHARES, test 19/20 century change 01-12-1999 -- 31-01-2000:
-    #   yahooImport("IBM.CSV", 
-    #     query = "s=IBM&a=11&b=1&c=1999&d=0&q=31&f=2000&z=IBM&x=.csv", 
-    #   save=TRUE)
-
-    # Notes:
-    #   Requires: fields() cuts a string in fields
-    #   Yahoo Token Description:           
-    #   s     Selected Ticker-Symbol
-    #   a     First Quote starts with Month (mm): 0-11, Jan-Dec
-    #   b     First Quote starts with Day (dd)
-    #   c     First Quote starts with Year: as CCYY
-    #   d     Last Quote ends with Month (mm): 0-11, Jan-Dec
-    #   e     Last Quote ends with Day (dd)
-    #   f     Last Quote ends with Year (yy): as CCYY
-    #   z     Selected Ticker-Symbol
-
+    #   keystatsImport("YHOO")
+    
     # FUNCTION:
     
     # Download:
     if (try) {
         # First try if the Internet can be accessed:
-        z = try(.yahooImport(file = file, source = source, 
+        z = try(keystatsImport(file = file, source = source, 
             query = query, save = save, try = FALSE))
-        if (class(z) == "try-error") {
-            print("No Internet Access")
-            return(NULL) }
-        else {
-            return(z) }}    
-    else {
-        # Internal Function:
-        fields = 
-        function (x, rm.spaces = TRUE, ignore.quotes = TRUE, sep = ",") {
-            options(warn=-1)
-            # Remove White Spaces:
-            if(rm.spaces) { 
-                p = nchar(x); result = NULL
-                while (p > 0) {
-                    p = regexpr("\ ", x); x1 = substring(x, 1, p-1)
-                    x2 = substring(x, p+1); x = paste(x1 ,x2, sep = "")}}   
-            # Ignore Quotation Marks:
-            if(ignore.quotes) { 
-                p = nchar(x); result = NULL
-                while (p > 0) {
-                    p = regexpr('\"', x); x1 = substring(x, 1, p-1)
-                    x2 = substring(x, p+1); x = paste(x1, x2, sep = "")}}   
-            # Retrieve Individual Fields:
-            sep = paste("\\", sep, sep="")
-            p = nchar(x); result = NULL
-            while (p > 0) {
-                p = regexpr(sep,x); add = substring(x, 1, p-1)
-                x = substring(x, p+1)
-                if (p > 0) result = c(result, add)
-                else result = c(result, x)}
-            # Return Value:
-            result }
-            
-        # Download the file:
-        download.file(url = paste(source, query, sep = ""), destfile = file)
-         
-        # Get the names from the first line and cut it in fields,
-        # Use the function fields() from fBasics:
-        znames = fields(scan(file = file, n = 1, quiet = TRUE, 
-            what = "", sep = "\n"))
+        if (class(z) == "try-error" || class(z) == "Error") {
+            return("No Internet Access")
+        } else {
+            return(z) 
+        } 
+    } else {                 
+        offset = 2
+        url = paste(source, query, sep = "")
         
-        # Get the data records, starting in the second line:
-        z = scan(file, quiet = TRUE, what = "", skip = 1, sep = ",")
+        # For S-Plus Compatibility:
+        if (class(version) != "Sversion") {
+            # R:
+            method = NULL
+        } else { 
+            # SPlus
+            method = "wget"
+        }
         
-        # Transform the data to matrix form:
-        z = matrix(data = z, byrow = TRUE, ncol = length(znames))
-        
-        # Remove the last it's a comment !?
-        z = z[-dim(z)[1], ]
-        
-        # Write the date in ISO-8601 format as CCYYMMDD,
-        mm = 1:12
-        names(mm) = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-        r = matrix(fields(z[, 1], sep = "-"), byrow = FALSE, ncol = 3)
-        r[, 2] = mm[r[, 2]]
-        r = matrix(as.numeric(r), byrow = FALSE, ncol = 3)
-        # Add Century: Sorry works only up to 2010:
-        z[,1 ] = (1950 + 50*(sign(10-r[, 3])) + r[, 3])*10000 + 
-            r[, 2]*100 + r[, 1]
-        
-        # Build the data table z:
-        z = data.frame(z)
-        names(z) = znames
-        for (i in 1:length(znames)) z[, i] = rev(z[, i])
-        
-        # Write table to file:
-        if (save) {
-            write.table(z, file, quote = FALSE, sep = ",", row.names = FALSE) }
-        else {
-            unlink(file) }
-        
+        # Download:
+        download.file(url = url, destfile = file, method = method)
+        .warn = options()$warn
+        options(warn = -1)
+        x = scan(file, what = "", sep = ">")
+        options(warn = .warn)
+        keynames = c(
+            "Market Cap ", 
+            "Enterprise Value ",
+            "Trailing P/E ",
+            "Forward P/E ",
+            "PEG Ratio ",
+            "Price/Sales ",
+            "Price/Book ",
+            "Enterprise Value/Revenue ",
+            "Enterprise Value/EBITDA ",
+            "Annual Dividend:",
+            "Dividend Yield:",
+            "Beta:",
+            "52-Week Change:",
+            "52-Week High ",
+            "52-Week Low " )
+        if (class(version) != "Sversion") {
+            # R:
+            stats = as.character(Sys.Date())
+        } else {
+            # SPlus:
+            currentDate = timeDate(date(), in.format="%w %m %d %H:%M:%S %Z %Y")
+            mdy = month.day.year(currentDate)
+            stats = as.character(mdy$year*10000+mdy$month*100+mdy$day)
+        }
+        for (s in keynames) {
+            grepped = paste(gsub("</td", "", x[grep(s, x) + offset]))
+            stats = c(stats, grepped)
+        }
+        for (i in 1:length(keynames)) {
+            keynames[i] = substring(keynames[i], 1, nchar(keynames[i])-1)
+        }
+        keynames = c("Date", keynames)  
+             
         # Return Value:
-        return(z)
+        ans = list(query = query, 
+        	keystats = data.frame(cbind(Keyname = keynames, Statistic = stats)))   
+        class(ans) = "keystats"
+        ans    
     }
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+print.keystats = 
+function(x, ...)
+{
+	# Title:
+    cat("\nTitle:\n")
+    cat("Yahoo Key Statistics\n", sep = "")
+    
+    # Key Statistics:
+    cat("\nKey Statistics for", x$query, "\n")
+    print(x$keystats)
+    
+    # Description:
+    cat("\nDescription:\n")   
+    cat(date())
+    cat("\n\n")
     
     # Return Value:
     invisible()
 }
-    
 
-# ------------------------------------------------------------------------------
-
-  	
-keystatsImport = 
-function(file = "tempfile", source = "http://finance.yahoo.com/q/ks?s=", 
-query, save = FALSE, try = TRUE) 
-{	# A function implemented by Diethelm Wuertz
-
-	# Description 
-	#	Downloads Key Statistics on shares from Yahoo's Internet site
-	# 
-	# Example:
-	#	keystatsImport(query = "YHOO")
-	
-	# FUNCTION:
-	
-	# Download:
-	if (try) {
-		# First try if the Internet can be accessed:
-        z = try(keystatsImport(file = file, source = source, 
-            query = query, save = save, try = FALSE))
-        if (class(z) == "try-error") {
-            print("No Internet Access")
-            return(NULL) }
-        else {
-            return(z) } }
-    else {                 
-	    offset = 2
-	    url = paste(source, query, sep = "")
-	    download.file(url, file)
-	    x = scan(file, what = "", sep = ">")
-	    keynames = c(
-	        "Market Cap ", 
-	        "Enterprise Value ",
-	        "Trailing P/E ",
-	        "Forward P/E ",
-	        "PEG Ratio ",
-	        "Price/Sales ",
-	        "Price/Book ",
-	        "Enterprise Value/Revenue ",
-	        "Enterprise Value/EBITDA ",
-	        "Annual Dividend:",
-	        "Dividend Yield:",
-	        "Beta:",
-	        "52-Week Change:",
-	        "52-Week High ",
-	        "52-Week Low " )
-	    stats = as.character(Sys.Date())
-	    for (s in keynames) {
-		    grepped = paste(sub("</td", "", x[grep(s, x) + offset]))
-			stats = c(stats, grepped)}
-		for (i in 1:length(keynames))
-			keynames[i] = substr(keynames[i], 1, nchar(keynames[i])-1)
-		keynames = c("Date", keynames)       
-	    # Return Value:
-	    data.frame(cbind(Keyname = keynames, Statistic = stats)) }
-}
     
     
 # ------------------------------------------------------------------------------
   
 
 fredImport = 
-function(file = "tempfile", 
+function(query, file = "tempfile", 
 source = "http://research.stlouisfed.org/fred2/series/", 
-query, frequency = "daily", save = FALSE, sep = ";", try = TRUE) 
+frequency = "daily", save = FALSE, sep = ";", try = TRUE) 
 {   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	#	Downloads Monthly Market Data, Indices and Benchmarks from 
-	#	St. Louis FED, "research.stlouisfed.org".
-	
-	# Value:
-	#	An One Column data frame with row names denoting the dates
-	#	given in the POSIX format "%Y%m%d". The column lists the
-	#   downloaded data records.
-		
-	# Examples:
-	#   fredImport(query = "DPRIME")
+    # Description:
+    #   Downloads Monthly Market Data, Indices and Benchmarks from 
+    #   St. Louis FED, "research.stlouisfed.org".
     
-	# Notes:
-	#	This function is written for one-column daily data sets.
-	#   Some example data sets include:  
-	#     DEXUSEU   U.S. / Euro Foreign Exchange Rate 
-	#     DEXSZUS	Switzerland / U.S. Foreign Exchange Rate 
-	#	  DGS1      1-Year Treasury Constant Maturity Rate 
-	#	  DPRIME	Bank Prime Loan Rate
-	#	   
+    # Value:
+    #   An One Column data frame with row names denoting the dates
+    #   given in the POSIX format "%Y%m%d". The column lists the
+    #   downloaded data records.
+        
+    # Examples:
+    #   fredImport("DPRIME")
+    
+    # Notes:
+    #   This function is written for one-column daily data sets.
+    #   Some example data sets include:  
+    #     DEXUSEU   U.S. / Euro Foreign Exchange Rate 
+    #     DEXSZUS   Switzerland / U.S. Foreign Exchange Rate 
+    #     DGS1      1-Year Treasury Constant Maturity Rate 
+    #     DPRIME    Bank Prime Loan Rate
+    #      
 
-	# FUNCTION:
-	
-	# Check:
-	if (frequency != "daily")
-		stop("Only daily dat records are supported!")
-	
-	# Download:
-	if (try) {
-		# Try for Internet Connection:
-        z = try(fredImport(file = file, source = source, query = query, 
+    # FUNCTION:
+    
+    # Check:
+    if (frequency != "daily")
+        stop("Only daily dat records are supported!")
+    
+    # Download:
+    if (try) {
+        # Try for Internet Connection:
+        z = try(fredImport(query = query, file = file, source = source, 
             save = save, try = FALSE))
-        if (class(z) == "try-error") {
-            print("No Internet Access")
-            return(NULL) }
-        else {
-            return(z) } }
-	else { 
-		# Download File:
-		queryFile = paste(query, "/downloaddata/", query, ".txt", sep = "")
-		download.file(url = paste(source, queryFile, sep = ""), file) 
-		# Scan the file:
-		
-		x = scan(file, what = "", sep = "\n")
-		# Extract dates ^19XX and ^20XX:
-		x = x[regexpr("^[12][90]", x) > 0]
-		x = x[regexpr(" .$", x) < 0]
-		
-		# Transform to one-column matrix:
-		z = matrix(as.numeric(substr(x, 11, 999)), byrow = TRUE, ncol = 1)
-		
-		# Add column name:
-		colnames(z) <- query
-		rownames(z) <- paste(substr(x, 1, 4), substr(x, 6, 7), 
-			substr(x, 9, 10), sep = "")
-		
-		# Save Download ?
-		if (save) {
-		    write.table(paste("%Y%m%d", query, sep = sep), file, 
-		    	quote = FALSE, row.names = FALSE, col.names = FALSE)
-			write.table(z, file, quote = FALSE, append = TRUE, 
-				col.names = FALSE, sep = sep) }
-		else {
-		    unlink(file) } 
-		       
-		# Return Value:
-		return(as.data.frame(z) )
-	}
-	
-	# Return Value:
-	invisible()
+        if (class(z) == "try-error" || class(z) == "Error") {
+            return("No Internet Access") 
+        } else {
+            return(z) 
+        } 
+    } else { 
+        # File name:
+        queryFile = paste(query, "/downloaddata/", query, ".txt", sep = "")
+        
+        # For S-Plus Compatibility:
+        if (class(version) != "Sversion") {
+            # R:
+            method = NULL
+        } else { 
+            # SPlus
+            method = "wget"
+        }
+    
+        # Download and temporarily store:
+        download.file(url = paste(source, queryFile, sep = ""), 
+            destfile = file, method = method) 
+        
+        # Scan the file:
+        x1 = scan(file, what = "", sep = "\n")
+        # Extract dates ^19XX and ^20XX:
+        x2 = x1[regexpr("^[12][90]", x1) > 0]
+        x1 = x2[regexpr(" .$", x2) < 0]
+        
+        # Transform to one-column matrix:
+        z = matrix(as.numeric(substring(x1, 11, 999)), byrow = TRUE, ncol = 1)
+        
+        # Add column names:
+        colNames = query
+        # DW: Change to ISO-8601
+        # rowNames = paste(substring(x1, 1, 4), substring(x1, 6, 7), 
+        #    substring(x1, 9, 10), sep = "")
+        rowNames = substring(x1, 1, 10)
+        # 
+        dimnames(z) = list(rowNames, colNames)
+        
+        # Save download ?
+        if (save) {
+            write.table(paste("%Y%m%d", query, sep = ";"), file, 
+                quote = FALSE, row.names = FALSE, col.names = FALSE)
+            write.table(z, file, quote = FALSE, append = TRUE, 
+                col.names = FALSE, sep = ";") 
+        } else {
+            unlink(file) 
+        } 
+               
+        # Return Value:
+        z = data.frame(DATE = rowNames, z, row.names = NULL)
+        
+        # Return Value:
+        ans = new("fWEBDATA",     
+	        call = match.call(),
+	        param = c(
+	        	"Instrument Query" = query,
+	        	"Frequency" = frequency),
+	        data = z, 
+	        title = "Web Data Import from FED St. Louis", 
+	        description = as.character(date()) )
+	    return(ans)
+    }
+    
+    # Return Value:
+    invisible()
 }
 
 
-# ------------------------------------------------------------------------------
+################################################################################
 

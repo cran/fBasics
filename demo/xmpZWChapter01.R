@@ -27,7 +27,7 @@
 # Section 1.2.1 - Assignment
 
     
-    # Integer:
+	# Integer:
     a = 3
     a
     ###

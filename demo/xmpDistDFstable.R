@@ -19,16 +19,15 @@
 #     improved! 
 #   Part II: Explore Symmetric Stable Distributions. The example
 #     investigate the limit behaviour of the "symstb" function.
-#   Part III: #	Investigate the Tails of the Symmetric Stable Distribution
+#   Part III: # Investigate the Tails of the Symmetric Stable Distribution
 #     The example investigates the tail behaviour of the "symstb" function.
 #   Part IV: Plot alpha stable density function for alpha values 0.5, 
-#     0.75, 1.01, 1.25, 1.5 and beta=0.5. Note, that the function 
-#     doesn't yet apply for some special x if they are integer multiples 
-#     of alpha and/or beta. These cases have to be considered separately 
-#     and to be implemented!
+#     0.75, 1.01, 1.25, 1.5 and beta=0.5. 
+#   PART V:
+#     Consider stable and other stable parameterizations than S0.
 #
 # Author:
-#	(C) 2002, Diethelm Wuertz, GPL
+#   (C) 2002, Diethelm Wuertz, GPL
 #
 
 
@@ -194,4 +193,85 @@
    p = pstable(x, alpha = 1.9, beta = 0.5)
    plot(x, p, type = "l", main = "PSTABLE (1.9,0.5)")
    points(sort(r), (1:length(r))/length(r), col = "steelblue4")
+
+   
+################################################################################
+# Part V: Stable Mode and other parameterizations
+
+
+  # Graph Settings:
+  par(mfrow = c(2, 2), cex = 0.7)
+    
+  # Stable Mode:
+  alpha = seq(0, 2, by = 0.05)
+  beta = c(1.00, 0.75, 0.50, 0.25, 0.00)
+  for ( i in 1:length(beta) ) {
+    y = NULL
+    for ( j in 1:length(alpha) ) { 
+        y = c(y, stableMode(alpha = alpha[j], beta = beta[i]))
+    }
+    if ( i == 1 ) { 
+        plot(x = alpha,y = y, type = "l", ylab = "m")
+    } else {
+        lines(x = alpha, y = y, lty = i+1)
+    }
+  }
+  title(main = "Stable Mode")
+  legend(1.5, -0.25, legend = paste("beta=", beta), lty = 1:5)
+
+  
+  # First Parameterization: S0
+  x = seq(-5.001, 5.001, by = 0.05)
+  alpha = c(0.50, 0.75, 1.00, 1.25, 1.50)
+  beta  = 0.50
+  gamma = 1.00
+  delta = 0.00
+  for ( i in 1:length(alpha) ) {
+    y = dstable(x, alpha[i], beta, gamma, delta, pm = 0) 
+    if (i == 1) {
+        plot(x, y, type = "l")
+    } else {
+        lines(x, y,  lty = i+1)
+    }
+  }
+
+
+  # Second Parameterization: S1
+  x = seq(-5.001, 5.001, by = 0.05)
+  alpha = c(0.50, 0.75, 1.00, 1.25, 1.50)
+  beta  = 0.50
+  gamma = 1.00
+  delta = 0.00
+  for ( i in 1:length(alpha) ) {
+    y = dstable(x, alpha[i], beta, gamma, delta, pm = 1) 
+    if (i == 1) {
+        plot(x, y, type = "l", ylab = "pdf")
+    } else {
+        lines(x, y,  lty = i+1)
+    }
+  }
+  title(main = "S1 Parameterization")
+  legend(-4, 0.55, legend = paste("alpha=", alpha), lty = 1:5)
+
+
+  # Third Parameterization: S2
+  x = seq(-5.001, 5.001, by = 0.05)
+  alpha = c(0.50, 0.75, 1.00, 1.25, 1.50)
+  beta  = 0.50
+  gamma = 1.00
+  delta = 0.00
+  for ( i in 1:length(alpha) ) {
+    y = dstable(x, alpha[i], beta, gamma, delta, pm = 2) 
+    if (i == 1) {
+        plot(x, y, type = "l", ylim = c(0, 0.5), ylab = "pdf")
+    } else {
+        lines(x, y,  lty = i+1)
+    }
+  }
+  title(main = "S2 Parameterization")
+  legend(-4, 0.45, legend = paste("alpha=", alpha), lty = 1:5)
+
+  
+  
+################################################################################
 

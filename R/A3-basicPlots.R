@@ -28,18 +28,18 @@
 
 
 ################################################################################
-# FUNCTION:             DESCRIPTION:    
-#  splusLikePlot         Sets parameters that plots look more Splus like
-#  tsPlot                Returns a time series plot
-#  histPlot              Returns a histogram plot
-#  densityPlot           Returns a kernel density estimate plot
-# FUNCTION:             DESCRIPTION 3D PLOTS:
-#  circlesPlot           Returns a scatterplot of circles indexing a 3rd variable
-#  perspPlot             Returns a perspective plot in 2 dimensions
-# FUNCTION:             DESCRIPTION PLOT TOOLS:
-#  characterTable        Shows a table of character's numerical equivalents 
-#  plotcharacterTable    Shows a table of plot characters and symbols
-#  colorTable            Shows a table of plot color codes
+# FUNCTION:            DESCRIPTION:    
+#  splusLikePlot        Sets parameters that plots look more Splus like
+#  tsPlot               Returns a time series plot
+#  histPlot             Returns a histogram plot
+#  densityPlot          Returns a kernel density estimate plot
+# FUNCTION:            DESCRIPTION 3D PLOTS:
+#  circlesPlot          Returns a scatterplot of circles indexing a 3rd variable
+#  perspPlot            Returns a perspective plot in 2 dimensions
+# FUNCTION:            DESCRIPTION PLOT TOOLS:
+#  characterTable       Shows a table of character's numerical equivalents 
+#  plotcharacterTable   Shows a table of plot characters and symbols
+#  colorTable           Shows a table of plot color codes
 ################################################################################
 
  
@@ -79,48 +79,19 @@ function(scale = 0.8)
 
 
 tsPlot = 
-function(x, type = "l", labels = TRUE, ...) 
+function(x, ...) 
 {   # A function implemented by Diethelm Wuertz
     
     # Description:
-    #   Returns a time series plot
-    
-    # Notes:
-    #	A synonyme call for function 'ts.plot'
-    
+    #   Returns time series graphs in a common plot
+  
     # FUNCTION:
     
     # Settings:
     # if (SPLUSLIKE) splusLikePlot(TRUE)
     
-    # Labels:
-    if (labels) {
-        xlab = "t"
-        ylab = "x"
-        main = paste ("Series: ", substitute(x))
-        col = "steelblue4" }
-    else {
-        xlab = ""
-        ylab = ""
-        main = ""}
-            
-    # Plot:
-    if (is.null(dim(x))) {
-        if (labels) {
-            ts.plot(x = x, type = type, col = col, 
-                xlab = xlab, ylab = ylab, main = main, ...) 
-            grid() }
-        else {
-            ts.plot(x = x, type = type,
-                xlab = xlab, ylab = ylab, main = main, ...) }}
-    else { 
-        if (labels) {
-            ts.plot(x = x,
-                xlab = xlab, ylab = ylab, main = main, ...) 
-            grid() }
-        else {
-            ts.plot(x = x, ...) } }
-            
+    plot(x, ylab = "", ...)
+         
     # Return Value:
     invisible(x)
 }
@@ -130,14 +101,12 @@ function(x, type = "l", labels = TRUE, ...)
 
 
 histPlot = 
-function(x, col = "steelblue4", border = "white", ...) 
+function(x, col = "steelblue4", border = "white", main = x@units, ...) 
 {   # A function implemented by Diethelm Wuertz
 
     # Description:
-    #   Returns a histogram plot
-    
-    # Notes:
-    #	A synonyme call for function 'hist'
+    #   Returns histogram plots for each column of a 
+    #   timeSeries object
     
     # FUNCTION:
     
@@ -145,13 +114,25 @@ function(x, col = "steelblue4", border = "white", ...)
     # if (SPLUSLIKE) splusLikePlot(TRUE)
     
     # Transform 'timeSeries':
-    if (is.timeSeries(x)) x = seriesData(x)
+    units = x@units
+    DIM = dim(x@Data)[2]
+      
+    # Construct output list:
+    ans = paste( " hist", 1:DIM, " = NULL", sep = "", collapse = ",")
+    ans = paste( "list(",  ans, ")" )
+    ans = eval(parse(text = ans))
     
-    # Histogram Plot:
-    ans = hist(x = x, col = col, border = border, ...) 
+    # Histogram Plots:
+    for (i in 1:DIM) {
+	    Values = as.vector(x@Data[, i])
+        result = hist(x = Values, col = col, border = border, 
+            breaks = "FD", main = main[i], ...)  
+        ans[[i]] = result  
+    }
+    names(ans) = units
     
     # Return Value:
-    ans
+    invisible(ans)
 }  
 
 
@@ -159,25 +140,35 @@ function(x, col = "steelblue4", border = "white", ...)
 
 
 densityPlot = 
-function(x, ...)
+function(x, col = "steelblue4", main = x@units, ...)
 {   # A function implemented by Diethelm Wuertz
 
     # Description:
-    #   Returns a kernel density estimate plot
+    #   Returns density plots for each column of a 
+    #   timeSeries object
 
-    # Notes:
-    #	A synonyme call for method 'plot.density'
-    
     # FUNCTION:
     
-    # Settings:
-    # if (SPLUSLIKE) splusLikePlot(TRUE)
+    # Transform 'timeSeries':
+    units = x@units
+    DIM = dim(x@Data)[2]
+      
+    # Construct output list:
+    ans = paste( " hist", 1:DIM, " = NULL", sep = "", collapse = ",")
+    ans = paste( "list(",  ans, ")" )
+    ans = eval(parse(text = ans))
     
-    # Plot:
-    plot(density(x), ...)
+    # Histogram Plots:
+    for (i in 1:DIM) {
+	    Values = as.vector(x@Data[, i])
+	    Density = density(Values, ...)
+        plot(x = Density, col = col, type = "l", main = main[i], ...)  
+        ans[[i]] = Density  
+    }
+    names(ans) = units
     
     # Return Value:
-    invisible()
+    invisible(ans)
 }
 
 
@@ -220,7 +211,7 @@ function(x, y, z, theta = -40, phi = 30, col = "steelblue4", ps = 9, ...)
     #   Returns a perspecvtive plot
     
     # Notes:
-    #	A synonyme call for function 'persp'
+    #   A synonyme call for function 'persp'
     
     # FUNCTION:   
     
@@ -228,17 +219,21 @@ function(x, y, z, theta = -40, phi = 30, col = "steelblue4", ps = 9, ...)
     # if (SPLUSLIKE) splusLikePlot(TRUE)
     
     # Perspective Plot:
-    par(ps = ps)
-    if (!exists("ticktype")) ticktype = "detailed"
-    if (!exists("expand")) expand = 0.6
-    if (!exists("r")) r = 500
-    
-    # Plot:
-    persp(x = x, y = y, z = z, theta = theta, phi = phi, 
-        col = col, ticktype = ticktype, expand = expand, ...) 
+    if (class(version) == "Sversion") {
+        # we assume SPlus:
+        ans = persp(x = x, y = y, z = z, ...) 
+    } else {
+        # R:
+        par(ps = ps)
+        if (!exists("ticktype")) ticktype = "detailed"
+        if (!exists("expand")) expand = 0.6
+        if (!exists("r")) r = 500
+        ans = persp(x = x, y = y, z = z, theta = theta, phi = phi, 
+            col = col, ticktype = ticktype, expand = expand, ...) 
+    }
         
     # Return Value:
-    invisible()
+    invisible(ans)
 }
 
                         
@@ -269,7 +264,7 @@ function(font = 1, cex = 0.7)
     #   Source from Pierre Joyet, pierre.joyet@bluewin.ch
 
     # Example:
-    #   for ( i in 1:20) characterTable(font = i)
+    #   for (i in 1:20) characterTable(font = i)
 
     # FUNCTION:
     
@@ -291,7 +286,7 @@ function(font = 1, cex = 0.7)
         30:37)), font = 3, cex = cex)
     
     # Return Value:
-    invisible()
+    invisible(font)
 }
 
 
@@ -306,7 +301,7 @@ function(cex = 0.7)
     #   Displays a table of plot colors.
     
     # Author:
-    #   Unknown:
+    #   Unknown, code found on the internet.
     
     # Example:
     #   colorTable()
@@ -342,24 +337,26 @@ function(font = par('font'), cex = 0.7)
     #   plotcharacterTable()
     
     # Author:
-    #   Unknown.
+    #   Unknown, code found on the internet.
 
     # FUNCTION:
     
     # Table:
     plot(0, 0, xlim = c(-1, 11), ylim = c(0, 26), type = 'n', 
-        axes = FALSE, xlab = '', ylab = '', main = "Table of Plot Characters")
+        axes = FALSE, xlab = '', ylab = '', 
+        main = "Table of Plot Characters")
     j = -1
     for(i in 0:255) {
         if(i %% 25 == 0) {j = j+1; k = 26}
         k = k-1
         points(j, k, pch = i, font = font, cex = cex, col = 2)
-        text(j+0.50, k, i, cex = cex) }
+        text(j+0.50, k, i, cex = cex) 
+    }
     
     # Return Value:
-    invisible()
+    invisible(font)
 }
 
 
-# ******************************************************************************
+################################################################################
 

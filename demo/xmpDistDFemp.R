@@ -66,7 +66,7 @@
    F10 <- ecdf(rnorm(10))
    summary(F10)
    plot(F10)
-   plot(F10, verticals= TRUE, do.p = FALSE)
+   plot(F10, verticals = TRUE, do.p = FALSE)
    plot(Fn12)  
    xx <- unique(sort(c(seq(-3, 2, length = 201), knots(Fn12))))
    lines(xx, Fn12(xx), col = 'blue')
@@ -107,13 +107,7 @@
 	 #marginals for numerical variables. x is a numeric vector.	
 	 ssden(~x, ...)	}
    ###
-   
-
-   # Requirements:
-   require(gss)
-   ###
-	
-   
+	   
    # Fit: Estimate from Empirical Distribution  
    data(nyseres)
    par(mfcol = c(3, 2), err = -1)
@@ -123,8 +117,7 @@
    # This will take some time ...
    fit = ssdFit(e)
    ###
-	
-   
+	  
    # SSD - Empirical Distribution:	
    x = seq(-6, 6, length = 256)
    r = rssd(100, fit)

@@ -37,11 +37,11 @@
 
 \description{
 
-    A collection and description of functions which compute 
-    basic statistical properties. Missing functions in R to 
-    calculate skewness and kurtosis are added, a function 
-    which creates a summary statistics, and functions to 
-    calculate column statistics.
+    A collection and description of functions to compute 
+    basic statistical properties. Missing functions in 
+    R to calculate skewness and kurtosis are added, a 
+    function which creates a summary statistics, and 
+    functions to calculate column and row statistics.
     \cr
     
     The functions are:
@@ -181,21 +181,27 @@ colCumsums(x, na.rm = FALSE, \dots)
 
 
 \examples{
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.A2-BasicStatistics")
+
 ## basicStats -
    xmpBasics("\nStart: Basic Statistics of log-Returns > ")
    # Data NYSE Composite Index:
    data(nyseres)
    basicStats(nyseres)  
      
-## moments -
+## mean -
+## var -
+## skewness -
+## kurtosis -
    xmpBasics("\nNext: Moments, Skewness and Kurtosis > ")
    # Mean, Variance:
    mean(nyseres)
    var(nyseres)
    # Skewness, Kurtosis:
-   # Note, can handele data.frames:
-   skewness(nyseres)
-   kurtosis(nyseres)   
+   class(nyseres)
+   skewness(nyseres[, 1])
+   kurtosis(nyseres[, 1])   
 }
 
 

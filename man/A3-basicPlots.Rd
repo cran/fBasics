@@ -22,9 +22,10 @@
 
     A collection and description of several plot functions 
     and utilities which may be useful for the explorative 
-    data analysis of financial and economic market data. 
-    Listed are also three utility functions displaying 
-    tables for characters, plot symbols, and colors.
+    data analysis of financial and economic market data using
+    S4 time series objects from Rmetrics. Included are also 
+    utility functions displaying tables for characters, plot 
+    symbols, and colors.
     \cr
     
     The functions are:
@@ -44,11 +45,9 @@
 
 
 \usage{ 
-tsPlot(x, type = "l", labels = TRUE, \dots) 
-histPlot(x, col = "steelblue4", border = "white", \dots)
-densityPlot(x, \dots)
-
-
+tsPlot(x, \dots) 
+histPlot(x, col = "steelblue4", border = "white", main = x@units, \dots)
+densityPlot(x, col = "steelblue4", main = x@units, \dots)
 
 circlesPlot(x, y, size = 1, \dots)
 perspPlot(x, y, z, theta = -40, phi = 30, col = "steelblue4", ps = 9, \dots)
@@ -63,7 +62,7 @@ splusLikePlot(scale = 0.8))
 
 \arguments{
   
-    \item{col, border, type}{
+    \item{col, border}{
         two character strings, defining the colors used to fill the
         bars and to plot the borders of the bars for the \code{histPlot},
         or color and linetype as used by the function \code{plot}.
@@ -74,11 +73,10 @@ splusLikePlot(scale = 0.8))
         or the current plot character font for the 
         \code{plotcharacterTable}. The character size is determined by
         the numeric value \code{cex}, the default size is 0.7.
-        }   
-    \item{labels}{
-        a logical. If set to \code{TRUE} labels are generated automatically,
-        otherwise not. Default value is \code{TRUE}.
-        }   
+        }  
+    \item{main}{
+    	character string of main title(s).
+    	} 
     \item{scale}{
         a numeric value, by default 0.8, to scale fonts and symbols in
         plots to make them more Splus like.
@@ -93,6 +91,10 @@ splusLikePlot(scale = 0.8))
         function \code{persp}.
         }
     \item{x, y}{
+        [tsPlot][histPlot][densityPlot] - \cr
+        an object of class \code{timeSeries}.
+        \cr
+        [circlesPlot][perspPlot] - \cr
         numeric vectors.
         In the case of the \code{thermometerPlot} \code{x} holds the
         current values of the n-bars.
@@ -229,31 +231,39 @@ splusLikePlot(scale = 0.8))
 
 
 \examples{
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.A3-BasicPlots")
+
+\dontrun{
 ## tsPlot -
    xmpBasics("\nStart: European Stock Markets > ")
    # Show multiple plot:
    par(mfrow = c(1, 1), cex = 0.7)
-   data(EuStockMarkets)
-   tsPlot(EuStockMarkets, gpars = list(col = c(2:4, 6)), labels = FALSE)
-   title(main = "European Stock Markets")
+   data(DowJones30)
+   DowJones.ts = as.timeSeries(DowJones30)[, c("CAT", "GE", "IBM", "JPM", )]
+   tsPlot(DowJones.ts)
+   title(main = "CAT - GE - IBM - JPM")
    
 ## histPlot -
    xmpBasics("\nNext: Histogram Plot of Normal Random Numbers > ")
-   histPlot(x = rnorm(1000), main = "Histogram Plot")
+   DowJones.ret = returnSeries(DowJones.ts)
+   par(mfrow = c(2, 2), cex = 0.7)
+   histPlot(x = DowJones.ret)
    
 ## densityPlot -
    xmpBasics("\nNext: Density Plot of Normal Random Numbers > ")
-   densityPlot(x = rnorm(1000), main = "Density Plot")
+   densityPlot(x = DowJones.ret)
    
 ## circlesPlot -
    xmpBasics("\nNext: 3D Circles Plot of Normal Random Numbers > ")
+   par(mfrow = c(1, 1), cex = 0.7)
    circlesPlot(x = rnorm(50), y = rnorm(50), size = abs(rnorm(50)),
      main = "Circles Plot")
 
 ## perspPlot -
    xmpBasics("\nNext: Perspective Plot > ")
-   par(mfrow = c(1, 1), ps = 11)
-   x = y = seq(-10, 10, length=51)
+   par(mfrow = c(1, 1))
+   x = y = seq(-10, 10, length = 51)
    f = function(x, y) { r = sqrt(x^2+y^2); 10 * sin(r)/r }
    z = outer(x, y, f)   
    perspPlot(x, y, z)
@@ -274,6 +284,7 @@ splusLikePlot(scale = 0.8))
 ## plotcharacter Table - 
    xmpBasics("\nNext: Display Table of Plot Characters > ")
    plotcharacterTable()
+}
 }
 
 

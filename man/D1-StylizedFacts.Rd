@@ -18,9 +18,10 @@
 
 \description{
 
-    A collection and description of functions to plot 
-    several stylized facts of financial and economic 
-    time series. This includes fat tails, autocorrelations, 
+    A collection and description of functions to 
+    investigate and to plot several stylized facts 
+    of economic and financial time series. This 
+    includes fat tails, autocorrelations, 
     crosscorrelations, long memory behavior, and the
     Taylor effect.
     \cr
@@ -44,10 +45,14 @@
 logpdfPlot(x, n = 50, doplot = TRUE, type = c("lin-log", "log-log"), \dots)
 qqgaussPlot(x, span = 5, col = "steelblue4", main = "Normal Q-Q Plot", \dots)
 scalinglawPlot(x, span = ceiling(log(length(x)/252)/log(2)), doplot = TRUE, \dots)
+
 acfPlot(x, \dots)
 pacfPlot(x, \dots)
-ccfPlot(x, y, \dots)
-lmacfPlot(x, lag.max = 50, ci = 0.95, main = "ACF", doprint = TRUE)
+ccfPlot(x, y, lag.max = max(2, floor(10*log10(length(x)))), 
+	type = c("correlation", "covariance", "partial"), \dots)
+
+lmacfPlot(x, lag.max = max(2, floor(10*log10(length(x)))), 
+	ci = 0.95, main = "ACF", doprint = TRUE)
 teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10, 
     ymax = NA, standardize = TRUE)
 }
@@ -236,6 +241,11 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
 
 
 \examples{
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.A3-BasicPlots")
+## SOURCE("fBasics.D1-StylizedFacts")
+## SOURCE("fBasics.Z1-BasicsTools")
+
 ## logpdfPlot -
    xmpBasics("\nStart: log PDF Plot > ")
    # Plot the log-returns of the NYSE Composite Index

@@ -25,7 +25,7 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2004, Diethelm Wuertz, GPL
+#   1999 - 2005, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   info@rmetrics.org
 #   www.rmetrics.org
@@ -44,11 +44,28 @@ function(lib, pkg)
 {   # A function implemented by Diethelm Wuertz
     
     # Package:
-    cat("\nRmetrics, (C) 1999-2004, Diethelm Wuertz, GPL")
+    cat("\nRmetrics, (C) 1999-2005, Diethelm Wuertz, GPL")
     cat("\nfBasics: Markets, Basic Statistics, Date and Time\n")
 
     # Load dll:
     library.dynam("fBasics", pkg, lib)
+    
+    # Example time series for internal use:
+    # data(singleIndex.dat)
+    # .univTS = timeSeries(
+    # 	data = matrix(singleIndex.dat[, 3], ncol = 1),
+    #	charvec = as.character(singleIndex.dat[, 1]),
+    #	units = "SP500",
+    #	format = "%d-%b-%Y", 
+    #	zone = "GMT",
+    #	FinCenter = "GMT")
+    #.bivTS = timeSeries(
+    #	data = as.matrix(singleIndex.dat[, 2:3]),
+    #	charvec = as.character(singleIndex.dat[, 1]),
+    #	units = c("MSFT", "SP500"),
+    #	format = "%d-%b-%Y", 
+    #	zone = "GMT",
+    #	FinCenter = "GMT") 	
 }
 
 

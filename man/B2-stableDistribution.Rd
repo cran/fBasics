@@ -7,6 +7,7 @@
 \alias{qsymstb}
 \alias{rsymstb}
 
+\alias{stableMode}
 \alias{dstable}
 \alias{pstable}
 \alias{qstable}
@@ -19,16 +20,17 @@
     
     A collection and description of functions to compute 
     density, distribution function, quantile function and 
-    to generate random variates from the stable distribution. 
-    Two different algorithms are used for the symmetric 
-    and skewed distribution.
+    to generate random variates, the stable distribution,
+    and the stable mode. Two different cases are considered,
+    the first for the symmetric and the second for the 
+    skewed distribution.
     \cr
     
     The functions are:
     
     \tabular{ll}{
     \code{[dpqr]symstb} \tab The symmetric stable distribution, \cr
-    \code{[dpqr]stable} \tab The skewed stable distribution using parametrizition 0. }
+    \code{[dpqr]stable} \tab the skewed stable distribution. }
 
 }
 
@@ -39,10 +41,12 @@ psymstb(q, alpha)
 qsymstb(p, alpha)
 rsymstb(n, alpha)
 
-dstable(x, alpha, beta, gamma = 1, delta = 0, pm = 0)
-pstable(q, alpha, beta, gamma = 1, delta = 0, pm = 0)
-qstable(p, alpha, beta, gamma = 1, delta = 0, pm = 0)
-rstable(n, alpha, beta, gamma = 1, delta = 0, pm = 0)
+stableMode(alpha, beta)
+
+dstable(x, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
+pstable(q, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
+qstable(p, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
+rstable(n, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
 }
 
 
@@ -61,8 +65,8 @@ rstable(n, alpha, beta, gamma = 1, delta = 0, pm = 0)
         a numeric vector of probabilities.
         }
     \item{pm}{
-        parameterization, at the moment only the 0-th 
-        parameterization is supported.
+        parameterization, an integer value by default \code{pm=0}, 
+        the 'S0' parameterization.
         }
     \item{x, q}{
         a numeric vector of quantiles.
@@ -73,11 +77,15 @@ rstable(n, alpha, beta, gamma = 1, delta = 0, pm = 0)
 
 \value{
 
-    All values are numeric vectors: 
+    All values for the \code{*symstb} and \code{*stable} functions
+    are numeric vectors: 
     \code{d*} returns the density, 
     \code{p*} returns the distribution function, 
     \code{q*} returns the quantile function, and
     \code{r*} generates random deviates.
+    
+    The function \code{stable} mode returns a numeric value, the
+    location of the stable mode.
     
 }
 
@@ -108,7 +116,7 @@ rstable(n, alpha, beta, gamma = 1, delta = 0, pm = 0)
     stable random variables. These integrals are numerically 
     evaluated using R's function \code{integrate}. 
     \cr
-    "S0" parameterization: based on the (M) representation
+    "S0" parameterization [pm=0]: based on the (M) representation
     of Zolotarev for an alpha stable distribution with skewness
     beta. Unlike the Zolotarev (M) parameterization, gamma and 
     delta are straightforward scale and shift parameters. This
@@ -116,68 +124,85 @@ rstable(n, alpha, beta, gamma = 1, delta = 0, pm = 0)
     an intuitive meaning to gamma and delta that is lacking in 
     other parameterizations.
     \cr
-    "S" or "S1" parameterization: the parameterization used 
+    "S" or "S1" parameterization [pm=1]: the parameterization used 
     by Samorodnitsky and Taqqu in the book Stable Non-Gaussian 
     Random Processes. It is a slight modification of Zolotarev's 
     (A) parameterization.
     \cr
-    "S*" or "S2" parameterization: a modification of the S0 
+    "S*" or "S2" parameterization [pm=2]: a modification of the S0 
     parameterization which is defined so that (i) the scale gamma 
     agrees with the Gaussian scale (standard dev.) when alpha=2 
     and the Cauchy scale when alpha=1, (ii) the mode is exactly at 
     delta.
     \cr
-    "S3" parameterization: an internal parameterization. The scale is
-    the same as the S2 parameterization, the shift is \eqn{-beta*g(alpha)}, 
-    where \eqn{g(alpha)} is defined in the paper below.
-    
-}
-
-\note{
-    
-    Note, that up to now for the stable distribution, only 
-    parameterization 0 is implemented!
+    "S3" parameterization [pm=3]: an internal parameterization. The 
+    scale is the same as the S2 parameterization, the shift is 
+    \eqn{-beta*g(alpha)}, where \eqn{g(alpha)} is defined in 
+    Nolan [1999].
     
 }
 
 
 \examples{  
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.B2-StableDistribution")
+## SOURCE("fBasics.Z1-BasicsTools")
+
 ## rsymstb -
    xmpBasics("\nStart: Symmetric Stable Distribuion:  > ")
-   par(mfcol = c(3, 2), cex = 0.5)
+   par(mfcol = c(3, 2), cex = 0.7)
    set.seed(1953)
-   r = rsymstb(n = 1000, alpha = 1.85)
-   plot(r, type = "l", main = "symstb: alpha = 1.85")
+   r = rsymstb(n = 1000, alpha = 1.9)
+   plot(r, type = "l", main = "symstb: alpha = 1.9")
    # Plot empirical density and compare with true density:
    hist(r, n = 25, probability = TRUE, border = "white", col = "steelblue4")
-   x = seq(-10, 10, 0.1)
-   lines(x, dsymstb(x = x, alpha = 1.85))
+   x = seq(-5, 5, 0.1)
+   lines(x, dsymstb(x = x, alpha = 1.9))
    # Plot df and compare with true df:
    plot(sort(r), (1:1000/1000), main = "Probability", col = "steelblue4")
-   lines(x, psymstb(x, alpha = 1.85))
+   lines(x, psymstb(x, alpha = 1.9))
    # Compute quantiles:
-   qsymstb(psymstb(q = seq(-10, 10, 1), alpha = 1.85), alpha = 1.85)
-   
+   qsymstb(psymstb(q = seq(-10, 10, 1), alpha = 1.9), alpha = 1.9)
+  
 ## stable - 
+   xmpBasics("\nNext: Skew Stable Distribuion:  > ")
+   # Compared to R, this might be quite slow under S-Plus ...
    set.seed(1953)
-   r = rstable(n = 1000, alpha = 1.85, beta = 0.3)
-   plot(r, type = "l", main = "stable: alpha = 1,85 beta = 0.3")
+   r = rstable(n = 1000, alpha = 1.9, beta = 0.3)
+   plot(r, type = "l", main = "stable: alpha=1.9 beta=0.3")
    # Plot empirical density and compare with true density:
    hist(r, n = 25, probability = TRUE, border = "white", col = "steelblue4")
-   x = seq(-10, 10, 0.1)
-   lines(x, dstable(x = x, alpha = 1.85, beta = 0.3))
+   x = seq(-5, 5, 0.4)
+   lines(x, dstable(x = x, alpha = 1.9, beta = 0.3))
    # Plot df and compare with true df:
    plot(sort(r), (1:1000/1000), main = "Probability", col = "steelblue4")
-   lines(x, pstable(q = x, alpha = 1.85, beta = 0.3))
+   lines(x, pstable(q = x, alpha = 1.9, beta = 0.3))
    # Compute quantiles:
-   qstable(pstable(seq(-10, 10, 1), alpha = 1.85, beta = 0.3), 
-     alpha = 1.85, beta = 0.3)
+   qstable(pstable(seq(-4, 4, 1), alpha = 1.9, beta = 0.3), 
+     alpha = 1.9, beta = 0.3)
+     
+## stable -
+   xmpBasics("\nNext: Paramterization S1:  > ")
+   set.seed(1953)
+   r = rstable(n = 1000, alpha = 1.9, beta = 0.3, pm = 1)
+   plot(r, type = "l", main = "S1 stable: alpha=1.9 beta=0.3")
+   # Plot empirical density and compare with true density:
+   hist(r, n = 25, probability = TRUE, border = "white", col = "steelblue4")
+   x = seq(-5, 5, 0.4)
+   lines(x, dstable(x = x, alpha = 1.9, beta = 0.3))
+   # Plot df and compare with true df:
+   plot(sort(r), (1:1000/1000), main = "Probability", col = "steelblue4")
+   lines(x, pstable(q = x, alpha = 1.9, beta = 0.3, pm = 1))
+   # Compute quantiles:
+   qstable(pstable(seq(-4, 4, 1), alpha = 1.9, beta = 0.3, pm = 1), 
+     alpha = 1.9, beta = 0.3, pm = 1)
+   
 }
 
 
 \author{
 
-    McCulloch for the Fortran program, and \cr
+    McCulloch for the 'symstb' Fortran program, and \cr
     Diethelm Wuertz for the Rmetrics \R-port.
 
 }
@@ -211,7 +236,8 @@ Weron, A., Weron R. (1999);
 \seealso{
   
     \code{\link{dnig}},
-    \code{\link{dhyp}}.
+    \code{\link{dhyp}},
+    \code{\link{dssd}},
     
 }
 

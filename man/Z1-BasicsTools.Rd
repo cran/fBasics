@@ -3,17 +3,10 @@
 
 \alias{fBasicsTools}
 
-\alias{myFinCenter}
-\alias{myUnits}
-\alias{currentYear}
-
 \alias{xmpBasics}
 \alias{xmpfBasics}
 
-\alias{modify}
-\alias{modify.default}
-\alias{atoms}
-\alias{atoms.default}
+\alias{unirootNA}
 
 \title{fBasics Tools}
 
@@ -21,35 +14,45 @@
 \description{
 
 	Tools used in the fBasics library.
-	
+	\cr
 }
 
 
 \usage{
-myFinCenter
-currentYear
-
 xmpfBasics()
 xmpBasics(prompt = "")
+
+unirootNA(f, interval, lower = min(interval), upper = max(interval), 
+	tol = .Machine$double.eps^0.25, \dots) 
 }
 
 
 \arguments{
 
-  	\item{currentYear}{
-  		the current year, formatted as \code{CCYY}.
+  	\item{f}{
+  		[unirootNA] - \cr
+  		the function for which the root is sought.
   		}
-  	\itam{myFinCenter}{
-  		a character string denoting my financial center settings,
-  		by default \code{"Zurich"}.
+  	\item{interval}{
+  		[unirootNA] - \cr
+  		a vector containing the end-points of the interval to 
+  		be searched for the root.
   		}
-  	\itam{myUnits}{
-  		a character string denoting current time units, one from
-  		"secs", "mins", "hours", "days", or "weeks".
+  	\item{lower, upper}{
+  		[unirootNA] - \cr
+  		the lower and upper end points of the interval to be searched.
   		}
   	\item{prompt}{
 		the string printed when prompting the user for input. 
 		}	
+	\item{tol}{
+  		[unirootNA] - \cr
+  		the desired accuracy or the convergence tolerance.
+  		}
+  	\item{\dots}{
+  		[unirootNA] - \cr
+  		additional arguments to f.
+  		}
 }
 
 
@@ -85,11 +88,8 @@ xmpBasics(prompt = "")
 
 
 \examples{
-\dontrun{
-## xmpfBasics -
-   # Popup the examples menu:
-   xmpfBasics()
-}
+## SOURCE("fBasics.A0-SPlusCompatibility")
+## SOURCE("fBasics.Z1-BasicsTools")
 }
 
 
