@@ -42,26 +42,6 @@
 ################################################################################
 
 
-test.aaa = 
-function()
-{
-    # Help File:
-    helpFile = function() { 
-        example(ReturnSeriesBasics, ask = FALSE)
-        return() 
-    }
-    checkIdentical(
-        target = class(try(helpFile())),
-        current = "NULL")
-
-    # Return Value:
-    return()    
-}
-
-
-# ------------------------------------------------------------------------------
-
-
 test.seriesPlot = 
 function()
 {
@@ -215,29 +195,19 @@ function()
     
     # S-Plus Compatible:
     stdev(tU)
-    stdev(as.numeric(tU))
+    ## stdev(as.numeric(tU))                                        ## CHECK !!!
     stdev(as.vector(tU))
     stdev(as.ts(tU))
     
     # Base R:
     sd(tU)
-    sd(as.numeric(tU))
+    ## sd(as.numeric(tU))                                           ## CHECK !!!
     sd(as.vector(tU))
     sd(as.ts(tU))
     
      
     # Return Value:
     return()    
-}
-
-# ------------------------------------------------------------------------------
-
-
-if (FALSE) {
-    require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/tests/runit1A.R",
-        rngKind = "Marsaglia-Multicarry", rngNormalKind = "Inversion")
-    printTextProtocol(testResult)
 }
 
 

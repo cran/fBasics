@@ -28,28 +28,53 @@
 
 
 ################################################################################
+# FUNCTION:           JARQUE-BERA DATA TABLES:
+# .jbTable             Finite sample p values for the Jarque Bera test
+# .jbPlot              Plots probability
+# .pjb                 Returns probabilities for the JB Test given quantiles
+# .qjb                 Returns quantiles for the ADF Test given probabilities               
+# DATA:               Description:
+# .jbLM                Jarque-Bera Lagrange Multiplier Test Data
+# .jbALM               Jarque Bera Augmented Lagrange Multiplier Test Data
+################################################################################
 
 
-.First.lib =  
-function(lib, pkg)
-{   
-    # Startup Mesage and Desription:
-    MSG <- if(getRversion() >= "2.5") packageStartupMessage else message
-    dsc <- packageDescription(pkg)
-    if(interactive() || getOption("verbose")) { 
-        # not in test scripts
-        MSG(sprintf("\nPackage %s (%s) loaded.\n%s\n",
-            pkg, dsc$Version, dsc$Title),
-            "Rmetrics, (C) 1999-2007, Diethelm Wuertz, GPL\n")
-    }
-
-    # Load dll:
-    # library.dynam("fBasics", pkg, lib) 
+test.jbTable = 
+function()
+{
+    # Jarque-Bera Table:
+    #   .jbTable(type = c("LM", "ALM"), size = c("mini", "small", "all")) 
+    table = .jbTable()
+    table
+    
+    # Perspective Plot:
+    #   .jbPlot(type = c("LM", "ALM"))
+    .jbPlot()
+        
+    # Return Value:
+    return() 
 }
 
 
-if(!exists("Sys.setenv", mode = "function")) # pre R-2.5.0, use "old form"
-    Sys.setenv <- Sys.putenv
+# ------------------------------------------------------------------------------
+
+
+test.jbData = 
+function()
+{
+    # Jarque-Bera LM Data:
+    class(.jbLM)
+    class(.jbLM())
+    head(.jbLM())
+    
+    # Jarque-Bera ALM Data:
+    class(.jbALM)
+    class(.jbALM())
+    head(.jbALM())
+      
+    # Return Value:
+    return() 
+}
 
 
 ################################################################################

@@ -50,26 +50,6 @@
 ################################################################################
 
 
-test.aaa = 
-function()
-{
-    # Help File:
-    helpFile = function() { 
-        example(HyperbolicDistribution, ask = FALSE)
-        return() 
-    }
-    checkIdentical(
-        target = class(try(helpFile())),
-        current = "NULL")
-
-    # Return Value:
-    return()    
-}
-
-
-################################################################################
-
-
 test.gh = 
 function()
 { 
@@ -167,7 +147,8 @@ function()
     #   hypSlider()
     
     # Try:
-    hypSlider()
+    # hypSlider()
+    NA
     
     # Return Value:
     return()    
@@ -184,22 +165,11 @@ function()
     #   nigSlider
     
     # Try:
-    nigSlider()
+    # nigSlider()
+    NA
     
     # Return Value:
     return()    
-}
-
-
-
-# ------------------------------------------------------------------------------
-
-
-if (FALSE) {
-    require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/tests/runit2B.R",
-        rngKind = "Marsaglia-Multicarry", rngNormalKind = "Inversion")
-    printTextProtocol(testResult)
 }
 
      

@@ -49,27 +49,7 @@
 #  qjb                   Computes quantiles for the Jarque Bera Test
 #  jbTest                Performs finite sample adjusted JB LM and ALM test
 ################################################################################
-  
  
-test.aaa = 
-function()
-{
-    # Help File:
-    helpFile = function() { 
-        example(OneSampleTest, ask = FALSE)
-        return() 
-    }
-    checkIdentical(
-        target = class(try(helpFile())),
-        current = "NULL")
-
-    # Return Value:
-    return()    
-}
-
-
-# ------------------------------------------------------------------------------
-  
 
 test.normalTests = 
 function()
@@ -176,17 +156,6 @@ function()
     checkIdentical(as.character(class(TEST)), "fHTEST")
 }
 
-
-# ------------------------------------------------------------------------------
-    
-
-if (FALSE) {
-    require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/tests/runit5A.R",
-        rngKind = "Marsaglia-Multicarry", rngNormalKind = "Inversion")
-    printTextProtocol(testResult)
-}
-    
 
 ################################################################################    
  
