@@ -12,10 +12,6 @@
 
 
 ################################################################################
-# 1 Chron Package Addon - moved to fCalendar
-
-
-################################################################################
 # 2 Computes Bootstrapped Mean
 #   A very fast implementation of the basic nonparametric bootstrap for 
 #   obtaining confidence limits for the population mean without assuming 
@@ -101,21 +97,21 @@ function (..., package = .packages(), sep = ",")
 	row.names=NULL 
 	
 	# Internal Function:
-	sQuote <- function(s) paste("`", s, "'", sep = "")
-	names <- c(as.character(substitute(list(...))[-1]), list)
+	sQuote = function(s) paste("`", s, "'", sep = "")
+	names = c(as.character(substitute(list(...))[-1]), list)
 	if (!missing(package)) 
-		if (is.name(y <- substitute(package))) 
-			package <- as.character(y)
-	found <- FALSE
-	fsep <- .Platform$file.sep
-	paths <- .find.package(package, lib.loc, verbose = verbose)
+		if (is.name(y = substitute(package))) 
+			package = as.character(y)
+	found = FALSE
+	fsep = .Platform$file.sep
+	paths = .find.package(package, lib.loc, verbose = verbose)
 	if (is.null(lib.loc)) 
-		paths <- c(.path.package(package, TRUE), getwd(), paths)
-	paths <- unique(paths[file.exists(paths)])
-	nodata <- !file.exists(file.path(paths, "data"))
+		paths = c(.path.package(package, TRUE), getwd(), paths)
+	paths = unique(paths[file.exists(paths)])
+	nodata = !file.exists(file.path(paths, "data"))
 	if (any(nodata)) {
 		if (!missing(package) && (length(package) > 0)) {
-			packagesWithNoData <- package[package %in% sapply(paths[nodata], 
+			packagesWithNoData = package[package %in% sapply(paths[nodata], 
 			basename)]
 		if (length(packagesWithNoData) > 1) {
 			warning(paste("packages", paste(sQuote(packagesWithNoData), 
@@ -123,74 +119,74 @@ function (..., package = .packages(), sep = ",")
 		else if (length(packagesWithNoData) == 1) {
 			warning(paste("package", sQuote(packagesWithNoData), 
 				"contains no datasets")) } }
-		paths <- paths[!nodata] }
+		paths = paths[!nodata] }
 	if (length(names) == 0) {
-		db <- matrix(character(0), nr = 0, nc = 4)
-		noindex <- character(0)
+		db = matrix(character(0), nr = 0, nc = 4)
+		noindex = character(0)
 		for (path in paths) {
-			INDEX <- file.path(path, "data", "00Index")
+			INDEX = file.path(path, "data", "00Index")
 		if (file.exists(INDEX)) {
-			entries <- read.00Index(INDEX)
+			entries = read.00Index(INDEX)
 			if (NROW(entries) > 0) {
-				db <- rbind(db, cbind(basename(path), dirname(path), 
+				db = rbind(db, cbind(basename(path), dirname(path), 
 			entries)) } }
 		else {
 			if (length(list.files(file.path(path, "data"))) > 0) 
-			noindex <- c(noindex, basename(path)) } }
-		colnames(db) <- c("Package", "LibPath", "Item", "Title")
+			noindex = c(noindex, basename(path)) } }
+		colnames(db) = c("Package", "LibPath", "Item", "Title")
 		if (length(noindex) > 0) {
 			if (!missing(package) && (length(package) > 0)) {
-				packagesWithNoIndex <- package[package %in% noindex]
+				packagesWithNoIndex = package[package %in% noindex]
 			if (length(packagesWithNoIndex) > 1) {
 				warning(paste("packages", paste(sQuote(packagesWithNoIndex), 
 				collapse = ", "), "contain datasets but no index")) }
 			else if (length(packagesWithNoIndex) == 1) 
 				warning(paste("package", sQuote(packagesWithNoIndex), 
 				"contains datasets but no index")) } }
-		footer <- if (missing(package)) 
+		footer = if (missing(package)) 
 		paste("Use `data(package = ", ".packages(all.available = TRUE))'\n", 
 			"to list the data sets in all ", "*available* packages.", 
 			sep = "")
 		else NULL
-		y <- list(type = "data", header = NULL, results = db, 
+		y = list(type = "data", header = NULL, results = db, 
 			footer = footer)
-			class(y) <- "packageIQR"
+			class(y) = "packageIQR"
 		return(y) }
-	paths <- file.path(paths, "data")
+	paths = file.path(paths, "data")
 	for (name in names) {
-		files <- NULL
+		files = NULL
 		for (p in paths) {
 			if (file.exists(file.path(p, "Rdata.zip"))) {
-				if (file.exists(fp <- file.path(p, "filelist"))) 
-				files <- c(files, file.path(p, scan(fp, what = "", 
+				if (file.exists(fp = file.path(p, "filelist"))) 
+				files = c(files, file.path(p, scan(fp, what = "", 
 					quiet = TRUE)))
 			else warning(paste("`filelist' is missing for dir", p)) }
 			else {
-			files <- c(files, list.files(p, full = TRUE)) } }
-		files <- files[grep(name, files)]
-		found <- FALSE
+			files = c(files, list.files(p, full = TRUE)) } }
+		files = files[grep(name, files)]
+		found = FALSE
 		if (length(files) > 0) {
-			subpre <- paste(".*", fsep, sep = "")
+			subpre = paste(".*", fsep, sep = "")
 			for (file in files) {
 			if (verbose) 
 			cat("name=", name, ":  file= ...", fsep, sub(subpre, 
 				"", file), "::      ", sep = "")
 			if (found) 
 			break
-			found <- TRUE
-			ext <- sub(".*\\.", "", file)
+			found = TRUE
+			ext = sub(".*\\.", "", file)
 			if (sub(subpre, "", file) != paste(name, ".", 
 			ext, sep = "")) 
-			found <- FALSE
+			found = FALSE
 			else {
-			zfile <- zip.file.extract(file, "Rdata.zip")
+			zfile = zip.file.extract(file, "Rdata.zip")
 			# next four lines added:
 			if (ext == "csv" || ext == "CSV") {
 				# handling data.frames:
-				result <- read.table(zfile, header = TRUE, 
+				result = read.table(zfile, header = TRUE, 
 					sep = sep.csv,  row.names=row.names)
 				# handling if there is only one column: 
-				if(length(names) == 1) result <- result[,]}
+				if(length(names) == 1) result = result[,]}
 			switch(ext, 
 				R = , 
 					r = source(zfile, chdir = TRUE), 
@@ -203,7 +199,7 @@ function (..., package = .packages(), sep = ",")
 						env = .GlobalEnv), 
 				CSV = , 
 					csv = assign(name, result, env = .GlobalEnv), 
-				found <- FALSE)			
+				found = FALSE)			
 			if (zfile != file) 
 				unlink(zfile) }
 			if (verbose) 
@@ -266,8 +262,8 @@ query, save = FALSE, try = TRUE)
             print("No Internet Access")
             return(NULL) }
         else {
-            return(z) } }
-	else { 
+            return(z) } 
+    } else { 
 		# File Name:
 		queryFile = paste(query, ".htm", sep = "")
 		# Construct URL:
@@ -288,7 +284,7 @@ query, save = FALSE, try = TRUE)
 		x = data.frame(x[, 2], row.names = 
 			as.character(10000*as.numeric(x[, 1]) + 28))
 		# Add column name:
-		colnames(x) <- query
+		colnames(x) = query
 		# Save Download ?
 		if (save) {
 		    write.table(paste("%Y%m%d;", query, sep = ""), file, 
@@ -300,11 +296,7 @@ query, save = FALSE, try = TRUE)
 		# Return Value:
 		x  }
 }
-
-
-################################################################################
-# 5 Additional Time/Date Functions - moved to fCalendar
-      
+ 
 
 ################################################################################
 

@@ -32,6 +32,8 @@
 \alias{colKurtosis}
 \alias{colCumsums}
 
+\alias{stdev}
+
 \title{Basic Statistics Summary}
 
 
@@ -65,6 +67,13 @@
     \code{rowCumsums} \tab calculates row cumulated Sums, \cr
     \code{colCumsums} \tab calculates column cumulated Sums. }
     
+    For SPLUS Compatibility:
+    
+    \tabular{ll}{
+    \code{stdev} \tab Returns the standard deviation of a vector or matrix. }
+    
+    
+    
 }
 
 
@@ -81,7 +90,7 @@ kurtosis(x, \dots)
 \method{kurtosis}{POSIXct}(x, \dots)
 \method{kurtosis}{POSIXlt}(x, \dots)
 
-basicStats(x, ci = 0.95)
+basicStats(x, ci = 0.95, column = 1)
 
 rowStats(x, FUN, na.rm = FALSE, \dots) 
 rowAvgs(x, na.rm = FALSE, \dots)
@@ -98,6 +107,8 @@ colStdevs(x, na.rm = FALSE, \dots)
 colSkewness(x, na.rm = FALSE, \dots)
 colKurtosis(x, na.rm = FALSE, \dots)
 colCumsums(x, na.rm = FALSE, \dots)
+
+stdev(x, na.rm = FALSE)
 }
 
 
@@ -107,6 +118,12 @@ colCumsums(x, na.rm = FALSE, \dots)
         confidence interval, a numeric value, by default 0.95, 
         i.e. 95 percent.
         }
+    \item{column}{
+        [basicStats] - \cr
+        which column should be selected from the input matrix,
+        data frame or timeSeries object. By default an integer
+        value set to 1.
+        }
     \item{FUN}{
         the statistical function to be applied.
         }
@@ -115,6 +132,11 @@ colCumsums(x, na.rm = FALSE, \dots)
         }
     \item{x}{
         a numeric vector, or a matrix for column statistics.
+        \cr
+        [basicStats] - \cr
+        allows also a matrix, data.frame or timeSeries as input.
+        In this case only the first column of data will be considered
+        and a a warning will be printed.        
         }
     \item{\dots}{
         arguments to be passed.
@@ -156,9 +178,14 @@ colCumsums(x, na.rm = FALSE, \dots)
 
 \note{
 
-    \R's-base package contains a function \code{colMeans} with an
+    R's-base package contains a function \code{colMeans} with an
     additional argument \code{dim=1}. Therefore, the function used 
     here to compute column means (averages) is named \code{colAvgs}.
+    \cr
+    
+    The function \code{stdev} computes the standard deviation for a
+    vector or matrix and was introduced for SPlus compatibility.
+    Under R use the function \code{sd}. 
     
 }
 

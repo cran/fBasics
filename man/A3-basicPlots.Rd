@@ -56,7 +56,7 @@ characterTable(font = 1, cex = 0.7)
 plotcharacterTable(font = par('font'), cex = 0.7)
 colorTable(cex = 0.7)
 
-splusLikePlot(scale = 0.8))
+splusLikePlot(scale = 0.8)
 }
 
 

@@ -56,6 +56,8 @@
 #   colSkewness           Computes sample skewness by column
 #   colKurtosis           Computes sample kurtosis by column
 #   colCumsums            Computes sample cumulated sums by column
+# SPLUS LIKE FUNCTIONS  DESCRIPION
+#  stdev                  Returns the standard deviation of a vector
 ################################################################################
 
 
@@ -65,7 +67,8 @@ function (x, ...)
 
     # FUNCTION:
     
-    UseMethod("kurtosis")
+     # Return Value:
+     UseMethod("kurtosis")
 }
 
 
@@ -108,7 +111,8 @@ kurtosis.data.frame =
 function (x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
-    sapply(x, kurtosis, ...)
+     # Return Value:
+     sapply(x, kurtosis, ...)
 }
 
 
@@ -119,7 +123,8 @@ kurtosis.POSIXct =
 function (x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
-    structure(kortosis(unclass(x), ...), class = c("POSIXt", "POSIXct"))
+     # Return Value:
+     structure(kortosis(unclass(x), ...), class = c("POSIXt", "POSIXct"))
 }
 
 
@@ -130,7 +135,8 @@ kurtosis.POSIXlt =
 function (x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
-    as.POSIXlt(kurtosis(as.POSIXct(x), ...))
+     # Return Value:
+     as.POSIXlt(kurtosis(as.POSIXct(x), ...))
 }
 
 
@@ -141,7 +147,8 @@ skewness =
 function (x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
-    UseMethod("skewness")
+     # Return Value:
+     UseMethod("skewness")
 }
 
 
@@ -184,7 +191,8 @@ skewness.data.frame =
 function (x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
-    sapply(x, skewness, ...)
+     # Return Value:
+     sapply(x, skewness, ...)
 }
 
 
@@ -195,6 +203,7 @@ skewness.POSIXct =
 function (x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
+    # Return Value:
     structure(skewness(unclass(x), ...), class = c("POSIXt", "POSIXct"))
 }
 
@@ -206,7 +215,8 @@ skewness.POSIXlt =
 function (x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
-    as.POSIXlt(skewness(as.POSIXct(x), ...))
+     # Return Value:
+     as.POSIXlt(skewness(as.POSIXct(x), ...))
 }
 
 
@@ -214,13 +224,34 @@ function (x, ...)
 
 
 basicStats = 
-function(x, ci = 0.95) 
+function(x, ci = 0.95, column = 1) 
 {   # A function implemented by Diethelm Wuertz
     
     # Description:
     #   Calculates Basic Statistics
     
+    # Arguments:
+    #	x - a numeric vector. If x is a matrix, a data.frame,
+    #		or a timeSeries object then the first column is used.
+    #   ci - Confidence Interval.
+     
     # FUNCTION:
+    
+    # DW 2005.05.02
+    if (class(x) == "matrix") {
+	    x = x[, column]
+	    warning("Column ", column, " of matrix used")
+    }
+    if (class(x) == "data.frame") {
+	    x = x[, column]
+	    warning("Column ", column, " of data.frame used")
+	    if (!is.numeric(x)) stop("The selected column is not numeric")
+    }
+    if (class(x) == "timeSeries") {
+	    x = x@Data[, colum]
+	    warning("Column ", column, " of timeSeries used")
+    }
+    x = as.vector(x)  
     
     # CL Levels:    
     cl.vals = function(x, ci) {
@@ -281,10 +312,11 @@ function(x, FUN, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = FUN, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 1, FUN = FUN, ...) 
+    }
         
     # Return Value:
     result
@@ -310,10 +342,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = mean, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 1, FUN = mean, ...) 
+    }
         
     # Return Value:
     result
@@ -336,10 +369,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = var, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 1, FUN = var, ...) 
+    }
         
     # Return Value:
     result
@@ -362,10 +396,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = sqrt(apply(na.remove(x), MARGIN = 1, FUN = var, ...))
-    else
+    } else {
         result = sqrt(apply(x, MARGIN = 1, FUN = var, ...))
+    }
         
     # Return Value:
     result
@@ -388,10 +423,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = skewness, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 1, FUN = skewness, ...) 
+    }
         
     # Return Value:
     result
@@ -414,10 +450,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = kurtosis, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 1, FUN = kurtosis, ...) 
+    }
         
     # Return Value:
     result 
@@ -440,10 +477,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
-    else
-        result = apply(x, MARGIN = 2, FUN=cumsum, ...) 
+	} else {
+        result = apply(x, MARGIN = 2, FUN = cumsum, ...) 
+    }
         
     # Return Value:
     result 
@@ -466,10 +504,11 @@ function(x, FUN, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
-        result = apply(na.remove(x), MARGIN=2, FUN=FUN, ...) 
-    else
-        result = apply(x, MARGIN=2, FUN=FUN, ...) 
+    if (na.rm) {
+        result = apply(na.remove(x), MARGIN = 2, FUN = FUN, ...) 
+	} else {
+        result = apply(x, MARGIN = 2, FUN = FUN, ...) 
+    }
         
     # Return Value:
     result
@@ -495,10 +534,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm){
         result = apply(na.remove(x), MARGIN = 2, FUN = mean, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 2, FUN = mean, ...) 
+    }
         
     # Return Value:
     result
@@ -521,10 +561,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) { 
         result = apply(na.remove(x), MARGIN = 2, FUN = var, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 2, FUN = var, ...) 
+    }
         
     # Return Value:
     result
@@ -547,10 +588,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = sqrt(apply(na.remove(x), MARGIN = 2, FUN = var, ...))
-    else
+	} else {
         result = sqrt(apply(x, MARGIN = 2, FUN = var, ...))
+    }
         
     # Return Value:
     result
@@ -573,10 +615,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = skewness, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 2, FUN = skewness, ...) 
+    }
         
     # Return Value:
     result
@@ -599,10 +642,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = kurtosis, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 2, FUN = kurtosis, ...) 
+    }
         
     # Return Value:
     result 
@@ -625,10 +669,11 @@ function(x, na.rm = FALSE, ...)
     x = as.matrix(x)
     
     # Statistics:
-    if (na.rm) 
+    if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
-    else
+	} else {
         result = apply(x, MARGIN = 2, FUN = cumsum, ...) 
+    }
         
     # Return Value:
     result 
@@ -637,3 +682,22 @@ function(x, na.rm = FALSE, ...)
 
 ################################################################################
 
+
+stdev = 
+function(x, na.rm = FALSE)
+{	# A function implemented by Diethelm Wuertz
+
+    # Description:
+    #   Returns the standard deviation of a vector
+    
+    # Notes:
+    #	Under use sd, this function is for SPlus compatibility.
+    
+    # FUNCTION:
+    
+	# Return Value: 
+	sd(x = x, na.rm = na.rm)
+}
+
+
+################################################################################
