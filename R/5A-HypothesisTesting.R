@@ -64,10 +64,7 @@ function(object)
 
     # Source:
     #   This function copies code from base:print.htest
-    
-    # Changes:
-    #
-    
+ 
     # FUNCTION:
        
     # Unlike print the argument for show is 'object'.
@@ -185,9 +182,10 @@ function(type = c("LM", "ALM"), size = c("all", "small"))
     # Description:
     #   Finite sample p values for the Jarque Bera test
     
-    # Changes:
-    #
-    
+    # Details:
+    #   The function jbTable() returns a data.frame with columns denoting 
+    #   size and rows denoting probabilities 0 < p < 1.
+   
     # FUNCTION:
     
     # Create Table:
@@ -291,12 +289,12 @@ fill = FALSE, linear = TRUE, digits = 8, doplot = TRUE, ...)
     # Interpolation on Grid:
     # 'interp.new' ignores ncp and does only bicubic spline interpolation.
     if (linear) {
-        ans = .interpTable.old(x = x.vec, y = y.vec, z = z.vec, xo = xo, 
+       ans = .interpTable.old(x = x.vec, y = y.vec, z = z.vec, xo = xo, 
             yo = yo, ncp = 0, extrap = FALSE, duplicate = "median") 
     } else {
-        # There is a bug in interp.new ...
+    # There is a bug in interp.new ...
         ans = .interpTable.new(x = x.vec, y = y.vec, z = z.vec, xo = xo, 
-            yo = yo, linear = FALSE, extrap = FALSE, duplicate = "median") 
+            yo = yo, linear = FALSE, extrap = FALSE, duplicate = "median")
     }
     zo = as.matrix(ans$z)
     
@@ -358,10 +356,7 @@ function(X, p, N, digits = 4)
     #   plot(qTable(X = adfcTable(), p = (1:99)/100, N = 100), type = "l")
     #   qTable(X = adfcTable(), p = 0.075, N = 175,  digits = 2)
     #   qTable(jblmTable(), N = 100, p = (1:99)/100, lower.tail = FALSE)
-    
-    # Changes:
-    #
-    
+ 
     # FUNCTION:
     
     # Check:
@@ -394,10 +389,7 @@ function(X, p, N, digits = 4)
     #   p - a numeric p value to be interpolated.
     #   N - an integer size value to be interpolated.
     #   digits - the number of digits used for the output.
-    
-    # Changes:
-    #
-    
+     
     # FUNCTION:
         
     # Positions:
@@ -452,10 +444,7 @@ function(X, Stat, N, digits = 4)
     #   pTable(X = cADF, N = 100, Stat = -2.89)    
     #   pTable(X = jbLM, N = 100, Stat = 5.43) 
     #   pTable(X = jbLM, N = 1400, Stat = 0.7003) 
-    
-    # Changes:
-    #
-    
+  
     # FUNCTION:
     
     # Check:
@@ -491,10 +480,7 @@ function(X, Stat, N, digits = 4)
     
     # Value:
     #   Interpolated probabilities for size 'N' and quantiles 'Stat'.
-    
-    # Changes:
-    #
-    
+
     # FUNCTION:
     
     # Extract a proper part from the table to speed up the execution time:
@@ -546,10 +532,7 @@ function (x, y, z, xo = seq(min(x), max(x), length = 40), yo = seq(min(y),
 max(y), length = 40), ncp = 0, extrap = FALSE, duplicate = "error", 
 dupfun = NULL) 
 {   #  A copy from contributed package akima
-    
-    # Changes:
-    #
-    
+
     # FUNCTION:
     
     if (!(all(is.finite(x)) && all(is.finite(y)) && all(is.finite(z)))) 
@@ -616,9 +599,6 @@ function (x, y, z, xo = seq(min(x), max(x), length = 40), yo = seq(min(y),
     duplicate = "error", dupfun = NULL) 
 {   #  A copy from contributed package akima
 
-    # Changes:
-    #
-    
     # FUNCTION:
     
     if (!(all(is.finite(x)) && all(is.finite(y)) && all(is.finite(z)))) 

@@ -28,21 +28,23 @@
 
 
 ################################################################################
-# DEMO:                         DESCRIPTION   
-#  xmpDWChapter012.R
-#  xmpDWChapter013.R
-#  xmpDWChapter014.R
-#  xmpDWChapter015.R
+# FUNCTION:                 TAILORED PLOT FUNCTIONS:     
+#  seriesPlot                Returns a time series plot
+#  histPlot                  Returns a tailored histogram plot
+#  densityPlot               Returns a tailored kernel density estimate plot
+#  quantilePlot              Returns a tailored quantile-quantile plot
 ################################################################################
 
 
-test.demoFile12 = 
+test.helpFile = 
 function()
 {
     # Help File:
-    demoFile = paste(.Library, 
-        "\\fBasics\\Demo\\xmpDWChapter012.R", sep = "")
-    source(demoFile)
+    helpFile = function() { 
+        example(TailoredReturnPlots); return() }
+    checkIdentical(
+        target = class(try(helpFile())),
+        current = "NULL")
 
     # Return Value:
     return()    
@@ -50,46 +52,23 @@ function()
 
 
 # ------------------------------------------------------------------------------
+# TAILORED PLOT FUNCTIONS:
 
 
-test.demoFile13 = 
+test.tailoredPlots = 
 function()
 {
-    # Help File:
-    demoFile = paste(.Library, 
-        "\\fBasics\\Demo\\xmpDWChapter013.R", sep = "")
-    source(demoFile)
-
-    # Return Value:
-    return()    
-}
-
-# ------------------------------------------------------------------------------
-
-
-test.demoFile14 = 
-function()
-{
-    # Help File:
-    demoFile = paste(.Library, 
-        "\\fBasics\\Demo\\xmpDWChapter014.R", sep = "")
-    source(demoFile)
-
-    # Return Value:
-    return()    
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-test.demoFile15 = 
-function()
-{
-    # Help File:
-    demoFile = paste(.Library, 
-        "\\fBasics\\Demo\\xmpDWChapter015.R", sep = "")
-    source(demoFile)
+    # Series Plot:
+    tD = timeSequence(from = "2004-07-01", to = "2005-06-30")
+    nD = length(tD)
+    tS = timeSeries(cbind(N = rnorm(nD), T = rt(nD, 4)), tD)
+    
+    par(mfrow = c(2,2), cex = 0.7)
+    seriesPlot(tS)
+    histPlot(tS)
+    
+    densityPlot(tS)
+    quantilePlot(tS)
 
     # Return Value:
     return()    
@@ -100,9 +79,8 @@ function()
 
 
 if (FALSE) {
-    # WARNING - NOT YET UPDATED TO R 2.4.0, THIS MAY RESULT IN ERRORS
     require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runitDemo.R")
+    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runit1B.R")
     printTextProtocol(testResult)
 }
 

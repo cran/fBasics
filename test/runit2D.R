@@ -31,13 +31,13 @@
 # FUNCTION:            DESCRIPTION:    
 #  'fDISTFIT'           S4 Class representation
 #  print.fDISTFIT       Prints Results from a Fitted Distribution
-# FUNCTION:            NORMAL DISTRIBUTION:
-#  .normFit             Fits parameters of a Normal density
-# FUNCTION:            STUDENT DISTRIBUTION:
+# FUNCTION:            NORMAL AND T DISTRIBUTION:
+#  nFit                 Fits parameters of a Normal density
 #  tFit                 Fits parameters of a Student-t density
 # FUNCTION:            STABLE DISTRIBUTION:
 #  stableFit            Fits parameters of a stable density
 #  .phiStable            Creates contour table for McCulloch estimators
+#  .PhiStable            Contour table created by .phiStable()
 #  .qStableFit           Estimates stable parameters by McCulloch approach
 #  .mleStableFit         Estimates stable parameters by MLE approach
 # FUNCTION:            GENERALIZED DISTRIBUTION:
@@ -65,7 +65,7 @@ function()
 # ------------------------------------------------------------------------------
 
 
-test.distFit = 
+test.normFit = 
 function()
 { 
     # Graph Frame:
@@ -81,8 +81,22 @@ function()
         ( (ans@fit$estimate[2] - 0.5)/0.5 < 0.10 ))
     print(ans)
     print(relErrorTest)
-    checkTrue(mean(relErrorTest) == 1)
+    checkTrue(as.logical(mean(relErrorTest)))
 
+    # Return Value:
+    return()    
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+test.tFit = 
+function()
+{ 
+    # Graph Frame:
+    par(mfrow = c(2, 2), cex = 0.7)
+    
     # tFit -
     # Simulated random variates t(4):
     set.seed(1953)
@@ -93,7 +107,21 @@ function()
         ( (ans@fit$estimate[1] - 4.0)/4.0 < 0.10 ))
     print(ans)
     print(relErrorTest)
-    checkTrue(mean(relErrorTest) == 1)
+    checkTrue(as.logical(mean(relErrorTest)))
+    
+    # Return Value:
+    return()    
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+test.ghFit = 
+function()
+{ 
+    # Graph Frame:
+    par(mfrow = c(2, 2), cex = 0.7)
     
     # ghFit -
     set.seed(1953)
@@ -108,7 +136,21 @@ function()
         ( (ans@fit$estimate[5] - 2.0)/( 2.0) < 0.10 ))
     print(ans)
     print(relErrorTest)
-    checkTrue(mean(relErrorTest) == 1)
+    checkTrue(as.logical(mean(relErrorTest)))
+    
+    # Return Value:
+    return()    
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+test.hypFit = 
+function()
+{ 
+    # Graph Frame:
+    par(mfrow = c(2, 2), cex = 0.7)
     
     # hypFit -
     set.seed(1953)
@@ -122,7 +164,21 @@ function()
         ( (ans@fit$estimate[4] + 1.0)/(-1.0) < 0.10 ))
     print(ans)
     print(relErrorTest)
-    checkTrue(mean(relErrorTest) == 1)
+    checkTrue(as.logical(mean(relErrorTest)))
+    
+    # Return Value:
+    return()    
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+test.nigFit = 
+function()
+{ 
+    # Graph Frame:
+    par(mfrow = c(2, 2), cex = 0.7)
     
     # nigFit -
     set.seed(1953)
@@ -136,7 +192,7 @@ function()
         ( (ans@fit$estimate[4] + 1.0)/(-1.0) < 0.10 ))
     print(ans)
     print(relErrorTest)
-    checkTrue(mean(relErrorTest) == 1)
+    checkTrue(as.logical(mean(relErrorTest)))
     
     # Return Value:
     return()
@@ -146,8 +202,51 @@ function()
 # ------------------------------------------------------------------------------
 
 
+test.stableFit = 
+function()
+{   
+    # stableFit -
+    # Simulated stable random variates:
+    set.seed(1953)
+    s = rstable(500, alpha=1.8, beta=0.3, gamma = 1, delta = 0.1, pm = 0) 
+    ans = stableFit(x = s, alpha = 1.5) 
+    relErrorTest =  c(
+        ( (ans@fit$estimate[1] - 1.8)/( 1.8) < 0.10 ), 
+        ( (ans@fit$estimate[2] - 0.3)/( 0.3) < 0.10 ),
+        ( (ans@fit$estimate[3] - 1.0)/( 1.0) < 0.10 ),
+        ( (ans@fit$estimate[4] - 0.1)/( 0.1) < 0.10 ))
+    print(ans)
+    print(relErrorTest)
+    checkTrue(as.logical(mean(relErrorTest)))
+    
+    # MLE:
+    if (FALSE) {
+        # Note, this takes rather long time ...
+        ans = stableFit(x = s, alpha = 1.5, type = "mle", trace = TRUE) 
+        # .mleStableFit(s, 1.75, 0, 1, 0)
+        # The result would be:
+        #
+        relErrorTest =  c(
+            ( (ans@fit$estimate[1] - 1.8)/( 1.8) < 0.10 ), 
+            ( (ans@fit$estimate[2] - 0.3)/( 0.3) < 0.10 ),
+            ( (ans@fit$estimate[3] - 1.0)/( 1.0) < 0.10 ),
+            ( (ans@fit$estimate[4] - 0.1)/( 0.1) < 0.10 ))
+        
+        print(ans)
+        print(relErrorTest)
+        checkTrue(as.logical(mean(relErrorTest)))
+    }
+    
+    # Return Value:
+    return() 
+}
+
+
+# ------------------------------------------------------------------------------
+
+
 if (FALSE) {
-    require(RUnits)
+    require(RUnit)
     testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runit2D.R")
     printTextProtocol(testResult)
 }

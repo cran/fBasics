@@ -28,21 +28,31 @@
 
 
 ################################################################################
-# DEMO:                         DESCRIPTION   
-#  xmpDWChapter012.R
-#  xmpDWChapter013.R
-#  xmpDWChapter014.R
-#  xmpDWChapter015.R
+# FUNCTION:           DESCRIPTION:
+# .akimaInterp         Interpolates and Smoothes Irregularly Distributed Points
+# .krigeInterp         Interpolates and Smoothes Irregularly Distributed Points
+# FUNCTION:           DESCRIPTION:
+# .squareBinning       Squatre Binning of Irregularly Distributed Points
+# .sqarePlot           Plots Square Binned Data Points
+# FUNCTION:           DESCRIPTION:
+# .hexBinning          Hexagonal Binning of Irregularly Distributed Points
+# .hexPlot             Plots Hexagonal Binned Data Points
+# FUNCTION:           DESCRIPTION:
+# .surfacePlot         Perspective Plot of Irregularly Distributed Points
+# .levelPlot           Contour Plot of Irregularly Distributed Points
+# .circles2Plot        Circles Plot of Irregularly Distributed Points
 ################################################################################
 
 
-test.demoFile12 = 
+test.helpFile = 
 function()
 {
     # Help File:
-    demoFile = paste(.Library, 
-        "\\fBasics\\Demo\\xmpDWChapter012.R", sep = "")
-    source(demoFile)
+    helpFile = function() { 
+        example(Tailored3DPlots); return() }
+    checkIdentical(
+        target = class(try(helpFile())),
+        current = "NULL")
 
     # Return Value:
     return()    
@@ -50,46 +60,32 @@ function()
 
 
 # ------------------------------------------------------------------------------
+# TAILORED PLOT FUNCTIONS:
 
 
-test.demoFile13 = 
+test.tailoredPlots = 
 function()
 {
-    # Help File:
-    demoFile = paste(.Library, 
-        "\\fBasics\\Demo\\xmpDWChapter013.R", sep = "")
-    source(demoFile)
+    set.seed(101)
+    x = rnorm(10000)
+    y = rnorm(10000) + X*(X+1)/4
+    
+    par(mfrow = c(1, 1))
+    
+    .hexPlot(x, y, bins = 30)
+    grid()
+    
+    .hexPlot(x, y, bins = 30, rainbow(255))
+    grid()
+    
+    .hexPlot(x, y, bins = 30, rev(greyPalette(256-17)))
+    grid()
+    
+    plot(x, y, pch = ".", col = "steelblue")
+    grid()
 
-    # Return Value:
-    return()    
-}
-
-# ------------------------------------------------------------------------------
-
-
-test.demoFile14 = 
-function()
-{
-    # Help File:
-    demoFile = paste(.Library, 
-        "\\fBasics\\Demo\\xmpDWChapter014.R", sep = "")
-    source(demoFile)
-
-    # Return Value:
-    return()    
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-test.demoFile15 = 
-function()
-{
-    # Help File:
-    demoFile = paste(.Library, 
-        "\\fBasics\\Demo\\xmpDWChapter015.R", sep = "")
-    source(demoFile)
+    .hexPlot(x, y, bins = 30)
+    grid()
 
     # Return Value:
     return()    
@@ -100,9 +96,8 @@ function()
 
 
 if (FALSE) {
-    # WARNING - NOT YET UPDATED TO R 2.4.0, THIS MAY RESULT IN ERRORS
     require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runitDemo.R")
+    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runit1C.R")
     printTextProtocol(testResult)
 }
 

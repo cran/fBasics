@@ -32,9 +32,9 @@
 #  set.lcgseed          Sets initial random seed
 #  get.lcgseed          Gets the current valus of the random seed
 # FUNCTION:            DISTRIBUTIONS:
-# runif.lcg             Generates portable uniform linear congruational rvs
-# rnorm.lcg             Generates portable normal linear congruational rvs
-# rt.lcg                Generates portable Student-t linear congruational rvs
+#  runif.lcg            Generates portable uniform linear congruational rvs
+#  rnorm.lcg            Generates portable normal linear congruational rvs
+#  rt.lcg               Generates portable Student-t linear congruational rvs
 ################################################################################
 
 
@@ -67,10 +67,7 @@ function(seed = 4711)
     # Description:
     #   Sets the random seed for the linear congruential 
     #   random number generator
-    
-    # Changes:
-    #
-    
+
     # FUNCTION:
     
     # Return Value:
@@ -123,10 +120,7 @@ function(n, min = 0, max = 1)
     #    http://csep1.phy.ornl.gov/rn/node13.html 
     #    N. S. Altman. ``Bitwise Behavior of Random Number Generators,'' 
     #    SIAM J. Sci. Stat. Comput., 9(5), September, pps. 941-949, 1988
-    
-    # Changes:
-    #
-    
+
     # FUNCTION:
     
     # Initialize:
@@ -157,10 +151,7 @@ function(n, mean = 0, sd = 1)
     # Description:
     #    A linear congruential generator for normal distributed
     #    random numbers
-   
-    # Changes:
-    #
-    
+
     # FUNCTION:
     
     # This is slow, but portable between R and SPlus
@@ -178,10 +169,7 @@ function(n, df)
     # Description:
     #    A linear congruential generator for Sudent-t distributed
     #    random numbers
-    
-    # Changes:
-    #
-    
+ 
     # FUNCTION:
     
     # This is slow, but portable between R and SPlus
