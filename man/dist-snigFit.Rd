@@ -1,51 +1,41 @@
-\name{ghFit}
+\name{snigFit}
 
+\alias{snigFit}
 
-\alias{ghFit}
-
-
-\title{GH Distribution Fit}
+\title{Fit of a Stndardized NIG Distribution}
 
 
 \description{
 
-    Estimates the distrinbutional parameters for a 
-    generalized hyperbolic distribution.
+    Estimates the parameters of a  standardized normal inverse 
+    Gaussian distribution.
 
 }
 
 
-\usage{
-ghFit(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1, 
-    scale = TRUE, doplot = TRUE, span = "auto", trace = TRUE, 
-    title = NULL, description = NULL, \dots) 
+\usage{   
+snigFit(x, zeta = 1, rho = 0, scale = TRUE, doplot = TRUE, 
+    span = "auto", trace = TRUE, title = NULL, description = NULL, \dots) 
 }
 
 
 \arguments{
   
-    \item{x}{
-        a numeric vector. 
+    \item{zeta, rho}{
+        shape parameter \code{zeta} is positive,
+        skewness parameter \code{rho} is in the range (-1, 1).
         }
-    \item{alpha, beta, delta, mu, lambda}{
-        The parameters are \code{alpha}, \code{beta}, \code{delta}, 
-        \code{mu}, and and \code{lambda}:\cr
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0;
-        and lambda parameter \code{lambda}, by default 1.
+    \item{description}{
+        a character string which allows for a brief description.
+        }
+    \item{doplot}{
+        a logical flag. Should a plot be displayed?
         }
     \item{scale}{
         a logical flag, by default \code{TRUE}. Should the time series
         be scaled by its standard deviation to achieve a more stable
         optimization?
         }
-    \item{doplot}{
-        a logical flag. Should a plot be displayed?
-        }        
     \item{span}{
         x-coordinates for the plot, by default 100 values 
         automatically selected and ranging between the 0.001, 
@@ -54,16 +44,16 @@ ghFit(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1,
         times = n)}, where, \code{min} and \code{max} are the 
         left and right endpoints of the range, and \code{n} gives 
         the number of the intermediate points.
-        }        
+        }
+    \item{title}{
+        a character string which allows for a project title.
+        }
     \item{trace}{
         a logical flag. Should the parameter estimation process be
         traced?
         }
-    \item{title}{
-        a character string which allows for a project title.
-        }     
-    \item{description}{
-        a character string which allows for a brief description.
+    \item{x}{
+        a numeric vector. 
         }
     \item{\dots}{
         parameters to be parsed.
@@ -74,7 +64,8 @@ ghFit(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1,
 
 \value{
   
-    returns a list with the following components:
+    The function \code{snigFit} returns a list with the following 
+    components:
   
     \item{estimate}{
         the point at which the maximum value of the log liklihood 
@@ -105,34 +96,19 @@ ghFit(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1,
     \item{steps}{
         number of function calls.
         }
-        
-    Remark: The parameter estimation for the stable distribution via the 
-    maximum Log-Likelihood approach may take a quite long time.
               
 }
 
 
-\details{
-
-    The function \code{\link{nlm}} is used to minimize the "negative" 
-    maximum log-likelihood function. \code{nlm} carries out a minimization 
-    using a Newton-type algorithm.
-    \cr\cr
-       
-}
-
-
 \examples{    
-## ghFit -
-   # Simulate random variates HYP(1.5, 0.3, 0.5, -1.0):
+## snigFit -
+   # Simulate Random Variates:
    set.seed(1953)
-   s = rgh(n = 1000, alpha = 1.5, beta = 0.3, delta = 0.5, mu = -1.0) 
+   s = rsnig(n = 2000, zeta = 0.7, rho = 0.5) 
 
-## ghFit -  
+## snigFit -  
    # Fit Parameters:
-   # Note, this may take some time.
-   # Starting vector (1, 0, 1, mean(s)):
-   ghFit(s, alpha = 1, beta = 0, delta = 1, mu = mean(s), doplot = TRUE) 
+   snigFit(s, zeta = 1, rho = 0, doplot = TRUE) 
 }
 
 

@@ -1,25 +1,22 @@
-\name{ghtFit}
+\name{ghFit}
 
 
-\alias{ghtFit}
+\alias{ghFit}
 
 
-\alias{ghtFit}
-
-
-\title{GHT Distribution Fit}
+\title{GH Distribution Fit}
 
 
 \description{
 
     Estimates the distrinbutional parameters for a 
-    generalized hyperbolic Student-t distribution.
+    generalized hyperbolic distribution.
 
 }
 
 
-\usage{ 
-ghtFit(x, beta = 1e-6, delta = 1, mu = 0, nu = 10, 
+\usage{
+ghFit(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1, 
     scale = TRUE, doplot = TRUE, span = "auto", trace = TRUE, 
     title = NULL, description = NULL, \dots) 
 }
@@ -30,17 +27,16 @@ ghtFit(x, beta = 1e-6, delta = 1, mu = 0, nu = 10,
     \item{x}{
         a numeric vector. 
         }
-    \item{beta, delta, mu}{
-        The parameters are \code{beta}, \code{delta}, and \code{mu}:\cr
-        skewness parameter \code{beta} is in the range (0, alpha);
-        scale parameter \code{delta} must be zero or positive; 
-        location parameter \code{mu}, by default 0; and
-        lambda parameter \code{lambda}, by default 1.
-        }
-    \item{nu}{
-        defines the number of degrees of freedom. 
-        Note, \code{alpha} takes the limit of \code{abs(beta)}, 
-        and \code{lambda=-nu/2}.
+    \item{alpha, beta, delta, mu, lambda}{
+        The parameters are \code{alpha}, \code{beta}, \code{delta}, 
+        \code{mu}, and and \code{lambda}:\cr
+        shape parameter \code{alpha};
+        skewness parameter \code{beta}, \code{abs(beta)} is in the 
+        range (0, alpha);
+        scale parameter \code{delta}, \code{delta} must be zero or 
+        positive; 
+        location parameter \code{mu}, by default 0;
+        and lambda parameter \code{lambda}, by default 1.
         }
     \item{scale}{
         a logical flag, by default \code{TRUE}. Should the time series
@@ -109,9 +105,6 @@ ghtFit(x, beta = 1e-6, delta = 1, mu = 0, nu = 10,
     \item{steps}{
         number of function calls.
         }
-        
-    Remark: The parameter estimation for the stable distribution via the 
-    maximum Log-Likelihood approach may take a quite long time.
               
 }
 
@@ -126,8 +119,14 @@ ghtFit(x, beta = 1e-6, delta = 1, mu = 0, nu = 10,
 
 
 \examples{    
-## ghtFit -
-   # ...
+## ghFit -
+   # Simulate Random Variates:
+   set.seed(1953)
+   s = rgh(n = 1000, alpha = 1.5, beta = 0.3, delta = 0.5, mu = -1.0) 
+
+## ghFit -  
+   # Fit Parameters:
+   ghFit(s, alpha = 1, beta = 0, delta = 1, mu = mean(s), doplot = TRUE) 
 }
 
 

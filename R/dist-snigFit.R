@@ -6,16 +6,16 @@
 #
 # This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU Library General Public License for more details.
 #
-# You should have received A copy of the GNU Library General 
-# Public License along with this library; if not, write to the 
-# Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
+# You should have received a copy of the GNU Library General
+# Public License along with this library; if not, write to the
+# Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
 # Copyrights (C)
-# for this R-port: 
+# for this R-port:
 #   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   www.rmetrics.org
@@ -27,41 +27,30 @@
 
 
 ################################################################################
-# FUNCTION:                 DESCRIPTION:
-#  colorTable                Shows a table of plot color codes
+# FUNCTION:            DESCRIPTION:
+#  snigFit              Fits parameters of a standardized NIG density
 ################################################################################
 
 
-colorTable <- 
-    function(cex = 0.7) 
+snigFit =
+function (x, zeta = 1, rho = 0, scale = TRUE, doplot = TRUE, 
+    span = "auto", trace = TRUE, title = NULL, description = NULL, ...) 
 {   
-    # A function implemented by Diethelm Wuertz
+
+    # Update Slots: 
+    if (is.null(title)) title = "SNIG Parameter Estimation"
     
-    # Description:
-    #   Displays a table of plot colors.
+    # Quick and dirty ...
+    ans = sghFit(x, zeta = zeta, rho = rho, lambda = -0.5, include.lambda = FALSE,
+        scale = scale, doplot = doplot, span = span, trace = trace, 
+        title = title, description = description, ...) 
     
-    # Author:
-    #   Unknown, piece of code found on the internet.
-    
-    # Example:
-    #   colorTable()
-  
-    # FUNCTION:
-    
-    # Plot:
-    plot(0, 0, xlim = c(-1, 10), ylim = c(0, 10), type = 'n', axes = FALSE, 
-        xlab = '', ylab = '', cex = cex, main = "Table of Color Codes")
-    ## DW
-    ## j = -1
-    j = -2 ## here I have shifted the plot to the left ... DW
-    for(i in 0:99) {
-        if(i %% 10 == 0) {j = j+1; k = 10}
-        k = k-1
-        points(j, k, pch = 15, col = i, cex = 2)
-        text(j+0.45, k, i, cex = cex)}
+    # Update Slots:    
+    ans@call = match.call()
+    ans@model = "Standarized NIG Distribution"
     
     # Return Value:
-    invisible()
+    ans
 }
 
 
