@@ -33,18 +33,12 @@
 #  pgh                   Returns probability for generalized hyperbolic DF
 #  qgh                   Returns quantiles for generalized hyperbolic DF
 #  rgh                   Returns random variates for generalized hyperbolic DF
-#  .rghyp                  Internal functions for the evaluation
-#  .rgigjd                 of random variates for the generalized
-#  .rgigjd1                hyperbolic distribution function ...
 # FUNCTION:             DESCRIPTION:
 #  dhyp                  Returns density for hyperbolic DF
 #  phyp                  Returns probability for hyperbolic DF
 #  qhyp                  Returns quantiles for hyperbolic DF
 #  rhyp                  Returns random variates for hyperbolic DF
-#  hypMode               Computes the hyperbolic mode
-#  .*hyp[1234]             [1], ..., [4] first to fourth parameterization
-#  .hyp[1234]Mode          [1], ..., [4] first to fourth parameterization
-#  .BesselK1             Internal Function  
+#  hypMode               Computes the hyperbolic mode 
 # FUNCTION:             DESCRIPTION:
 #  dnig                  Returns density for inverse Gaussian DF
 #  pnig                  Returns probability for for inverse Gaussian DF
@@ -56,12 +50,14 @@
 ################################################################################
 
 
-test.helpFile = 
+test.aaa = 
 function()
 {
     # Help File:
     helpFile = function() { 
-        example(HyperbolicDistribution); return() }
+        example(HyperbolicDistribution, ask = FALSE)
+        return() 
+    }
     checkIdentical(
         target = class(try(helpFile())),
         current = "NULL")
@@ -71,36 +67,18 @@ function()
 }
 
 
-# ------------------------------------------------------------------------------
+################################################################################
 
 
 test.gh = 
 function()
-{
-    par(ask = FALSE)
-    par(mfrow = c(1, 1))
-    
+{ 
     # gh() Distribution:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("gh", 
-        alpha = 1.3, beta = 0.3, delta = 1, mu = 0, lambda = 1)
-    print(test)
-    checkTrue(mean(test) == 1)
-    
-    # gh() Distribution, continued:
-    test = .distCheck("gh", 
-        alpha = 1.3, beta = 0.3, delta = 1, mu = 0, lambda = 0.8)
-    print(test)
-    checkTrue(mean(test) == 1)
-    
-    # gh() Distribution, continued:
-    test = .distCheck("gh", 
-        alpha = 1.3, beta = 0.3, delta = 1.7, mu = 0.5, lambda = 0.8)
-    print(test)
-    checkTrue(mean(test) == 1)
-    
-    # gh() Distribution, continued:
-    test = .distCheck("gh", 
-        alpha = 1.3, beta = 0.3, delta = 1.7, mu = 0.5, lambda = 0.8)
+        alpha = 1.3, beta = 0.3, delta = 1.7, mu = 0.2, lambda = 0.8, 
+        n = 2000, robust = FALSE)
     print(test)
     checkTrue(mean(test) == 1)
     
@@ -115,33 +93,44 @@ function()
 test.hyp = 
 function()
 {
-    par(ask = FALSE)
-    par(mfrow = c(1, 1))
-    
     # hyp() Distribution - Parameterization 1:
-    test = .distCheck("hyp", alpha = 1, beta = 0.3, delta = 1)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
+    test = .distCheck("hyp", 
+        alpha = 1.2, beta = 0.2, delta = 1.9, mu = 0.1, pm = 1, 
+        n = 1000, robust = FALSE)
     print(test)
     checkTrue(mean(test) == 1)
     
     # hyp() Distribution - Parameterization 2:
-    test = .distCheck("hyp", alpha = 1, beta = 0.3, delta = 1, pm = 2)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
+    test = .distCheck("hyp", 
+        alpha = 0.9, beta = -0.3, delta = 1.4, mu = -0.1, pm = 2,
+        n = 1000, robust = FALSE)
+    print(test)
+    checkTrue(mean(test) == 1)          
+    
+    # hyp() Distribution - Parameterization 3:                
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
+    .distCheck("hyp", 
+        alpha = 0.9, beta = -0.3, delta = 1.4, mu = -0.1, pm = 3,
+        n = 1000, robust = FALSE)
     print(test)
     checkTrue(mean(test) == 1)
     
-    # hyp() Distribution - Parameterization 3:
-    # .distCheck("hyp", alpha = 1, beta = 0.3, delta = 1, pm = 3)
-    # hyp() Distribution - Parameterization 1:
-    # test = .distCheck("hyp", alpha = 1, beta = 0.3, delta = 1)
-    # print(test)
-    # checkTrue(mean(test) == 1)
-    
-    # hyp() Distribution - Parameterization 4:
-    # .distCheck("hyp", alpha = 1, beta = 0.3, delta = 1, pm = 4)
-    # hyp() Distribution - Parameterization 1:
-    # test = .distCheck("hyp", alpha = 1, beta = 0.3, delta = 1)
-    # print(test)
-    # checkTrue(mean(test) == 1)
-    
+    # hyp() Distribution - Parameterization 4:                        
+    if (FALSE) {
+        RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+        set.seed(4711, kind = "Marsaglia-Multicarry")
+        .distCheck("hyp", 
+            alpha = 1.6, beta = -0.3, delta = 1.4, mu = 0.1, pm = 4,
+            n = 1000, robust = FALSE)                                    # CHECK              
+        print(test)
+        checkTrue(mean(test) == 1)
+    }
+
     # Return Value:
     return()    
 }
@@ -152,14 +141,16 @@ function()
 
 test.nig = 
 function()
-{
-    par(ask = FALSE)
-    par(mfrow = c(1, 1))
-    
+{   
     # nig() Distribution:
-    test = .distCheck("nig", alpha = 1, beta = 0.1, delta = 1)
-    print(test)
-    checkTrue(mean(test) == 1)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
+    test = .distCheck("nig", 
+        alpha = 2.1, beta = 0.1, delta = 1.5, mu = -0.1,
+        n = 1000, robust = FALSE)
+    print(test) 
+    checkTrue(mean(test) == 1) 
+    
     
     # Return Value:
     return()    
@@ -169,9 +160,45 @@ function()
 # ------------------------------------------------------------------------------
 
 
+test.hypSlider = 
+function()
+{
+    # Arguments ?
+    #   hypSlider()
+    
+    # Try:
+    hypSlider()
+    
+    # Return Value:
+    return()    
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+test.nigSlider = 
+function()
+{
+    # Arguments ?
+    #   nigSlider
+    
+    # Try:
+    nigSlider()
+    
+    # Return Value:
+    return()    
+}
+
+
+
+# ------------------------------------------------------------------------------
+
+
 if (FALSE) {
     require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runit2B.R")
+    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/tests/runit2B.R",
+        rngKind = "Marsaglia-Multicarry", rngNormalKind = "Inversion")
     printTextProtocol(testResult)
 }
 

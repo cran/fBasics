@@ -16,7 +16,7 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2006, Diethelm Wuertz, GPL
+#   1999 - 2007, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   info@rmetrics.org
 #   www.rmetrics.org
@@ -42,6 +42,7 @@
 
 
 ################################################################################
+# FUNCTION:             DESCRIPTION:
 #  acfPlot               Displays autocorrelations function plot
 #  pacfPlot              Displays partial autocorrelation function plot
 #  ccfPlot               Displays cross correlation function plot
@@ -206,7 +207,7 @@ ymax = NA, standardize = TRUE, labels = TRUE, ...)
     plot(deltas, data[1,], ylim = c(0, ymax), type = "n", 
         main = main, xlab = xlab, ylab = ylab, ...)
     xl = 1:length(deltas)
-    for (il in 1:(lag.max)){
+    for (il in 1:(lag.max)) {
         yp = max(data[il, ])
         yl = xl[data[il, ] == yp]
         lines(deltas, data[il, ], col = il)

@@ -208,12 +208,7 @@ show.fDISTFIT(object)
 }
 
 
-\examples{
-## SOURCE("fBasics.2D-DistributionFits")
-   
-## Plot:
-   par(ask = FALSE)
-   
+\examples{    
 ## nigFit -
    # Simulate random variates HYP(1.5, 0.3, 0.5, -1.0):
    set.seed(1953)

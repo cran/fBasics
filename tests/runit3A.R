@@ -41,12 +41,14 @@
 ################################################################################
     
 
-test.helpFile = 
+test.aaa = 
 function()
 {
     # Help File:
     helpFile = function() { 
-        example(StylizedFacts); return() }
+        example(StylizedFacts, ask = FALSE)
+        return() 
+    }
     checkIdentical(
         target = class(try(helpFile())),
         current = "NULL")
@@ -63,11 +65,7 @@ test.plotLabels =
 function()
 {
     # MSFT Opening Prices:
-    URL = "http://www.itp.phys.ethz.ch/econophysics/R/data/textbooks/"
-    SRC = "ZivotWang/data/msft.dat.csv"
-    DATA = paste(URL, SRC, sep = "") 
-    download.file(DATA, destfile = "msft.dat.csv")
-    msft.dat = readSeries("msft.dat.csv")
+    msft.dat = as.timeSeries(data(msft.dat))
     msft = msft.dat[, 1]
     checkSum = 15349.9344
     checkEqualsNumeric(sum(msft@Data), checkSum)
@@ -130,12 +128,6 @@ test.plotNoLabels =
 function()
 { 
     # MSFT Opening Prices:
-    # URL = "http://www.itp.phys.ethz.ch/econophysics/R/data/textbooks/"
-    # SRC = "ZivotWang/data/msft.dat.csv"
-    # DATA = paste(URL, SRC, sep = "") 
-    # download.file(DATA, destfile = "msft.dat.csv")
-    # msft.dat = readSeries("msft.dat.csv")
-    # ... or load it from Package fEcofin
     data(msft.dat)
     msft.dat = as.timeSeries(msft.dat)
     msft = msft.dat[, 1]
@@ -198,7 +190,8 @@ function()
 
 if (FALSE) {
     require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runit3B.R")
+    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/tests/runit3A.R",
+        rngKind = "Marsaglia-Multicarry", rngNormalKind = "Inversion")
     printTextProtocol(testResult)
 }
 

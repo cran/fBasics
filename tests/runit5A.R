@@ -34,9 +34,6 @@
 #  shapiroTest           Shapiro-Wilk normality test
 #  jarqueberaTest        Jarque-Bera normality test
 #  dagoTest              D'Agostino normality test
-#   .skewness.test        ... internal function
-#   .kurtosis.test        ... internal function
-#   .omnibus.test         ... internal function
 # FUNCTION:             FROM NORTEST PACKAGE:
 #  adTest                Anderson-Darling normality test
 #  cvmTest               Cramer-von Mises normality test
@@ -50,17 +47,18 @@
 #  jbTable               Table of finite sample p values for the JB test
 #  pjb                   Computes probabilities for the Jarque Bera Test
 #  qjb                   Computes quantiles for the Jarque Bera Test
-#  .jb.test               S3 version type finite sample adjusted JB test
 #  jbTest                Performs finite sample adjusted JB LM and ALM test
 ################################################################################
   
  
-test.helpFile = 
+test.aaa = 
 function()
 {
     # Help File:
     helpFile = function() { 
-        example(OneSampleTest); return() }
+        example(OneSampleTest, ask = FALSE)
+        return() 
+    }
     checkIdentical(
         target = class(try(helpFile())),
         current = "NULL")
@@ -76,9 +74,9 @@ function()
 test.normalTests = 
 function()
 {   
-    
     # Normal Data:
-    set.seed(1953)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     X = rnorm(50)
     
     TEST = ksnormTest(X)
@@ -120,11 +118,6 @@ function()
     TEST = sfTest(X)
     print(TEST)
     checkIdentical(as.character(class(TEST)), "fHTEST")
-    
-    TEST = runsTest(X)
-    print(TEST)
-    checkIdentical(as.character(class(TEST)), "htest")
-    
 }  
 
 
@@ -134,12 +127,13 @@ function()
 test.normalTestsTS = 
 function()
 {      
-    URL = "http://www.itp.phys.ethz.ch/econophysics/R/data/textbooks/"
-    SRC = "ZivotWang/data/msft.dat.csv"
-    DATA = paste(URL, SRC, sep = "") 
-    download.file(DATA, destfile = "msft.dat.csv")
-    msft.dat = readSeries("msft.dat.csv")
-    X = returnSeries(msft.dat[, 1])
+    # URL = "http://www.itp.phys.ethz.ch/econophysics/R/data/textbooks/"
+    # SRC = "ZivotWang/data/msft.dat.csv"
+    # DATA = paste(URL, SRC, sep = "") 
+    # download.file(DATA, destfile = "msft.dat.csv")
+    # msft.dat = readSeries("msft.dat.csv")
+    # from Ecofin ...
+    X = returnSeries(as.timeSeries(data(msft.dat)))[, 1]
     
     TEST = ksnormTest(X)
     print(TEST)
@@ -180,10 +174,6 @@ function()
     TEST = sfTest(X)
     print(TEST)
     checkIdentical(as.character(class(TEST)), "fHTEST")
-    
-    TEST = runsTest(X)
-    print(TEST)
-    checkIdentical(as.character(class(TEST)), "htest")
 }
 
 
@@ -192,7 +182,8 @@ function()
 
 if (FALSE) {
     require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runit5B.R")
+    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/tests/runit5A.R",
+        rngKind = "Marsaglia-Multicarry", rngNormalKind = "Inversion")
     printTextProtocol(testResult)
 }
     

@@ -19,6 +19,8 @@
 \alias{qnig}
 \alias{rnig}
 
+\alias{nigShapeTriangle}
+
 \alias{hypSlider}
 \alias{nigSlider}
 
@@ -42,8 +44,9 @@
     \tabular{ll}{
     \code{[dpqr]gh} \tab The generalized hyperbolic distribution, \cr
     \code{[dpqr]hyp} \tab The hyperbolic distribution, \cr
-    \code{hypMode} \tab the hyperbolic mode, \cr
     \code{[dpqr]nig} \tab The normal inverse Gaussian distribution, \cr
+    \code{hypMode} \tab the hyperbolic mode, \cr
+    \code{nigShapeTriangle} \tab plots NIG Shape Triangle, \cr
     \code{hypSlider} \tab interactive hyperbolic distribution display, \cr
     \code{nigSlider} \tab interactive NIG distribution display. }
     
@@ -57,16 +60,18 @@ qgh(p, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
 rgh(n, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
 
 dhyp(x, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
-phyp(q, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4), ...)
-qhyp(p, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4), ...)
+phyp(q, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4), \dots)
+qhyp(p, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4), \dots)
 rhyp(n, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
-
-hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
 
 dnig(x, alpha = 1, beta = 0, delta = 1, mu = 0)
 pnig(q, alpha = 1, beta = 0, delta = 1, mu = 0)
 qnig(p, alpha = 1, beta = 0, delta = 1, mu = 0)
 rnig(n, alpha = 1, beta = 0, delta = 1, mu = 0)
+
+nigShapeTriangle(object, add = FALSE, \dots)
+
+hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
 
 hypSlider()
 nigSlider()
@@ -75,6 +80,11 @@ nigSlider()
 
 \arguments{
 
+    \item{add}{
+        [nigShapeTriangle] - \cr
+        a logical value. Should another point added to the NIG
+        shape triangle? By default FALSE, a new plot will be created.
+        } 
     \item{alpha, beta, delta, mu, lambda}{
         shape parameter \code{alpha};
         skewness parameter \code{beta}, \code{abs(beta)} is in the 
@@ -98,6 +108,11 @@ nigSlider()
         }
     \item{n}{
         number of observations.
+        }
+    \item{object}{
+        [nigShapeTriangle] - \cr
+        an object of class \code{"fDISTFIT"} as returned by the function
+        \code{nigFit}.
         } 
     \item{p}{
         a numeric vector of probabilities.
@@ -169,14 +184,6 @@ nigSlider()
 }
 
 
-\author{
-
-    David Scott for the HYP Generator from R's "HyperbolicDist" package, \cr
-    Diethelm Wuertz for the Rmetrics \R-port.
-    
-}
-
-
 \references{
 Atkinson, A.C. (1982); 
     \emph{The simulation of generalized inverse Gaussian and hyperbolic 
@@ -200,12 +207,15 @@ Raible S. (2000);
 }
 
 
-\examples{
-## SOURCE("fBasics.2B-HyperbolicDistribution")
+\author{
 
-## Plot:
-   par(ask = FALSE)
+    David Scott for the HYP Generator from R's "HyperbolicDist" package, \cr
+    Diethelm Wuertz for the Rmetrics \R-port.
     
+}
+
+
+\examples{   
 ## nig -
    set.seed(1953)
    r = rnig(5000, alpha = 1, beta = 0.3, delta = 1)
@@ -214,13 +224,13 @@ Raible S. (2000);
  
 ## nig - 
    # Plot empirical density and compare with true density:
-   hist(r, n = 25, probability = TRUE, border = "white", col = "steelblue4")
+   hist(r, n = 25, probability = TRUE, border = "white", col = "steelblue")
    x = seq(-5, 5, 0.25)
    lines(x, dnig(x, alpha = 1, beta = 0.3, delta = 1))
  
 ## nig -  
    # Plot df and compare with true df:
-   plot(sort(r), (1:5000/5000), main = "Probability", col = "steelblue4")
+   plot(sort(r), (1:5000/5000), main = "Probability", col = "steelblue")
    lines(x, pnig(x, alpha = 1, beta = 0.3, delta = 1))
    
 ## nig -

@@ -16,7 +16,7 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2006, Diethelm Wuertz, GPL
+#   1999 - 2007, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   info@rmetrics.org
 #   www.rmetrics.org
@@ -48,6 +48,7 @@
 
 
 ################################################################################
+# FUNCTION:             SYMMETRIC STABLE DISTRIBUTION:
 #  dsymstb               Returns density for symmetric stable DF
 #  psymstb               Returns probabilities for symmetric stable DF
 #  qsymstb               Returns quantiles for symmetric stable DF
@@ -130,13 +131,13 @@ function(p, alpha)
         for (i in 1:length(p)) {
             pp = p[i]
             # xmin = -(1-pp)/pp
-            if (pp < 0.5) {
+            if (pp <= 0.5) {    # <=
                 xmin = qcauchy(pp)
             } else {
                 xmin = qnorm(pp, mean = 0, sd = sqrt(2))
             }
             # xmax = pp/(1-pp) 
-            if (pp < 0.5) {
+            if (pp <= 0.5) {    # <=
                 xmax = qnorm(pp, mean = 0, sd = sqrt(2))
             } else {
                 xmax = qcauchy(pp)  
@@ -206,7 +207,7 @@ function(n, alpha)
 # ------------------------------------------------------------------------------
 
 
-.symstb =
+.symstbR =
 function(x, alpha)
 {   # A function implemented by Diethelm Wuertz
 
@@ -350,10 +351,30 @@ function(x, alpha)
     # Return Value:
     cbind(x = X, p = prob, d = dens)
 }  
- 
+
+
+# ------------------------------------------------------------------------------
+
+
+.symstb = 
+function (x, alpha) 
+{   # A function implemented by Diethelm Wuertz
+
+    # Description:
+    #   Returns symmetric alpha-stable pdf/cdf
+    
+    # Distribution:
+    ans = .Fortran("symstb", as.double(x), as.double(1:length(x)), 
+        as.double(1:length(x)), as.integer(length(x)), as.double(alpha), 
+        PACKAGE = "fBasics")
+        
+    # Return Value:
+    cbind(x = x, p = ans[[2]], d = ans[[3]])
+}
 
 
 ################################################################################
+# FUNCTIONS:            STABLE DISTRIBUTION:
 #  dstable               Returns density for stable DF
 #  pstable               Returns probabilities for stable DF
 #  qstable               Returns quantiles for stable DF
@@ -968,6 +989,7 @@ function (f, lower, upper, subdivisions, rel.tol, abs.tol, ...)
 
 
 ################################################################################
+# FUNCTION:             STABLE SLIDERS:
 #  symstbSlider          Displays symmetric stable distribution function
 #  stableSlider          Displays stable distribution function
 

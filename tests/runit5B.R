@@ -54,12 +54,14 @@
 ################################################################################
 
 
-test.helpFile = 
+test.aaa = 
 function()
 {
     # Help File:
     helpFile = function() { 
-        example(TwoSampleTests); return() }
+        example(TwoSampleTests, ask = FALSE)
+        return() 
+    }
     checkIdentical(
         target = class(try(helpFile())),
         current = "NULL")
@@ -76,7 +78,8 @@ test.distributionTest =
 function()
 {
     # Data:
-    set.seed(1953)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     X = rnorm(100)
     Y = rt(50, df = 3)
     
@@ -97,7 +100,8 @@ test.locationTests =
 function()
 {
     # Data:
-    set.seed(1953)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     X = rnorm(100)
     Y = rt(50, df = 3)    
  
@@ -123,7 +127,8 @@ test.varianceTests =
 function()
 {
     # Data:
-    set.seed(1953)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     X = rnorm(100)
     Y = rt(50, df = 3)              
         
@@ -154,7 +159,8 @@ test.scaleTests =
 function()
 {
     # Data:
-    set.seed(1953)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     X = rnorm(100)
     Y = rt(50, df = 3)           
         
@@ -180,7 +186,8 @@ test.correlationTests =
 function()
 { 
     # Data:
-    set.seed(1953)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     X = rnorm(100)
     Y = rt(100, df = 3)
     
@@ -209,7 +216,8 @@ function()
 
 if (FALSE) {
     require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runit5C.R")
+    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/tests/runit5B.R",
+        rngKind = "Marsaglia-Multicarry", rngNormalKind = "Inversion")
     printTextProtocol(testResult)
 }
    

@@ -16,7 +16,7 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2006, Diethelm Wuertz, GPL
+#   1999 - 2007, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   info@rmetrics.org
 #   www.rmetrics.org
@@ -45,12 +45,14 @@
 ################################################################################
 
 
-test.helpFile = 
+test.aaa = 
 function()
 {
     # Help File:
     helpFile = function() { 
-        example(StableDistribution); return() }
+        example(StableDistribution, ask = FALSE)
+        return() 
+    }
     checkIdentical(
         target = class(try(helpFile())),
         current = "NULL")
@@ -60,23 +62,24 @@ function()
 }
 
 
-# ------------------------------------------------------------------------------
-# SYMMETRIC STABLE DISTRIBUTION:
+################################################################################
 
 
 test.symstb = 
 function()
-{
-    par(ask = FALSE)
-    par(mfrow = c(1, 1))
-    
+{ 
     # rsymstb, alpha=1.8
-    test = .distCheck("symstb", alpha = 1.8)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
+    test = .distCheck("symstb", alpha = 1.9, robust = FALSE, 
+        subdivisions = 500)
     print(test)
     checkTrue(mean(test) == 1)
     
     # rsymstb, alpha=1.2
-    test = .distCheck("symstb", alpha = 1.2)
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
+    test = .distCheck("symstb", alpha = 1.2, subdivisions = 5000)
     print(test)
     checkTrue(mean(test[2:3]) == 1)
     
@@ -84,27 +87,29 @@ function()
     return()    
 }
 
-
 # ------------------------------------------------------------------------------
 
 
-test.stable.S0 = 
+test.stableS0 = 
 function()
-{
-    par(ask = FALSE)
-    par(mfrow = c(1, 1))
-    
+{   
     # stable - Parameterization S0:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 1.8, beta = 0.3)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
     
     # stable - Parameterization S0:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 1.2, beta = -0.3)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
     
     # stable - Parameterization S0:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 0.6, beta = 0)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
@@ -117,23 +122,26 @@ function()
 # ------------------------------------------------------------------------------
 
 
-test.stable.S1 = 
+test.stableS1 = 
 function()
-{
-    par(ask = FALSE)
-    par(mfrow = c(1, 1))
-    
+{   
     # stable - Parameterization S1:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 1.8, beta = 0.3, pm = 1)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
     
     # stable - Parameterization S1:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 1.2, beta = -0.3, pm = 1)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
     
     # stable - Parameterization S1:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 0.6, beta = 0, pm = 1)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
@@ -146,23 +154,26 @@ function()
 # ------------------------------------------------------------------------------
 
 
-test.stable.S2 = 
+test.stableS2 = 
 function()
-{
-    par(ask = FALSE)
-    par(mfrow = c(1, 1))
-    
+{   
     # stable - Parameterization S2:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 1.8, beta = 0.3, pm = 2)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
     
     # stable - Parameterization S2:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 1.2, beta = -0.3, pm = 2)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
     
     # stable - Parameterization S2:
+    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    set.seed(4711, kind = "Marsaglia-Multicarry")
     test = .distCheck("stable", alpha = 0.6, beta = 0, pm = 2)
     print(test)
     checkTrue(mean(test[1:2]) == 1)
@@ -172,13 +183,47 @@ function()
 }
 
 
+# ------------------------------------------------------------------------------
+
+
+test.symstbSlider = 
+function()
+{
+    # Arguments ?
+    #   sysmstbSlider()
+    
+    # Try:
+    symstbSlider()
+    
+    # Return Value:
+    return()    
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+test.stableSlider = 
+function()
+{
+    # Arguments ?
+    #   stableSlider()
+    
+    # Try:
+    stableSlider()
+    
+    # Return Value:
+    return()    
+}
+
 
 # ------------------------------------------------------------------------------
 
 
 if (FALSE) {
     require(RUnit)
-    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/test/runit2A.R")
+    testResult <- runTestFile("C:/Rmetrics/SVN/trunk/fBasics/tests/runit2A.R",
+        rngKind = "Marsaglia-Multicarry", rngNormalKind = "Inversion")
     printTextProtocol(testResult)
 }
 

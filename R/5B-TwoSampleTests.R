@@ -16,7 +16,7 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2006, Diethelm Wuertz, GPL
+#   1999 - 2007, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   info@rmetrics.org
 #   www.rmetrics.org
@@ -43,9 +43,6 @@
 #  scaleTest             Performs scale tests on two samples
 #  .ansariTest           Ansari-Bradley test for differences in scale
 #  .moodTest             Mood test for differences in scale
-#  .dansariw              Returns density of the Ansari W statistic
-#  .pansariw              Returns probabilities of the Ansari W statistic
-#  .qansariw              Returns quantiles of the Ansari W statistic
 # FUNCTION:             CORRELATION TESTS:
 #  correlationTest       Performs correlation tests on two samples
 #  .pearsonTest          Pearson product moment correlation coefficient
@@ -55,7 +52,8 @@
 
 
 ################################################################################
-# Distribution Tests:
+# FUNCTION:             DISTRIBUTIONAL TESTS:
+#  ks2Test               Performs a two sample Kolmogorov-Smirnov test
 
 
 ks2Test = 
@@ -142,6 +140,10 @@ function(x, y, title = NULL, description = NULL)
 
 
 ################################################################################
+# FUNCTION:             LOCATION TESTS:
+#  locationTest          Performs locations tests on two samples
+#  .tTest                Unpaired t test for differences in mean
+#  .kw2Test              Kruskal-Wallis test for differences in locations  
 
 
 locationTest =
@@ -382,6 +384,11 @@ function(x, y, title = NULL, description = NULL)
 
 
 ################################################################################
+# FUNCTION:             VARIANCE TESTS:
+#  varianceTest          Performs variance tests on two samples
+#  .varfTest             F test for differences in variances
+#  .bartlett2Test        Bartlett's test for differences in variances
+#  .fligner2Test         Fligner-Killeen test for differences in variances
 
 
 varianceTest =
@@ -577,8 +584,8 @@ function(x, y, title = NULL, description = NULL)
 }
 
 
-################################################################################
-   
+# ------------------------------------------------------------------------------
+  
 
 .fligner2Test = 
 function(x, y, title = NULL, description = NULL)
@@ -645,6 +652,10 @@ function(x, y, title = NULL, description = NULL)
 
 
 ################################################################################
+# FUNCTION:             SCALE TESTS:
+#  scaleTest             Performs scale tests on two samples
+#  .ansariTest           Ansari-Bradley test for differences in scale
+#  .moodTest             Mood test for differences in scale
 
 
 scaleTest =
@@ -773,193 +784,6 @@ function(x, y, title = NULL, description = NULL)
         test = test,
         title = as.character(title), 
         description = as.character(description) )
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-.dansariw = 
-function(x = NULL, m, n = m)
-{   # A function Implemented by Diethelm Wuertz
-    
-    # Description:
-    
-    # Arguments:
-    #   x - if x is null, then all available density-values are
-    #       returned, the names of the vector belong to the
-    #       allowed x values.
-    
-    # Example:
-    #   .dansariw(m = 3, n = 4)
-    
-    # FUNCTION:
-    
-    astart = 0
-    L1 = 1 + floor(m *n/2)
-    A1 = A2 = A3 = rep(-99, times = L1)
-    IFAULT = 0
-    lower = floor((m+1)^2/4)
-    upper = lower + floor(m*n/2)
-    Q = lower:upper
-    
-    # Density:
-    result = .Fortran("asgscale", as.integer(m), as.integer(n), 
-        as.double(astart), as.double(A1), as.integer(L1), as.double(A2), 
-        as.double(A3), as.integer(IFAULT), PACKAGE = "fBasics")
-        
-    # Result:
-    ans = result[[4]]/choose(m+n, n)
-    if (is.null(x)) {
-        names(ans) = as.character(Q)
-    } else {
-        x = as.integer(x)
-        d = rep(0, times = length(x))   
-        for (i in 1:length(x)) {
-            if (x[i] >= upper) {
-                d[i] = 1
-            } else {
-                if (x[i] >= lower) d[i] = ans[x[i]+1-lower]
-            }
-        } 
-        ans = d
-        names(ans) = as.character(x)
-    }
-    
-    # Return Value:
-    ans
-
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-if (class(version) != "Sversion") {
-..pansariw = 
-function(p, m, n) 
-{   # A function Implemented by Diethelm Wuertz
-
-    # FUNCTION:
-    
-    # Internal R Function:
-    .C("pansari", as.integer(length(q)), p = as.double(q),
-        as.integer(m), as.integer(n), PACKAGE = "stats")$p 
-}}
-
-
-# ------------------------------------------------------------------------------
-
-
-.pansariw =
-function(q = NULL, m, n = m)
-{   # A function Implemented by Diethelm Wuertz
-    
-    # Arguments:
-    #   q - if q is null, then all available p-values are returned, 
-    #       the names of the vector belong to the allowed q values
-    
-    # Example:
-    #   .pansariw(m = 3, n = 4)
-    
-    # Note:
-    #   There exists an undocumented C function in R:
-    #   .pansari = function(q, m, n) {
-    #       .C("pansari", as.integer(length(q)), p = as.double(q),
-    #           as.integer(m), as.integer(n), PACKAGE = "stats")$p }
-    
-    # FUNCTION:
-    
-    # Settings:
-    astart = 0
-    L1 = 1 + floor(m *n/2)
-    A1 = A2 = A3 = rep(-99, times = L1)
-    IFAULT = 0
-    lower = floor((m+1)^2/4)
-    upper = lower + floor(m*n/2)
-    Q = lower:upper
-    
-    # p-values:
-    result = .Fortran("wprob", as.integer(m), as.integer(n), 
-        as.double(astart), as.double(A1), as.integer(L1), 
-        as.double(A2), as.double(A3), as.integer(IFAULT), 
-        PACKAGE = "fBasics")
-        
-    # Result:
-    ans = result[[4]]
-    if (is.null(q)) {
-        names(ans) = as.character(Q)
-    } else {
-        q = as.integer(q)
-        p = rep(0, times = length(q))   
-        for (i in 1:length(q)) {
-            if (q[i] >= upper) {
-                p[i] = 1
-            } else {
-                if (q[i] >= lower) p[i] = ans[q[i]+1-lower]
-            }
-        } 
-        ans = p
-        names(ans) = as.character(q)
-    }
-    
-    # Return Value:
-    ans
-}
-    
-
-# ------------------------------------------------------------------------------
-
-
-if (class(version) != "Sversion") {
-..qansariw = 
-function(p, m, n) 
-{   # A function Implemented by Diethelm Wuertz
-
-    # FUNCTION:
-    
-    # Internal R Function:
-    .C("qansari", as.integer(length(p)), q = as.double(p),
-        as.integer(m), as.integer(n), PACKAGE = "stats")$q 
-}}
-    
-
-# ------------------------------------------------------------------------------
-
-
-.qansariw =
-function(p, m, n = m)
-{   # A function Implemented by Diethelm Wuertz
-    
-    # Arguments:
-    #   p - if p is null, then all available quantiles are returned, 
-    #       the names of the vector belong to the allowed p values
-    
-    # Example:
-    #   .qansariw(.pansariw(m = 3, n = 4), m = 3, n = 4)
-    #   .qansariw((0:10)/10,  m = 3, n = 4)
-    
-    # Note:
-    #   There exists an undocumented C function in R:
-    #   .qansari = function(p, m, n) {
-    #       .C("qansari", as.integer(length(p)), q = as.double(p),
-    #           as.integer(m), as.integer(n), PACKAGE = "stats")$q }
-
-    # FUNCTION:
-    
-    # Settings:
-    P = .pansariw(q = NULL, m = m, n = n)
-    q = 0 * p 
-    
-    # Quantiles:
-    for ( i in 1:length(p) ) {
-        index = sign(P-p[i])
-        q[i] = as.integer(names(index[index >= 0])[1])
-    }
-    ans = q
-    
-    # Return Value:
-    ans 
 }
 
 
@@ -1273,6 +1097,11 @@ function(x, y, title = NULL, description = NULL)
 
 
 ################################################################################
+# FUNCTION:             CORRELATION TESTS:
+#  correlationTest       Performs correlation tests on two samples
+#  .pearsonTest          Pearson product moment correlation coefficient
+#  .kendallTest          Kendall's tau correlation test
+#  .spearmanTest         Spearman's rho correlation test
 
 
 correlationTest =

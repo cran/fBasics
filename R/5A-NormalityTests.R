@@ -16,7 +16,7 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2006, Diethelm Wuertz, GPL
+#   1999 - 2007, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   info@rmetrics.org
 #   www.rmetrics.org
@@ -43,15 +43,22 @@
 #  lillieTest            Lilliefors (Kolmogorov-Smirnov) normality test 
 #  pchiTest              Pearson chi-square normality test 
 #  sfTest                Shapiro-Francia normality test     
-# FUNCTION:             MORE TESTS ...
-#  runsTest              Runs test for detecting non-randomness [tseries]
 # FUNCTION ADDON:       AUGMENTED FINITE SAMPLE JB TEST:
-#  jbTable               Table of finite sample p values for the JB ALM test
-#  pjb                   Computes probabilities for the JB ALMTest
-#  qjb                   Computes quantiles for the JB ALM Test
 #  jbTest                Performs finite sample adjusted JB LM and ALM test
 #  .jb.test               S3 version type finite sample adjusted JB test
 ################################################################################
+
+
+################################################################################
+# FUNCTION:             NORMALITY TESTS:
+#  normalTest            Test suite for normality tests S-Plus compatible
+#  ksnormTest            One sample Kolmogorov-Smirnov normality test
+#  shapiroTest           Shapiro-Wilk normality test
+#  jarqueberaTest        Jarque-Bera normality test
+#  dagoTest              D'Agostino normality test
+#   .skewness.test        ... internal function called by dagoTest
+#   .kurtosis.test        ... internal function called by dagoTest
+#   .omnibus.test         ... internal function called by dagoTest
 
 
 normalTest =
@@ -316,26 +323,22 @@ function(x, title = NULL, description = NULL)
 }
 
 
-# ******************************************************************************
-# D'Agostino Test
-
-# http://adela.karlin.mff.cuni.cz/~klaster/vyuka/
-
-# Materiály pro cvicení, která byla v labu, jsou zde: cv01.txt, 
-# cv02.txt, cv03.txt, cv05.txt, cv06.txt, data maths, police a  
-# vysky a makro dagost.r. Výber nejakých príkladu ze cvicení je 
-# tady. 
-
-# Program R lze zdarma (GNU General Public Licence) stáhnout z 
-# www.r-project.org. Alespon k letmému nahlédnutí doporucuji též 
-# minimanuál An Introduction to R, který roste tamtéž. Další 
-# materiály vcetne dvou zacátecnických prírucek najdete na 
-# stránkách Dr. Kulicha.
-
-
 .skewness.test =
 function(x) 
 {   # Internal Function for D'Agostino Normality Test:
+
+    # Note:
+    #   D'Agostino Test
+    #   http://adela.karlin.mff.cuni.cz/~klaster/vyuka/
+    #   Materiály pro cvicení, která byla v labu, jsou zde: cv01.txt, 
+    #   cv02.txt, cv03.txt, cv05.txt, cv06.txt, data maths, police a  
+    #   vysky a makro dagost.r. Výber nejakých príkladu ze cvicení je 
+    #   tady. 
+    #   Program R lze zdarma (GNU General Public Licence) stáhnout z 
+    #   www.r-project.org. Alespon k letmému nahlédnutí doporucuji též 
+    #   minimanuál An Introduction to R, který roste tamtéž. Další 
+    #   materiály vcetne dvou zacátecnických prírucek najdete na 
+    #   stránkách Dr. Kulicha.
 
     # FUNCTION:
     
@@ -531,8 +534,13 @@ function(x, title = NULL, description = NULL)
 }
 
 
-# ******************************************************************************
-# 'nortest' Tests:
+################################################################################
+# FUNCTION:             FROM NORTEST PACKAGE:
+#  adTest                Anderson-Darling normality test
+#  cvmTest               Cramer-von Mises normality test
+#  lillieTest            Lilliefors (Kolmogorov-Smirnov) normality test 
+#  pchiTest              Pearson chi-square normality test 
+#  sfTest                Shapiro-Francia normality test     
 
 
 adTest =
@@ -964,169 +972,10 @@ function(x, title = NULL, description = NULL)
 }
 
 
-# ******************************************************************************
-
-
-runsTest = 
-function(x)
-{   # A function implemented by Diethelm Wuertz
-    
-    # Description:
-    #   Performs a runs test
-    
-    # Arguments:
-    #   x - a numeric vector of data values.
-    
-    # Notes:
-    #   Implementing Trapletti's tseries R-Package
-
-    # Note:
-    #   We consider the signs of x in the series, the zeros will be 
-    #   discarded. In addition we have to factor the data for runs.test().
-
-    # FUNCTION:
-    
-    # Convert Type:
-    if (class(x) == "fREG") x = residuals(x)
-    x = as.vector(x)
-    
-    # runs.test() copied from A. Traplettis tseries package
-    runs.test = 
-    function (x, alternative = c("two.sided", "less", "greater")) 
-    {
-        if (!is.factor(x)) stop("x is not a factor")
-        if (any(is.na(x))) stop("NAs in x")
-        if (length(levels(x)) != 2) stop("x does not contain dichotomous data")
-        alternative = match.arg(alternative)
-        DNAME = deparse(substitute(x))
-        n = length(x)
-        R = 1 + sum(as.numeric(x[-1] != x[-n]))
-        n1 = sum(levels(x)[1] == x)
-        n2 = sum(levels(x)[2] == x)
-        m = 1 + 2 * n1 * n2/(n1 + n2)
-        s = sqrt(2 * n1 * n2 * (2 * n1 * n2 - n1 - n2)/((n1 + n2)^2 * 
-            (n1 + n2 - 1)))
-        STATISTIC = (R - m)/s
-        METHOD = "Runs Test"
-        if (alternative == "two.sided") 
-            PVAL = 2 * pnorm(-abs(STATISTIC))
-        else if (alternative == "less") 
-            PVAL = pnorm(STATISTIC)
-        else if (alternative == "greater") 
-            PVAL = pnorm(STATISTIC, lower.tail = FALSE)
-        else stop("irregular alternative")
-        names(STATISTIC) = "Standard Normal"
-        structure(list(
-            statistic = STATISTIC, 
-            alternative = alternative, 
-            p.value = PVAL, 
-            method = METHOD, 
-            data.name = DNAME), 
-            class = "htest") }
-            
-    # Result:
-    x = sign(x)
-    x = x[x != 0]
-    x = factor(x)
-    ans = runs.test(x = x) 
-    
-    # Return Value:
-    ans
-}
-
-
-# ******************************************************************************
-
-
-jbTable = 
-function(type = c("LM", "ALM"), size = c("all", "small"))
-{   # A function implemented by Diethelm Wuertz
-
-    # Description:
-    #   Table of finite sample p values for the Jarque Bera test
-   
-    # FUNCTION:
-    
-    # Select Table:
-    if (type[1] == "LM") {
-        table = .jbLM()
-    } else if (type[1] == "ALM") {
-        table = .jbALM()
-    }
-    
-    # Downsize Data:
-    if (size[1] == "small") {
-        n = dim(table)[1]
-        table = table[c(matrix(1:(n-2), byrow = TRUE, ncol = 22)[, 1], n), ]
-        table = table[-(1:17),]
-    }
-
-    # Return Value:
-    table
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-pjb = 
-function(q, N = Inf, type = c("LM", "ALM")) 
-{   # A function implemented by Diethelm Wuertz
-
-    # Description:
-    #   Computes probabilities for the Jarque Bera Test
-    
-    # Arguments:
-
-    # FUNCTION:
-    
-    # Check Arguments:
-    if (N < 5) stop("N must be at least 5")
-    if (!(type == "LM" | type == "ALM")) stop("Type must be either LM or ALM")
-    
-    # Compute Probabilities:
-    if (is.finite(N)) {
-        ans = pTable(X = jbTable(type = type), q, N)
-    } else {
-        ans = pchi(q, 2)
-    }
-    
-    # Return Value:
-    ans
-} 
-
-
-# ------------------------------------------------------------------------------
-
-
-qjb = 
-function(p, N = Inf, type = c("LM", "ALM"))
-{   # A function implemented by Diethelm Wuertz
-
-    # Description:
-    #   Computes Quantiles for the Jarque Bera Test
-    
-    # Arguments:
-    
-    # FUNCTION:
-    
-    # Check Arguments:
-    if (N < 5) stop("N must be at least 5")
-    if (!(type == "LM" | type == "ALM")) stop("Type must be either LM or ALM")
-        
-    # Compute Quantiles:
-    if (is.finite(N)) {
-        ans = qTable(X = jbTable(type = type), p, N)
-    } else {
-        ans = qchi(p, 2)
-    }
-    
-    # Return Value:
-    ans
-} 
-
-
-# ------------------------------------------------------------------------------
+################################################################################    
+# FUNCTION ADDON:       AUGMENTED FINITE SAMPLE JB TEST:
+#  jbTest                Performs finite sample adjusted JB LM and ALM test
+#  .jb.test               S3 version type finite sample adjusted JB test
 
 
 .jb.test =
@@ -1175,8 +1024,8 @@ function(x)
     names(STATISTIC) = "LM"
     
     # The rest goes as parameters ...
-    pvalLM = 1 - pjb(STATISTIC, N = n, type = "LM")
-    pvalALM = 1 - pjb(ALM, N = n, type = "ALM")
+    pvalLM = 1 - .pjb(STATISTIC, N = n, type = "LM")
+    pvalALM = 1 - .pjb(ALM, N = n, type = "ALM")
     PARAMETER = c(ALM, n, pvalLM, pvalALM)  
     names(PARAMETER) = c( "ALM", "Sample Size", "LM p-value", "ALM p-value" )
         

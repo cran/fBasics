@@ -1,18 +1,15 @@
-\name{OneSampleTests}
+\name{NormalityTests}
 
-\alias{OneSampleTests}
+\alias{NormalityTests}
 
 \alias{normalTest}
 \alias{ksnormTest}
 \alias{shapiroTest}
 \alias{jarqueberaTest} 
+
 \alias{dagoTest} 
 
-\alias{jbTable}
-\alias{pjb}
-\alias{qjb}
 \alias{jbTest}
-
 
 % from nortest:
 
@@ -22,10 +19,8 @@
 \alias{pchiTest}    
 \alias{sfTest}
 
-\alias{runsTest}
 
-
-\title{One Sample Tests}
+\title{Normality Tests}
 
 
 \description{
@@ -46,9 +41,6 @@
     Functions for high precision Jarque Bera LM and ALM tests:
       
     \tabular{ll}{
-    \code{jbTable} \tab Table of finite sample p values for the JB test, \cr
-    \code{pjb} \tab Computes probabilities for the Jarque Bera Test, \cr
-    \code{qjb} \tab Computes quantiles for the Jarque Bera Test, \cr
     \code{jbTest} \tab Performs finite sample adjusted JB LM and ALM test. }       
     
     Additional functions for testing normality from the 'nortest' package:
@@ -59,41 +51,30 @@
     \code{lillieTest} \tab Lilliefors (Kolmogorov-Smirnov) normality test, \cr
     \code{pchiTest} \tab Pearson chi--square normality test, \cr
     \code{sfTest} \tab Shapiro--Francia normality test. }  
-    
-    
+       
     For SPlus/Finmetrics Compatibility:
     
     \tabular{ll}{
     \code{normalTest} \tab test suite for some normality tests. }     
-    
-    More tests ...
-    
-    \tabular{ll}{
-    \code{runsTest} \tab Runs test for detecting non-randomness.}
  
 }
 
 
 \usage{ 
 ksnormTest(x, title = NULL, description = NULL)
+
+jbTest(x, title = NULL, description = NULL)
 shapiroTest(x, title = NULL, description = NULL)
+normalTest(x, method = c("sw", "jb"), na.rm = FALSE) 
+
 jarqueberaTest(x, title = NULL, description = NULL)
 dagoTest(x, title = NULL, description = NULL)
-
-jbTable(type = c("LM", "ALM"), size = c("all", "small"))
-pjb(q, N = Inf, type = c("LM", "ALM")) 
-qjb(p, N = Inf, type = c("LM", "ALM"))
-jbTest(x, title = NULL, description = NULL)
 
 adTest(x, title = NULL, description = NULL)            
 cvmTest(x, title = NULL, description = NULL)      
 lillieTest(x, title = NULL, description = NULL) 
 pchiTest(x, title = NULL, description = NULL)    
 sfTest(x, title = NULL, description = NULL) 
-
-normalTest(x, method = c("sw", "jb"), na.rm = FALSE) 
-
-runsTest(x)
 }
 
 
@@ -111,38 +92,14 @@ runsTest(x)
         \code{"da"} for the D'Agostino Test. 
         The default value is \code{"ks"}.
         } 
-    \item{N}{ 
-        an integer value specifying the sample size. 
-        } 
     \item{na.rm}{ 
         [normalTest] - \cr
         a logical value. Should missing values removed before computing
         the tests? The default value is \code{FALSE}. 
-        }   
-    \item{p}{ 
-        a numeric vector of probabilities. Missing values are not
-        allowed. 
-        }
-    \item{q}{   
-        vector of quantiles or test statistics. Missing values are not
-        allowed. 
-        }       
-    \item{size}{
-        [jbTable] - \cr
-        a character string denoting the size of the table. If set
-        to \code{"all"} then all data are used from the table, if
-        set to \code{"small"} then only a small part of the data
-        will be returned.
-        }
+        }         
     \item{title}{
         an optional title string, if not specified the inputs data 
         name is deparsed.
-        }
-    \item{type}{
-        [jbTest][pjb][qjb] - \cr
-        the same for the Jarque Bera test statistic. \code{"LM"}
-        denotes the Lagrange multiplier test, and \code{"ALM"} the
-        adjusted Lagrange multiplier test. 
         }
     \item{x}{
         a numeric vector of data values or a S4 object of class 
@@ -291,17 +248,6 @@ runsTest(x)
     distribution. The \code{adTest} goodness-of-fit test can be
     considered as a modification of the Kolmogorov--Smirnov test which 
     gives more weight to the tails than does the \code{ksnormTest}. 
-    \cr
-    
-    \bold{Runs Test:}
-    \cr\cr
-    The runs test can be used to decide if a data set is from a random 
-    process. A run is defined as a series of increasing values or a 
-    series of decreasing values. The number of increasing, or decreasing, 
-    values is the length of the run. In a random data set, the probability 
-    that the \emph{(i+1)-th} value is larger or smaller than the \emph{i-th} 
-    value follows a binomial distribution, which forms the basis of the 
-    runs test. 
 
 }
 
@@ -393,8 +339,6 @@ Wuertz D., Katzgraber H.G. (2005);
 
 
 \examples{
-## SOURCE("fBasics.5B-OneSampleTests")
-
 ## Series:
    x = rnorm(100)
    
@@ -406,13 +350,9 @@ Wuertz D., Katzgraber H.G. (2005);
    shapiroTest(x)
 
 ## jarqueberaTest - 
-## jbTest - Jarque-Bera Test
-   jarqueberaTest(x)
-   jbTest(x)
-   
-## runsTest -
-   runsTest(x)
-
+   # Jarque - Bera Test
+   # jarqueberaTest(x)
+   # jbTest(x)
 }
 
 

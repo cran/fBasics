@@ -16,7 +16,7 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2006, Diethelm Wuertz, GPL
+#   1999 - 2007, Diethelm Wuertz, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   info@rmetrics.org
 #   www.rmetrics.org
@@ -51,12 +51,15 @@
 #  qnig                  Returns quantiles for for inverse Gaussian DF 
 #  rnig                  Returns random variates for inverse Gaussian DF
 # FUNCTION:             DESCRIPTION:
+#  nigShapeTriangle      Plots NIG Shape Triangle
+# FUNCTION:             DESCRIPTION:
 #  hypSlider             Displays hyperbolic distribution function
 #  nigSlider             Displays normal inverse Gausssian distribution function
 ################################################################################
 
 
 ################################################################################
+# FUNCTION:             DESCRIPTION:
 #  dgh                   Returns density for generalized hyperbolic DF
 #  pgh                   Returns probability for generalized hyperbolic DF
 #  qgh                   Returns quantiles for generalized hyperbolic DF
@@ -1286,6 +1289,7 @@ function(a.bar = 1, b.bar = 0, delta  = 1, mu = 0)
 
 
 ################################################################################
+# FUNCTION:             DESCRIPTION:
 #  dnig                  Returns density for inverse Gaussian DF
 #  pnig                  Returns probability for for inverse Gaussian DF
 #  qnig                  Returns quantiles for for inverse Gaussian DF 
@@ -1392,6 +1396,67 @@ function(n, alpha = 1, beta = 0, delta = 1, mu = 0)
 
 
 ################################################################################
+# FUNCTION:             DESCRIPTION:
+#  nigShapeTriangle      Plots NIG Shape Triangle
+
+   
+nigShapeTriangle =
+function(object, add = FALSE, ...)
+{   # A function implemented by Diethelm Wuertz
+
+    # Description:
+    #   Plots NIG Shape Triangle
+    
+    # Arguments:
+    #   object - an object of class 'fDISTFIT' as returned by the
+    #       function nigFit()
+    
+    # Example:
+    #   nigShapeTriangle(nigFit(rnig(100), doplot = FALSE))
+    
+    # FUNCTION:
+    
+    # Settings:
+    stopifnot(class(object) == "fDISTFIT")
+    
+    # Plot Frame:
+    if (!add) {
+        x = c(-1, 0, 1, -1)
+        y = c( 1, 0, 1,  1)
+        plot(x, y, type = "l", 
+            xlab = "Asymmetry: chi", ylab = "Steepness: zeta")
+        title(main = "NIG Shape Traingle")
+        for (s in c(0.8, 0.6, 0.4, 0.2)) 
+            lines(c(-s, s), c(s, s), lty = 3, col = "grey")  
+        lines(c(0, 0), c(0, 1), lty = 3, col = "grey")
+    }
+    
+    # Transform:
+    par = object@fit$estimate
+    names(par) = c("alpha", "beta", "delta", "mu")
+    alpha = par[1] 
+    beta = par[2]
+    delta = par[3]
+    mu = par[4]   
+    
+    # Add Points:
+    zeta = 1/sqrt(1+delta*sqrt(alpha^2-beta^2))
+    chi = zeta*(beta/alpha)
+    points(chi, zeta, pch = 19, ...)
+    
+    # Result:
+    ans = list(chi = chi[[1]], zeta = zeta[[1]])
+    attr(ans, "control")<-par
+    
+    # Return Value:
+    ans
+}
+
+
+
+
+################################################################################
+# FUNCTION:             DESCRIPTION:
 #  hypSlider             Displays hyperbolic distribution function
 #  nigSlider             Displays normal inverse Gausssian distribution function
 

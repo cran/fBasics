@@ -17,7 +17,7 @@
     
     A collection and description of functions for 
     two sample statistical tests. The functions allow 
-    an easy use to test financial return series for 
+    an easy use to test two financial return series for 
     distributional equivalence, for difference in 
     location, variance and scale, and for correlations
     and association.
@@ -274,8 +274,6 @@ Moore, D.S. (1986);
 
 
 \examples{
-## SOURCE("fBasics.5C-TwoSampleTests")
-
 ## x, y -
    x = rnorm(50)
    y = rnorm(50)
