@@ -45,7 +45,7 @@ function(lib, pkg)
     
     # Package:
     cat("\nRmetrics, (C) 1999-2005, Diethelm Wuertz, GPL")
-    cat("\nfBasics: Markets, Basic Statistics, Date and Time\n")
+    cat("\nfBasics: Markets, Basic Statistics, Hypothesis Testing\n")
 
     # Load dll:
     library.dynam("fBasics", pkg, lib)
@@ -66,6 +66,9 @@ function(lib, pkg)
     #	format = "%d-%b-%Y", 
     #	zone = "GMT",
     #	FinCenter = "GMT") 	
+    
+    .Sys.timezone = function() Sys.getenv("TZ")[[1]]
+
 }
 
 

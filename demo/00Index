@@ -1,28 +1,10 @@
 funBasics					fBasics Functions Addon
+funAkima                    R functions from package akima
 
-xmpTimeSeries               Representation of Time Series Data
-xmpImportCSV                Import CSV Data from Package Data Directories
-xmpImportInternet           Import Data from Internet Sites
-
-xmpDistStatistics           Statistics and Aggregation of Time Series Data
-xmpDistDFstable             Symmetric and Skew Stable Distribution Functions
-xmpDistDFgh                 Generalized Hyperbolic Distribution Functions
-xmpDistDFhyp                Hyperbolic Distribution Functions
-xmpDistDFnig                Normal Inverse Gaussian Distribution Functions
-xmpDistDFemp                Empirical Distribution Functions
-
-xmpDistMLEdist              MLE Estimates for t, hyp, and nig Density
-xmpDistQQgauss              Quantile-Quantile Plot and Basic Statistics
-xmpDistScalinglaw           Scaling Law Behavior of a Time Series
-
-xmpDependencies             Dependencies in the NYSE Composite Index
-
-xmpTestCorrelations         Perform Correlation Tests
-xmpTestGoFnorm              Goodness-Of-Fit Tests for Testing Normality
-xmpTestKSgofConvergence     Student's-t Distribution in the Gaussian Limit
-xmpTestKSgofAggregation     Aggregated NYSE Residuals in the Gaussian Limit
-xmpTestKSgofSubsamples      Compare Subsamples of Time Series by the KS Test
-xmpTestRuns                 Perform a Runs Test on Time Series Data
-xmpTestRunsExt              Perform an Extended Runs Test on Time Series Data
+xmpDWChapter11              Economic and Financial Markets
+xmpDWChapter12              Financial Time Series Data
+xmpDWChapter13              Distribution Functions in Finance
+xmpDWChapter14              Stylized Facts, Structures and Dependencies
+xmpDWChapter15              Probability Theory and Hypothesis Tests
 
 xmpZWChapter01              Zivot-Wang Chapter 1 S and S-Plus
