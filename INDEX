@@ -1,0 +1,12 @@
+BasicStatistics         Basic Statistics Summary
+DistributionFits        Parameter Fit of a Distribution
+fBasicsUtilities        General Rmetrics Utilities
+HyperbolicDistribution
+                        Generalized Hyperbolic Distribution
+HypothesisTesting       Tests Class Representation and Utilities
+OneSampleTests          One Sample Tests
+PortableRandomInnovations
+                        Generator for Portable Random Innovations
+StableDistribution      Stable Distribution Function
+StylizedFacts           Stylized Facts
+TwoSampleTests          Two Sample Tests
