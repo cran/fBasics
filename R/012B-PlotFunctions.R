@@ -29,8 +29,8 @@
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:    
-#  .splusLikePlot 		 Sets parameters that plots look more Splus like
-#  tsPlot          		 Returns a time series plot
+#  .splusLikePlot        Sets parameters that plots look more Splus like
+#  tsPlot                Returns a time series plot
 #  histPlot              Returns a histogram plot
 #  densityPlot           Returns a kernel density estimate plot
 # FUNCTION:             DESCRIPTION 3D PLOTS:
@@ -98,17 +98,17 @@ main = x@units, add.fit = TRUE, ...)
     
     # Histogram Plots:
     for (i in 1:DIM) {
-	    Values = as.vector(x@Data[, i])
-	    mean = mean(Values)
-	    sd = sd(Values)
-	    if (is.null(xlim)) 
-	    	xlim = c(qnorm(0.001, mean, sd), qnorm(0.999, mean, sd)) 
+        Values = as.vector(x@Data[, i])
+        mean = mean(Values)
+        sd = sd(Values)
+        if (is.null(xlim)) 
+            xlim = c(qnorm(0.001, mean, sd), qnorm(0.999, mean, sd)) 
         result = hist(x = Values, col = col, border = border, 
             breaks = "FD", main = main[i], xlim = xlim, probability = TRUE,
             ...)  
         if (add.fit) {
-	        s = seq(xlim[1], xlim[2], length = 201)
-	        lines(s, dnorm(s, mean, sd), col = "brown")
+            s = seq(xlim[1], xlim[2], length = 201)
+            lines(s, dnorm(s, mean, sd), col = "brown")
         }
         ans[[i]] = result  
     }
@@ -144,14 +144,14 @@ function(x, col = "steelblue4", main = x@units, add.fit = TRUE, ...)
     
     # Histogram Plots:
     for (i in 1:DIM) {
-	    Values = as.vector(x@Data[, i])
-	    mean = mean(Values)
-	    sd = sd(Values)
-	    if (is.null(xlim)) 
-	    	xlim = c(qnorm(0.001, mean, sd), qnorm(0.999, mean, sd)) 
-	    Density = density(Values, ...)
+        Values = as.vector(x@Data[, i])
+        mean = mean(Values)
+        sd = sd(Values)
+        if (is.null(xlim)) 
+            xlim = c(qnorm(0.001, mean, sd), qnorm(0.999, mean, sd)) 
+        Density = density(Values, ...)
         plot(x = Density, xlim = xlim, col = col, type = "l", 
-        	main = main[i], ...)  
+            main = main[i], ...)  
         ans[[i]] = Density  
     }
     
@@ -427,53 +427,53 @@ function(font = par('font'), cex = 0.7)
 
 .chcode = 
 function(b, base.in = 2, base.out = 10, digits="0123456789ABCDEF")
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	#	Changes from one to another number system
-	
-	# Arguments:
-	#	b - number specified in the input base
-	#	b.in - input base
-	#   b.out - output base
-	#	digits - digits string
-	
-	# Value:
-	#	returns the input in the form represented by the output base
-	
-	# Author:
-	#	Peter Wolf Universitaet Bielefeld  
-	#   from: http://tolstoy.newcastle.edu.au/R/help/05/04/2085.html 
-	
-	# FUNCTION:
-	 
-	# Change Number System:
-	digits = substring(digits,1:nchar(digits),1:nchar(digits))    
-	if (length(base.in) == 1) 
-		base.in = rep(base.in, max(nchar(b) - 1))    
-	if (is.numeric(b)) 
-		b = as.character(as.integer(b))    
-	b.num = lapply(strsplit(b, ""), 
-		function(x) {match(x, digits)-1} )    
-	result = lapply(b.num, 
-		function(x) {cumprod(rev(c(base.in,1))[1:length(x)]) %*% rev(x)} )	
-	number = unlist(result)
-	# DW Print Output Suppressed
-	# cat("decimal representation:",number,"\n")	
-	if (length(base.out) == 1) {
-		base.out<-rep(base.out, 1+ceiling(log(max(number), base = base.out)))    
-	}
-	n.base = length(base.out)
-	result = NULL    
-	for(i in n.base:1){
-		result = rbind(number %% base.out[i], result)
-		number = floor(number/base.out[i])
-	}
-	result[]<-digits[result+1]
-	ans = apply(result, 2, paste, collapse = "") 
-	
-	# Return Value:
-	ans
+    # Description:
+    #   Changes from one to another number system
+    
+    # Arguments:
+    #   b - number specified in the input base
+    #   b.in - input base
+    #   b.out - output base
+    #   digits - digits string
+    
+    # Value:
+    #   returns the input in the form represented by the output base
+    
+    # Author:
+    #   Peter Wolf Universitaet Bielefeld  
+    #   from: http://tolstoy.newcastle.edu.au/R/help/05/04/2085.html 
+    
+    # FUNCTION:
+     
+    # Change Number System:
+    digits = substring(digits,1:nchar(digits),1:nchar(digits))    
+    if (length(base.in) == 1) 
+        base.in = rep(base.in, max(nchar(b) - 1))    
+    if (is.numeric(b)) 
+        b = as.character(as.integer(b))    
+    b.num = lapply(strsplit(b, ""), 
+        function(x) {match(x, digits)-1} )    
+    result = lapply(b.num, 
+        function(x) {cumprod(rev(c(base.in,1))[1:length(x)]) %*% rev(x)} )  
+    number = unlist(result)
+    # DW Print Output Suppressed
+    # cat("decimal representation:",number,"\n")    
+    if (length(base.out) == 1) {
+        base.out<-rep(base.out, 1+ceiling(log(max(number), base = base.out)))    
+    }
+    n.base = length(base.out)
+    result = NULL    
+    for(i in n.base:1){
+        result = rbind(number %% base.out[i], result)
+        number = floor(number/base.out[i])
+    }
+    result[]<-digits[result+1]
+    ans = apply(result, 2, paste, collapse = "") 
+    
+    # Return Value:
+    ans
 }
 
 
@@ -482,24 +482,24 @@ function(b, base.in = 2, base.out = 10, digits="0123456789ABCDEF")
 
 .hex.to.dec =
 function(b) 
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Converts heximal numbers do decimal numbers
+    # Description:
+    #   Converts heximal numbers do decimal numbers
 
-	# Arguments:
-	#	b - a heximal number
-	
-	# Value:
-	#	returns a heximal numbers as decimal numbers
-	
-	# FUNCTION:
-	
-	# Hex to Bin:
-	ans = as.numeric(.chcode(b, base.in = 16, base.out = 10))
-	
-	# Return Value:
-	ans
+    # Arguments:
+    #   b - a heximal number
+    
+    # Value:
+    #   returns a heximal numbers as decimal numbers
+    
+    # FUNCTION:
+    
+    # Hex to Bin:
+    ans = as.numeric(.chcode(b, base.in = 16, base.out = 10))
+    
+    # Return Value:
+    ans
 }
 
 
@@ -508,24 +508,24 @@ function(b)
 
 .dec.to.hex = 
 function(b) 
-{ 	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	# 	Converts decimal numbers do heximal numbers
-	
-	# Arguments:
-	#	x - a decimal number
+    # Description:
+    #   Converts decimal numbers do heximal numbers
+    
+    # Arguments:
+    #   x - a decimal number
 
-	# Value:
-	#	returns a decimal numbers as heximal numbers
-	
-	# FUNCTION:
-	
-	# Decimal to Hex:
-	ans = .chcode(b, base.in = 10, base.out = 16)
-	
-	# Return Value:
-	ans
+    # Value:
+    #   returns a decimal numbers as heximal numbers
+    
+    # FUNCTION:
+    
+    # Decimal to Hex:
+    ans = .chcode(b, base.in = 10, base.out = 16)
+    
+    # Return Value:
+    ans
 }
 
 
@@ -534,32 +534,32 @@ function(b)
 
 greyPal = 
 function(n = 64, start = 255-n, end = 255)
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	#	Creates a grey palette like rainbow does for colors
-	
-	# Arguments:
-	#	n - the number of greys to be constructed
-	#	start, end - the range of the color palette
-	
-	# Value:
-	#	returns a grey palette like rainbow does
-	#	for color palettes
-	
-	# Check Consistency:
-	if (start < 0) stop("start must be greater or equal to 0")
-	if (end > 255) stop("end must be smaller or equal to 255")
-	if (start - end > 0) stop("start must be smaller than end")
-	if (n > end-start) stop("n must be greater than end-start")
-	
-	# Palette:
-	Greys = trunc(seq(start, end, length = n))
-	Z = substr(.dec.to.hex(c(0:255)), 2, 3)[Greys]
-	ans = paste("#", Z, Z, Z, sep = "")
-	
-	# Return Value:
-	ans
+    # Description:
+    #   Creates a grey palette like rainbow does for colors
+    
+    # Arguments:
+    #   n - the number of greys to be constructed
+    #   start, end - the range of the color palette
+    
+    # Value:
+    #   returns a grey palette like rainbow does
+    #   for color palettes
+    
+    # Check Consistency:
+    if (start < 0) stop("start must be greater or equal to 0")
+    if (end > 255) stop("end must be smaller or equal to 255")
+    if (start - end > 0) stop("start must be smaller than end")
+    if (n > end-start) stop("n must be greater than end-start")
+    
+    # Palette:
+    Greys = trunc(seq(start, end, length = n))
+    Z = substr(.dec.to.hex(c(0:255)), 2, 3)[Greys]
+    ans = paste("#", Z, Z, Z, sep = "")
+    
+    # Return Value:
+    ans
 }
 
 
@@ -571,11 +571,11 @@ function(refresh.code, names, minima, maxima, resolutions, starts,
 title = "Slider", no = 0, set.no.value = 0)
 {   # A function implemented by Diethelm Wuertz
 
-	# Description:
-	#	Starts a slider menu
-	
+    # Description:
+    #   Starts a slider menu
+    
     # Source:
-    #	Built on code written by Peter Wolf
+    #   Built on code written by Peter Wolf
     
     # FUNCTION:
     

@@ -19,6 +19,10 @@
 \alias{qnig}
 \alias{rnig}
 
+\alias{hypSlider}
+\alias{nigSlider}
+
+
 \title{Generalized Hyperbolic Distribution}
 
 
@@ -39,7 +43,9 @@
     \code{[dpqr]gh} \tab The generalized hyperbolic distribution, \cr
     \code{[dpqr]hyp} \tab The hyperbolic distribution, \cr
     \code{hypMode} \tab the hyperbolic mode, \cr
-    \code{[dpqr]nig} \tab The normal inverse Gaussian distribution.}
+    \code{[dpqr]nig} \tab The normal inverse Gaussian distribution, \cr
+    \code{hypSlider} \tab interactive hyperbolic distribution display, \cr
+    \code{nigSlider} \tab interactive NIG distribution display. }
     
 }
 
@@ -61,6 +67,9 @@ dnig(x, alpha = 1, beta = 0, delta = 1, mu = 0)
 pnig(q, alpha = 1, beta = 0, delta = 1, mu = 0)
 qnig(p, alpha = 1, beta = 0, delta = 1, mu = 0)
 rnig(n, alpha = 1, beta = 0, delta = 1, mu = 0)
+
+hypSlider()
+nigSlider()
 }
 
 
@@ -110,17 +119,22 @@ rnig(n, alpha = 1, beta = 0, delta = 1, mu = 0)
 
 \value{
 
-    All values are numeric vectors:
+    All values for the \code{*gh}, \code{*hyp}, and \code{*nig} 
+    functions are numeric vectors: 
     \code{d*} returns the density,
     \code{p*} returns the distribution function,
     \code{q*} returns the quantile function, and
     \code{r*} generates random deviates.
     
-    \code{hyp*Mode} returns the mode in the appropriate
-    parameterization. A numeric value.
-    
     All values have attributes named \code{"param"} listing
     the values of the distributional parameters.
+    
+    The function \code{hyp*Mode} returns the mode in the appropriate
+    parameterization. A numeric value.
+    
+    The functions \code{hypSlider} and \code{nigSlider} 
+    display for educational purposes the densities and probabilities
+    of the hyperbolic and normal inverse Gaussian distributions.
     
 }
 
@@ -147,7 +161,7 @@ rnig(n, alpha = 1, beta = 0, delta = 1, mu = 0)
 }
 
 
-\notes{
+\note{
 
 	An undocumented R function for the modified Bessel function 
 	K1 named \code{.BesselK1(X)} is availalble, which is called

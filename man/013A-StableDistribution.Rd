@@ -13,6 +13,9 @@
 \alias{qstable}
 \alias{rstable}
 
+\alias{symstbSlider}
+\alias{stableSlider}
+
 \title{Stable Distribution Function}
 
 
@@ -30,7 +33,9 @@
     
     \tabular{ll}{
     \code{[dpqr]symstb} \tab The symmetric stable distribution, \cr
-    \code{[dpqr]stable} \tab the skewed stable distribution. }
+    \code{[dpqr]stable} \tab the skewed stable distribution, \cr
+    \code{symstbSlider} \tab interactive symmetric distribution display, \cr
+    \code{stableSlider} \tab interactive stable distribution display. }
 
 }
 
@@ -47,6 +52,9 @@ dstable(x, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
 pstable(q, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
 qstable(p, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
 rstable(n, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
+
+symstbSlider()
+stableSlider()
 }
 
 
@@ -84,8 +92,12 @@ rstable(n, alpha, beta, gamma = 1, delta = 0, pm = c(0, 1, 2))
     \code{q*} returns the quantile function, and
     \code{r*} generates random deviates.
     
-    The function \code{stable} mode returns a numeric value, the
+    The function \code{stableMode} returns a numeric value, the
     location of the stable mode.
+    
+    The functions \code{symstbSlider} and \code{stableSlider} 
+    display for educational purposes the densities and probabilities
+    of the symmetric and skew stable distributions.
     
 }
 
@@ -228,8 +240,7 @@ Weron, A., Weron R. (1999);
    lines(x, pstable(q = x, alpha = 1.9, beta = 0.3, pm = 1))
    # Compute quantiles:
    qstable(pstable(seq(-4, 4, 1), alpha = 1.9, beta = 0.3, pm = 1), 
-     alpha = 1.9, beta = 0.3, pm = 1)
-   
+     alpha = 1.9, beta = 0.3, pm = 1)  
 }
 
 

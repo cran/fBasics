@@ -81,13 +81,13 @@
 stdev(x, na.rm = FALSE)
 
 skewness(x, \dots)
-\method{skewness}{default}(x, na.rm = FALSE, \dots)
+\method{skewness}{default}(x, na.rm = FALSE, method = c("moment", "fisher"), \dots)
 \method{skewness}{data.frame}(x, \dots)
 \method{skewness}{POSIXct}(x, \dots)
 \method{skewness}{POSIXlt}(x, \dots)
 
 kurtosis(x, \dots)
-\method{kurtosis}{default}(x, na.rm = FALSE, \dots)
+\method{kurtosis}{default}(x, na.rm = FALSE, method = c("excess", "moment", "fisher"), \dots)
 \method{kurtosis}{data.frame}(x, \dots)
 \method{kurtosis}{POSIXct}(x, \dots)
 \method{kurtosis}{POSIXlt}(x, \dots)
@@ -125,10 +125,25 @@ colCumsums(x, na.rm = FALSE, \dots)
         value set to 1.
         }
     \item{FUN}{
+    	[colStats][rowStats - \cr
         the statistical function to be applied.
         }
         \item{na.rm}{
         a logical. Should missing values be removed?
+        }
+    \item{method}{
+        [kurtosis][skewness] - \cr
+        a character string which specifies the method of computation. 
+        These are either \code{"moment"} or \code{"fisher"}, kurtosis 
+        allows in addition for \code{"excess"}. If \code{"excess"} is 
+        selected, then the value of the kurtosis is computed  by the
+        \code{"moment"} method and a value of 3 will be subtracted.
+        The \code{"moment"} method is based on the definitions of 
+        skewness and kurtosis for distributions; these forms should 
+        be used when resampling (bootstrap or jackknife). The 
+        \code{"fisher"} method correspond to the usual "unbiased" 
+        definition of sample variance, although in the case of skewness 
+        and kurtosis exact unbiasedness is not possible. 
         }
     \item{x}{
         a numeric vector, or a matrix for column statistics.
@@ -147,9 +162,11 @@ colCumsums(x, na.rm = FALSE, \dots)
 
 \value{
     
-    \code{skewness}, \code{kurtosis}
+    \code{skewness}\cr
+    \code{kurtosis}
     \cr
-    returns the value of the statistics, a numeric value.
+    return the value of the statistics, a numeric value. An 
+    attribute which reports the used method is added.
     \cr
     
     \code{basicsStats}
@@ -160,17 +177,27 @@ colCumsums(x, na.rm = FALSE, \dots)
     Stdev, Skewness, Kurtosis.
     \cr
     
-    \code{rowStats}, \code{rowAvgs}, \code{rowVars}, \code{rowStdevs},\cr
-    \code{rowSkewness}, \code{rowKurtosis}, \code{rowCumsum}
+    \code{rowStats}\cr
+    \code{rowAvgs}\cr
+    \code{rowVars}\cr
+    \code{rowStdevs}\cr
+    \code{rowSkewness}\cr
+    \code{rowKurtosis}\cr
+    \code{rowCumsum}
     \cr 
-    computes sample statistics by column. Missing values can be
+    compute sample statistics by column. Missing values can be
     handled.
     \cr
     
-    \code{colStats}, \code{colAvgs}, \code{colVars}, \code{colStdevs},\cr
-    \code{colSkewness}, \code{colKurtosis}, \code{colCumsum}
+    \code{colStats}\cr
+    \code{colAvgs}\cr
+    \code{colVars}\cr
+    \code{colStdevs},\cr
+    \code{colSkewness}\cr
+    \code{colKurtosis}\cr
+    \code{colCumsum}
     \cr 
-    computes sample statistics by column. Missing values can be
+    compute sample statistics by column. Missing values can be
     handled. 
     
 }

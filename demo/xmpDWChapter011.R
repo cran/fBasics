@@ -38,11 +38,11 @@
 
 ### Example: List all Countries in the CIA World Factbook
 
-	# List:
+	# Show Argument List:
 	args(ciaCountries)
 	###
 	
-	# function()
+	# List Countries and Codes:
 	ciaCountries() 
 	###
 	
@@ -52,11 +52,11 @@
 	
 ### Example: List all Inticators in the CIA World Factbook
 
-	# List:
+	# Show Argument List:
 	args(ciaIndiactors)
 	###
 	
-	# function()
+	# List Indicators and their Code Number:
 	ciaIndicators() 
 	###
 	
@@ -66,7 +66,7 @@
 
 ### Example: Swiss Indicators from the CIA World Factbook
 
-    # Arguments:
+    # Show Argument List:
     args(ciaByCountry)
     # function (code = "CH", from = FALSE, names = FALSE, details = TRUE)
     ###
@@ -99,7 +99,7 @@
     
 ### Example: Code 2001 - Worldwide GPD from CIA World Factbook
 
-	# Arguments:
+	# Show Argument List:
     args(ciaByIndicator)
     # function (code = 2001, from = FALSE, details = TRUE)
     ###

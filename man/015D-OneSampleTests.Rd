@@ -33,7 +33,7 @@
     
     A collection and description of functions of one
     sample tests for testing normality of for detecting 
-    non-randomness in obsevations.
+    non-randomness in observations.
     \cr
     
     The functions for testing normality are:

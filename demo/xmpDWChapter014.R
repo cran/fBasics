@@ -110,6 +110,7 @@
     # Volatility Series of Bid Prices:
     USDDEM.RET = USDDEM.RET[,"BID"]
     lmacfPlot(USDDEM.RET, lag.max = 48*14, main = "USDCHF 2 Weeks")
+    grid()
 	# Output:
     # Long Memory Autocorrelation Function:
     # Maximum Lag        672
@@ -124,6 +125,7 @@
     # Remove Return Value from Index Redefinition:
     NYSE.RET = outlierSeries(NYSE.RET)
     lmacfPlot(NYSE.RET, lag.max = 63, main = "NYSE 3 Month")
+    grid()
     # Output:
     # Long Memory Autocorrelation Function:
     # Maximum Lag        63
@@ -212,6 +214,10 @@
 
 ### 1.4.4 Example: Display the Taylor Effect
 
+    # Graph Frame:
+    par(mfrow = c(2, 2), cex = 0.7)
+    ###
+    
     # Taylor Effect - NYSE Data:
     NYSE = as.timeSeries(data(nyse))
     NYSE.RET = outlierSeries(returnSeries(NYSE))
@@ -220,7 +226,7 @@
 	###	
 	
     # Taylor Effect - USDCHF Data:
-    USDCHF = returnSeries(as.timeSeries(data(usdchf)))
+    USDCHF.RET = returnSeries(as.timeSeries(data(usdchf)))
     teffectPlot(USDCHF.RET, deltas = seq(from = 0.2, to = 3, by = 0.1))
     title(main = "\n\nUSDCHF Exchange Rate", cex = 0.5)
     ###
@@ -254,6 +260,7 @@
 	# Absolute Value Scaling of daily NYSE Index:
     NYSE = outlierSeries(returnSeries(as.timeSeries(data(nyse))))
     scalinglawPlot(NYSE, span = 6)$fit$coefficients
+    title(main = "\n\nNYSE")
     # Output:
     # Intercept         X
     # 4.1767239 0.5277384
@@ -262,6 +269,7 @@
     # Absolute Value Scaling of 30m USDCHF Rates:
     USDCHF = returnSeries(as.timeSeries(data(usdchf)))
     scalinglawPlot(x = USDCHF, span = 6)$fit$coefficients
+    title(main = "\n\nUSDCHF")
     # Output:
     # Intercept         X
     # 3.7083449 0.5225638

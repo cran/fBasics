@@ -99,6 +99,7 @@
     lines(s, dnorm(s, mean(x), sd(x)), col = "red")
     ###
     
+    
 # ------------------------------------------------------------------------------
 
 
@@ -223,6 +224,11 @@
     # Use Data from Example 1.3.1:
     x = as.vector(NYSE.RET)
     ###
+    
+    # Graph Frame:
+    par(mfrow = c(1, 1))
+    ###
+    
 
     # Log Density Plot:
     den = density(x)
@@ -494,8 +500,8 @@
 		plot(c(0, 1000), range(c(r1, r2, r3)), type = "n",
 			ylab = "r", main = Title)
 		lines(r1, col = "black") 
-		lines(r2, col = "red", lty = 3) 
-		lines(r3, col = "blue", lty = 3) 
+		lines(r2, col = "brown", lty = 3) 
+		lines(r3, col = "steelblue", lty = 3) 
 	} 
 	###
 
@@ -551,8 +557,8 @@
 		plot(c(0, 1000), range(c(r1, r2, r3)), type = "n",
 			ylab = "Cumulated r", main = Title)
 		lines(r1, col = "black") 
-		lines(r2, col = "red", lty = 3) 
-		lines(r3, col = "blue", lty = 3) 
+		lines(r2, col = "brown", lty = 3) 
+		lines(r3, col = "steelblue", lty = 3) 
 	}
     ###
        
@@ -749,15 +755,15 @@
 	plot(r, type = "l", main = "RSYMSTB(1.01) Series")
 	d = dsymstb(x, alpha = 1.01)
 	d.cauchy = dcauchy(x)
-	plot(x, log(d), type="l", main="DSYMSTB(1.01) - Close Cauchy")
+	plot(x, log(d), type ="l", main="DSYMSTB(1.01) - Close Cauchy")
 	density = density(r, from = -10, to = 10, n = 256)
-	points(density$x, log(density$y), col = "steelblue")
-	lines(x, log(d.cauchy), col = 6)
+	points(density$x, log(density$y), col = "steelblue", cex = 0.7)
+	lines(x, log(d.cauchy), col = "orange")
 	p = psymstb(x, alpha = 1.01)
 	p.cauchy = pcauchy(x)
-	plot(x, p, type="l", main="PSYMSTB(1.01) - Close Cauchy")
-	points(sort(r), (1:length(r))/length(r), col = "steelblue")
-	lines(x, p.cauchy, col = 6)
+	plot(x, p, type = "l", main = "PSYMSTB(1.01) - Close Cauchy")
+	points(sort(r), (1:length(r))/length(r), col = "steelblue", cex = 0.7)
+	lines(x, p.cauchy, col = "orange")
 	###
 		
 	# RSYMSTB(1.99) - Symmetric Stable Distribution - Close Cauchy: 
@@ -768,13 +774,13 @@
 	d.norm = dnorm(x, sd = sqrt(2))
 	plot(x, log(d), type = "l", main = "DSYMSTB(1.99) - Close Normal")
 	density = density(r, from = -5, to = 5, n = 256)
-	points(density$x, log(density$y), col = "steelblue")
-	lines(x, log(d.norm), col = 6)
+	points(density$x, log(density$y), col = "steelblue", cex = 0.7)
+	lines(x, log(d.norm), col = "orange")
 	p = psymstb(x, alpha = 1.99)
 	p.norm = pnorm(x, sd = sqrt(2))
-	plot(x, p, type="l", main="PSYMSTB(1.99) - Close Normal")
-	points(sort(r), (1:length(r))/length(r), col = "steelblue")
-	lines(x, p.norm, col = 6)
+	plot(x, p, type = "l", main = "PSYMSTB(1.99) - Close Normal")
+	points(sort(r), (1:length(r))/length(r), col = "steelblue", cex = 0.7)
+	lines(x, p.norm, col = "orange")
 	###
 	
 	
@@ -939,11 +945,11 @@
 	d = dgh(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
 	plot(x, log(d), type = "l", main = "DGH(1, 0, 1, 0, 1)")
 	density = density(r, from = -5, to = 5, n = 128)
-	points(density$x, log(density$y), col = "steelblue")
+	points(density$x, log(density$y), col = "steelblue", cex = 0.7)
 	grid()
 	p = pgh(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
 	plot(x, p, type = "l", main = "PGH(1, 0, 1, 0, 1)")
-	points(sort(r), (1:length(r))/length(r), col = "steelblue")
+	points(sort(r), (1:length(r))/length(r), col = "steelblue", cex = 0.7)
 	grid()
 	###
 	
@@ -955,11 +961,11 @@
 	d = dgh(x, alpha = 1, beta = 0.3, delta = 1, mu = 1, lambda = 1)
 	plot(x, log(d), type = "l", main = "DGH(1, 0.3, 1, 1)")
 	density = density(r, from = -5, to = 5, n = 128)
-	points(density$x, log(density$y), col = "steelblue")
+	points(density$x, log(density$y), col = "steelblue", cex = 0.7)
 	grid()
 	p = pgh(x, alpha = 1, beta = 0.3, delta = 1, mu = 1, lambda = 1)
 	plot(x, p, type = "l", main = "PGH(1, 0.3, 1, 1, 1)")
-	points(sort(r), (1:length(r))/length(r), col = "steelblue")
+	points(sort(r), (1:length(r))/length(r), col = "steelblue", cex = 0.7)
 	grid()
 	###
   
@@ -976,29 +982,29 @@
 	# HYP(1, 0, 1, 0) - Hyperbolic Distribution:	
 	x = seq(-6, 6, length = 256)
 	r = rhyp(4096, alpha = 1, beta = 0, delta = 1, mu = 0)
-	plot(r, type = "l", main = "RHYP(1, 0, 1, 0) Series")
+	plot(r, type = "l", main = "RHYP(1, 0, 1, 0) Series", col = "steelblue")
 	mean(r); var(r)	
 	d = dhyp(x, alpha = 1, beta = 0, delta = 1, mu = 0)
 	plot(x, log(d), type = "l", main = "DHYP(1, 0, 1, 0)")
 	density = density(r, from = -6, to = 6, n = 128)
-	points(density$x, log(density$y), col = 4)	
+	points(density$x, log(density$y), col = "steelblue")	
 	p = phyp(x, alpha = 1, beta = 0, delta = 1, mu = 0)
 	plot(x, p, type = "l", main = "PHYP(1, 0, 1, 0)")
-	points(sort(r), (1:length(r))/length(r), col = 4)
+	points(sort(r), (1:length(r))/length(r), col = "steelblue")
 	###	
 	
 	# HYP(1, 0.3, 1, 0.0) - Hyperbolic Distribution:		
 	x = seq(-7, 15, length = 256)	
 	r = rhyp(4096, alpha = 1, beta = 0.3, delta = 2, mu = 1)
-	plot(r, type = "l", main = "RHYP(1, 0.3, 2, 1) Series")
+	plot(r, type = "l", main = "RHYP(1, 0.3, 2, 1) Series", col = "steelblue")
 	mean(r); var(r)
 	d = dhyp(x, alpha = 1, beta = 0.3, delta = 2, mu = 1)
 	plot(x, log(d), type="l", main="DHYP(1, 0.3, 2, 1)")
 	density = density(r, from = -7, to = 15, n = 128)
-	points(density$x, log(density$y), col = 4)
+	points(density$x, log(density$y), col = "steelblue")
 	p = phyp(x, alpha = 1, beta = 0.3, delta = 2, mu = 1)
 	plot(x, p, ylim = c(0,1), type = "l", main = "PHYP(1, 0.3, 2, 1)")
-	points(sort(r), (1:length(r))/length(r), col = 4)
+	points(sort(r), (1:length(r))/length(r), col = "steelblue")
 	###
 
 
@@ -1018,10 +1024,12 @@
 	d = dnig(x, alpha = 1, beta = 0, delta = 1, mu = 0)
 	plot(x, log(d), type="l", main="DNIG(1, 0, 1, 0)")
 	density = density(r, from = -5, to = 5, n = 128)
-	points(density$x, log(density$y), col = "steelblue")
+	points(density$x, log(density$y), col = "steelblue", cex = 0.7)
+	grid()
 	p = pnig(x, alpha=1, beta=0, delta=1, mu=0)
 	plot(x, p, type = "l", main = "PNIG(1, 0, 1, 0)")
-	points(sort(r), (1:length(r))/length(r), col = "steelblue")
+	points(sort(r), (1:length(r))/length(r), col = "steelblue", cex = 0.7)
+	grid()
 	###
 	
 	# NIG(1, 0.3, 1, 1) - Hyperbolic Distribution:	
@@ -1031,10 +1039,12 @@
 	d = dnig(x, alpha = 1, beta = 0.3, delta = 1, mu = 1)
 	plot(x, log(d), type = "l", main = "DNIG(1, 0.3, 1, 1)")
 	density = density(r, from = -5, to = 5, n = 128)
-	points(density$x, log(density$y), col = "steelblue")
+	points(density$x, log(density$y), col = "steelblue", cex = 0.7)
+	grid()
 	p = pnig(x, alpha = 1, beta = 0.3, delta = 1, mu = 1)
 	plot(x, p, type = "l", main = "PNIG(1, 0.3, 1, 1)")
-	points(sort(r), (1:length(r))/length(r), col = "steelblue")
+	points(sort(r), (1:length(r))/length(r), col = "steelblue", cex = 0.7)
+	grid()
 	###
 
 	
@@ -1150,9 +1160,14 @@
 	x = as.vector(returnSeries(as.timeSeries(nyse)))
 	# Standardize time series
 	s = (x-mean(x))/sqrt(var(x)) 
-	# width - width of window for density plot
+	###
+	
+	# Graph Frame:
+	par(mfrow = c(2, 2), cex = 0.7)
+	
+	# Fit the Parameters and Plot:
 	fit = hypFit(x = s, alpha = 1, beta = 0, delta = 1, mu = 0, 
-		doplot = TRUE, width = 0.5)
+		doplot = TRUE, width = 1)
 	fit
 	###	
 	
@@ -1176,6 +1191,9 @@
 	x = as.vector(returnSeries(as.timeSeries(nyse)))
 	# Standardize time series
 	s = (x-mean(x))/sqrt(var(x))
+	###
+	
+	
 	# Note, this may take some time:
 	fit = nigFit(x = s, alpha = 1, beta = 0, delta = 1, mu = 0, 
 		doplot = TRUE)

@@ -76,15 +76,19 @@ function (x, ...)
 
 
 kurtosis.default =
-function (x, na.rm = FALSE, ...) 
+function (x, na.rm = FALSE, method = c("excess", "moment", "fisher"), ...) 
 {   # A function implemented by Diethelm Wuertz
   
     # Description:
-    #   Returns the value of the kurtosis of a
-    #   distribution function. Missing values
-    #   can be handled.
+    #   Returns the value of the kurtosis of a distribution function. 
+    
+    # Details:
+    #   Missing values can be handled.
     
     # FUNCTION:
+    
+    # Method:
+    method = method[1]
     
     # Warnings:
     if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
@@ -97,7 +101,19 @@ function (x, na.rm = FALSE, ...)
     # Kurtosis:
     n = length(x)
     if (is.integer(x)) x = as.numeric(x) 
-    kurtosis = sum((x-mean(x))^4/var(x)^2)/length(x) - 3
+    if (method == "excess") {
+        kurtosis = sum((x-mean(x))^4/var(x)^2)/length(x) - 3
+    } 
+    if (method == "moment") {
+        kurtosis = sum((x-mean(x))^4/var(x)^2)/length(x)
+    } 
+    if (method == "fisher") {
+        kurtosis = ((n+1)*(n-1)*((sum(x^4)/n)/(sum(x^2)/n)^2 - 
+            (3*(n-1))/(n+1)))/((n-2)*(n-3))
+    }
+
+    # Add Control Attribute:
+    attr(kurtosis, "method") <- method
     
     # Return Value:
     kurtosis  
@@ -156,15 +172,19 @@ function (x, ...)
 
 
 skewness.default =
-function (x, na.rm = FALSE, ...) 
+function (x, na.rm = FALSE, method = c("moment", "fisher"), ...) 
 {   # A function implemented by Diethelm Wuertz
   
     # Description:
-    #   Returns the value of the skewness of a
-    #   distribution function. Missing values
-    #   can be handled.
+    #   Returns the value of the skewness of a distribution function. 
+    
+    # Details:
+    #   Missing values can be handled.
     
     # FUNCTION:
+    
+    # Method:
+    method = method[1]
     
     # Warnings:
     if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
@@ -177,7 +197,20 @@ function (x, na.rm = FALSE, ...)
     # Skewness:
     n = length(x)
     if (is.integer(x)) x = as.numeric(x) 
-    skewness = sum((x-mean(x))^3/sqrt(var(x))^3)/length(x)
+    
+     
+    if (method == "moment") {
+        skewness = sum((x-mean(x))^3/sqrt(var(x))^3)/length(x)
+    } 
+    if (method == "fisher") {
+        if (n < 3)
+            skewness = NA
+        else 
+            skewness = ((sqrt(n*(n-1))/(n-2))*(sum(x^3)/n))/((sum(x^2)/n)^(3/2))
+    }   
+    
+    # Add Control Attribute:
+    attr(skewness, "method") <- method
     
     # Return Value:
     skewness  
@@ -191,8 +224,8 @@ skewness.data.frame =
 function (x, ...) 
 {   # A function implemented by Diethelm Wuertz
 
-     # Return Value:
-     sapply(x, skewness, ...)
+    # Return Value:
+    sapply(x, skewness, ...)
 }
 
 
@@ -231,25 +264,35 @@ function(x, ci = 0.95, column = 1)
     #   Calculates Basic Statistics
     
     # Arguments:
-    #	x - a numeric vector. If x is a matrix, a data.frame,
-    #		or a timeSeries object then the first column is used.
-    #   ci - Confidence Interval.
+    #   x - a numeric vector, or a rectangular data object. If 'x' 
+    #       is a matrix, a data.frame, or a timeSeries object then 
+    #       the first column is used by default, or alternatively
+    #       the one specified by the argument 'column'.
+    #   ci - a numeric value setting the confidence interval.
+    
+    # Value:
+    #   a two-column data frame, where the first column takes the 
+    #   value of the statistics, and the second its name, e.g.
+    #   "nobs", "NAs",  "Minimum", "Maximum", "1. Quartile",  
+    #   "3. Quartile",  "Mean", "Median", "Sum",  "SE Mean", 
+    #   "LCL Mean", "UCL Mean", "Variance", "Stdev", "Skewness", 
+    #   "Kurtosis")
      
     # FUNCTION:
     
     # DW 2005.05.02
     if (class(x) == "matrix") {
-	    x = x[, column]
-	    warning("Column ", column, " of matrix used")
+        x = x[, column]
+        warning("Column ", column, " of matrix used")
     }
     if (class(x) == "data.frame") {
-	    x = x[, column]
-	    warning("Column ", column, " of data.frame used")
-	    if (!is.numeric(x)) stop("The selected column is not numeric")
+        x = x[, column]
+        warning("Column ", column, " of data.frame used")
+        if (!is.numeric(x)) stop("The selected column is not numeric")
     }
     if (class(x) == "timeSeries") {
-	    x = x@Data[, colum]
-	    warning("Column ", column, " of timeSeries used")
+        x = x@Data[, colum]
+        warning("Column ", column, " of timeSeries used")
     }
     x = as.vector(x)  
     
@@ -314,7 +357,7 @@ function(x, FUN, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = FUN, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 1, FUN = FUN, ...) 
     }
         
@@ -344,7 +387,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = mean, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 1, FUN = mean, ...) 
     }
         
@@ -371,7 +414,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = var, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 1, FUN = var, ...) 
     }
         
@@ -425,7 +468,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = skewness, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 1, FUN = skewness, ...) 
     }
         
@@ -452,7 +495,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 1, FUN = kurtosis, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 1, FUN = kurtosis, ...) 
     }
         
@@ -479,7 +522,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 2, FUN = cumsum, ...) 
     }
         
@@ -506,7 +549,7 @@ function(x, FUN, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = FUN, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 2, FUN = FUN, ...) 
     }
         
@@ -536,7 +579,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm){
         result = apply(na.remove(x), MARGIN = 2, FUN = mean, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 2, FUN = mean, ...) 
     }
         
@@ -563,7 +606,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) { 
         result = apply(na.remove(x), MARGIN = 2, FUN = var, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 2, FUN = var, ...) 
     }
         
@@ -590,7 +633,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = sqrt(apply(na.remove(x), MARGIN = 2, FUN = var, ...))
-	} else {
+    } else {
         result = sqrt(apply(x, MARGIN = 2, FUN = var, ...))
     }
         
@@ -617,7 +660,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = skewness, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 2, FUN = skewness, ...) 
     }
         
@@ -644,7 +687,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = kurtosis, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 2, FUN = kurtosis, ...) 
     }
         
@@ -671,7 +714,7 @@ function(x, na.rm = FALSE, ...)
     # Statistics:
     if (na.rm) {
         result = apply(na.remove(x), MARGIN = 2, FUN = cumsum, ...) 
-	} else {
+    } else {
         result = apply(x, MARGIN = 2, FUN = cumsum, ...) 
     }
         
@@ -685,18 +728,18 @@ function(x, na.rm = FALSE, ...)
 
 stdev = 
 function(x, na.rm = FALSE)
-{	# A function implemented by Diethelm Wuertz
+{   # A function implemented by Diethelm Wuertz
 
     # Description:
     #   Returns the standard deviation of a vector
     
     # Notes:
-    #	Under use sd, this function is for SPlus compatibility.
+    #   Under use sd, this function is for SPlus compatibility.
     
     # FUNCTION:
     
-	# Return Value: 
-	sd(x = x, na.rm = na.rm)
+    # Return Value: 
+    sd(x = x, na.rm = na.rm)
 }
   
 

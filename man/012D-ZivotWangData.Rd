@@ -4,7 +4,9 @@
 
 \alias{CPI.dat}
 \alias{DowJones30}
+\alias{ford.s}
 \alias{highFreq3M.df}
+\alias{hp.s}
 \alias{IP.dat}
 \alias{lexrates.dat}
 \alias{msft.dat}
@@ -31,7 +33,9 @@
 	\tabular{ll}{
 	\code{CPI.dat} \tab Seasonally adjusted US Consumer Price Index, \cr 
 	\code{DowJones30.csv} \tab Dow Jones Industrial Average Index, \cr 
+	\code{ford.s.csv} \tab Daily returns of the Ford stock, \cr 
 	\code{highFreq3M.df} \tab 3M High Frequency Stock Market Data, \cr
+	\code{hp.s.csv} \tab Daily returns of the HP stock, \cr 
 	\code{IP.dat} \tab Seasonally Adjusted US Industrial Production Index, \cr              
 	\code{lexrates.dat} \tab Spot and Forward Exchange Rate Data, \cr
 	\code{msft.dat} \tab Open, High, Low, Close of Microsoft Stocks, \cr
@@ -80,6 +84,16 @@
     adjusted US Consumer Price Index. 
     \cr
     Data are downloadable and can be updated from Economagics's web site. 
+    \cr
+    
+    \bold{Ford and HP Stock Returns:}
+    \cr\cr
+    The files \code{ford.s.csv} and \code{hp.s.csv} contain data 
+    representing 2000 daily stock returns for the Ford and HP shares 
+    traded at NYSE. The time series span the period from Feburary 2, 
+    1984, to December 31, 1991. 
+    \cr
+    Data are downloadable and can be updated from Yahoo's web site.
     \cr
     
         

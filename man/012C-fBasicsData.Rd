@@ -35,9 +35,9 @@
 
 	A collection and description of data sets used in the  
 	examples. Included are data files for high frequency FX
-	data, time and sales data for financial Futures, and 
+	data, time and sales data for financial futures, and 
 	market returns for selected stock and market indexes.
-	Included are also tables for the finite sample Jarque Bera
+	Included are also tables for the finite sample Jarque-Bera
 	test.
 	\cr
 	

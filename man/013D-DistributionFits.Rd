@@ -22,11 +22,12 @@
 
 \description{
 
-    A collection and description of maximum likelihood 
-    estimators to fit the parameters of a distribution. 
-    Included are estimators for the Student-t, for the 
-    generalized hyperbolic hyperbolic, for the normal 
-    inverse Gaussian, and for empirical distributions. 
+    A collection and description of moment and maximum 
+    likelihood estimators to fit the parameters of a 
+    distribution. Included are estimators for the Student-t, 
+    for the stable, for the generalized hyperbolic hyperbolic, 
+    for the normal inverse Gaussian, and for empirical 
+    distributions. 
     \cr
 
     The functions are:
@@ -192,8 +193,7 @@ ssdFit(x, alpha = 1.4, seed = NULL, title = NULL, description = NULL)
     which contains as information the parameters to compute density,
     probability, quantiles, and random deviates for the functions
     \code{[dpqr]ssd}. 
-        
-       
+              
 }
 
 

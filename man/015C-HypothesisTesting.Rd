@@ -19,7 +19,7 @@
 
 \description{
     
-    Class represenatation and methods for objects of 
+    Class representation and methods for objects of 
     class 'fHTEST'.
     \cr
     
