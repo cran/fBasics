@@ -1,10 +1,10 @@
 Package: fBasics
-Version: 290.76
-Revision: 4033
-Date: 2009-04-15
+Version: 2100.77
+Revision: 4093
+Date: 2009-04-19
 Title: Rmetrics - Markets and Basic Statistics
 Author: Diethelm Wuertz and many others, see the SOURCE file
-Depends: R (>= 2.6.0), MASS, methods, timeDate, timeSeries
+Depends: R (>= 2.6.0), MASS, methods, timeDate, timeSeries (>= 2100.83)
 Suggests: akima, spatial, RUnit, tcltk
 Maintainer: Rmetrics Core Team <Rmetrics-core@r-project.org>
 Description: Environment for teaching "Financial Engineering and
@@ -16,6 +16,6 @@ LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
 URL: http://www.rmetrics.org
-Packaged: 2009-04-15 17:34:40 UTC; yankee
+Packaged: 2009-04-20 06:31:28 UTC; yankee
 Repository: CRAN
-Date/Publication: 2009-04-16 06:59:47
+Date/Publication: 2009-04-20 08:32:29
