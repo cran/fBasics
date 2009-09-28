@@ -16,19 +16,107 @@
 
 # Copyrights (C)
 # for this R-port: 
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
+#   1999 - 2009, Rmetrics Association, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
 
 
 ################################################################################
-# FUNCTION:             DESCRIPTION:
-#  nigShapeTriangle      Plots NIG Shape Triangle
+# FUNCTION:           DESCRIPTION:
+#  .nigMean            Computes the mean of the normal inverse Gaussian PDF
+#  .nigVar             Computes the variance of the normal inverse Gaussian PDF
+#  .nigSkew            Computes the skewness of the normal inverse Gaussian PDF
+#  .nigKurt            Computes the kurtosis of the normal inverse Gaussian PDF
+#  nigShapeTriangle    Plots NIG Shape Triangle
+################################################################################
+
+
+.nigMean <- 
+    function(alpha = 1, beta = 0, delta = 1, mu = 0)
+{   
+    # A function implemented by Diethelm Wuertz
+    
+    # Description:
+    #   Computes the mean of the Normal Inverse Gaussian PDF
+    
+    # FUNCTION:
+    
+    # Mean:
+    gamma = sqrt(alpha^2 - beta^2)
+    ans = mu + delta * beta / gamma
+    
+    # Return Value:
+    ans
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+.nigVar <- 
+    function(alpha = 1, beta = 0, delta = 1, mu = 0)
+{   
+    # A function implemented by Diethelm Wuertz
+    
+    # Description:
+    #   Computes the variance of the Normal Inverse Gaussian PDF
+    
+    # FUNCTION:
+    
+    # Variance:
+    gamma = sqrt(alpha^2 - beta^2)
+    ans = delta * alpha^2 / gamma^3
+    
+    # Return Value:
+    ans
+}
+
+
+
+# ------------------------------------------------------------------------------
+
+
+.nigSkew <- 
+    function(alpha = 1, beta = 0, delta = 1, mu = 0)
+{   
+    # A function implemented by Diethelm Wuertz
+    
+    # Description:
+    #   Computes the skewness of the Normal Inverse Gaussian PDF
+    
+    # FUNCTION:
+    
+    # Skewness:
+    gamma = sqrt(alpha^2 - beta^2)
+    ans = 3*beta / ( alpha * sqrt(delta*gamma) ) 
+    
+    # Return Value:
+    ans
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+.nigKurt <- 
+    function(alpha = 1, beta = 0, delta = 1, mu = 0)
+{   
+    # A function implemented by Diethelm Wuertz
+    
+    # Description:
+    #   Computes the excess kurtosis of the Normal Inverse Gaussian PDF
+    
+    # FUNCTION:
+    
+    # Skewness:
+    gamma = sqrt(alpha^2 - beta^2)
+    ans = 3 * ( 1 + 4 * beta^2 / alpha^2) / (delta * gamma)
+    
+    # Return Value:
+    ans
+}
+
+
 ################################################################################
 
    

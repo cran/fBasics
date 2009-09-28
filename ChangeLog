@@ -1,36 +1,61 @@
-2009-04-19  chalabi
+2009-05-18 wuertz
 
-	* DESCRIPTION: added explicit version number in Depends field for
-	  key packages
+        * stable dist fit improved
 
-2009-04-02  chalabi
+pkg/fBasics/NAMESPACE
+pkg/fBasics/R/dist-stableFit.R
+pkg/fBasics/man/dist-DistributionFits.Rd
 
-	* DESCRIPTION: more explicit depends and suggests field in DESC
-	  file.
+2009-05-18 wuertz
 
-2009-04-01  chalabi
+        * stable distribution nlminb added
 
-	* DESCRIPTION: updated DESC file
+pkg/fBasics/R/dist-stable.R
+pkg/fBasics/R/dist-stableFit.R
+pkg/fBasics/man/dist-DistributionFits.Rd
 
-2009-03-13  chalabi
+2009-05-18 wuertz
 
-	* R/qqPlot.R:
+        * a useful counts plot
 
-2009-02-09  wuertz
+pkg/fBasics/R/plot-counts.R
 
-	* R/qqPlot.R:
+2009-04-29 wuertz
 
-2009-01-28  chalabi
+        * color script files renamed in color-foo
 
-	* DESCRIPTION: updated version number
+pkg/fBasics/R/color-Locator.R
+pkg/fBasics/R/color-Palettes.R
+pkg/fBasics/R/color-RGB.R
+pkg/fBasics/R/color-Table.R
+pkg/fBasics/R/colorLocator.R
+pkg/fBasics/R/colorPalette.R
+pkg/fBasics/R/colorTable.R
+pkg/fBasics/R/matrix-pdl.R
+pkg/fBasics/R/pdl.R
+pkg/fBasics/R/rgb.R
 
-2009-01-28  chalabi
+2009-04-29 wuertz
 
-	* DESCRIPTION: changed version number to match version on CRAN + 1
+        * plot files renamed as plot-foo to find them better
 
-2009-01-12  chalabi
+pkg/fBasics/R/plot-acfPlot.R
+pkg/fBasics/R/plot-boxPlot.R
+pkg/fBasics/R/plot-histPlot.R
+pkg/fBasics/R/plot-qqPlot.R
+pkg/fBasics/R/plot-scalinglawPlot.R
+pkg/fBasics/R/plot-seriesPlot.R
+pkg/fBasics/R/plot-subPlot.R
+pkg/fBasics/R/plot-subStars.R
 
-	* man/NormalityTests.Rd, man/correlationTest.Rd, man/fHTEST.Rd,
-	  man/ks2Test.Rd, man/locationTest.Rd, man/scaleTest.Rd,
-	  man/varianceTest.Rd: fixed warning with new Rd parser
+2009-04-19 chalabi
 
+        * added explicit version number in Depends field for key packages
+
+pkg/fBasics/DESCRIPTION
+
+2009-01-28 chalabi
+
+        * changed version number to match version on CRAN + 1
+
+pkg/fBasics/DESCRIPTION

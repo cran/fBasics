@@ -37,9 +37,9 @@
 
 
 stableFit <-
-    function(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
-    type = c("q", "mle"), doplot = TRUE, trace = FALSE,
-    title = NULL, description = NULL)
+function(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
+    type = c("q", "mle"), doplot = TRUE, control = list(),
+    trace = FALSE, title = NULL, description = NULL)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -62,7 +62,7 @@ stableFit <-
         if (is.na(Gamma)) Gamma = gamma
         if (is.na(Delta)) Delta = delta
         ans = .mleStableFit(x, Alpha, Beta, Gamma, Delta, doplot,
-            trace, title, description)
+            control, trace, title, description)
     }
 
     # Return Value:
@@ -74,7 +74,7 @@ stableFit <-
 
 
 .phiStable =
-    function()
+function()
 {
     # A function implemented by Diethelm Wuertz
 
@@ -371,7 +371,7 @@ stableFit <-
 
 
 .qStableFit <-
-    function(x, doplot = TRUE, title = NULL, description = NULL)
+function(x, doplot = TRUE, title = NULL, description = NULL)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -463,7 +463,7 @@ stableFit <-
     # Return Value:
     new("fDISTFIT",
         call = as.call(CALL),
-        model = "Student-t Distribution",
+        model = "Stable Distribution",
         data = as.data.frame(x),
         fit = fit,
         title = as.character(title),
@@ -475,8 +475,8 @@ stableFit <-
 
 
 .mleStableFit <-
-    function(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0, doplot = TRUE,
-    trace = FALSE, title = NULL, description = NULL)
+function(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0, doplot = TRUE,
+    control = list(), trace = FALSE, title = NULL, description = NULL)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -496,65 +496,74 @@ stableFit <-
     CALL = match.call()
 
     # Log-likelihood Function:
-    establemle = function(x, y = x, trace = FALSE) {
-        alpha = 2/(1+exp(-x[1]))
-        beta = tanh(x[2])
-        gamma = x[3]
-        delta = x[4]
-        f = -sum(log(dstable(y, alpha = alpha, beta = beta,
-            gamma = gamma, delta = delta)))
+    mle = function(x, y = x, trace = FALSE) {
+        f = -mean(log(dstable(y, 
+            alpha = x[1], beta = x[2], gamma = x[3], delta = x[4])))
         # Print Iteration Path:
         if (trace) {
             cat("\n Objective Function Value:  ", -f)
-            cat("\n Stable Estimate:           ", alpha, beta, gamma, delta)
+            cat("\n Stable Estimate:           ", x)
             cat("\n")
         }
         f
     }
-
+    
     # Minimization:
-    r = nlm(f = establemle, p = c(log(alpha/(2-alpha)), atanh(beta),
-        gamma, delta), y = x, trace = trace)
-    alpha = 2/(1+exp(-r$estimate[1]))
-    beta = tanh(r$estimate[2])
-    gamma = r$estimate[3]
-    delta = r$estimate[4]
-
+    eps = 1e-4
+    r <- nlminb(objective = mle, 
+        start = c(alpha, beta, gamma, delta), 
+        lower = c( eps, -1+eps, 0+eps, -Inf),
+        upper = c(2-eps, 1-eps,  Inf,  Inf),
+        y = x, control = control, trace = trace) 
+    alpha = r$par[1]
+    beta = r$par[2]
+    gamma = r$par[3]
+    delta = r$par[4]
+    
     # Optional Plot:
-    if (doplot) {
-        span.min = qstable(0.01, alpha, beta)
-        span.max = qstable(0.99, alpha, beta)
-        span = seq(span.min, span.max, length = 100)
-        par(err = -1)
-        z = density(x, n = 100)
-        x = z$x[z$y > 0]
-        y = z$y[z$y > 0]
-        y.points = dstable(span, alpha, beta)
-        ylim = log(c(min(y.points), max(y.points)))
-        plot(x, log(y), xlim = c(span[1], span[length(span)]),
-            ylim = ylim, type = "p", xlab = "x", ylab = "log f(x)")
-        title("STUDENT-T: Parameter Estimation")
-        lines(x = span, y = log(y.points), col = "steelblue")
-        if (exists("grid")) grid()
-    }
+    if (doplot) .stablePlot(x, alpha, beta, gamma, delta)
 
     # Add Title and Description:
     if (is.null(title)) title = "Stable Parameter Estimation"
     if (is.null(description)) description = description()
 
     # Fit:
-    fit = list(estimate = c(alpha = alpha, beta = beta, gamma = gamma,
-        delta = delta), minimum = -r$minimum, code = r$code, gradient =
-        r$gradient)
+    fit = list(estimate = c(alpha, beta, gamma, delta), 
+        minimum = -r$objective, code = r$convergence, gradient = r$gradient)
 
     # Return Value:
     new("fDISTFIT",
         call = as.call(CALL),
-        model = "Student-t Distribution",
+        model = "Stable Distribution",
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
         description = description() )
+}
+
+
+# ------------------------------------------------------------------------------
+
+
+.stablePlot <-
+function(x, alpha, beta, gamma, delta)
+{
+    span.min = qstable(0.01, alpha, beta, gamma, delta)
+    span.max = qstable(0.99, alpha, beta, gamma, delta)
+    span = seq(span.min, span.max, length = 100)
+    par(err = -1)
+    z = density(x, n = 100)
+    x = z$x[z$y > 0]
+    y = z$y[z$y > 0]
+    y.points = dstable(span, alpha, beta, gamma, delta)
+    ylim = log(c(min(y.points), max(y.points)))
+    plot(x, log(y), xlim = c(span[1], span[length(span)]),
+        ylim = ylim, type = "p", xlab = "x", ylab = "log f(x)")
+    title("Stable Distribution: Parameter Estimation")
+    lines(x = span, y = log(y.points), col = "steelblue")
+    grid()
+    
+    invisible()
 }
 
 

@@ -36,12 +36,13 @@
 
 \usage{
 nFit(x, doplot = TRUE, span = "auto", title = NULL, description = NULL, \dots)
+
 tFit(x, df = 4, doplot = TRUE, span = "auto", trace = FALSE, title = NULL, 
     description = NULL, \dots)
     
 stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0, 
-    type = c("q", "mle"), doplot = TRUE, trace = FALSE, title = NULL, 
-    description = NULL) 
+    type = c("q", "mle"), doplot = TRUE, control = list(),
+    trace = FALSE, title = NULL, description = NULL) 
     
 \S4method{show}{fDISTFIT}(object)
 }
@@ -49,6 +50,10 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
 
 \arguments{
   
+    \item{control}{
+        [stableFit] - \cr
+        a list of control parameters, see function \code{nlminb}.
+        }
     \item{alpha, beta, gamma, delta}{
         [stable] - \cr
         The parameters are \code{alpha}, \code{beta}, \code{gamma}, 
@@ -118,25 +123,10 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
         log liklihood function.
         }
     \item{code}{
-        an integer indicating why the optimization process terminated.\cr
-        1: relative gradient is close to zero, current iterate is probably 
-            solution; \cr
-        2: successive iterates within tolerance, current iterate is probably 
-            solution; \cr
-        3: last global step failed to locate a point lower than \code{estimate}. 
-            Either \code{estimate} is an approximate local minimum of the 
-            function or \code{steptol} is too small; \cr
-        4: iteration limit exceeded; \cr
-        5: maximum step size \code{stepmax} exceeded five consecutive times. 
-            Either the function is unbounded below, becomes asymptotic to a 
-            finite value from above in some direction or \code{stepmax} 
-            is too small.
-            }
+        an integer indicating why the optimization process terminated.
+        }
     \item{gradient}{
         the gradient at the estimated maximum.
-        }
-    \item{steps}{
-        number of function calls.
         }
         
     Remark: The parameter estimation for the stable distribution via the 

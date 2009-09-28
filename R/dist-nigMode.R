@@ -6,17 +6,17 @@
 #
 # This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
 # GNU Library General Public License for more details.
 #
-# You should have received A copy of the GNU Library General
-# Public License along with this library; if not, write to the
-# Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# You should have received a copy of the GNU Library General 
+# Public License along with this library; if not, write to the 
+# Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA  02111-1307  USA
 
 # Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
+# for this R-port: 
+#   1999 - 2009, Diethelm Wuertz, Rmetrics Foundation, GPL
 #   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
 #   www.rmetrics.org
 # for the code accessed (or partly included) from other R-ports:
@@ -27,35 +27,30 @@
 
 
 ################################################################################
-# FUNCTION:                 DESCRIPTION:
-#  listDescription           Extracts R package description
+# FUNCTION:             DESCRIPTION:
+#  nigMode               Computes the normal inverse Gaussian mode
 ################################################################################
 
 
-listDescription <-
-    function(package, character.only = FALSE)
-{
-    # A function implemented by Diethelm Wuertz & Yohan Chalabi
-
+.nigMode <- 
+    function(alpha = 1, beta = 0, delta = 1, mu = 0)
+{   
+    # A function implemented by Diethelm Wuertz
+    
     # Description:
-    #   Extracts package description
-
-    # Example:
-    #   listDescription("fSeries")
-
+    #   Computes the mode of the Normal Inverse Gaussian PDF
+    
     # FUNCTION:
-
-    # Extract Description:
-    if (!character.only)
-        package <- as.character(substitute(package))
-    cmd = paste("library(help =", package, ")", sep = "" )
-    ans = eval(parse(text = cmd))
-    name = ans$name
-    parh = ans$path
-    description = ans$info[[1]]
-    index = ans$info[[2]]
-    cat("\n", package, "Description:\n\n")
-    cat(paste(" ", description), sep = "\n")
+    
+    # Find Maximum: 
+    min = qnig(0.01, alpha, beta, delta, mu)
+    max = qnig(0.99, alpha, beta, delta, mu)
+    ans = optimize(f = dnig, interval = c(min, max), 
+        alpha = alpha, beta = beta, delta = delta, mu = mu,  
+        maximum = TRUE, tol = .Machine$double.eps)$maximum
+    
+    # Return Value:
+    ans
 }
 
 

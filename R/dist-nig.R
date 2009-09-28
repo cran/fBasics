@@ -35,7 +35,6 @@
 # FUNCTION:             DESCRIPTION:
 #  .pnigC                Fast C implementation (fails)
 #  .qnigC                Fast C implementation
-#  .CArrange             Arranges input matrices and vectors for C
 ################################################################################
 
 
@@ -47,11 +46,26 @@ dnig <-
     # Description:
     #   Returns density for inverse Gaussian DF
     
+    # Example:
+    #   x = rnorm(1000); u = dgh(x, 1.1, 0.2, 0.8, 0.4, -0.5)
+    #   v = dnig(rnorm(x), 1.1, 0.2, 0.8, 0.4); u -v
+    
     # FUNCTION:
     
     # Density:
-    dgh(x = x, alpha = alpha, beta = beta, delta = delta, mu = mu, 
-        lambda = -0.5, log = log)
+    #   dgh(x = x, alpha = alpha, beta = beta, delta = delta, mu = mu, 
+    #   lambda = -0.5, log = log)
+    
+    log.a = delta*sqrt(alpha^2-beta^2) + log(delta*alpha/pi)
+    Sqrt = sqrt(delta^2+(x-mu)^2) 
+    log.Sqrt = -log(Sqrt)
+    log.K1 = log(besselK(alpha * Sqrt, 1, expon.scaled = TRUE)) - alpha*Sqrt
+    log.Exp = beta*(x-mu)   
+    dnig = log.a + log.Sqrt + log.K1 + log.Exp
+    if (!log) dnig = exp(dnig)
+    
+    # Return Value:
+    dnig
 }
 
 
@@ -69,8 +83,22 @@ pnig <-
     # Function:
     
     # Probability:
-    pgh(q = q, alpha = alpha, beta = beta, delta = delta, mu = mu, 
-        lambda = -0.5)
+    #   pgh(q = q, alpha = alpha, beta = beta, delta = delta, mu = mu, 
+    #   lambda = -0.5)
+    
+    if (alpha <= 0) 
+        stop("alpha must be greater than zero")
+    if (delta <= 0) 
+        stop("delta must be greater than zero")
+    if (abs(beta) >= alpha) 
+        stop("abs value of beta must be less than alpha")
+    ans = NULL
+    for (Q in q) {
+        Integral = integrate(dnig, -Inf, Q, stop.on.error = FALSE, 
+            alpha = alpha, beta = beta, delta = delta, mu = mu)
+        ans = c(ans, as.numeric(unlist(Integral)[1]))
+    }
+    ans
 }
 
 
@@ -88,8 +116,42 @@ qnig <-
     # FUNCTION:
     
     # Quantiles:
-    qgh(p = p, alpha = alpha, beta = beta, delta = delta, mu = mu, 
-        lambda = -0.5)
+    # qgh(p = p, alpha = alpha, beta = beta, delta = delta, mu = mu, 
+    #   lambda = -0.5)
+    
+    # Checks:
+    if (alpha <= 0) stop("alpha must be greater than zero")
+    if (delta <= 0) stop("delta must be greater than zero")
+    if (abs(beta) >= alpha) stop("abs value of beta must be less than alpha")
+
+    # Internal Function:
+    .froot <-
+    function(x, alpha, beta, delta, mu, p)
+    {
+        pnig(q = x, alpha = alpha, beta = beta, delta = delta,
+            mu = mu) - p
+    }
+
+    # Quantiles:
+    result = NULL
+    for (pp in p) {
+        lower = -1
+        upper = +1
+        counter = 0
+        iteration = NA
+        while (is.na(iteration)) {
+            iteration = .unirootNA(f = .froot, interval = c(lower,
+                upper), alpha = alpha, beta = beta, delta = delta,
+                mu = mu, p = pp)
+            counter = counter + 1
+            lower = lower - 2^counter
+            upper = upper + 2^counter
+        }
+        result = c(result, iteration)
+    }
+
+    # Return Value:
+    result
 }
 
 
@@ -161,29 +223,31 @@ rnig <-
     # Description:
     #   Returns quantiles for for inverse Gaussian DF
     
+    # Example:
+    #   p = runif(10); .qnigC(p)
+    
     # FUNCTION:
     
     # Checks:
-    if(alpha <= 0) stop("Invalid parameters: alpha <= 0.\n")
-    if(alpha^2 <= beta^2) stop("Invalid parameters: alpha^2 <= beta^2.\n")
-    if(delta <= 0) stop("Invalid parameters: delta <= 0.\n")
+    if(alpha <= 0) stop("Invalid parameters: alpha <= 0.0\n")
+    if(alpha^2 <= beta^2) stop("Invalid parameters: alpha^2 <= beta^2.0\n")
+    if(delta <= 0) stop("Invalid parameters: delta <= 0.0\n")
     if((sum(is.na(p)) > 0)) 
         stop("Invalid probabilities:\n",p,"\n")
     else 
         if(sum(p < 0)+sum(p > 1) > 0) stop("Invalid probabilities:\n",p,"\n")
-              
-    n <- length(p)
-    q <- rep(0, n)
     
     # Evaluate NIG cdf by calling C function
+    n <- length(p)
+    q <- rep(0, n)
     retValues <- .C("qNIG",
-        .CArrange(p,1,1,n),
+        as.double(p),
         as.double(mu),
         as.double(delta),
         as.double(alpha),
         as.double(beta),
         as.integer(n),
-        .CArrange(q, 1, 1, n),
+        as.double(q),
         PACKAGE = "fBasics")
     quantiles <- retValues[[7]]
     quantiles[quantiles <= -1.78e+308] <- -Inf
@@ -204,79 +268,35 @@ function(q, alpha = 1, beta = 0, delta = 1, mu = 0)
     #   Returns probabilities for for inverse Gaussian DF
     
     # IMPORTANT NOTE:
-    #   DW: C program fails
+    #   DW: C program fails, remains to check
     
     # Example:
-    #   .pnigC(runif(10))
-    
+    #   q = sort(rnorm(10)); .pnigC(q) # FAILS
+        
     # FUNCTION:
     
     # Checks:
-    if(alpha <= 0) stop("Invalid parameters: alpha <= 0.\n")
-    if(alpha^2 <= beta^2) stop("Invalid parameters: alpha^2 <= beta^2.\n")
-    if(delta <= 0) stop("Invalid parameters: delta <= 0.\n")
+    if(alpha <= 0) stop("Invalid parameters: alpha <= 0.0\n")
+    if(alpha^2 <= beta^2) stop("Invalid parameters: alpha^2 <= beta^2.0\n")
+    if(delta <= 0) stop("Invalid parameters: delta <= 0.0\n")
     if(sum(is.na(q)) > 0) stop("Invalid quantiles:\n", q)
     
+    # Evaluate NIG cdf by calling C function
     n <- length(q)
     p <- rep(0, n)
-    
-    # Evaluate NIG cdf by calling C function
     retValues <- .C("pNIG",
-        .CArrange(q, 1, 1, n),
+        as.double(q),
         as.double(mu),
         as.double(delta),
         as.double(alpha),
         as.double(beta),
         as.integer(n),
-        .CArrange(p, 1, 1, n),
+        as.double(p),
         PACKAGE = "fBasics")
     probs <- retValues[[7]]   
     
     # Return Value:
     probs
-}
-
-
-# ------------------------------------------------------------------------------
- 
-    
-.CArrange <-
-    function(obj, i, j, n)
-{
-    # Description:
-    #   Arrange input matrices and vectors in a suitable way for the C program
-    #   Matrices are transposed because the C program stores matrices by row 
-    #   while R stores matrices by column
-    
-    # Arguments:
-    #   i - length of first dimension
-    #   j - length of second dimension
-    #   n - length of third dimension
-    
-    # Value:
-    #   out - transformed data set
-    
-    # Author: 
-    #   Daniel Berg <daniel at nr.no> (Kjersti Aas <Kjersti.Aas at nr.no>)
-    #   Date: 12 May 2005
-    #   Version: 1.0.2
-   
-    # FUNCTION:
-        
-    if(is.null(obj)) stop("Missing data")
-  
-    if(is.vector(obj)) {
-        if(i==1 & j==1 & length(obj)==n) out <- as.double(obj)
-        else stop("Unexpected length of vector")
-    } else if(is.matrix(obj)) {
-        if(nrow(obj) == i && ncol(obj) == j) out <- as.double(rep(t(obj), n))
-        else stop("Unexpected dimensions of matrix")
-    } else {
-        stop("Unexpected object")
-    }
-  
-    # Return Value:
-    out 
 }
 
 
