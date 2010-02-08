@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:                 SLIDER MENU:
@@ -33,7 +22,7 @@
 
 
 .subStars <- 
-    function (x, keyOffset = c(0, 0), loc = NULL, palette = NULL) 
+function(x, keyOffset = c(0, 0), loc = NULL, palette = NULL) 
 {
     # Description:
     #   Creates a sub stars plot
@@ -81,7 +70,7 @@
     
     angles <- seq.int(0, 2 * pi, length.out = n.seg + 1)[-(n.seg + 1)]
     x <- apply(x, 2, 
-        function(x) (x - min(x, na.rm = TRUE))/diff(range(x, na.rm = TRUE)))
+    function(x) (x - min(x, na.rm = TRUE))/diff(range(x, na.rm = TRUE)))
     
     mx <- max(x <- x * len)
     if (is.null(xlim)) xlim <- range(xloc) + c(-mx, mx)

@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port: 
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
@@ -35,7 +24,7 @@
 
 
 hypMode <- 
-    function(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
+function(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
 {   
     # A function implemented by Diethelm Wuertz
     
@@ -60,7 +49,7 @@ hypMode <-
 
 
 .hyp1Mode <- 
-    function(alpha = 1, beta = 0, delta = 1, mu = 0)
+function(alpha = 1, beta = 0, delta = 1, mu = 0)
 {   
     # A function implemented by Diethelm Wuertz
     
@@ -81,7 +70,7 @@ hypMode <-
 
 
 .hyp2Mode <- 
-    function(zeta = 1, rho = 0, delta = 1, mu = 0)
+function(zeta = 1, rho = 0, delta = 1, mu = 0)
 {   
     # A function implemented by Diethelm Wuertz
     
@@ -104,7 +93,7 @@ hypMode <-
 
 
 .hyp3Mode <-  
-    function(xi = 1/sqrt(2), chi = 0, delta = 1, mu = 0)
+function(xi = 1/sqrt(2), chi = 0, delta = 1, mu = 0)
 {   
     # A function implemented by Diethelm Wuertz
     
@@ -129,7 +118,7 @@ hypMode <-
 
 
 .hyp4Mode <-  
-    function(a.bar = 1, b.bar = 0, delta  = 1, mu = 0)
+function(a.bar = 1, b.bar = 0, delta  = 1, mu = 0)
 {   
     # A function implemented by Diethelm Wuertz
     

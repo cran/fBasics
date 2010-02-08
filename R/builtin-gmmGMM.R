@@ -16,7 +16,7 @@
 
 
 ################################################################################
-# FUNCTION:            DESCRIPTION:
+# FUNCTION:             
 #  .gmm
 #  .HAC
 #  .weightsAndrews2
@@ -24,6 +24,10 @@
 #  .summary.gmm
 #  .lintest
 ################################################################################
+
+
+# Code borrowed from 
+#   R's contributed package "gmm" written by Pierre Chausse.
 
 
 # Rmetrics:
@@ -396,7 +400,7 @@ if (typeg == 1)
 
 
 .HAC <- 
-function (x, weights = .weightsAndrews2, bw = .bwAndrews2, 
+function(x, weights = .weightsAndrews2, bw = .bwAndrews2, 
     prewhite = FALSE, ar.method = "ols", kernel=c("Quadratic Spectral", 
     "Truncated", "Bartlett", "Parzen", "Tukey-Hanning"), approx="AR(1)",
     tol = 1e-7) 
@@ -450,7 +454,7 @@ function (x, weights = .weightsAndrews2, bw = .bwAndrews2,
 
 
 .weightsAndrews2 <- 
-function (x, bw = .bwAndrews2, kernel = c("Quadratic Spectral", 
+function(x, bw = .bwAndrews2, kernel = c("Quadratic Spectral", 
     "Truncated", "Bartlett", "Parzen", "Tukey-Hanning"), approx = c("AR(1)", 
     "ARMA(1,1)"), prewhite = 1, ar.method = "ols", tol = 1e-7, verbose = FALSE)
 {
@@ -471,7 +475,7 @@ function (x, bw = .bwAndrews2, kernel = c("Quadratic Spectral",
 
 
 .bwAndrews2 <- 
-function (x, kernel = c("Quadratic Spectral", 
+function(x, kernel = c("Quadratic Spectral", 
     "Truncated", "Bartlett", "Parzen", "Tukey-Hanning"), approx = c("AR(1)", 
     "ARMA(1,1)"), prewhite = 1, ar.method = "ols") 
 {

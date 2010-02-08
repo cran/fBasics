@@ -14,14 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA 02111-1307 USA
 
-# Copyrights (C)
-# for this R-port: 
-#   1999 - Diethelm Wuertz, GPL
-#   2007 - Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-# for code accessed (or partly included) from other sources:
-#   see Rmetric's copyright and license files
-
 
 ################################################################################
 # FUNCTION:                 DESCRIPTION:
@@ -35,7 +27,7 @@
 
 
 maxddStats <- 
-    function(mean = 0, sd = 1, horizon = 1000)
+function(mean = 0, sd = 1, horizon = 1000)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -76,7 +68,7 @@ maxddStats <-
 
 
 .maxddStats <- 
-    function(mu = 0, sigma = 1, horizon = 1000)
+function(mu = 0, sigma = 1, horizon = 1000)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -163,11 +155,10 @@ maxddStats <-
     
 
 ################################################################################
-# Distribution and Random Deviates
 
     
 dmaxdd <- 
-    function(x, sd = 1, horizon = 100, N = 1000) 
+function(x, sd = 1, horizon = 100, N = 1000) 
 {
     # Description:
     #   Calculates for a trendless Brownian process (mean=0) and
@@ -216,7 +207,7 @@ dmaxdd <-
 
 
 pmaxdd <- 
-    function(q, sd = 1, horizon = 100, N = 1000) 
+function(q, sd = 1, horizon = 100, N = 1000) 
 {
     # Description:
     #   Calculates for a trendless Brownian process (mean=0) 
@@ -264,7 +255,7 @@ pmaxdd <-
 
 
 rmaxdd <- 
-    function(n, mean = 0, sd = 1, horizon = 100) 
+function(n, mean = 0, sd = 1, horizon = 100) 
 {
     # Description:
     #   Generates for a Brownian process with mean "mean" and

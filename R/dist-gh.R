@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2009, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
@@ -36,7 +25,7 @@
 
 
 dgh <-
-function(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1, log = FALSE)
+function(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2, log = FALSE)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -45,6 +34,14 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1, log = FALSE)
 
     # FUNCTION:
 
+    # Parameters:
+    if (length(alpha) == 4) {
+       mu = alpha[4]
+       delta = alpha[3]
+       beta = alpha[2]
+       alpha = alpha[1]
+    } 
+    
     # Checks:
     if (alpha <= 0) stop("alpha must be greater than zero")
     if (delta <= 0) stop("delta must be greater than zero")
@@ -75,7 +72,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1, log = FALSE)
 
 
 pgh <-
-function(q, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
+function(q, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -107,7 +104,7 @@ function(q, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
 
 
 qgh <-
-function (p, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
+function(p, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -122,8 +119,7 @@ function (p, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
     if (abs(beta) >= alpha) stop("abs value of beta must be less than alpha")
 
     # Internal Function:
-    .froot <-
-    function(x, alpha, beta, delta, mu, lambda, p)
+    .froot <- function(x, alpha, beta, delta, mu, lambda, p)
     {
         pgh(q = x, alpha = alpha, beta = beta, delta = delta,
             mu = mu, lambda = lambda) - p
@@ -156,7 +152,7 @@ function (p, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
 
 
 rgh <-
-function (n, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = 1)
+function(n, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2)
 {
     # A function implemented by Diethelm Wuertz
 

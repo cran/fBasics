@@ -14,27 +14,16 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:                 DESCRIPTION:
-#  isPositiveDefinite        M  Checks if the matrix X is positive definite
-#  makePositiveDefinite      M  Forces the matrix x to be positive definite
+#  isPositiveDefinite        Checks if the matrix X is positive definite
+#  makePositiveDefinite      Forces the matrix x to be positive definite
 ################################################################################
 
 
 isPositiveDefinite <-
-    function(x)
+function(x)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -63,7 +52,7 @@ isPositiveDefinite <-
 
 
 .is.positive.definite <-
-    function (m, tol, method = c("eigen", "chol"))
+function(m, tol, method = c("eigen", "chol"))
 {
     # Author:
     #   Copyright 2003-05 Korbinian Strimmer
@@ -99,7 +88,7 @@ isPositiveDefinite <-
 
 
 makePositiveDefinite <-
-    function(x)
+function(x)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -125,7 +114,7 @@ makePositiveDefinite <-
 
 
 .make.positive.definite <-
-    function(m, tol)
+function(m, tol)
 {
     # Author:
     #   Copyright 2003-05 Korbinian Strimmer

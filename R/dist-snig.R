@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:            DESCRIPTION:
@@ -39,15 +28,24 @@
 
 
 dsnig <-  
-    function(x, zeta = 1, rho = 0, log = FALSE) 
+function(x, zeta = 1, rho = 0, log = FALSE) 
 {
     # Description:
     #   Returns density of the snig distribution
     
     # FUNCTION:
  
+    # Parameters:
+    if (length(zeta) == 2) {
+       rho = zeta[2]
+       zeta = zeta[1]
+    } 
+    
     # Compute Density - Quick and Dirty:
     ans = dsgh(x, zeta, rho, lambda = -0.5, log = log)
+    
+    # Log:
+    if(log) ans = log(ans)
     
     # Return Value:
     ans
@@ -58,7 +56,7 @@ dsnig <-
 
 
 psnig <-  
-    function(q, zeta = 1, rho = 0) 
+function(q, zeta = 1, rho = 0) 
 {
     # Description:
     #   Returns probabilities of the snig distribution
@@ -77,7 +75,7 @@ psnig <-
 
 
 qsnig <-  
-    function(p, zeta = 1, rho = 0) 
+function(p, zeta = 1, rho = 0) 
 {
     # Description:
     #   Returns quantiles of the snig distribution
@@ -96,7 +94,7 @@ qsnig <-
 
 
 rsnig <-  
-    function(n, zeta = 1, rho = 0) 
+function(n, zeta = 1, rho = 0) 
 {
     # Description:
     #   Generates snig distributed random variates
@@ -115,7 +113,7 @@ rsnig <-
 
 
 .psnigC <-  
-    function(q, zeta = 1, rho = 0) 
+function(q, zeta = 1, rho = 0) 
 {
     # A function implemented by Diethelm Wuertz
     
@@ -137,7 +135,7 @@ rsnig <-
 
 
 .qsnigC <-  
-    function(p, zeta = 1, rho = 0) 
+function(p, zeta = 1, rho = 0) 
 {
     # A function implemented by Diethelm Wuertz
     

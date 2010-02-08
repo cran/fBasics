@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:            GENERALIZED DISTRIBUTION:
@@ -32,22 +21,46 @@
 #  .nigFit.mle          max Log-likelihood Estimation
 #  .nigFit.gmm          gemeralized method of moments estimation
 #  .nigFit.mps          maximum product spacings estimation
+#  .nigFit.vmps         minimum variance product spacings estimation
 ################################################################################
 
 
-nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0, 
-    method = c("mle", "gmm", "mps"), scale = TRUE, doplot = TRUE, 
-    span = "auto", trace = TRUE, title = NULL, description = NULL, ...)
+nigFit <- 
+function(x, alpha = 1, beta = 0, delta = 1, mu = 0, 
+    method = c("mle", "gmm", "mps", "vmps"), 
+    scale = TRUE, doplot = TRUE, span = "auto", trace = TRUE, 
+    title = NULL, description = NULL, ...)
 {
     # A function implemented by Diethelm Wuertz
     
     # FUNCTION: 
     
-    # MLE:
-    fit = .nigFit.mle(x = x, alpha = alpha, beta = beta, delta = delta, 
-        mu = mu , scale = scale, doplot = doplot, span = span, 
-        trace = trace, title = title, description = description, ...)
-        
+    # Settings:
+    method = match.arg(method)
+    
+    # Select:
+    if (method == "mle") {
+        # MLE:
+        fit = .nigFit.mle(x = x, alpha = alpha, beta = beta, delta = delta, 
+            mu = mu , scale = scale, doplot = doplot, span = span, 
+            trace = trace, title = title, description = description, ...)
+    } else if (method == "gmm") {
+        # GMM:
+        fit = .nigFit.gmm(x = x, alpha = alpha, beta = beta, delta = delta, 
+            mu = mu , scale = scale, doplot = doplot, span = span, 
+            trace = trace, title = title, description = description, ...)
+    } else if (method == "mps") {
+        # MPS:
+        fit = .nigFit.mps(x = x, alpha = alpha, beta = beta, delta = delta, 
+            mu = mu , scale = scale, doplot = doplot, span = span, 
+            trace = trace, title = title, description = description, ...)
+    } else if (method == "vmps") {
+        # MPS:
+        fit = .nigFit.vmps(x = x, alpha = alpha, beta = beta, delta = delta, 
+            mu = mu , scale = scale, doplot = doplot, span = span, 
+            trace = trace, title = title, description = description, ...)
+    }  
+    
     # Return Value:
     fit
 }
@@ -57,7 +70,7 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 
 
 .nigFit.mle <-
-    function(x, alpha = 1, beta = 0, delta = 1, mu = 0, 
+function(x, alpha = 1, beta = 0, delta = 1, mu = 0, 
     scale = TRUE, doplot = TRUE, add = FALSE, span = "auto", trace = TRUE,
     title = NULL, description = NULL, ...)
 {
@@ -67,7 +80,7 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
     #   Fits parameters of a NIG using maximum log-likelihood  
 
     # Example:
-    #   set.seed(4711); x = rnig(500); mle = .nigFit.mle(x)@fit$estimate; mle
+    #   set.seed(4711); x = rnig(500); mle = .nigFit.mle(x); mle@fit$estimate
     
     # FUNCTION:
 
@@ -78,58 +91,59 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
         SD = sd(x)
         x = x / SD }
 
-    # Settings:
-    CALL = match.call()
-
-    # Parameter Estimation:
-    llh = function(x, y = x, trace) {
-        if (abs(x[2]) >= x[1]) return(1e99)
+    # Objective Function:
+    obj = function(x, y = x, trace) {
+        if (abs(x[2]) >= x[1]) return(1e9)
         f = -sum(dnig(y, x[1], x[2], x[3], x[4], log = TRUE))
         # Print Iteration Path:
         if (trace) {
             cat("\n Objective Function Value:  ", -f)
-            cat("\n Parameter Estimates:       ", x[1], x[2], x[3], x[4], "\n")
+            cat("\n Parameter Estimates:       ", x, "\n")
         }
         f }
+        
+    # Parameter Estimation:
     eps = 1e-10
     BIG = 1000
-    r = nlminb(start = c(alpha, beta, delta, mu), objective = llh,
-        lower = c(eps, -BIG, eps, -BIG), upper = BIG, y = x, trace = trace)
-    names(r$par) <- c("alpha", "beta", "delta", "mu")
+    fit = nlminb(
+        start = c(alpha, beta, delta, mu), 
+        objective = obj,
+        lower = c(eps, -BIG, eps, -BIG), 
+        upper = BIG, 
+        y = x, 
+        trace = trace)
+    names(fit$par) <- c("alpha", "beta", "delta", "mu")
+    # Rescale Result:
+    if (scale) {
+        fit$scaleParams = c(SD, SD, 1/SD, 1/SD)
+        fit$par = fit$par / fit$scaleParams
+        fit$objective = obj(fit$par, y = as.vector(x.orig), trace = trace)
+    } else {
+        fit$scaleParams = rep(1, time = length(fit$par))
+    }
+    fit$scale = scale
+    fit$estimate = fit$par
+    fit$minimum = -fit$objective
+    fit$code = fit$convergence
+       
+    # Standard Errors and t-Values:
+    fit = .distStandardErrors(fit, obj, x)
 
     # Add Title and Description:
     if (is.null(title)) title = "Normal Inverse Gaussian Parameter Estimation"
     if (is.null(description)) description = description()
 
-    # Rescale Result:
-    if (scale) {
-        r$par = r$par / c(SD, SD, 1/SD, 1/SD)
-        r$objective = llh(r$par, y = as.vector(x.orig), trace = trace)
-    }
-    fit = list(estimate = r$par, minimum = -r$objective, code = r$convergence)
-
     # Optional Plot:
-    if (doplot) {
-        x = as.vector(x.orig)
-        if (span == "auto") span = seq(min(x), max(x), length = 501)
-        z = density(x, n = 100, ...)
-        x = z$x[z$y > 0]
-        y = z$y[z$y > 0]
-        y.points = dnig(span, r$par[1], r$par[2], r$par[3], r$par[4])
-        ylim = log(c(min(y.points), max(y.points)))
-        if (add) {
-            lines(x = span, y = log(y.points), col = "steelblue")
-        } else {
-            plot(x, log(y), xlim = c(span[1], span[length(span)]),
-                ylim = ylim, type = "p", xlab = "x", ylab = "log f(x)", ...)
-            title("NIG Parameter Estimation")
-            lines(x = span, y = log(y.points), col = "steelblue")
-        }
-    }
+    if (doplot) .distFitPlot(
+        fit, 
+        x = x.orig, 
+        FUN = "dnig", 
+        main = "NIG Parameter Estimation", 
+        span = span, add = add, ...)
 
     # Return Value:
     new("fDISTFIT",
-        call = as.call(CALL),
+        call = match.call(),
         model = "Normal Inverse Gaussian Distribution",
         data = as.data.frame(x.orig),
         fit = fit,
@@ -142,7 +156,7 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 
 
 .nigFit.gmm <-
-    function(x, 
+function(x, 
     scale = TRUE, doplot = TRUE, add = FALSE, span = "auto", trace = TRUE,
     title = NULL, description = NULL, ...)
 {
@@ -167,7 +181,7 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
     CALL = match.call()
 
     # Parameter Estimation:
-    nig.gmm <- function(Theta, x) {
+    obj <- function(Theta, x) {
         # Parameters:
         alpha = Theta[1]
         beta  = Theta[2]
@@ -185,7 +199,7 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
         f <- cbind(m1, m2, m3, m4)
         return(f)
     }
-    r <- .gmm(g = nig.gmm, x = x, t0 = c(1, 0, 1, 0)) 
+    r <- .gmm(g = obj, x = x, t0 = c(1, 0, 1, 0)) 
     names(r$par) <- c("alpha", "beta", "delta", "mu")
     
     # Add Title and Description:
@@ -213,7 +227,7 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
         } else {
             plot(x, log(y), xlim = c(span[1], span[length(span)]),
                 ylim = ylim, type = "p", xlab = "x", ylab = "log f(x)", ...)
-            title("NIG Parameter Estimation")
+            title("NIG GMM Parameter Estimation")
             lines(x = span, y = log(y.points), col = "steelblue")
         }
     }
@@ -233,7 +247,7 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 
 
 .nigFit.mps <-
-    function(x, alpha = 1, beta = 0, delta = 1, mu = 0, 
+function(x, alpha = 1, beta = 0, delta = 1, mu = 0, 
     scale = TRUE, doplot = TRUE, add = FALSE, span = "auto", trace = TRUE,
     title = NULL, description = NULL, ...)
 {
@@ -258,12 +272,10 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
     CALL = match.call()
 
     # Parameter Estimation:
-    mps = function(x, y = x, trace) {
-        if (abs(x[2]) >= x[1]) return(1e99)
-        
+    obj <- function(x, y = x, trace) {
+        if (abs(x[2]) >= x[1]) return(1e9)
         DH = diff(c(0, na.omit(.pnigC(sort(y), x[1], x[2], x[3], x[4])), 1))
         f = -mean(log(DH[DH > 0]))*length(y)
-
         # Print Iteration Path:
         if (trace) {
             cat("\n Objective Function Value:  ", -f)
@@ -272,20 +284,31 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
         f }
     eps = 1e-10
     BIG = 1000
-    r = nlminb(start = c(alpha, beta, delta, mu), objective = mps,
+    r = nlminb(start = c(alpha, beta, delta, mu), objective = obj,
         lower = c(eps, -BIG, eps, -BIG), upper = BIG, y = x, trace = trace)
     names(r$par) <- c("alpha", "beta", "delta", "mu")
+    
+    # Standard Errors:
+    hessian = tsHessian(x = r$par, fun = obj, y = x, trace = FALSE)
+    colnames(hessian) = rownames(hessian) = names(r$par)
+    varcov = solve(hessian)
+    par.ses = sqrt(diag(varcov))
+    if (scale) par.ses = par.ses / c(SD, SD, 1/SD, 1/SD)
 
     # Add Title and Description:
-    if (is.null(title)) title = "NIG MPS Parameter Estimation"
+    if (is.null(title)) title = "NIG mps Parameter Estimation"
     if (is.null(description)) description = description()
 
     # Result:
     if (scale) {
         r$par = r$par / c(SD, SD, 1/SD, 1/SD)
-        r$objective = mps(r$par, y = as.vector(x.orig), trace = trace)
+        r$objective = obj(r$par, y = as.vector(x.orig), trace = trace)
     }
-    fit = list(estimate = r$par, minimum = -r$objective, code = r$convergence)
+    fit = list(
+        estimate = r$par, 
+        minimum = -r$objective, 
+        error = par.ses,
+        code = r$convergence)
 
     # Optional Plot:
     if (doplot) {
@@ -301,7 +324,7 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
         } else {
             plot(x, log(y), xlim = c(span[1], span[length(span)]),
                 ylim = ylim, type = "p", xlab = "x", ylab = "log f(x)", ...)
-            title("NIG Parameter Estimation")
+            title("NIG MPS Parameter Estimation")
             lines(x = span, y = log(y.points), col = "steelblue")
         }
     }
@@ -317,6 +340,108 @@ nigFit <- function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 }
 
 
+# ------------------------------------------------------------------------------
+
+
+.nigFit.vmps  <- 
+function (x, alpha = 1, beta = 0, delta = 1, mu = 0,
+    scale = TRUE, doplot = TRUE, add = FALSE, span = "auto", trace = TRUE, 
+    title = NULL,description = NULL, ...)
+{
+    # A function implemented by Yohan Chalabi
+
+    # Description:
+    #   Fits parameters of a NIG using maximum product spacings  
+
+    # Example:
+    #   set.seed(4711); x = rnig(500); vmps = .nigFit.vmps(x)@fit$estimate; vmps
+    
+    # FUNCTION:
+
+    # Transform:
+    x.orig = x
+    x = as.vector(x)
+    if (scale) {
+        SD = sd(x)
+        x = x/SD
+    }
+    
+    # Settings:
+    CALL = match.call()
+    
+    # Parameter Estimation:
+    obj <- function(x, y = x, trace) {
+        if (abs(x[2]) >= x[1]) return(1e+9)
+        DH = diff(c(0, na.omit(.pnigC(sort(y), x[1], x[2], x[3], x[4])), 1))
+        f = log(var(DH[DH > 0]))    
+        if (trace) {
+            cat("\n Objective Function Value:  ", -f)
+            cat("\n Parameter Estimates:       ", x[1], x[2], x[3], x[4], "\n")
+        }
+        f
+    }
+    eps = 1e-10
+    BIG = 1000
+    r = nlminb(
+        start = c(alpha, beta, delta, mu), 
+        objective = obj,
+        lower = c(eps, -BIG, eps, -BIG), 
+        upper = BIG, y = x,
+        trace = trace)
+    names(r$par) <- c("alpha", "beta", "delta", "mu")
+    
+    # Standard Errors:
+    hessian = tsHessian(x = r$par, fun = obj, y = x, trace = FALSE)
+    colnames(hessian) = rownames(hessian) = names(r$par)
+    varcov = solve(hessian)
+    par.ses = sqrt(diag(varcov))
+    if (scale) par.ses = par.ses / c(SD, SD, 1/SD, 1/SD)
+    
+    # Add Title and Description:
+    if (is.null(title)) title = "NIG varMPS Parameter Estimation"
+    if (is.null(description)) description = description()
+    
+    # Result:
+    if (scale) {
+        r$par = r$par/c(SD, SD, 1/SD, 1/SD)
+        r$objective = obj(r$par, y = as.vector(x.orig), trace = trace)
+    }
+    fit = list(
+        estimate = r$par, 
+        minimum = -r$objective, 
+        error = par.ses,
+        code = r$convergence)
+    
+    # Optional Plot:
+    if (doplot) {
+        x = as.vector(x.orig)
+        if (span == "auto") span = seq(min(x), max(x), length = 501)
+        z = density(x, n = 100, ...)
+        x = z$x[z$y > 0]
+        y = z$y[z$y > 0]
+        y.points = dnig(span, r$par[1], r$par[2], r$par[3], r$par[4])
+        ylim = log(c(min(y.points), max(y.points)))
+        if (add) {
+            lines(x = span, y = log(y.points), col = "steelblue")
+        } else {
+            plot(x, log(y), xlim = c(span[1], span[length(span)]),
+                ylim = ylim, type = "p", xlab = "x", ylab = "log f(x)", ...)
+            title("NIG varMPS Parameter Estimation")
+            lines(x = span, y = log(y.points), col = "steelblue")
+        }
+    }
+    
+    
+    # Return Value:
+    new("fDISTFIT",
+        call = as.call(CALL),
+        model = "Normal Inverse Gaussian Distribution",
+        data = as.data.frame(x.orig),
+        fit = fit,
+        title = as.character(title),
+        description = description() )
+}
+
+
 ################################################################################
 
-   

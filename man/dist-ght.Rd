@@ -19,7 +19,7 @@
 
 
 \usage{
-dght(x, beta = 0.1, delta = 1, mu = 0, nu = 10)
+dght(x, beta = 0.1, delta = 1, mu = 0, nu = 10, log = FALSE)
 pght(q, beta = 0.1, delta = 1, mu = 0, nu = 10)
 qght(p, beta = 0.1, delta = 1, mu = 0, nu = 10)
 rght(n, beta = 0.1, delta = 1, mu = 0, nu = 10)
@@ -29,6 +29,18 @@ rght(n, beta = 0.1, delta = 1, mu = 0, nu = 10)
 \arguments{
 
 
+    \item{beta, delta, mu}{
+        numeric values.
+        \code{beta} is the skewness parameter in the range \code{(0, alpha)};
+        \code{delta} is the scale parameter, must be zero or positive; 
+        \code{mu} is the location parameter, by default 0.
+        These are the parameters in the first parameterization.
+        }
+    \item{nu}{
+        a numeric value, the number of degrees of freedom.
+        Note, \code{alpha} takes the limit of \code{abs(beta)}, 
+        and \code{lambda=-nu/2}.
+        }
     \item{x, q}{
         a numeric vector of quantiles.
         }
@@ -38,24 +50,10 @@ rght(n, beta = 0.1, delta = 1, mu = 0, nu = 10)
     \item{n}{
         number of observations.
         }
-    \item{beta, delta, mu}{
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These are the parameters in the first parameterization.
+    \item{log}{
+        a logical, if TRUE, probabilities \code{p} are given as 
+        \code{log(p)}.
         }
-    \item{nu}{
-        a numeric value, the number of degrees of freedom.
-        }
-    %\item{log}{
-    %    a logical flag by default \code{FALSE}. 
-    %    Should labels and a main title drawn to the plot?
-    %    }
-    %\item{\dots}{
-    %    arguments to be passed.
-    %    }
     
 }
 

@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
@@ -36,7 +25,7 @@
 
 
 acfPlot <-
-    function(x, labels = TRUE, ...)
+function(x, labels = TRUE, ...)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -81,7 +70,7 @@ acfPlot <-
 
 
 pacfPlot <-
-    function(x, labels = TRUE, ...)
+function(x, labels = TRUE, ...)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -127,7 +116,7 @@ pacfPlot <-
 
 
 teffectPlot <-
-    function (x, deltas = seq(from = 0.2, to = 3.0, by = 0.2), lag.max = 10,
+function(x, deltas = seq(from = 0.2, to = 3.0, by = 0.2), lag.max = 10,
     ymax = NA, standardize = TRUE, labels = TRUE, ...)
 {
     # A function implemented by Diethelm Wuertz
@@ -212,7 +201,7 @@ teffectPlot <-
 
 
 lacfPlot <-
-    function(x, n = 12, lag.max = 20, type = c("returns", "values"),
+function(x, n = 12, lag.max = 20, type = c("returns", "values"),
     labels = TRUE, ...)
 {
     # A function implemented by Diethelm Wuertz

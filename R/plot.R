@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:                 INTERNAL USED PLOT FUNCTIONS:
@@ -43,15 +32,8 @@
 ################################################################################
 
 
-################################################################################
-#  .residualsPlot            Returns a residual series plot
-#  .acfPlot                  Returns a autocorrelation function plot
-#  .pacfPlot                 Returns a partial ACF plot
-#  .mrlPlot                  Returns a mean residual life plot
-
-
 .residualsPlot <- 
-    function(x, ...)
+function(x, ...)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -82,7 +64,7 @@
 
 
 .acfPlot <- 
-    function(x, ...)
+function(x, ...)
 {
     # A function implemented by Diethelm Wuertz
     
@@ -103,7 +85,7 @@
 
 
 .pacfPlot <- 
-    function(x, ...)
+function(x, ...)
 {
     # A function implemented by Diethelm Wuertz
     
@@ -124,7 +106,7 @@
 
 
 .mrlPlot <- 
-    function(x, ci = 0.95, umin = mean(x), umax = max(x), nint = 100,
+function(x, ci = 0.95, umin = mean(x), umax = max(x), nint = 100,
     doplot = TRUE, plottype = c("autoscale", ""), labels = TRUE, ...)
 {   
     # A function implemented by Diethelm Wuertz
@@ -193,12 +175,10 @@
 
 
 ################################################################################
-#  .responsesPlot            Returns a response series plot
-#  .firePlot                 Returns a fitted values vs.residuals plot
 
 
 .responsesPlot <- 
-    function(x, y = NULL, ...)
+function(x, y = NULL, ...)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -234,7 +214,7 @@
 
 
 .firePlot <- 
-    function(x, y, method = c("scatter", "hist"), ...)
+function(x, y, method = c("scatter", "hist"), ...)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -318,14 +298,10 @@
 
 
 ################################################################################
-#  .circlesPlot           Returns a scatterplot of circles indexing 3rd variable
-#  .perspPlot             Returns a perspective plot in 2 dimensions
-#  .contourPlot           Returns a contour plot in 2 dimensions
-#  .histStack             Returns a stacked histogram plot
 
 
 .circlesPlot <- 
-    function(x, y = NULL, z = NULL, scale = 1, points = TRUE,
+function(x, y = NULL, z = NULL, scale = 1, points = TRUE,
     labels = TRUE, ...)
 {   
     # A function implemented by Diethelm Wuertz
@@ -378,7 +354,7 @@
 
 
 .perspPlot <- 
-    function(x, y, z, theta = -40, phi = 30, col = "steelblue", ps = 9, ...)
+function(x, y, z, theta = -40, phi = 30, col = "steelblue", ps = 9, ...)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -413,7 +389,7 @@
 
 
 .contourPlot <- 
-    function(x, y, z, ...)
+function(x, y, z, ...)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -443,7 +419,7 @@
 
 
 .histStack <- 
-    function(x, y = NULL, space = 0, ylab = "frequency", ...)
+function(x, y = NULL, space = 0, ylab = "frequency", ...)
 {   
     # A function implemented by Diethelm Wuertz
 

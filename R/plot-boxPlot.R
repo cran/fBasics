@@ -14,27 +14,16 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port: 
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
-# FUNCTION:                TAILORED BOX PLOTS:
+# FUNCTION:                DESCRIPTION:
 #  boxPlot                  Produces a side-by-side standard box plot
 #  boxPercentilePlot        Produces a side-by-side box-percentile plot
 ################################################################################
 
 
 boxPlot <-
-    function(x, col = "steelblue", title = TRUE, ...) 
+function(x, col = "steelblue", title = TRUE, ...) 
 {   
     # A function Implemented by Diethelm Wuertz
 
@@ -81,7 +70,7 @@ boxPlot <-
 
 
 boxPercentilePlot <-  
-    function(x, col = "steelblue", title = TRUE, ...) 
+function(x, col = "steelblue", title = TRUE, ...) 
 {   
     # A modified copy from Hmisc
 

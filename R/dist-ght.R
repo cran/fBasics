@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
@@ -36,7 +25,7 @@
 
 
 dght <-
-function(x, beta = 0.1, delta = 1, mu = 0, nu = 10)
+function(x, beta = 0.1, delta = 1, mu = 0, nu = 10, log = FALSE)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -50,9 +39,20 @@ function(x, beta = 0.1, delta = 1, mu = 0, nu = 10)
 
     # FUNCTION:
 
+    # Parameters:
+    if (length(beta) == 4) {
+       nu = beta[4]
+       mu = beta[3]
+       delta = beta[2]
+       beta = beta[1]
+    } 
+    
+    # GH Parameters:
+    alpha = abs(beta) + 1e-6
+    lambda = -nu/2
+    
     # Density:
-    ans = dgh(x, alpha = abs(beta) + 1e-6, beta, delta, mu, lambda = -nu/2, 
-        log = FALSE)
+    ans = dgh(x, alpha, beta, delta, mu, lambda, log = log)
 
     # Return Value:
     ans
@@ -63,7 +63,7 @@ function(x, beta = 0.1, delta = 1, mu = 0, nu = 10)
 
 
 pght <-
-    function(q, beta = 0.1, delta = 1, mu = 0, nu = 10)
+function(q, beta = 0.1, delta = 1, mu = 0, nu = 10)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -77,6 +77,14 @@ pght <-
 
     # FUNCTION:
 
+    # Parameters:
+    if (length(beta) == 4) {
+       nu = beta[4]
+       mu = beta[3]
+       delta = beta[2]
+       beta = beta[1]
+    } 
+    
     # Cumulative Probability:
     ans = NULL
     for (Q in q) {
@@ -94,7 +102,7 @@ pght <-
 
 
 qght <-
-    function(p, beta = 0.1, delta = 1, mu = 0, nu = 10)
+function(p, beta = 0.1, delta = 1, mu = 0, nu = 10)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -108,6 +116,14 @@ qght <-
 
     # FUNCTION:
 
+    # Parameters:
+    if (length(beta) == 4) {
+       nu = beta[4]
+       mu = beta[3]
+       delta = beta[2]
+       beta = beta[1]
+    } 
+    
     # Internal Functions:
     .froot <- function(x, beta = beta, delta = delta, mu = mu, nu = nu, p) 
     {
@@ -155,10 +171,21 @@ function(n, beta = 0.1, delta = 1, mu = 0, nu = 10)
     #   r = rght(10)
 
     # FUNCTION:
+    
+    # Parameters:
+    if (length(beta) == 4) {
+       nu = beta[4]
+       mu = beta[3]
+       delta = beta[2]
+       beta = beta[1]
+    } 
+    
+    # GH Parameters:
+    alpha = abs(beta) + 1e-6
+    lambda = -nu/2
 
     # Random Variates:
-    x = rgh(n, alpha = abs(beta) + 1e-6, beta = beta, delta = delta, mu = mu, 
-        lambda = -nu/2) 
+    x = rgh(n, alpha, beta = beta, delta = delta, mu = mu, lambda) 
 
     # Return Value:
     x

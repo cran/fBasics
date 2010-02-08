@@ -14,25 +14,15 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:            STABLE DISTRIBUTION:
 #  stableFit            Fits parameters of a stable density
 #  .phiStable            Creates contour table for McCulloch estimators
-#  .PhiStable            Contour table created by .phiStable()
-#  .qStableFit           Estimates stable parameters by McCulloch approach
+#  .PhiStable            Contour table created by function .phiStable()
+#  .qStableFit           Estimates parameters by McCulloch's approach
 #  .mleStableFit         Estimates stable parameters by MLE approach
+#  .stablePlot           Plots results of stable parameter estimates
 ################################################################################
 
 
@@ -496,7 +486,7 @@ function(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0, doplot = TRUE,
     CALL = match.call()
 
     # Log-likelihood Function:
-    mle = function(x, y = x, trace = FALSE) {
+    obj = function(x, y = x, trace = FALSE) {
         f = -mean(log(dstable(y, 
             alpha = x[1], beta = x[2], gamma = x[3], delta = x[4])))
         # Print Iteration Path:
@@ -510,7 +500,8 @@ function(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0, doplot = TRUE,
     
     # Minimization:
     eps = 1e-4
-    r <- nlminb(objective = mle, 
+    r <- nlminb(
+        objective = obj, 
         start = c(alpha, beta, gamma, delta), 
         lower = c( eps, -1+eps, 0+eps, -Inf),
         upper = c(2-eps, 1-eps,  Inf,  Inf),
@@ -548,6 +539,14 @@ function(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0, doplot = TRUE,
 .stablePlot <-
 function(x, alpha, beta, gamma, delta)
 {
+    # A function implemented by Diethelm Wuertz
+
+    # Description:
+    #   Estimates stable parameters by MLE approach
+    
+    # FUNCTION:
+    
+    # Plot:
     span.min = qstable(0.01, alpha, beta, gamma, delta)
     span.max = qstable(0.99, alpha, beta, gamma, delta)
     span = seq(span.min, span.max, length = 100)
@@ -563,6 +562,7 @@ function(x, alpha, beta, gamma, delta)
     lines(x = span, y = log(y.points), col = "steelblue")
     grid()
     
+    # Return Value:
     invisible()
 }
 

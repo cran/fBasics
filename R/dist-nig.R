@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port: 
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:             DESCRIPTION:
@@ -33,13 +22,13 @@
 #  qnig                  Returns quantiles for for inverse Gaussian DF 
 #  rnig                  Returns random variates for inverse Gaussian DF
 # FUNCTION:             DESCRIPTION:
-#  .pnigC                Fast C implementation (fails)
+#  .pnigC                Fast C implementation 
 #  .qnigC                Fast C implementation
 ################################################################################
 
 
 dnig <- 
-    function(x, alpha = 1, beta = 0, delta = 1, mu = 0, log = FALSE)
+function(x, alpha = 1, beta = 0, delta = 1, mu = 0, log = FALSE)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -52,10 +41,24 @@ dnig <-
     
     # FUNCTION:
     
+    # Parameters:
+    if (length(alpha) == 4) {
+       mu = alpha[4]
+       delta = alpha[3]
+       beta = alpha[2]
+       alpha = alpha[1]
+    } 
+    
+    # Checks:
+    if (alpha <= 0) stop("alpha must be greater than zero")
+    if (delta <= 0) stop("delta must be greater than zero")
+    if (abs(beta) >= alpha) stop("abs value of beta must be less than alpha")
+    
     # Density:
     #   dgh(x = x, alpha = alpha, beta = beta, delta = delta, mu = mu, 
-    #   lambda = -0.5, log = log)
+    #       lambda = -0.5, log = log)
     
+    # Compute:
     log.a = delta*sqrt(alpha^2-beta^2) + log(delta*alpha/pi)
     Sqrt = sqrt(delta^2+(x-mu)^2) 
     log.Sqrt = -log(Sqrt)
@@ -73,7 +76,7 @@ dnig <-
 
 
 pnig <- 
-    function(q, alpha = 1, beta = 0, delta = 1, mu = 0)
+function(q, alpha = 1, beta = 0, delta = 1, mu = 0)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -106,7 +109,7 @@ pnig <-
 
 
 qnig <- 
-    function(p, alpha = 1, beta = 0, delta = 1, mu = 0)
+function(p, alpha = 1, beta = 0, delta = 1, mu = 0)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -126,7 +129,7 @@ qnig <-
 
     # Internal Function:
     .froot <-
-    function(x, alpha, beta, delta, mu, p)
+function(x, alpha, beta, delta, mu, p)
     {
         pnig(q = x, alpha = alpha, beta = beta, delta = delta,
             mu = mu) - p
@@ -159,7 +162,7 @@ qnig <-
 
 
 rnig <- 
-    function(n, alpha = 1, beta = 0, delta = 1, mu = 0)
+function(n, alpha = 1, beta = 0, delta = 1, mu = 0)
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -218,7 +221,7 @@ rnig <-
 
 
 .qnigC <-
-    function(p, alpha = 1, beta = 0, delta = 1, mu = 0)
+function(p, alpha = 1, beta = 0, delta = 1, mu = 0)
 {   
     # Description:
     #   Returns quantiles for for inverse Gaussian DF

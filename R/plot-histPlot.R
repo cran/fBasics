@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:                TAILORED DENSITY FUNCTIONS:
@@ -36,7 +25,7 @@
 
 
 histPlot <-
-    function(x, labels = TRUE, col = "steelblue", fit = TRUE,
+function(x, labels = TRUE, col = "steelblue", fit = TRUE,
     title = TRUE, grid = TRUE, rug = TRUE, skip = FALSE, ...)
 {
     # A function implemented by Diethelm Wuertz
@@ -120,7 +109,7 @@ histPlot <-
 
 
 densityPlot <-
-    function(x, labels = TRUE, col = "steelblue", fit = TRUE, hist = TRUE,
+function(x, labels = TRUE, col = "steelblue", fit = TRUE, hist = TRUE,
     title = TRUE, grid = TRUE, rug = TRUE, skip = FALSE, ...)
 {
     # A function implemented by Diethelm Wuertz
@@ -204,7 +193,7 @@ densityPlot <-
 
 
 logDensityPlot <-
-    function(x, labels = TRUE, col = "steelblue", robust = TRUE,
+function(x, labels = TRUE, col = "steelblue", robust = TRUE,
     title = TRUE, grid = TRUE, rug = TRUE, skip = FALSE,  ...)
 {
     # A function implemented by Diethelm Wuertz
@@ -296,7 +285,7 @@ logDensityPlot <-
 
 
 .plot.histogram <-
-function (x, freq = equidist, density = NULL, angle = 45,
+function(x, freq = equidist, density = NULL, angle = 45,
     col = NULL, border = "white", lty = NULL,
     main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
     xlim = range(x$breaks), ylim = NULL,

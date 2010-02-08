@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # DATA:                     DESCRIPTION:
@@ -33,7 +22,7 @@
 
 
 .jbLM <-
-    function()
+function()
 {
 structure(list("5" = c(0.052470165, 0.052479988, 0.052481227,
 0.052482714, 0.052484752, 0.0524849, 0.052487004, 0.052487547,

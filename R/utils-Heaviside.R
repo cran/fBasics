@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston, 
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port: 
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:                 HEAVISIDE AND RELATED FUNCTIONS:
@@ -37,7 +26,7 @@
 
 
 Heaviside <- 
-    function(x, a = 0) 
+function(x, a = 0) 
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -71,7 +60,7 @@ Heaviside <-
 
 
 Sign <- 
-    function(x, a = 0) 
+function(x, a = 0) 
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -100,7 +89,7 @@ Sign <-
 
 
 Delta <- 
-    function(x, a = 0) 
+function(x, a = 0) 
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -128,7 +117,7 @@ Delta <-
 
 
 Boxcar <- 
-    function(x, a = 0.5) 
+function(x, a = 0.5) 
 {   
     # A function implemented by Diethelm Wuertz
 
@@ -157,7 +146,7 @@ Boxcar <-
 
 
 Ramp <- 
-    function(x, a = 0) 
+function(x, a = 0) 
 {   
     # A function implemented by Diethelm Wuertz
 
