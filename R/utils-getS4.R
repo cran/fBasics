@@ -16,32 +16,20 @@
 
 
 ################################################################################
-# FUNCTION:                 GENERAL EXTRACTORS FOR S4:
+# FUNCTION:                 DESCRIPTION:
 #  getCall                   Extracts the call slot from a S4 object
 #  getModel                  Extracts the model slot from a S4 object
 #  getTitle                  Extracts the title slot from a S4 object
 #  getDescription            Extracts the description slot from a S4 object
 #  getSlot                   Extracts a specified slot from a S4 object
+#  getArgs                   Shows the arguments of a S4 functiong
 ################################################################################
 
 
-getCall <-
-function(object)
-{
-    # A function implemented by Rmetrics
-
-    # Description:
-    #   Extracts the "call" slot from an object of class 4
-
-    # Arguments:
-    #   object - an object of class S4
-
-    # FUNCTION:
-
-    # Return Value:
-    getSlot(object, "call")
-}
-
+if(getRversion() < "2.14") {
+    getCall <- function(x) slot(x, "call")
+} ## since 2.14.0, getCall() is an S3 generic in 'stats'
+## *AND* its default method also works for S4 and a "call" slot
 
 # ------------------------------------------------------------------------------
 
@@ -60,7 +48,7 @@ function(object)
     # FUNCTION:
 
     # Return Value:
-    getSlot(object, "model")
+    slot(object, "model")
 }
 
 
@@ -81,7 +69,7 @@ function(object)
     # FUNCTION:
 
     # Return Value:
-    getSlot(object, "title")
+    slot(object, "title")
 }
 
 
@@ -102,7 +90,7 @@ function(object)
     # FUNCTION:
 
     # Return Value:
-    getSlot(object, "description")
+    slot(object, "description")
 }
 
 
@@ -112,30 +100,53 @@ function(object)
 getSlot <-
 function(object, slotName)
 {
-    # A function implemented by Rmetrics
 
-    # Description:
-    #   Extracts the a specified slot from an object of class 4
-
-    # Arguments:
-    #   object - an object of class S4
-    #   slotName - the name of the slot ot be extracted from an S4 object
+    # a simple wrapper around slot to avoid compatibilty troubles with
+    # other packages.
 
     # FUNCTION:
 
-    # isS4
-    stopifnot(isS4(object))
+    slot(object, slotName)
+}
 
-    # exists @call ?
-    stopifnot (any(slotNames(object) == slotName))
 
-    # Command to execute:
-    command = paste("object@", slotName, sep = "")
+# ------------------------------------------------------------------------------
+
+
+getArgs <-
+function(f, signature = character())
+{
+    # A function implemented by Diethelm Wuertz
+
+    # Description:
+    #   Shows the arguments of a S4 functiong
+
+    # Arguments:
+    #   f - a generic function or the character-string name of one
+    #   signature - the signature of classes to match to the arguments
+    #       of f
+
+    # Note:
+    #   such a function is missing in the methods package,
+    #   see, e.g he function getMethod()
+
+    # FUNCTION:
+
+    # Get arguments:
+    fun = getMethod(f, signature)@.Data
+    test = class(try(body(fun)[[2]][[3]], silent = TRUE))
+    if (test == "function") {
+        ans = args(body(fun)[[2]][[3]])
+    } else {
+        ans = args(fun)
+    }
+    cat(substitute(f), ",", signature, ":\n", sep = "")
 
     # Return Value:
-    eval(parse(text = command))
+    ans
 }
 
 
 ################################################################################
+
 

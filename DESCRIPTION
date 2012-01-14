@@ -1,7 +1,7 @@
 Package: fBasics
-Version: 2110.79
-Revision: 4727
-Date: 2010-02-08
+Version: 2160.81
+Revision: 5116
+Date: 2012-01-14
 Title: Rmetrics - Markets and Basic Statistics
 Author: Diethelm Wuertz and Rmetrics core team members, uses code
         builtin from the following R contributed packages: gmm from
@@ -11,6 +11,9 @@ Author: Diethelm Wuertz and Rmetrics core team members, uses code
         Kersti Aas.
 Depends: R (>= 2.6.0), MASS, methods, timeDate, timeSeries (>= 2100.84)
 Suggests: akima, spatial, RUnit, tcltk
+Imports: stabledist
+ImportNote: stabledist only for back compatibility; will suggest only,
+        later
 Maintainer: Rmetrics Core Team <Rmetrics-core@r-project.org>
 Description: Environment for teaching "Financial Engineering and
         Computational Finance" NOTE: SEVERAL PARTS ARE STILL
@@ -18,10 +21,9 @@ Description: Environment for teaching "Financial Engineering and
         INCLUDES FUNCTION AND ARGUMENT NAMES, AS WELL AS DEFAULTS FOR
         ARGUMENTS AND RETURN VALUES. Please donate, www.rmetrics.org,
         to support future activities of the Rmetrics association.
-LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
 URL: http://www.rmetrics.org
-Packaged: 2010-02-08 14:18:25 UTC; yankee
+Packaged: 2012-03-20 08:27:23 UTC; yankee
 Repository: CRAN
-Date/Publication: 2010-02-08 16:30:44
+Date/Publication: 2012-03-20 10:05:32

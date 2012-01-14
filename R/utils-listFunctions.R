@@ -14,17 +14,6 @@
 # Free Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA  02111-1307  USA
 
-# Copyrights (C)
-# for this R-port:
-#   1999 - 2008, Diethelm Wuertz, Rmetrics Foundation, GPL
-#   Diethelm Wuertz <wuertz@itp.phys.ethz.ch>
-#   www.rmetrics.org
-# for the code accessed (or partly included) from other R-ports:
-#   see R's copyright and license files
-# for the code accessed (or partly included) from contributed R-ports
-# and other sources
-#   see Rmetrics's copyright file
-
 
 ################################################################################
 # FUNCTION:                 DESCRIPTION:
@@ -54,7 +43,7 @@ function(package, character.only = FALSE)
         package <- as.character(substitute(package))
     if(require(package, character.only = TRUE, quietly = TRUE)) {
         env <- paste("package", package, sep = ":")
-        nm <- ls(env, all = TRUE)
+        nm <- ls(env, all.names = TRUE)
         ans = nm[unlist(lapply(nm, function(n) exists(n, where = env,
             mode = "function", inherits = FALSE)))]
     } else {
