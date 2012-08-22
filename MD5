@@ -1,6 +1,6 @@
-1014872190e39a3750b0686decafbd35 *ChangeLog
-36c5c717ad8562e834f2a93f7a197751 *DESCRIPTION
-2d0a15f17ab1475e7c936fe06f1920d6 *NAMESPACE
+9e6b92ccf285b9926e5aa4a7347a63ab *ChangeLog
+928ae18681d9232655a6e9daa5befc6c *DESCRIPTION
+102109f22b96496b4c0b1e8d5cf0aaa6 *NAMESPACE
 0bb530ae64aa6fb5e3f7d0ccdb087630 *R/00fBasics-Package.R
 ffe2c1f5c776aa0853ea616d0719a38f *R/builtin-gelGmm.R
 ed986880f886f3e3bbbcd5cef64cda2b *R/builtin-glGld.R
@@ -86,9 +86,9 @@ c2ee72fc50668d9aa7a75a68ef8a3fc7 *R/plot-subStars.R
 53be74d03ac075fc2342baa18e5381e7 *R/plot-varpie.R
 fcf1b73e6095fc8c761aff1b0e5b7c64 *R/plot.R
 37c86a634b613627a675d9fb87e70e7a *R/stats-basicStats.R
-1ae968f9a0b14487f850f072dae11baa *R/stats-interpAkima.R
+bf03579b11b94cc8fa865f57c1e92a5f *R/stats-interpAkima.R
 451543d58210f17d98616597b52bf6a0 *R/stats-interpKrige.R
-1f17e3e2e1d5cce7a1b40d87557f3b17 *R/stats-interpLinear.R
+f5f74bf3ea24370e413458f92e003951 *R/stats-interpLinear.R
 34bb0e99137555ed24d58104e00224b8 *R/stats-maxdd.R
 3e811cb50eeabb3081ff6785a0f15242 *R/stats-rowStats.R
 780d742fc94c891d2e4686cd0d0e5cb2 *R/stats-sampleLmoments.R
@@ -100,7 +100,7 @@ a0a6ffb1408161fced8d13daa02a5414 *R/test-jbLM.R
 d7f1ab56ff37cf7a4d3866b9c6f634c9 *R/test-jbTable.R
 35e8e30c1601da53eae4c4cabfd91ad4 *R/test-ks2Test.R
 f1fcfd9190a65800f207f2f858975812 *R/test-locationTest.R
-d9f91d9172cc1c00082ab917550ae60e *R/test-normalityTest.R
+343729a215962f21e3366e16b4164e5b *R/test-normalityTest.R
 e7734f1b41dd64375aa9b88b7b2b9fa9 *R/test-scaleTest.R
 a53d00b11324083b45977e12aa9aa3d5 *R/test-varianceTest.R
 9caadcd15ee4bcdd10cdda8eed49773e *R/utils-Heaviside.R
@@ -114,7 +114,7 @@ c06c5d902123f111d7982f0e9995555a *R/utils-baseMethods.R
 1ad6b853b24bcc87853214ceda8e837e *R/utils-colorRGB.R
 a5cdaf75a0079b195f5074520b7d4692 *R/utils-colorTable.R
 c87af125e323fe0a55f5e9631bdd631e *R/utils-decor.R
-e4e99d2a31b510c751d7a18181ea1c8d *R/utils-getS4.R
+25f4d30b4f5d9fbf4019183645dbb932 *R/utils-getS4.R
 8f1fce2695c26fb68137032c22c83b2e *R/utils-hessian.R
 a4317b50047273b3aaa2837553ca411b *R/utils-interactivePlot.R
 0490ed06a18dced62aef2fa8e6a5a687 *R/utils-listDescription.R
@@ -260,7 +260,7 @@ a44a484d84aece3fa908a9305abea16a *man/utils-colorLocator.Rd
 8feefca38253825ab75485b3840461fc *man/utils-colorPalette.Rd
 a46398307966bfb209d153b4c29574fc *man/utils-colorTable.Rd
 28a594ec7920420e0e0d09fc9cf07600 *man/utils-decor.Rd
-9fcc391f927b670741e7062f79a324d4 *man/utils-getS4.Rd
+31612e2b4695b06a1e128205bf587c72 *man/utils-getS4.Rd
 6f7e3a07ed48ac9e932dc86cb36bacf5 *man/utils-hessian.Rd
 9985275f7630b95f84025419625074b4 *man/utils-interactivePlot.Rd
 3a0698d165d719a2a5010cd5cf17d011 *man/utils-listDescription.Rd
