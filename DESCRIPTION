@@ -1,7 +1,7 @@
 Package: fBasics
-Version: 2160.83
-Revision: 5346
-Date: 2012-08-22
+Version: 2160.84
+Revision: 5349
+Date: 2012-09-14
 Title: Rmetrics - Markets and Basic Statistics
 Author: Diethelm Wuertz and Rmetrics core team members, uses code
         builtin from the following R contributed packages: gmm from
@@ -26,6 +26,6 @@ Description: Environment for teaching "Financial Engineering and
 LazyData: yes
 License: GPL (>= 2)
 URL: http://www.rmetrics.org
-Packaged: 2012-08-22 16:05:15 UTC; yankee
+Packaged: 2012-09-14 18:51:51 UTC; yankee
 Repository: CRAN
-Date/Publication: 2012-08-23 06:45:08
+Date/Publication: 2012-09-14 19:45:05
