@@ -1,6 +1,6 @@
-22996152bfb091f178f3a2d9c9b40736 *ChangeLog
-13665e27189c215ecabae98d6ece315e *DESCRIPTION
-102109f22b96496b4c0b1e8d5cf0aaa6 *NAMESPACE
+546c576f6d428a3c2e0a402b614e0d9e *ChangeLog
+41f7c20908367194e0c74905358263ac *DESCRIPTION
+adefd94a8ee951917499451627a132b5 *NAMESPACE
 0bb530ae64aa6fb5e3f7d0ccdb087630 *R/00fBasics-Package.R
 ffe2c1f5c776aa0853ea616d0719a38f *R/builtin-gelGmm.R
 ed986880f886f3e3bbbcd5cef64cda2b *R/builtin-glGld.R
@@ -49,7 +49,6 @@ fc4bf7cbd7906fa64fc9e5e92f5b62e2 *R/dist-sght.R
 66614d9beba7481023d18a7b234fb571 *R/dist-snigFit.R
 38360098dd903490aad51ba56f65fefb *R/dist-ssd.R
 af24ea2e4548d2db20100a084f13b8e4 *R/dist-ssdFit.R
-b53a7208808fa2d46b3a33319accff13 *R/dist-stable-deprecated.R
 ea258baac978204e1ac7409c869359b3 *R/dist-stableFit.R
 3ddeb452b4e2193ee1e37a4ba4784ed9 *R/dist-tFit.R
 6310a3d541b0cba7e66aa6fae80f2aa2 *R/gui-HeavisideSlider.R
@@ -130,7 +129,7 @@ c695119e203d0913f791a9fc5736269b *R/utils-unitrootNA.R
 0c421832d488f624a5beccfda671d3e8 *inst/unitTests/HeavisideSlider.R
 6763e1b8ea6f19e99e1d9c55a5b19b71 *inst/unitTests/Makefile
 89cb4d984e816d3e9757b715cab4cb81 *inst/unitTests/runTests.R
-413118335238b9003ecc26693d7ccfd5 *inst/unitTests/runit.DistributionFits.R
+de0f8863a9c90edb00db6a08235cb153 *inst/unitTests/runit.DistributionFits.R
 0102fbf3733ee1d531346e67ddf03c54 *inst/unitTests/runit.Heaviside.R
 3cc654e44e24e279a84a95ad8318074c *inst/unitTests/runit.HyperbolicDistribution.R
 cfb05fc99e5ff12dcacbbb3cd9eab96d *inst/unitTests/runit.JarqueBeraPValues.R
@@ -214,7 +213,7 @@ f70e06310b305ec450072050d5a40468 *man/dist-sght.Rd
 86c8f424fdf944ca69a880c24caad37c *man/dist-snigFit.Rd
 75c578b3792c18bb0e63f1a19cb38505 *man/dist-ssd.Rd
 315fc215e7dcc9d80517014cf7b93274 *man/dist-ssdFit.Rd
-b528c20bce2cb3908fe48b7b9e37b797 *man/fBasics-deprecated.Rd
+276536db46bb86f6d59e790316788650 *man/fBasics-deprecated.Rd
 2bdb0b549be5de60c262c1ef6b0649f9 *man/matrix-colVec.Rd
 1eda72553ee30643b3d1493089c4bfb3 *man/matrix-gridVector.Rd
 c291142800d241b4e9ba3b6010f2e77d *man/matrix-hilbert.Rd
