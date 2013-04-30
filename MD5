@@ -1,6 +1,6 @@
-546c576f6d428a3c2e0a402b614e0d9e *ChangeLog
-41f7c20908367194e0c74905358263ac *DESCRIPTION
-adefd94a8ee951917499451627a132b5 *NAMESPACE
+0da1cabe97399ea912012f1d0c9e4899 *ChangeLog
+62314b129e8f3e00b00f6c82adabf1b9 *DESCRIPTION
+c9b5d87a7953425aff9153ac78be174b *NAMESPACE
 0bb530ae64aa6fb5e3f7d0ccdb087630 *R/00fBasics-Package.R
 ffe2c1f5c776aa0853ea616d0719a38f *R/builtin-gelGmm.R
 ed986880f886f3e3bbbcd5cef64cda2b *R/builtin-glGld.R
@@ -8,7 +8,7 @@ ed986880f886f3e3bbbcd5cef64cda2b *R/builtin-glGld.R
 a6cbf934be32808c358fdeef098db076 *R/builtin-hypHyperbolicDist.R
 0004a95d44ff7d50c7e04a010c58d55a *R/builtin-kweightsSandwhich.R
 a9c6cb84bd6f4aac47a78f44dd121485 *R/builtin-posdefCorpcor.R
-7c99c2106b4464fc5e11ecdb2da765b7 *R/builtin-ssdenGss.R
+30d2a44ff1f5b81431f27d5bf0f2e8fa *R/builtin-ssdenGss.R
 1d2cbcf379d68cb931140e978c6e9f94 *R/builtin-testNortest.R
 cf364809f14386d246f282ef3d1c520e *R/builtin-varpieA2R.R
 e4c6cf02ac6c5974914de2dd0ba199a6 *R/dist-distCheck.R
@@ -124,7 +124,7 @@ c357583eaf2867c2169ba1cebaffce0a *R/utils-recessionLines.R
 451a02fdd0dd4249abbe8f8399f4296e *R/utils-symbolTable.R
 a256d689a0a03045061974b10d93aaf4 *R/utils-unitTest.R
 c695119e203d0913f791a9fc5736269b *R/utils-unitrootNA.R
-910db8bb5d4851f5380e0e699daf9e58 *R/zzz.R
+6047540097818c70272a1434aeb8c784 *R/zzz.R
 6042b9c5e5bec3ecc1b6959cd2858b64 *inst/COPYRIGHT.html
 0c421832d488f624a5beccfda671d3e8 *inst/unitTests/HeavisideSlider.R
 6763e1b8ea6f19e99e1d9c55a5b19b71 *inst/unitTests/Makefile
@@ -269,7 +269,5 @@ b5f60671b3d38b0f1077d6ff517ec714 *man/utils-printControl.Rd
 b10d2eecc59ee07dd7ebb78142d2582b *man/utils-symbolTable.Rd
 8290d2e9740414e315237f0d5d4024bb *src/Makevars
 2841cdbbc20e8b5b98de0b6abc2e252f *src/gld.c
-4dd7d486d4819b990121a77987eb2fd7 *src/gss_a.f
-492e9abffe084eca767a9a7d6f462aee *src/gss_b.c
 5a5101f57ae20ba3f930970289753826 *src/nig.c
 46963bfeff05e6aa8353544b7627cbda *tests/doRUnit.R
