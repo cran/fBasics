@@ -1,6 +1,6 @@
 0da1cabe97399ea912012f1d0c9e4899 *ChangeLog
-b0b4306e7bb54be8d7b7e6e936024ca9 *DESCRIPTION
-0e5fa8cb2389e49b1cb7f3198d1d9ba4 *NAMESPACE
+f8fac4e82cdc9fd46b599c6bde94f215 *DESCRIPTION
+24f516750f221a247d481cd1b10c6bc6 *NAMESPACE
 b5841badb29a9efeca576915c5969166 *R/00fBasics-Package.R
 ffe2c1f5c776aa0853ea616d0719a38f *R/builtin-gelGmm.R
 ed986880f886f3e3bbbcd5cef64cda2b *R/builtin-glGld.R
@@ -26,7 +26,7 @@ f94c6bc9301cd38c1d7186203e4fd56a *R/dist-ghtMode.R
 836d4c53bdf200f478e2ae428c867f98 *R/dist-ghtMoments.R
 6c4d9d60f43e06d2c4bcec7606ef53dc *R/dist-ghtRobMoments.R
 280dad3bc6d7049e7751f302b4c41c0c *R/dist-gld.R
-9c025043e308e6dea1c219d1af241300 *R/dist-gldFit.R
+ee63f3a3d9ae3f751e06217ce4d10003 *R/dist-gldFit.R
 011ec9a3a04a4a42f3d88025d5b24cff *R/dist-gldMode.R
 138b771667b07ff8a2f915da4a930cd2 *R/dist-gldRobMoments.R
 1af9968a58742daaa6ea85275522e077 *R/dist-hyp.R
@@ -56,7 +56,7 @@ b205ead2f9afe3c05cf2eb13ea507dcc *R/gui-ghSlider.R
 cbc1dfa6ffdf56cb9e76a2b31d64e8e8 *R/gui-hypSlider.R
 42495b3ec667becf5b77b28b5a4dcdad *R/gui-nigSlider.R
 cbe245a07fd1e69eb4a0e8bcfa55f0ae *R/gui-returnSeries.R
-ebe32146cc2149f386d37a0a53905ce4 *R/gui-sliderMenu.R
+44ebae33f22de3d79de7570a22099259 *R/gui-sliderMenu.R
 85e5ddc55fade77ef2187de317deb5de *R/gui-stableSlider.R
 0cc355beafa7fe51f0c35623ddb7402c *R/gui-stylizedFacts.R
 b37d712d1f6384ad1438bdc971af07dc *R/matrix-colVec.R
@@ -85,9 +85,9 @@ c2ee72fc50668d9aa7a75a68ef8a3fc7 *R/plot-subStars.R
 53be74d03ac075fc2342baa18e5381e7 *R/plot-varpie.R
 fcf1b73e6095fc8c761aff1b0e5b7c64 *R/plot.R
 37c86a634b613627a675d9fb87e70e7a *R/stats-basicStats.R
-0dfbba844c10aecbf513a8663916cf09 *R/stats-interpAkima.R
-201657b1a2efab6568b378bc60b55ae1 *R/stats-interpKrige.R
-c07562d398caa0906a336b109e5bf8ab *R/stats-interpLinear.R
+89156555079e93437a20c227b6085c9f *R/stats-interpAkima.R
+1d6dfcc67c5a2146a0caf46d0c03ef97 *R/stats-interpKrige.R
+0ae6a37590fe7ae916fdcec6c7c8d51f *R/stats-interpLinear.R
 34bb0e99137555ed24d58104e00224b8 *R/stats-maxdd.R
 3e811cb50eeabb3081ff6785a0f15242 *R/stats-rowStats.R
 780d742fc94c891d2e4686cd0d0e5cb2 *R/stats-sampleLmoments.R
@@ -99,7 +99,7 @@ a0a6ffb1408161fced8d13daa02a5414 *R/test-jbLM.R
 d7f1ab56ff37cf7a4d3866b9c6f634c9 *R/test-jbTable.R
 35e8e30c1601da53eae4c4cabfd91ad4 *R/test-ks2Test.R
 f1fcfd9190a65800f207f2f858975812 *R/test-locationTest.R
-343729a215962f21e3366e16b4164e5b *R/test-normalityTest.R
+398a23610628587198e1b8741b4833bc *R/test-normalityTest.R
 e7734f1b41dd64375aa9b88b7b2b9fa9 *R/test-scaleTest.R
 a53d00b11324083b45977e12aa9aa3d5 *R/test-varianceTest.R
 9caadcd15ee4bcdd10cdda8eed49773e *R/utils-Heaviside.R
@@ -115,15 +115,15 @@ c87af125e323fe0a55f5e9631bdd631e *R/utils-decor.R
 10840c90662a81cef6ca88837f09aa90 *R/utils-getS4.R
 8f1fce2695c26fb68137032c22c83b2e *R/utils-hessian.R
 a4317b50047273b3aaa2837553ca411b *R/utils-interactivePlot.R
-0490ed06a18dced62aef2fa8e6a5a687 *R/utils-listDescription.R
-cf8b9c6974d1035aa9feda6b265399a5 *R/utils-listFunctions.R
-166aac8a12ff9a38bbfa671f2258a36f *R/utils-listIndex.R
+06e4d9d413f2d012f2d530a5b1308ea9 *R/utils-listDescription.R
+1b4a2d83897f75fcd598cb570888e567 *R/utils-listFunctions.R
+7c662794745ddd161b74d36eb176d34a *R/utils-listIndex.R
 30e266228d89a6875055d93da85a7369 *R/utils-printControl.R
 32f3f898e525ff7311d2adfd0158c57b *R/utils-randLCG.R
 c357583eaf2867c2169ba1cebaffce0a *R/utils-recessionLines.R
 451a02fdd0dd4249abbe8f8399f4296e *R/utils-symbolTable.R
 c695119e203d0913f791a9fc5736269b *R/utils-unitrootNA.R
-8c031f95f209b3d7b36233d3264ba7f5 *R/zzz.R
+4060dc43980b3319fb64ff6de9ce9cd8 *R/zzz.R
 f32fab9414543f541655695cab8f18f6 *data/Capitalization.R
 4b326acb0fcbf684bd71e3c206c99521 *data/DowJones30.csv
 fda23a724e2a413b84479b354343085e *data/HedgeFund.R
@@ -141,7 +141,7 @@ de0f8863a9c90edb00db6a08235cb153 *inst/unitTests/runit.DistributionFits.R
 0102fbf3733ee1d531346e67ddf03c54 *inst/unitTests/runit.Heaviside.R
 3cc654e44e24e279a84a95ad8318074c *inst/unitTests/runit.HyperbolicDistribution.R
 cfb05fc99e5ff12dcacbbb3cd9eab96d *inst/unitTests/runit.JarqueBeraPValues.R
-8b6a2d9658d54bb5dae505eb07e7f15c *inst/unitTests/runit.NormalityTests.R
+cc9658c6f0941cfa4a5e777662c4119e *inst/unitTests/runit.NormalityTests.R
 052a01156b8f414fd190745a3d38a712 *inst/unitTests/runit.ReturnSeriesBasics.R
 e31b7c372eeb9b0dedb040f9cfeab918 *inst/unitTests/runit.StylizedFacts.R
 04059bd02ee724883db4ed97bcc8ac2c *inst/unitTests/runit.Sys.putenv.R
@@ -167,7 +167,7 @@ f1288af1db8eaed3e9d77af7510fdc95 *inst/unitTests/runit.julian.R
 d5020025a2bb136cd8466e527952a23e *inst/unitTests/runit.kurtosis.R
 8ef5b524f61ff91113bc4c93c8747139 *inst/unitTests/runit.lcg.R
 2bbbfd7c82215a2023f549f003b8b55e *inst/unitTests/runit.linearInterp.R
-ed08bb7afed381e9f386c3567a39200d *inst/unitTests/runit.listDescription.R
+23ae1d0fc57dca6a7461a1f5bdc8ac30 *inst/unitTests/runit.listDescription.R
 567a025db962aec9dc30fdf18d2a5268 *inst/unitTests/runit.listFunctions.R
 3424d43652d1449383a468520e1bfc97 *inst/unitTests/runit.listIndex.R
 ded7f6d681b04c792dd7fa047e21e486 *inst/unitTests/runit.matrixAddon.R
@@ -246,8 +246,8 @@ c43e61280d097f59bcf599ba266376df *man/plot-scalinglawPlot.Rd
 ff0e78bf01cdb12a2024457b9b9293d4 *man/plot-seriesPlot.Rd
 55b68f7292b19e3e1fb132ee8588a023 *man/stableSlider.Rd
 7c3da32e0586e5377b038bc8bbb328f6 *man/stats-basicStats.Rd
-ad6e45b940ddcc6cb910456f6fb4b1eb *man/stats-interpAkima.Rd
-888d3ee051c378f329071949861c44bb *man/stats-interpKrige.Rd
+2cbb94deaa4961487ded5a893fd92e7a *man/stats-interpAkima.Rd
+9677f30617db777ca36507caf494c3e6 *man/stats-interpKrige.Rd
 32dec54e0b009ea9209783441ca691d6 *man/stats-interpLinear.Rd
 2fa0b773424b04e1b25d7c5805fa6855 *man/stats-maxdd.Rd
 0d3b8f6272099cec5a6d8d3640402f72 *man/stats-rowStats.Rd
