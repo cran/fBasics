@@ -58,7 +58,6 @@ getArgs(f, signature)
     a character string, the name of the slot to be extracted from the
     S4 object.
   }
-  \item{\dots}{Further arguments to be passed to function.}
 }
 
 \value{

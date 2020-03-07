@@ -62,9 +62,6 @@ rgh(n, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2)
     \item{x, q}{
         a numeric vector of quantiles.
         }
-    \item{\dots}{
-        arguments to be passed to the function \code{integrate}.
-        }
     
 }
 

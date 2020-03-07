@@ -1,7 +1,7 @@
 Package: fBasics
 Title: Rmetrics - Markets and Basic Statistics
 Date: 2017-11-12
-Version: 3042.89
+Version: 3042.89.1
 Author: Diethelm Wuertz [aut],
 	Tobias Setz [cre],
 	Yohan Chalabi [ctb]
@@ -24,6 +24,6 @@ License: GPL (>= 2)
 Encoding: UTF-8
 URL: https://www.rmetrics.org
 NeedsCompilation: yes
-Packaged: 2017-11-17 06:26:29 UTC; Tobias Setz
+Packaged: 2020-03-07 10:25:14 UTC; hornik
 Repository: CRAN
-Date/Publication: 2017-11-17 12:09:09 UTC
+Date/Publication: 2020-03-07 11:06:10 UTC
