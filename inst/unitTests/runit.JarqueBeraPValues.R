@@ -44,7 +44,7 @@ function()
 {
     if (FALSE) {
 
-        require(akima)
+        require(interp)
 
         # Jarque-Bera Table:
         #   .jbTable(type = c("LM", "ALM"), size = c("mini", "small", "all"))

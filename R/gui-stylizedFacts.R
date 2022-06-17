@@ -377,8 +377,8 @@ function(x, y, lag.max = max(2, floor(10*log10(length(x)))),
     # FUNCTION:
 
     # Convert Type:
-    if (class(x) == "timeSeries") stopifnot(isUnivariate(x))
-    if (class(y) == "timeSeries") stopifnot(isUnivariate(y))
+    if (inherits(x, "timeSeries")) stopifnot(isUnivariate(x))
+    if (inherits(y, "timeSeries")) stopifnot(isUnivariate(y))
     x = as.vector(x)
     y = as.vector(y)
 

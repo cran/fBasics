@@ -75,7 +75,7 @@ function(m, tol, method = c("eigen", "chol"))
         }
     } else if (method == "chol") {
         val = try(chol(m), silent = TRUE)
-        if (class(val) == "try-error") {
+        if (inherits(val, "try-error")) {
             return(FALSE)
         } else {
             return(TRUE)

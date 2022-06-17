@@ -32,9 +32,9 @@
 ################################################################################
 
 
-.residualsPlot <- 
+.residualsPlot <-
 function(x, ...)
-{   
+{
     # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -63,11 +63,11 @@ function(x, ...)
 # ------------------------------------------------------------------------------
 
 
-.acfPlot <- 
+.acfPlot <-
 function(x, ...)
 {
     # A function implemented by Diethelm Wuertz
-    
+
     # FUNCTION:
 
     # Convert Type:
@@ -84,11 +84,11 @@ function(x, ...)
 # ------------------------------------------------------------------------------
 
 
-.pacfPlot <- 
+.pacfPlot <-
 function(x, ...)
 {
     # A function implemented by Diethelm Wuertz
-    
+
     # FUNCTION:
 
     # Convert Type:
@@ -105,10 +105,10 @@ function(x, ...)
 # ------------------------------------------------------------------------------
 
 
-.mrlPlot <- 
+.mrlPlot <-
 function(x, ci = 0.95, umin = mean(x), umax = max(x), nint = 100,
     doplot = TRUE, plottype = c("autoscale", ""), labels = TRUE, ...)
-{   
+{
     # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -177,9 +177,9 @@ function(x, ci = 0.95, umin = mean(x), umax = max(x), nint = 100,
 ################################################################################
 
 
-.responsesPlot <- 
+.responsesPlot <-
 function(x, y = NULL, ...)
-{   
+{
     # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -213,9 +213,9 @@ function(x, y = NULL, ...)
 # ------------------------------------------------------------------------------
 
 
-.firePlot <- 
+.firePlot <-
 function(x, y, method = c("scatter", "hist"), ...)
-{   
+{
     # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -300,10 +300,10 @@ function(x, y, method = c("scatter", "hist"), ...)
 ################################################################################
 
 
-.circlesPlot <- 
+.circlesPlot <-
 function(x, y = NULL, z = NULL, scale = 1, points = TRUE,
     labels = TRUE, ...)
-{   
+{
     # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -353,9 +353,9 @@ function(x, y = NULL, z = NULL, scale = 1, points = TRUE,
 # ------------------------------------------------------------------------------
 
 
-.perspPlot <- 
+.perspPlot <-
 function(x, y, z, theta = -40, phi = 30, col = "steelblue", ps = 9, ...)
-{   
+{
     # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -367,7 +367,7 @@ function(x, y, z, theta = -40, phi = 30, col = "steelblue", ps = 9, ...)
     # FUNCTION:
 
     # Perspective Plot:
-    if (class(version) == "Sversion") {
+    if (inherits(version, "Sversion")) {
         # we assume SPlus:
         ans = persp(x = x, y = y, z = z, ...)
     } else {
@@ -388,9 +388,9 @@ function(x, y, z, theta = -40, phi = 30, col = "steelblue", ps = 9, ...)
 # ------------------------------------------------------------------------------
 
 
-.contourPlot <- 
+.contourPlot <-
 function(x, y, z, ...)
-{   
+{
     # A function implemented by Diethelm Wuertz
 
     # Description:
@@ -402,7 +402,7 @@ function(x, y, z, ...)
     # FUNCTION:
 
     # Contour Plot:
-    if (class(version) == "Sversion") {
+    if (inherits(version, "Sversion")) {
         # we assume SPlus:
         ans = contour(x = x, y = y, z = z, ...)
     } else {
@@ -418,9 +418,9 @@ function(x, y, z, ...)
 # ------------------------------------------------------------------------------
 
 
-.histStack <- 
+.histStack <-
 function(x, y = NULL, space = 0, ylab = "frequency", ...)
-{   
+{
     # A function implemented by Diethelm Wuertz
 
     # Description:

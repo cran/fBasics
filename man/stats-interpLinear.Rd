@@ -79,7 +79,7 @@ linearInterpp(x, y = NULL, z = NULL, xo, yo)
 \examples{ 
 ## linearInterp -
    # Linear Interpolation:    
-   if (require(akima)) {
+   if (requireNamespace("interp")) {
      set.seed(1953)
      x = runif(999) - 0.5
      y = runif(999) - 0.5

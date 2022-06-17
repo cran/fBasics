@@ -70,7 +70,7 @@ function()
     print(TEST)
     checkIdentical(as.character(class(TEST)), "fHTEST")
 
-    if(try(require(akima))) {
+    if(try(require(interp))) {
         TEST = jbTest(X)
         print(TEST)
         checkIdentical(as.character(class(TEST)), "fHTEST") }
@@ -125,7 +125,7 @@ function()
     checkIdentical(as.character(class(TEST)), "fHTEST")
 
 
-    if(try(require(akima))) {
+    if(try(require(interp))) {
         TEST = jbTest(X)
         print(TEST)
         checkIdentical(as.character(class(TEST)), "fHTEST")}

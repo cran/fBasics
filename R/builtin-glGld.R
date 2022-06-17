@@ -145,25 +145,23 @@ function(q, lambda1=0, lambda2=NULL, lambda3=NULL, lambda4=NULL,
         FMKL=, # Notes on .C call - the "numerics", lambdas and inverse.eps
                # don't need the as.??? call as they are implicitly double
         fmkl=.C(
-            "gl_fmkl_distfunc", lambdas[1], lambdas[2], lambdas[3], lambdas[4],
+            C_gl_fmkl_distfunc, lambdas[1], lambdas[2], lambdas[3], lambdas[4],
             as.double(0), as.double(1), inverse.eps,
             as.integer(max.iterations), as.double(q), as.double(u),
-            as.integer(length.of.vector), PACKAGE="fBasics"),
+            as.integer(length.of.vector)),
             ramberg=, # Ramberg & Schmeiser
             ram=,
             RS=,
             rs=.C(
-                "gl_rs_distfunc", lambdas[1], lambdas[2], lambdas[3], lambdas[4],
+                C_gl_rs_distfunc, lambdas[1], lambdas[2], lambdas[3], lambdas[4],
                 as.double(0), as.double(1), inverse.eps,
             as.integer(max.iterations), as.double(q), as.double(u),
-            as.integer(length.of.vector),
-            PACKAGE="fBasics"),
-        fm5=.C("gl_fm5_distfunc", lambdas[1], lambdas[2], lambdas[3],
+            as.integer(length.of.vector)),
+        fm5=.C(C_gl_fm5_distfunc, lambdas[1], lambdas[2], lambdas[3],
             lambdas[4], lambdas[5],
                 as.double(0), as.double(1), inverse.eps,
             as.integer(max.iterations), as.double(q), as.double(u),
-            as.integer(length.of.vector),
-            PACKAGE="fBasics"),
+            as.integer(length.of.vector)),
             stop("Error: Parameterisation must be one of fmkl, fm5 or rs")
             ) # closes "switch"
     if (!(is.numeric(result[[1]]))){

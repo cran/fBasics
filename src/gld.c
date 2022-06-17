@@ -42,7 +42,7 @@
 
 /* proto */
 
-void fm5_funcd( double , double , double *, double *, double *, double *, double *,
+static void fm5_funcd( double , double , double *, double *, double *, double *, double *,
 double *, double *);
 /* This needs a comment for explaining the arguments */
 
@@ -151,7 +151,7 @@ for (i=0;i<*lengthofdata;i++)
 }
 
 
-void fm5_funcd( double u, double x, double *F, double *dFdu, double *pa, double *pb, double *pc, double *pd, double *pe)
+static void fm5_funcd( double u, double x, double *F, double *dFdu, double *pa, double *pb, double *pc, double *pd, double *pe)
 {
 
 /* *F is the gld F-1(u)  */
@@ -227,7 +227,7 @@ else {
 
 /* proto */
 
-void fmkl_funcd( double , double , double *, double *, double *, double *, double *, double *);
+static void fmkl_funcd( double , double , double *, double *, double *, double *, double *, double *);
 
 /* the function that finds the root */
 
@@ -337,7 +337,7 @@ for (i=0;i<*lengthofdata;i++)
 }
 
 
-void fmkl_funcd( double u, double x, double *F, double *dFdu, double *pa, double *pb, double *pc, double *pd)
+static void fmkl_funcd( double u, double x, double *F, double *dFdu, double *pa, double *pb, double *pc, double *pd)
 {
 
 /* *F is the gld F-1(u)  */
@@ -411,6 +411,8 @@ else {
 static double la, lb, lc, ld, x;
 
 /* the function that finds the root */
+
+static void funcd(double u, double *a, double *b);
 
 void gl_rs_distfunc( double *pa,double *pb,double *pc,double *pd,
 double  *px1,double *px2,double *pxacc, int *max_it,
@@ -498,7 +500,7 @@ for (i=0;i<l;i++)
 }
 
 
-void funcd(u,a,b)
+static void funcd(u,a,b)
 double u,*a,*b;
 {
 

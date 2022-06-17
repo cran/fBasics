@@ -236,15 +236,14 @@ function(p, alpha = 1, beta = 0, delta = 1, mu = 0)
     # Evaluate NIG cdf by calling C function
     n <- length(p)
     q <- rep(0, n)
-    retValues <- .C("qNIG",
+    retValues <- .C(C_qNIG,
         as.double(p),
         as.double(mu),
         as.double(delta),
         as.double(alpha),
         as.double(beta),
         as.integer(n),
-        as.double(q),
-        PACKAGE = "fBasics")
+        as.double(q))
     quantiles <- retValues[[7]]
     quantiles[quantiles <= -1.78e+308] <- -Inf
     quantiles[quantiles >= 1.78e+308] <- Inf
@@ -280,15 +279,14 @@ function(q, alpha = 1, beta = 0, delta = 1, mu = 0)
     # Evaluate NIG cdf by calling C function
     n <- length(q)
     p <- rep(0, n)
-    retValues <- .C("pNIG",
+    retValues <- .C(C_pNIG,
         as.double(q),
         as.double(mu),
         as.double(delta),
         as.double(alpha),
         as.double(beta),
         as.integer(n),
-        as.double(p),
-        PACKAGE = "fBasics")
+        as.double(p))
     probs <- retValues[[7]]
 
     # Return Value:

@@ -38,17 +38,19 @@
 #define  ITMAX     100
 
 
+#if 0
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Print error text and return to R
+// Print error text and return to R - UNUSED
 //
 ////////////////////////////////////////////////////////////////////////////////
 
 
-void printError(char *text, char filename[200])
+static void printError(char *text, char filename[200])
 {
   error("%s: %s !!!\n", text, filename);
 }
+#endif
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +66,7 @@ void printError(char *text, char filename[200])
 ////////////////////////////////////////////////////////////////////////////////
 
 
-void heapSort(int n, double *x, int *order)
+static void heapSort(int n, double *x, int *order)
 {
   int i,j,l;
   int ir, ordert;
@@ -115,7 +117,7 @@ void heapSort(int n, double *x, int *order)
 ////////////////////////////////////////////////////////////////////////////////
 
 
-double bessk1(double x)
+static double bessk1(double x)
 {
   int i;
   double y, k1;
@@ -232,7 +234,7 @@ void dNIG(double* x, double* mu, double* delta, double* alpha,
 ////////////////////////////////////////////////////////////////////////////////
 
 
-double fdNIG(double x, double mu, double delta, double alpha, double beta)
+static double fdNIG(double x, double mu, double delta, double alpha, double beta)
 {
   int i = 1;
   double f;
@@ -254,7 +256,7 @@ double fdNIG(double x, double mu, double delta, double alpha, double beta)
 ///////////////////////////////////////////////////////////////////////////
 
 
-void intdei(double a, double mu, double delta, double alpha, double beta,
+static void intdei(double a, double mu, double delta, double alpha, double beta,
     double *i, double *err)
 {
   /* ---- adjustable parameters ---- */
@@ -373,7 +375,7 @@ void pNIG(double *x, double *mu, double *delta, double *alpha, double *beta,
 ////////////////////////////////////////////////////////////////////////////////
 
 
-double fpNIG(double x, double mu, double delta, double alpha, double beta,
+static double fpNIG(double x, double mu, double delta, double alpha, double beta,
     double sp)
 {
   double f;
@@ -391,7 +393,7 @@ double fpNIG(double x, double mu, double delta, double alpha, double beta,
 ////////////////////////////////////////////////////////////////////////////////
 
 
-double zbrent(double x1, double x2, double mu, double delta, double alpha,
+static double zbrent(double x1, double x2, double mu, double delta, double alpha,
     double beta, double sp)
 {
   int iter;

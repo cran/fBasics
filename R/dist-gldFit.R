@@ -120,7 +120,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
     # Objective Function:
     obj <- function(x, y = x, trace) {
         DGLD = try(dgld(y, x[1], x[2], x[3], x[4]), silent = TRUE)
-        if (class(DGLD) == "try-error") return(1e9)
+        if (inherits(DGLD, "try-error")) return(1e9)
         f = -sum(log(DGLD))
         # Print Iteration Path:
         if (trace) {
@@ -227,10 +227,10 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
         typeFun = function(x) -var(x) }
     obj = function(x, y = x, typeFun, trace) {
         PGLD = try(pgld(sort(y), x[1], x[2], x[3], x[4]), silent = TRUE)
-        if (class(PGLD) == "try-error") return(1e9)
+        if (inherits(PGLD,  "try-error")) return(1e9)
         DH = diff(c(0, na.omit(PGLD), 1))
         f = try(-typeFun(log(DH[DH > 0])), silent = TRUE)
-        if (class(PGLD) == "try-error") return(1e9)
+        if (inherits(PGLD, "try-error")) return(1e9)
         # Print Iteration Path:
         if (trace) {
             cat("\n Objective Function Value:  ", f)
@@ -349,7 +349,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
     typeFun <- match.fun(paste(".", type, "GLD", sep = ""))
     obj = function(x, y = x, typeFun, trace) {
         PFGL = try(pgld(sort(y), x[1], x[2], x[3], x[4]), silent = TRUE)
-        if (class(PFGL) == "try-error") return(1e9)
+        if (inherits(PFGL, "try-error")) return(1e9)
         PFGL = PFGL[PFGL > 0]
         PFGL = PFGL[PFGL < 1]
         N = length(PFGL)
@@ -456,7 +456,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
     # Objective Function:
     obj = function(x, hist, trace) {
         DFGL = try(dgld(hist$mids, x[1], x[2], x[3], x[4]), silent = TRUE)
-        if (class(DFGL) == "try-error") return(1e9)
+        if (inherits(DFGL, "try-error")) return(1e9)
         DST = (hist$density - DFGL)^2
         f = sum(DST)
         # Print Iteration Path:
@@ -567,7 +567,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
             (xSKEW-gldSKEW(lambda1, lambda2, lambda3, lambda4))^2 +
             (xKURT-gldKURT(lambda1, lambda2, lambda3, lambda4))^2 ),
             silent = TRUE)
-        if(class(ROB) == "try-error") return(1e9)
+        if(inherits(ROB, "try-error")) return(1e9)
         f = ROB
         # Print Iteration Path:
         if (trace) {

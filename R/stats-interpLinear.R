@@ -46,22 +46,16 @@ linearInterp <-
     #   A list with three elements, $x and $y which are vectors of length
     #   'gridPoints' and $z which is a matrix of size 'gridPoints^2'.
 
-    # Requirements:
-    #   akima Builtin Fortran Code.
-
     # Example:
     #   set.seed(1953)
     #   x = runif(999)-0.5; y = runif(999)-0.5; z = cos(2*pi*(x^2+y^2))
     #   ans = linearInterp(x, y, z)
     #   persp(ans, theta = -50, phi = 30, col = "steelblue")
 
-    # Note:
-    #   Uses Fortran akima Builtin
-
     # FUNCTION:
 
-    if (!requireNamespace("akima", quietly = TRUE))
-      stop("Needs Package 'akima' which is not auto-installed because of a different licence\n")
+    if (!requireNamespace("interp", quietly = TRUE))
+      stop("Needs Package 'interp' which is notinstalled")
 
     # Arguments:
     if (is.data.frame(x))
@@ -75,7 +69,7 @@ linearInterp <-
     }
 
     # Interpolation:
-    ans <- akima::interp(x, y, z, xo, yo, linear = TRUE, extrap = FALSE,
+    ans <- interp::interp(x, y, z, xo, yo, linear = TRUE, extrap = FALSE,
                          duplicate = "median", dupfun = NULL)
     colnames(ans$z) <- as.character(signif(ans$x, round(log(gridPoints), 0)))
     rownames(ans$z) <- as.character(signif(ans$y, round(log(gridPoints), 0)))
@@ -112,22 +106,16 @@ linearInterpp <-
     #   A list with three elements, $x and $y which are vectors of length
     #   'gridPoints' and $z which is a matrix of size 'gridPoints^2'.
 
-    # Requirements:
-    #   akima Builtin Fortran Code.
-
     # Example:
     #   set.seed(1953)
     #   x = runif(999)-0.5; y = runif(999)-0.5; z = cos(2*pi*(x^2+y^2))
     #   ans = linearInterpp(x, y, z, c(mean(x), 0, 100), c(mean(y), 0, 100))
     #   persp(ans, theta = -50, phi = 30, col = "steelblue")
 
-    # Note:
-    #   Uses Fortran akima Builtin
-
     # FUNCTION:
 
-    if (!requireNamespace("akima", quietly = TRUE))
-      stop("Needs Package 'akima' which is not auto-installed because of a different licence\n")
+    if (!requireNamespace("interp", quietly = TRUE))
+      stop("Needs Package 'interp' which is not installed")
 
     # Arguments:
     if (is.data.frame(x))
@@ -141,7 +129,7 @@ linearInterpp <-
     }
 
     # Interpolation:
-    interpp <- eval(parse(text=paste0("akima",":::","interpp")))
+    interpp <- eval(parse(text=paste0("interp",":::","interpp")))
     ans <- interpp(x, y, z, xo, yo, linear = TRUE, extrap = FALSE,
                    duplicate = "median", dupfun = NULL)
     ## Return

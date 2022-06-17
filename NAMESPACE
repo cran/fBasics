@@ -1,8 +1,7 @@
 ################################################################################
 ## Libraries
 ################################################################################
-useDynLib("fBasics")
-
+useDynLib("fBasics", .registration = TRUE, .fixes = "C_")
 ################################################################################
 ## Imports
 ################################################################################
@@ -40,7 +39,10 @@ import("timeSeries")
 ################################################################################
 ## Exports
 ################################################################################
-exportPattern(".")
+#exportPattern(".")
+## Avoid ^C_, include those starting with . , be locale-independent
+## Ideally avoid S3 methods, but not e.g. runif.lcg
+exportPattern("^[ABDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.]")
 
 S3method("getModel", "default")
 S3method("print", "control")

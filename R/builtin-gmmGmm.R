@@ -16,7 +16,7 @@
 
 
 ################################################################################
-# FUNCTION:             
+# FUNCTION:
 #  .gmm
 #  .HAC
 #  .weightsAndrews2
@@ -26,15 +26,15 @@
 ################################################################################
 
 
-# Code borrowed from 
+# Code borrowed from
 #   R's contributed package "gmm" written by Pierre Chausse.
 
 
 # Rmetrics:
-#   Note that gmm is not available on Debian as of 2009-04-28. 
-#   To run these functions under Debian/Rmetrics we have them    
+#   Note that gmm is not available on Debian as of 2009-04-28.
+#   To run these functions under Debian/Rmetrics we have them
 #   implemented here as a builtin.
-#   We also made modifications for tailored usage with Rmetrics. 
+#   We also made modifications for tailored usage with Rmetrics.
 #   Note that the dependences in the original package requires zoo
 #   which may create conflicts with Rmetrics timeDate/timeSeries.
 
@@ -45,13 +45,13 @@
 # Title: Generalized Method of Moments and Generalized Empirical Likelihood
 # Author: Pierre Chausse <pierre.chausse@uqam.ca>
 # Maintainer: Pierre Chausse <pierre.chausse@uqam.ca>
-# Description: It is a complete suite to estimate models based on moment 
-#     conditions. It includes the  two step Generalized method of moments 
-#     (GMM) of Hansen(1982), the iterated GMM and continuous updated 
-#     estimator (CUE) of Hansen-Eaton-Yaron(1996) and several methods that 
-#     belong to the Generalized Empirical Likelihood (GEL) family of estimators, 
-#     as presented by Smith(1997), Kitamura(1997), Newey-Smith(2004) and 
-#     Anatolyev(2005). 
+# Description: It is a complete suite to estimate models based on moment
+#     conditions. It includes the  two step Generalized method of moments
+#     (GMM) of Hansen(1982), the iterated GMM and continuous updated
+#     estimator (CUE) of Hansen-Eaton-Yaron(1996) and several methods that
+#     belong to the Generalized Empirical Likelihood (GEL) family of estimators,
+#     as presented by Smith(1997), Kitamura(1997), Newey-Smith(2004) and
+#     Anatolyev(2005).
 # Depends: R (>= 2.0.0), sandwich, tseries, mvtnorm
 # Imports: stats
 # License: GPL (>= 2)
@@ -60,12 +60,12 @@
 # ------------------------------------------------------------------------------
 
 
-.gmm <- 
-function(g, x, t0=NULL, gradv=NULL, type=c("twoStep","cue","iterative"), 
-    wmatrix = c("optimal","ident"),  vcov=c("HAC","iid"), 
-    kernel=c("Quadratic Spectral","Truncated", "Bartlett", "Parzen", 
-    "Tukey-Hanning"),crit=10e-7,bw = .bwAndrews2, 
-    prewhite = FALSE, ar.method = "ols", approx="AR(1)",tol = 1e-7, 
+.gmm <-
+function(g, x, t0=NULL, gradv=NULL, type=c("twoStep","cue","iterative"),
+    wmatrix = c("optimal","ident"),  vcov=c("HAC","iid"),
+    kernel=c("Quadratic Spectral","Truncated", "Bartlett", "Parzen",
+    "Tukey-Hanning"),crit=10e-7,bw = .bwAndrews2,
+    prewhite = FALSE, ar.method = "ols", approx="AR(1)",tol = 1e-7,
     itermax=100,intercept=TRUE,optfct=c("optim","optimize"), ...)
 {
     type <- match.arg(type)
@@ -97,7 +97,7 @@ function(g, x, t0=NULL, gradv=NULL, type=c("twoStep","cue","iterative"),
                 e <- x[,1:ny] -  x[,(ny+1):(ny+k)]%*%t(tet)
                 gt <- e*x[,ny+k+1]
                 if (nh > 1)
-                    {    
+                    {
                     for (i in 2:nh)
                         {
                         gt <- cbind(gt,e*x[,(ny+k+i)])
@@ -117,13 +117,13 @@ function(g, x, t0=NULL, gradv=NULL, type=c("twoStep","cue","iterative"),
             ym <- as.matrix(x[,1:ny])
             xm <- as.matrix(x[,(ny+1):(ny+k)])
             hm <- as.matrix(x[,(ny+k+1):(ny+k+nh)])
-            whx <- solve(w,(crossprod(hm,xm)%x%diag(ny)))    
+            whx <- solve(w,(crossprod(hm,xm)%x%diag(ny)))
             wvecyh <- solve(w,matrix(crossprod(ym,hm),ncol=1))
             dg <- gradv(x)
             xx <- crossprod(dg,whx)
             par <- solve(xx,crossprod(dg,wvecyh))
             gb <- matrix(colSums(g(par,x))/n,ncol=1)
-            value <- crossprod(gb,solve(w,gb)) 
+            value <- crossprod(gb,solve(w,gb))
             res <- list(par=par,value=value)
             return(res)
             }
@@ -201,8 +201,8 @@ if (q == k2 | wmatrix == "ident")
             res <- optimize(obj1,t0, ...)
             res$par <- res$minimum
             res$value <- res$objective
-            }    
-        z = list(par=res$par,objective=res$value)    
+            }
+        z = list(par=res$par,objective=res$value)
         }
     }
 else
@@ -223,7 +223,7 @@ else
                 res1 <- optimize(obj1,t0, ...)
                 res1$par <- res1$minimum
                 res1$value <- res1$objective
-                }    
+                }
             }
         if (vcov == "iid")
             w <- iid(res1$par)
@@ -243,9 +243,9 @@ else
                 res2 <- optimize(obj1,t0, ...)
                 res2$par <- res2$minimum
                 res2$value <- res2$objective
-                }    
+                }
             }
-        z = list(par=res2$par,objective=res2$value)    
+        z = list(par=res2$par,objective=res2$value)
         }
     if (type=="cue")
         {
@@ -260,7 +260,7 @@ else
                     prewhite=prewhite,ar.method=ar.method,approx=approx,tol=tol)
             obj <- crossprod(gbar,solve(w2,gbar))
             return(obj)
-            }    
+            }
         if (typeg)
             {
             if (is.null(t0))
@@ -268,7 +268,7 @@ else
             if (optfct == "optim")
                 {
                 res2 <- optim(t0,obj_cue, ...)
-                }    
+                }
             else
                 {
                 res2 <- optimize(obj_cue,t0, ...)
@@ -285,9 +285,9 @@ else
                 res2 <- optimize(obj_cue,t0, ...)
                 res2$par <- res2$minimum
                 res2$value <- res2$objective
-                }    
+                }
             }
-        z = list(par=res2$par,objective=res2$value)    
+        z = list(par=res2$par,objective=res2$value)
         }
     if (type=="iterative")
         {
@@ -303,7 +303,7 @@ else
                 res <- optimize(obj1,t0, ...)
                 res$par <- res$minimum
                 res$value <- res$objective
-                }    
+                }
             }
         ch <- 100000
         j <- 1
@@ -318,7 +318,7 @@ else
             if (typeg)
                 res <- tetlin(x,w2)
             else
-                {    
+                {
                 if (optfct == "optim")
                     res <- optim(tet,obj1, ...)
                 else
@@ -326,7 +326,7 @@ else
                     res <- optimize(obj1,t0, ...)
                     res$par <- res$minimum
                     res$value <- res$objective
-                    }    
+                    }
                 }
             ch <- crossprod(abs(tet-res$par)/tet,abs(tet-res$par)/tet)
             if (j>itermax)
@@ -334,19 +334,19 @@ else
                 cat("No convergence after ",itermax," iterations")
                 ch <- crit
                 }
-            j <- j+1    
+            j <- j+1
         }
 
-        z = list(par=res$par,objective=res$value)    
+        z = list(par=res$par,objective=res$value)
         }
     }
 
-    if (!is.function(gradv)) 
+    if (!is.function(gradv))
         G <- Gf(z$par)
     else
         if (typeg)
             G <- gradv(x)
-        else    
+        else
             G <- gradv(z$par,x)
 
     if (vcov == "iid")
@@ -354,7 +354,7 @@ else
     else
         v <- .HAC(g(z$par,x), kernel=kernel, bw=bw,prewhite=prewhite,
             ar.method=ar.method,approx=approx,tol=tol)/n
-    
+
     if (wmatrix == "optimal")
         {
         z$vcov <- solve(crossprod(G,solve(v,G)))
@@ -399,27 +399,27 @@ if (typeg == 1)
 # ------------------------------------------------------------------------------
 
 
-.HAC <- 
-function(x, weights = .weightsAndrews2, bw = .bwAndrews2, 
-    prewhite = FALSE, ar.method = "ols", kernel=c("Quadratic Spectral", 
+.HAC <-
+function(x, weights = .weightsAndrews2, bw = .bwAndrews2,
+    prewhite = FALSE, ar.method = "ols", kernel=c("Quadratic Spectral",
     "Truncated", "Bartlett", "Parzen", "Tukey-Hanning"), approx="AR(1)",
-    tol = 1e-7) 
+    tol = 1e-7)
 {
     n.orig <- n <- nrow(x)
     k <- ncol(x)
-    kernel=match.arg(kernel)    
-    if(prewhite > 0) 
+    kernel=match.arg(kernel)
+    if(prewhite > 0)
     {
-        var.fit <- ar(x, order.max = prewhite, demean = FALSE, aic = FALSE, 
+        var.fit <- ar(x, order.max = prewhite, demean = FALSE, aic = FALSE,
             method = ar.method)
         if(k > 1) D <- solve(diag(ncol(x)) - apply(var.fit$ar, 2:3, sum))
          else D <- as.matrix(1/(1 - sum(var.fit$ar)))
     x <- as.matrix(na.omit(var.fit$resid))
     n <- n - prewhite
     }
-    weights <- weights(x, ar.method = ar.method,kernel=kernel,bw=bw, 
+    weights <- weights(x, ar.method = ar.method,kernel=kernel,bw=bw,
         approx = approx, prewhite = 1, tol = tol)
-    if (length(weights) > n) 
+    if (length(weights) > n)
     {
         warning("more weights than observations, only first n used")
         weights <- weights[1:n]
@@ -429,14 +429,14 @@ function(x, weights = .weightsAndrews2, bw = .bwAndrews2,
     w2sum <- n * weights[1]^2/2
     if (length(weights) > 1) {
         for (ii in 2:length(weights)) {
-            utu <- utu + weights[ii] * crossprod(x[1:(n - 
+            utu <- utu + weights[ii] * crossprod(x[1:(n -
                 ii + 1), , drop = FALSE], x[ii:n, , drop = FALSE])
             wsum <- wsum + (n - ii + 1) * weights[ii]
             w2sum <- w2sum + (n - ii + 1) * weights[ii]^2
         }
     }
     utu <- utu + t(utu)
-    
+
     if(prewhite > 0) {
     utu <- crossprod(t(D), utu) %*% t(D)
      }
@@ -445,7 +445,7 @@ function(x, weights = .weightsAndrews2, bw = .bwAndrews2,
     bc <- n^2/(n^2 - wsum)
     df <- n^2/w2sum
     rval <- utu/n.orig
-    
+
     return(rval)
 }
 
@@ -453,18 +453,18 @@ function(x, weights = .weightsAndrews2, bw = .bwAndrews2,
 # ------------------------------------------------------------------------------
 
 
-.weightsAndrews2 <- 
-function(x, bw = .bwAndrews2, kernel = c("Quadratic Spectral", 
-    "Truncated", "Bartlett", "Parzen", "Tukey-Hanning"), approx = c("AR(1)", 
+.weightsAndrews2 <-
+function(x, bw = .bwAndrews2, kernel = c("Quadratic Spectral",
+    "Truncated", "Bartlett", "Parzen", "Tukey-Hanning"), approx = c("AR(1)",
     "ARMA(1,1)"), prewhite = 1, ar.method = "ols", tol = 1e-7, verbose = FALSE)
 {
     kernel <- match.arg(kernel)
     approx=match.arg(approx)
 
-    if (is.function(bw)) 
-        bw <- bw(x, kernel = kernel, prewhite = prewhite, 
+    if (is.function(bw))
+        bw <- bw(x, kernel = kernel, prewhite = prewhite,
             ar.method = ar.method, approx=approx)
-    n <- NROW(x) 
+    n <- NROW(x)
     weights <- .kweights(0:(n - 1)/bw, kernel = kernel)
     weights <- weights[1:max(which(abs(weights) > tol))]
     return(weights)
@@ -474,10 +474,10 @@ function(x, bw = .bwAndrews2, kernel = c("Quadratic Spectral",
 # ------------------------------------------------------------------------------
 
 
-.bwAndrews2 <- 
-function(x, kernel = c("Quadratic Spectral", 
-    "Truncated", "Bartlett", "Parzen", "Tukey-Hanning"), approx = c("AR(1)", 
-    "ARMA(1,1)"), prewhite = 1, ar.method = "ols") 
+.bwAndrews2 <-
+function(x, kernel = c("Quadratic Spectral",
+    "Truncated", "Bartlett", "Parzen", "Tukey-Hanning"), approx = c("AR(1)",
+    "ARMA(1,1)"), prewhite = 1, ar.method = "ols")
 {
     kernel <- match.arg(kernel)
     approx <- match.arg(approx)
@@ -492,12 +492,12 @@ function(x, kernel = c("Quadratic Spectral",
             return(rval)
         }
         ar.coef <- apply(x, 2, fitAR1)
-        denum <- sum((ar.coef["sigma", ]/(1 - ar.coef["rho", 
+        denum <- sum((ar.coef["sigma", ]/(1 - ar.coef["rho",
             ]))^4)
-        alpha2 <- sum(4 * ar.coef["rho", ]^2 * ar.coef["sigma", 
+        alpha2 <- sum(4 * ar.coef["rho", ]^2 * ar.coef["sigma",
             ]^4/(1 - ar.coef["rho", ])^8)/denum
-        alpha1 <- sum(4 * ar.coef["rho", ]^2 * ar.coef["sigma", 
-            ]^4/((1 - ar.coef["rho", ])^6 * (1 + ar.coef["rho", 
+        alpha1 <- sum(4 * ar.coef["rho", ]^2 * ar.coef["sigma",
+            ]^4/((1 - ar.coef["rho", ])^6 * (1 + ar.coef["rho",
             ])^2))/denum
     }
     else {
@@ -508,15 +508,15 @@ function(x, kernel = c("Quadratic Spectral",
             return(rval)
         }
         arma.coef <- apply(x, 2, fitARMA11)
-        denum <- sum(((1 + arma.coef["psi", ]) * arma.coef["sigma", 
+        denum <- sum(((1 + arma.coef["psi", ]) * arma.coef["sigma",
             ]/(1 - arma.coef["rho", ]))^4)
-        alpha2 <- sum(4 * ((1 + arma.coef["rho", ] * 
-            arma.coef["psi", ]) * (arma.coef["rho", ] + arma.coef["psi", 
-            ]))^2 * arma.coef["sigma", ]^4/(1 - arma.coef["rho", 
+        alpha2 <- sum(4 * ((1 + arma.coef["rho", ] *
+            arma.coef["psi", ]) * (arma.coef["rho", ] + arma.coef["psi",
+            ]))^2 * arma.coef["sigma", ]^4/(1 - arma.coef["rho",
             ])^8)/denum
-        alpha1 <- sum(4 * ((1 + arma.coef["rho", ] * 
-            arma.coef["psi", ]) * (arma.coef["rho", ] + arma.coef["psi", 
-            ]))^2 * arma.coef["sigma", ]^4/((1 - arma.coef["rho", 
+        alpha1 <- sum(4 * ((1 + arma.coef["rho", ] *
+            arma.coef["psi", ]) * (arma.coef["rho", ] + arma.coef["psi",
+            ]))^2 * arma.coef["sigma", ]^4/((1 - arma.coef["rho",
             ])^6 * (1 + arma.coef["rho", ])^2))/denum
     }
     rval <- switch(kernel, Truncated = {
@@ -537,7 +537,7 @@ function(x, kernel = c("Quadratic Spectral",
 # ------------------------------------------------------------------------------
 
 
-.summary.gmm <- 
+.summary.gmm <-
 function(object, interval=FALSE, ...)
     {
     z <- object
@@ -548,16 +548,16 @@ function(object, interval=FALSE, ...)
     ans <- list(met=z$met,kernel=z$kernel,algo=z$algo)
     names(ans$met) <- "GMM method"
     names(ans$kernel) <- "kernel for cov matrix"
-        
+
     ans$par <- round(cbind(par,se, tval, 2 * pnorm(abs(tval), lower.tail = FALSE)),5)
 
-        dimnames(ans$par) <- list(names(z$par), 
+        dimnames(ans$par) <- list(names(z$par),
         c("Estimate", "Std. Error", "t value", "Pr(>|t|)"))
 
     ans$J_test <- noquote(paste("Test-J degrees of freedom is ",z$df,sep=""))
     ans$j <- noquote(cbind(j,ifelse(z$df>0,pchisq(j,z$df,lower.tail = FALSE),"*******")))
     dimnames(ans$j) <- list("Test E(g)=0:  ",c("J-test","Pz(>j)"))
-    
+
     if (interval != FALSE)
         {
         zs <- qnorm((1-interval)/2,lower.tail=FALSE)
@@ -566,27 +566,24 @@ function(object, interval=FALSE, ...)
         dimnames(ans$interval) <- list(names(par),c("Theta_lower","Theta_upper"))
         }
     class(ans) <- "summary.gmm"
-    
+
     ans
 }
 
 
 # ------------------------------------------------------------------------------
-    
-    
-.lintest <- 
+
+
+.lintest <-
 function(object,R,c)
 {
     z <- object
     dl <- nrow(R)
     rest <- R%*%z$par - c
-    if (class(z)=="gmm")
-        vcov_par <- z$vcov
-    else
-        vcov_par <- z$vcov_par
+    vcov_par <- if (inherits(z, "gmm")) z$vcov else z$vcov_par
 
     vcov <- R%*%vcov_par%*%t(R)
-    h0 <- matrix(rep(NA,nrow(R)),ncol=1)    
+    h0 <- matrix(rep(NA,nrow(R)),ncol=1)
     for (i in 1:nrow(R))
         {
         testnames <- names(z$par)[R[i,]!=0]
@@ -600,16 +597,16 @@ function(object,R,c)
             for (j in 2:length(rn))
                 {
                 if (rn[j] >= 0)
-                    {    
-                    if (rn[j] != 1)                    
+                    {
+                    if (rn[j] != 1)
                         h0[i] <- paste(h0[i]," + ",rn[j],"*",testnames[j],sep="")
                     else
                         h0[i] <- paste(h0[i]," + ",testnames[j],sep="")
                     }
                 else
-                    {    
-                    if (abs(rn[j]) != 1)                    
-                        h0[i] <- paste(h0[i]," - ",abs(rn[j]),"*",testnames[j],sep="")                    
+                    {
+                    if (abs(rn[j]) != 1)
+                        h0[i] <- paste(h0[i]," - ",abs(rn[j]),"*",testnames[j],sep="")
                     else
                         h0[i] <- paste(h0[i]," - ",testnames[j],sep="")
                     }
@@ -617,19 +614,19 @@ function(object,R,c)
             }
         h0[i] <- paste(h0[i]," = ",c[i],sep="")
         }
-    rh <- solve(vcov,rest)        
+    rh <- solve(vcov,rest)
     ans <- list(description <- "Wald test for H0: R(Theta)=c")
     ans$H0 <- noquote(h0)
-    colnames(ans$H0) <- "Null Hypothesis"        
+    colnames(ans$H0) <- "Null Hypothesis"
     wt <- crossprod(rest,rh)
     pv <- pchisq(wt,dl,lower.tail=FALSE)
     res <- cbind(wt,pv)
     dimnames(res) <- list("Wald test", c("Statistics","P-Value"))
     ans$result <- res
     ans
-} 
+}
 
 
 ################################################################################
 
-    
+

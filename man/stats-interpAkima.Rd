@@ -88,10 +88,9 @@ akimaInterpp(x, y = NULL, z = NULL, xo, yo, extrap = FALSE)
     ACM Transactions on Mathematical Software 22, 362-371.
 }
 \examples{\donttest{
-## The akima library is not auto-installed because of a different licence.
 ## Does not run for r-solaris-x86
 ## akimaInterp -- Akima Interpolation:
-if (requireNamespace("akima")) {
+if (requireNamespace("interp")) {
   set.seed(1953)
   x <- runif(999) - 0.5
   y <- runif(999) - 0.5

@@ -105,7 +105,7 @@ setMethod("show", "fHTEST",
         cat("  P VALUE:\n")
         for (i in 1:length(Names)) {
             if (!is.na(pval[i])) {
-                if (class(version) != "Sversion") {
+                if (!inherits(version, "Sversion")) {
                     cat(paste("    ", Names[i], space,
                     format.pval(pval[i], digits = 4), " \n", sep = "" ) )
                 } else {
