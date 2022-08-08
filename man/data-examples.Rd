@@ -14,13 +14,8 @@
 \alias{SWXLP}
 \alias{usdthb}
 
-%%% These should be removed
-\alias{.HedgeFund1}
-\alias{.HedgeFund2}
-
-
 %--------------------------------------------------------------
-\title{fBsiscs Data Sets} 
+\title{fBasics Data Sets} 
 
 \description{
   The following data sets are part of this package:
@@ -150,7 +145,7 @@
 %--------------------------------------------------------------
 \examples{
 ## Plot DowJones30 Example Data Set
-   series <- as.timeSeries(DowJones30)
+   series <- timeSeries::as.timeSeries(DowJones30)
    head(series)
    plot(series[,1:6], type = "l")
 }

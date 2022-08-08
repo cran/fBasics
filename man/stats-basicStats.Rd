@@ -55,7 +55,7 @@ basicStats(x, ci = 0.95)
 \examples{
 ## basicStats -
    # Simulated Monthly Return Data:
-   tS = timeSeries(matrix(rnorm(12)), timeCalendar())
+   tS = timeSeries(matrix(rnorm(12)), timeDate::timeCalendar())
    basicStats(tS)
 }
 

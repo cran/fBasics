@@ -128,7 +128,8 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
 
 \examples{
 ## seriesPlot -
-   tS <- as.timeSeries(data(LPP2005REC))
+   data(LPP2005REC, package = "timeSeries")
+   tS <- as.timeSeries(LPP2005REC)
    seriesPlot(tS)
 }
 

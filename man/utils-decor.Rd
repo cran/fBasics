@@ -7,26 +7,13 @@
 \alias{box_}
 \alias{copyright}
 
-\title{Decor Functions}
-
+\title{Functions for decorating plots}
 
 \description{
 
     Functions for decorating plots.
-    \cr
-      
-    The plot utility functions are:
-    
-    \tabular{ll}{
-    \code{decor} \tab simple decoration function, \cr
-    \code{hgrid} \tab creates horizontal grid lines, \cr
-    \code{vgrid} \tab creates vertical grid lines, \cr
-    \code{boxL} \tab creates a L-shaped box, \cr
-    \code{box_} \tab creates a bogttom line box, \cr
-    \code{copyright} \tab adds Rmetrics copyright to a plot. }
     
 }
-
 
 \usage{
 decor()
@@ -40,24 +27,38 @@ box_(col = c("white", "black"))
 copyright()
 }
 
-
 \arguments{
 
-    \item{col}{
-        the color of the background, \code{"black"} and foreground
-        \code{"white"} lines of the box.
-        }
-    \item{nx, ny}{
-        number of cells of the grid in x or y direction. When \code{NULL}, 
-        as per default, the grid aligns with the tick marks on the 
-        corresponding default axis (i.e., tickmarks as computed by axTicks). 
-        } 
-    \item{\dots}{
-        additional arguments passed to the \code{grid()} function.
-        }
-        
+  \item{col}{
+    the color of the background, \code{"black"} and foreground
+    \code{"white"} lines of the box.
+  }
+  \item{nx, ny}{
+    number of cells of the grid in \code{x} or \code{y} direction. When \code{NULL}, 
+    as per default, the grid aligns with the tick marks on the 
+    corresponding default axis (i.e., tick marks as computed by axTicks). 
+  } 
+  \item{\dots}{
+    additional arguments passed to the \code{grid()} function.
+  }
+  
 }
 
+\details{
+  The plot decorating functions are:
+  
+  \describe{    
+    \item{decor}{
+      simple decoration function, equivalent to \code{hgrid()} followed
+      by \code{boxL()},
+    }
+    \item{hgrid}{creates horizontal grid lines,}
+    \item{vgrid}{creates vertical grid lines,}
+    \item{boxL}{creates an L-shaped box,}
+    \item{box_}{creates a bottom line box,}
+    \item{copyright}{adds Rmetrics copyright to a plot.}
+  }
+}
 
 \examples{
 ## Test Plot Function:
@@ -69,6 +70,4 @@ copyright()
    copyright()
 }
 
-
 \keyword{hplot}
-

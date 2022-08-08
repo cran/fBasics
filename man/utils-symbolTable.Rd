@@ -55,7 +55,7 @@ symbolTable(font = par('font'), cex = 0.7)
 \examples{  
 ## symbolTable - 
    # Default Symbol Table:
-   symbolTable()
+# symbolTable()
 }
 
 

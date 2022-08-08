@@ -49,6 +49,7 @@ function()
     #   Returns a tailored return series plot
 
     # Time Series:
+    data("MSFT", package = "timeSeries", envir = environment())
     tS = MSFT[, "Close"]
 
     # Series Plot:
@@ -72,6 +73,7 @@ function()
     #   Returns a tailored histogram plot
 
     # Time Series:
+    data("MSFT", package = "timeSeries", envir = environment())
     tS = MSFT[, "Close"]
 
     # Histogram Plot:
@@ -94,6 +96,7 @@ function()
     #   Returns a tailored kernel density estimate plot
 
     # Time Series:
+    data("MSFT", package = "timeSeries", envir = environment())
     tS = MSFT[, "Close"]
 
     # Density Plot:
@@ -115,6 +118,7 @@ function()
     #   Returns a tailored normal quantile-quantile plot
 
     # Time Series:
+    data("MSFT", package = "timeSeries", envir = environment())
     tS = MSFT[, "Close"]
 
     # Quantile Plot:
@@ -137,6 +141,7 @@ function()
     #   Returns a basic statistics summary
 
     # Time Series:
+    data("MSFT", package = "timeSeries", envir = environment())
     tS = MSFT
 
     Close = tS[, "Close"]
@@ -189,6 +194,7 @@ function()
     #   S-PLUS: Returns the standard deviation of a vector
 
     # Time Series:
+    data("MSFT", package = "timeSeries", envir = environment())
     tS = MSFT
 
     # stdev - Univariate:

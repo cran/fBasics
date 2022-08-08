@@ -60,7 +60,7 @@ Golub, van Loan, (1996);
    
 ## Return the Kronecker Product                     
    kron(P, diag(3))
-   P %x% diag(3)                        
+   P \%x\% diag(3)                        
                            
 }
 

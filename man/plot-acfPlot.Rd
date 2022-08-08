@@ -150,6 +150,7 @@ Ding Z., Granger C.W.J., Engle R.F. (1993);
 
 \examples{   
 ## data - 
+   data(LPP2005REC, package = "timeSeries")
    SPI <- LPP2005REC[, "SPI"]
    plot(SPI, type = "l", col = "steelblue", main = "SP500")
    abline(h = 0, col = "grey")

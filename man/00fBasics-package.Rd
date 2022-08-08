@@ -553,7 +553,7 @@
       to unexpectect behavior in the Rmetrics packages.
     
     * The package may be incompatible since it uses other time date
-      and time series classes than the 'timDate' and 'timeSeries' objects
+      and time series classes than the 'timeDate' and 'timeSeries' objects
       and methods from Rmetrics.
         
     We put the code in script files named \emph{builtin-funPackage.R}

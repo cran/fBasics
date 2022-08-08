@@ -60,7 +60,7 @@ Golub, van Loan, (1996);
    inv(P)
    
 ## Check:
-   inv(P) %*% P    
+   inv(P) \%*\% P    
    
 ## Alternatives:
    chol2inv(chol(P))

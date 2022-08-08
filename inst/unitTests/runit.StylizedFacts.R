@@ -44,10 +44,11 @@ test.acfPlot =
 function()
 {
     # MSFT Data:
+    data("MSFT", package = "timeSeries", envir = environment())
     msft.dat = MSFT
     msft = msft.dat[, 1]
     msft.vol = msft.dat[ , 5]/10^6
-    msft.ret = returns(msft)
+    msft.ret = timeSeries::returns(msft)
 
     # Graph Frame:
     par(mfrow = c(1, 1))
@@ -70,10 +71,11 @@ test.pacfPlot =
 function()
 {
     # MSFT Data:
+    data("MSFT", package = "timeSeries", envir = environment())
     msft.dat = MSFT
     msft = msft.dat[, 1]
     msft.vol = msft.dat[ , 5]/10^6
-    msft.ret = returns(msft)
+    msft.ret = timeSeries::returns(msft)
 
     # Graph Frame:
     par(mfrow = c(1, 1))
@@ -96,10 +98,11 @@ test.teffectPlot =
 function()
 {
     # MSFT Data:
+    data("MSFT", package = "timeSeries", envir = environment())
     msft.dat = MSFT
     msft = msft.dat[, 1]
     msft.vol = msft.dat[ , 5]/10^6
-    msft.ret = returns(msft)
+    msft.ret = timeSeries::returns(msft)
 
     # Graph Frame:
     par(mfrow = c(1, 1))
@@ -122,10 +125,11 @@ test.lmacfPlot =
 function()
 {
     # MSFT Data:
+    data("MSFT", package = "timeSeries", envir = environment())
     msft.dat = MSFT
     msft = msft.dat[, 1]
     msft.vol = msft.dat[ , 5]/10^6
-    msft.ret = returns(msft)
+    msft.ret = timeSeries::returns(msft)
 
     # Graph Frame:
     par(mfrow = c(1, 1))
@@ -158,10 +162,11 @@ test.lacfPlot =
 function()
 {
     # MSFT Data:
+    data("MSFT", package = "timeSeries", envir = environment())
     msft.dat = MSFT
     msft = msft.dat[, 1]
     msft.vol = msft.dat[ , 5]/10^6
-    msft.ret = returns(msft)
+    msft.ret = timeSeries::returns(msft)
 
     # Graph Frame:
     par(mfrow = c(1, 1))
@@ -178,10 +183,11 @@ test.logpdfPlot =
 function()
 {
     # MSFT Data:
+    data("MSFT", package = "timeSeries", envir = environment())
     msft.dat = MSFT
     msft = msft.dat[, 1]
     msft.vol = msft.dat[ , 5]/10^6
-    msft.ret = returns(msft)
+    msft.ret = timeSeries::returns(msft)
 
     # Graph Frame:
     par(mfrow = c(1, 1))
@@ -210,10 +216,11 @@ test.qqgausPlot =
 function()
 {
     # MSFT Data:
+    data("MSFT", package = "timeSeries", envir = environment())
     msft.dat = MSFT
     msft = msft.dat[, 1]
     msft.vol = msft.dat[ , 5]/10^6
-    msft.ret = returns(msft)
+    msft.ret = timeSeries::returns(msft)
 
     # Graph Frame:
     par(mfrow = c(1, 1))
@@ -236,10 +243,11 @@ test.scalinglawPlot =
 function()
 {
     # MSFT Data:
+    data("MSFT", package = "timeSeries", envir = environment())
     msft.dat = MSFT
     msft = msft.dat[, 1]
     msft.vol = msft.dat[ , 5]/10^6
-    msft.ret = returns(msft)
+    msft.ret = timeSeries::returns(msft)
 
     # Graph Frame:
     par(mfrow = c(1, 1))

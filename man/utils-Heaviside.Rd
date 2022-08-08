@@ -8,7 +8,7 @@
 \alias{Ramp}
 
 
-\title{Haviside and Related Functions}
+\title{Heaviside and Related Functions}
 
 
 \description{

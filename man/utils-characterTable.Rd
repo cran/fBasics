@@ -55,7 +55,7 @@ characterTable(font = 1, cex = 0.7)
 
 \examples{
 ## Character Table for Font 2:
-   characterTable(font = 1)
+# characterTable(font = 1)
 }
 
 

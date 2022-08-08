@@ -19,7 +19,7 @@
 
 \description{
 
-    Basic extensions which which add and/or modify
+    Basic extensions which add and/or modify
     additional functionality which is not available
     in R's basic packages.
     \cr

@@ -2,6 +2,7 @@
 ## Libraries
 ################################################################################
 useDynLib("fBasics", .registration = TRUE, .fixes = "C_")
+
 ################################################################################
 ## Imports
 ################################################################################
@@ -13,7 +14,7 @@ importFrom("graphics", axis, barplot, box, boxplot, contour,
              grid, hist, layout, locator, matplot, mtext,
              panel.smooth, par, persp, pie, plot.new,
              plot.window, polygon, rect, rug, symbols, text,
-             title)
+             title, abline, lines, points)
 importFrom("stats", acf, ansari.test, approx, ar, arima,
              complete.cases, constrOptim, cor, cor.test,
              density, dnorm, dt, integrate, ks.test, lsfit,
@@ -21,28 +22,26 @@ importFrom("stats", acf, ansari.test, approx, ar, arima,
              numericDeriv, optim, optimize, pacf, pchisq, pf,
              pnorm, ppoints, qchisq, qf, qnorm, qqline,
              qqnorm, qt, residuals, rexp, rnorm, runif, sd,
-             shapiro.test, spline, t.test, uniroot, var)
+             shapiro.test, spline, t.test, uniroot, var, na.omit, quantile)
 importFrom("utils", menu)
 
-importFrom("methods", getMethod, is, new, slot)
+#import(methods)
+importFrom("methods", getMethod, is, new, slot, show)
 
 importFrom("spatial", prmat, surf.gls)
 
 ## 'akima' is *not* here because of its non-GPL Licence
 ## importFrom("akima", interp, interpp)
 
+importFrom("timeDate", getRmetricsOptions, setRmetricsOptions,
+           kurtosis, skewness)
 
-## (MM:) FIXME: Only import what you need!
-import("timeDate")
-import("timeSeries")
+importFrom("timeSeries", timeSeries, is.timeSeries, as.timeSeries, isUnivariate,
+           returns, description, drawdowns, colCumsums)
 
 ################################################################################
 ## Exports
 ################################################################################
-#exportPattern(".")
-## Avoid ^C_, include those starting with . , be locale-independent
-## Ideally avoid S3 methods, but not e.g. runif.lcg
-exportPattern("^[ABDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.]")
 
 S3method("getModel", "default")
 S3method("print", "control")
@@ -54,6 +53,11 @@ S3method(".plot", "histogram")
 S3method(".print", "ssd")
 S3method(".summary", "gel")
 S3method(".summary", "gmm")
+
+## #exportPattern(".")
+## ## Avoid ^C_, include those starting with . , be locale-independent
+## ## Ideally avoid S3 methods, but not e.g. runif.lcg
+## exportPattern("^[ABDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.]")
 
 # In the future this should be used:
 #exportPattern("^[^\\.]")
@@ -67,6 +71,439 @@ S3method(".summary", "gmm")
 #export(.blue2yellowPalette)
 #export(.cyan2magentaPalette)
 
-#fCouplae, fExtremes, fGarch, fMultivar and fRegression need a lot of exported
-#functions that start with a dot. This has to be fixed first...
+## explicitly name exports, start with
+##     cat(ls("package:fBasics", all.names = TRUE), sep =",\n")
+## then clean up; for now just comment out, in case havoc ensues for dependencies.
 
+exportMethods("show")
+exportClasses("fDISTFIT", "fHTEST")
+
+export(
+    as.timeSeries, # reexport, needs to be documented here
+    timeSeries,    # reexport, S4 generic, doesn't need doc. here
+    returns,       # reexport, S4 generic, doesn't need doc. here
+
+    kurtosis,  # from timeDate, reexport
+    skewness,  # from timeDate, reexport
+    ## datasets
+    ##   .HedgeFund1,  removed, used only to create .HedgeFund
+    ##   .HedgeFund2,  ditto
+    ##   msft.dat,
+    ##   Capitalization,
+    ##   cars2,
+    ##   DowJones30,
+    ##   HedgeFund,
+    ##   nyse,
+    ##   PensionFund,
+    ##   swissEconomy,
+    ##   SWXLP,
+    ##   usdthb,
+
+    ## exports starting with '.'
+    ##    all not documented, it seems (regex search for aliases starting with '.')
+    .acfPlot,  # fRegression
+    # .adGLD,
+    # .ansari2Test,
+    # .ansariTest,
+    # .aRecursionGH,
+    # .asRGB,
+    # .bartlett2Test,
+    # .besselZ,
+    # .blue2greenPalette,
+    # .blue2redPalette,
+    # .blue2yellowPalette,
+    # .bwAndrews2,
+    # .bwNeweyWest2,
+    # .ccfPlot,
+    # .chcode,
+    # .checkGHMuMoments,
+    # .checkGHRawMoments,
+    # .circlesPlot,
+    # .cnvrt.coords,
+    .contourPlot,     # fAssets, fCopulae
+    # .counts1Plot,
+    # .counts2Plot,
+    # .cvmGLD,
+    # .cyan2magentaPalette,
+    # .dec.to.hex,
+    # .deltaKappaGH,
+    # .dgld,
+    # .dhyp1,
+    # .dhyp2,
+    # .dhyp3,
+    # .dhyp4,
+    .distCheck,    # imported by distrRmetrics and others
+    # .distFitPlot,
+    # .distStandardErrors,
+    # .dnig,
+    # .emptyPlot,
+    .firePlot, # fRegression
+    # .fligner2Test,
+    # .gel,
+    # .get_dat,
+    # .get_lamb,
+    # .ghCentralMoments,
+    # .ghMuMoments,
+    # .ghMuMomentsIntegrated,
+    # .ghRawMoments,
+    # .ghRawMomentsIntegrated,
+    # .gl.check.lambda,
+    # .gl.parameter.tidy,
+    # .gldFit.gof,
+    # .gldFit.hist,
+    # .gldFit.mle,
+    # .gldFit.mps,
+    # .gldFit.rob,
+    # .gmm,
+    # .green2redPalette,
+    # .HAC,
+    # .heavisideSlider,
+    # .hex.to.dec,
+    # .histStack,
+    # .hyp1Mode,
+    # .hyp2Mode,
+    # .hyp3Mode,
+    # .hyp4Mode,
+    # .hyperb.change.pars,
+    # .is.positive.definite,
+    # .jb.test,
+    # .jbALM,
+    # .jbLM,
+    # .jbPlot,
+    # .jbTable,
+    # .kappaGH,
+    # .ksGLD,
+    # .kurtosis.test,
+    # .kw2Test,
+    # .kweights,
+    # .lintest,
+    # .lmacfPlot,
+    # .logpdfPlot,
+    # .make.positive.definite,
+    # .maxddStats,
+    # .mleStableFit,
+    # .moodTest,
+    .mrlPlot,   # fRegression
+    # .nigFit.gmm,
+    # .nigFit.mle,
+    # .nigFit.mps,
+    # .nigFit.vmps,
+    # .normFit,
+    # .omnibus.test,
+    .pacfPlot,  # fRegression
+    # .paramGH,
+    .perspPlot,  # fAssets, fCopulae
+    # .pgld,
+    # .phiStable,
+    # .PhiStable,
+    # .phyp1,
+    # .phyp2,
+    # .phyp3,
+    # .phyp4,
+    # .pjb,
+    .plot,  # fRegression
+    # .plot.histogram,
+    # .pnigC,
+    .predict,  # fRegression
+    # .print,
+    # .print.ssd,
+    # .psnigC,
+    # .purple2greenPalette,
+    # .qdgl.fm5,
+    # .qdgl.fmkl,
+    # .qdgl.rs,
+    # .qdgld,
+    # .qgl.fm5,
+    # .qgl.fmkl,
+    # .qgl.rs,
+    # .qgld,
+    # .qhyp1,
+    # .qhyp2,
+    # .qhyp3,
+    # .qhyp4,
+    # .qjb,
+    # .qnigC,
+    # .qqgaussPlot,
+    # .qsnigC,
+    .qStableFit,   # StableEstim
+    # .recessionLines,
+    .residualsPlot,  # fRegression
+    .responsesPlot,  # fRegression
+    # .rghyp,
+    # .rgigjd,
+    # .rgigjd1,
+    # .rgld,
+    # .rho,
+    # .rhyp1,
+    # .rhyp2,
+    # .rhyp3,
+    # .rhyp4,
+    # .rhyperb,
+    # .skewness.test,
+    # .slider.env,
+    .sliderMenu,
+    # .smooth_g,
+    # .stablePlot,
+    # .stylizedFactsGUI,
+    # .subPlot,
+    # .subStars,
+    # .summary,
+    # .summary.gel,
+    # .summary.gmm,
+    # .tdSliderMenu,
+    # .tslag1,
+    # .tTest,
+    .unirootNA,  # fCopulae
+    # .varfTest,
+    # .varpieDemo,
+    # .varpiePlot,
+    # .weightsAndrews2,
+    # .xrug,
+    # .yrug,
+
+    ## S3 methods
+    ##   getModel.default,
+    ##   print.control,
+    ##   stdev.default,
+    ##   termPlot.default,
+    ##   volatility.default,
+
+    ## look like S3 methods but aren't
+    get.lcgseed, set.lcgseed, # get/set an Rmetric option
+    rnorm.lcg, # lcg stand for linear congruational generator
+    rt.lcg,
+    runif.lcg,
+    
+    ## (mostly) normally named exports
+    acfPlot,
+    adTest,
+    akimaInterp,
+    akimaInterpp,
+    basicStats,
+    box_,
+    Boxcar,
+    boxL,
+    boxPercentilePlot,
+    boxPlot,
+    characterTable,
+    cmPalette,
+    colIds,
+    "colIds<-",
+    colorLocator,
+    colorMatrix,
+    colorTable,
+    colVec,
+    copyright,
+    correlationTest,
+    countFunctions,
+    cumulatedPlot,
+    cvmTest,
+    dagoTest,
+    decor,
+    Delta,
+    densityPlot,
+    dgh,
+    dght,
+    dgld,
+    dhyp,
+    distCheck,
+    divPalette,
+    dmaxdd,
+    dnig,
+    drawdownPlot,
+    dsgh,
+    dsght,
+    dsnig,
+    dssd,
+    focusPalette,
+    getArgs,
+    getDescription,
+    getModel,
+    getSlot,
+    getTitle,
+    ghFit,
+    ghIQR,
+    ghKurt,
+    ghKURT,
+    ghMean,
+    ghMED,
+    ghMode,
+    ghMoments,
+    ghSkew,
+    ghSKEW,
+    ghSlider,
+    ghtFit,
+    ghtIQR,
+    ghtKurt,
+    ghtKURT,
+    ghtMean,
+    ghtMED,
+    ghtMode,
+    ghtMoments,
+    ghtSkew,
+    ghtSKEW,
+    ghtVar,
+    ghVar,
+    gldFit,
+    gldIQR,
+    gldKURT,
+    gldMED,
+    gldMode,
+    gldSKEW,
+    greyPalette,
+    gridVector,
+    heatPalette,
+    Heaviside,
+    hgrid,
+    hilbert,
+    histPlot,
+    hypFit,
+    hypIQR,
+    hypKurt,
+    hypKURT,
+    hypMean,
+    hypMED,
+    hypMode,
+    hypMoments,
+    hypSkew,
+    hypSKEW,
+    hypSlider,
+    hypVar,
+    interactivePlot,
+    inv,
+    isPositiveDefinite,
+    jarqueberaTest,
+    jbTest,
+    kendallTest,
+    krigeInterp,
+    kron,
+    ks2Test,
+    ksnormTest,
+    lacfPlot,
+    lillieTest,
+    linearInterp,
+    linearInterpp,
+    listDescription,
+    listFunctions,
+    listIndex,
+    locationTest,
+    logDensityPlot,
+    makePositiveDefinite,
+    maxddStats,
+    monoPalette,
+    nFit,
+    nigFit,
+    nigIQR,
+    nigKurt,
+    nigKURT,
+    nigMean,
+    nigMED,
+    nigMode,
+    nigMoments,
+    nigShapeTriangle,
+    nigSkew,
+    nigSKEW,
+    nigSlider,
+    nigVar,
+    norm2,
+    normalTest,
+    normIQR,
+    normKURT,
+    normMED,
+    normSKEW,
+    pacfPlot,
+    pascal,
+    pchiTest,
+    pdl,
+    pearsonTest,
+    pgh,
+    pght,
+    pgld,
+    phyp,
+    pmaxdd,
+    pnig,
+    psgh,
+    psght,
+    psnig,
+    pssd,
+    qgh,
+    qght,
+    qgld,
+    qhyp,
+    qnig,
+    qqghtPlot,
+    qqgldPlot,
+    qqnigPlot,
+    qqnormPlot,
+    qsgh,
+    qsght,
+    qsnig,
+    qssd,
+    qualiPalette,
+    rainbowPalette,
+    Ramp,
+    rampPalette,
+    returnPlot,
+    returnSeriesGUI,
+    rgh,
+    rght,
+    rgld,
+    rhyp,
+    rk,
+    rmaxdd,
+    rnig,
+    rowAvgs,
+    rowIds,
+    "rowIds<-",
+    rowKurtosis,
+    rowMaxs,
+    rowMins,
+    rowProds,
+    rowQuantiles,
+    rowSds,
+    rowSkewness,
+    rowStats,
+    rowStdevs,
+    rowVars,
+    rowVec,
+    rsgh,
+    rsght,
+    rsnig,
+    rssd,
+    sampleIQR,
+    sampleKURT,
+    sampleLmoments,
+    sampleMED,
+    sampleSKEW,
+    scaleTest,
+    scalinglawPlot,
+    seqPalette,
+    seriesPlot,
+    sfTest,
+    sghFit,
+    shapiroTest,
+    Sign,
+    snigFit,
+    spearmanTest,
+    ssdFit,
+    stableFit,
+    stableSlider,
+    stdev,
+    symbolTable,
+    teffectPlot,
+    termPlot,
+    terrainPalette,
+    tFit,
+    timPalette,
+    topoPalette,
+    tr,
+    triang,
+    Triang,
+    tsHessian,
+    tslag,
+    varianceTest,
+    vec,
+    vech,
+    vgrid,
+    volatility
+)

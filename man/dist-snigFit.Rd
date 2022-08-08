@@ -2,7 +2,7 @@
 
 \alias{snigFit}
 
-\title{Fit of a Stndardized NIG Distribution}
+\title{Fit of a Standardized NIG Distribution}
 
 
 \description{

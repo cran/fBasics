@@ -1,0 +1,289 @@
+template:
+  bootstrap: 5
+  
+search:
+  exclude: ['news/index.html']
+
+reference:
+  - title: "Overview of package fBasics"
+    contents:
+      - "fBasics-package"
+      - fBasicsData
+  - title: "Unclassified"
+    contents:
+      - stdev
+      - termPlot
+      - volatility
+  - title: "Fit distributions by MLE or moments"
+    contents:
+      - nFit
+      - tFit
+      - stableFit
+  - title: "Tests"
+    contents:
+      - correlationTest
+      -   ksnormTest
+      -   jbTest
+      -   shapiroTest
+      -   normalTest
+      -   jarqueberaTest
+      -   dagoTest
+      -   adTest
+      -   cvmTest
+      -   lillieTest
+      -   pchiTest
+      -   sfTest
+      - pearsonTest
+      - kendallTest
+      - spearmanTest
+      -   ks2Test
+      - locationTest
+      - scaleTest
+      - varianceTest
+      - fHTEST
+  - title: "Stats utilities"
+    contents:
+      - pdl
+      - basicStats
+      - dmaxdd
+      - pmaxdd
+      - rmaxdd
+      - maxddStats
+      - rowStats
+      - rowSds
+      - rowVars
+      - rowSkewness
+      - rowKurtosis
+      - rowMaxs
+      - rowMins
+      - rowProds
+      - rowQuantiles
+      - rowStdevs
+      - rowAvgs
+      -   normMED
+      -   normIQR
+      -   normSKEW
+      -   normKURT
+      - sampleMED
+      - sampleIQR
+      - sampleSKEW
+      - sampleKURT
+      -   sampleLmoments
+      - set.lcgseed
+      - get.lcgseed
+      - runif.lcg
+      - rnorm.lcg
+      - rt.lcg
+  - title: "Distributions"
+    contents:
+      - distCheck
+  - title: "Hyperbolic Distribution"
+    contents:
+      - dhyp
+      - phyp
+      - qhyp
+      - rhyp
+      - hypFit
+      - hypMode
+      - hypMean
+      - hypVar
+      - hypSkew
+      - hypKurt
+      - hypMoments
+      - hypMED
+      - hypIQR
+      - hypSKEW
+      - hypKURT
+      - hypSlider
+  - title: "Generalized Hyperbolic Distribution"
+    contents:
+      - dgh
+      - pgh
+      - qgh
+      - rgh
+      - ghFit
+      - ghMode
+      - ghMean
+      - ghVar
+      - ghSkew
+      - ghKurt
+      - ghMoments
+      - ghMED
+      - ghIQR
+      - ghSKEW
+      - ghKURT
+      - ghSlider
+  - title: "Generalized Hyperbolic Student-t"
+    contents:
+      - dght
+      - pght
+      - qght
+      - rght
+      - ghtFit
+      - ghtMode
+      - ghtMean
+      - ghtVar
+      - ghtSkew
+      - ghtKurt
+      - ghtMoments
+      - ghtMED
+      - ghtIQR
+      - ghtSKEW
+      - ghtKURT
+  - title: "Generalized Lambda Distribution"
+    contents:
+      - dgld
+      - pgld
+      - qgld
+      - rgld
+      - gldFit
+      - gldMode
+      - gldMED
+      - gldIQR
+      - gldSKEW
+      - gldKURT
+  - title: "Normal Inverse Gaussian Distribution"
+    contents:
+      - dnig
+      - pnig
+      - qnig
+      - rnig
+      - nigFit
+      - nigMode
+      - nigMean
+      - nigVar
+      - nigSkew
+      - nigKurt
+      - nigMED
+      - nigIQR
+      - nigSKEW
+      - nigKURT
+      - nigShapeTriangle
+      - nigSlider
+  - title: "Standardized distributions"
+    contents:
+      - dsgh
+      - psgh
+      - qsgh
+      - rsgh
+      - sghFit
+      -   dsght
+      -   psght
+      -   qsght
+      -   rsght
+      - dsnig
+      - psnig
+      - qsnig
+      - rsnig
+      - snigFit
+  - title: "Spline smoothed distribution"
+    contents:
+      -   dssd
+      -   pssd
+      -   qssd
+      -   rssd
+      -   ssdFit
+  - title: "Vector and matrix utilities"
+    contents:
+      - colVec
+      - rowVec
+      - gridVector
+      - hilbert
+      - inv
+      - kron
+      - norm2
+      - pascal
+      - isPositiveDefinite
+      - makePositiveDefinite
+      - rk
+      - tr
+      - triang
+      - Triang
+      - tslag
+      - vec
+      - vech
+  - title: "Plotting"
+    contents:
+      - acfPlot
+      - pacfPlot
+      - lacfPlot
+      - teffectPlot
+      - boxPlot
+      - boxPercentilePlot
+      - histPlot
+      - densityPlot
+      - logDensityPlot
+      - qqnormPlot
+      - qqnigPlot
+      - qqghtPlot
+      - qqgldPlot
+      - returnSeriesGUI
+      - scalinglawPlot
+      - seriesPlot
+      - cumulatedPlot
+      - returnPlot
+      - drawdownPlot
+      - stableSlider
+      - interactivePlot
+  - title: "Interpolation"
+    contents:
+      - linearInterp
+      - linearInterpp
+      -   krigeInterp
+      - akimaInterp
+      - akimaInterpp
+  - title: "Special functions"
+    contents:
+      - Heaviside
+      - Sign
+      - Delta
+      - Boxcar
+      - Ramp
+      - tsHessian
+  - title: "Colour"
+    contents:
+      - colorLocator
+      - colorMatrix
+      - rainbowPalette
+      - heatPalette
+      - terrainPalette
+      - topoPalette
+      - cmPalette
+      - greyPalette
+      - timPalette
+      - rampPalette
+      - seqPalette
+      - divPalette
+      - qualiPalette
+      - focusPalette
+      - monoPalette
+      - characterTable
+      - colorTable
+      - symbolTable
+      - decor
+      - hgrid
+      - vgrid
+      - boxL
+      - box_
+      - copyright
+  - title: "S4 utilities"
+    contents:
+      - getModel
+      - getTitle
+      - getDescription
+      - getSlot
+      - getArgs
+  - title: "Package utilities"
+    contents:
+      - listDescription
+      - listFunctions
+      - countFunctions
+      - listIndex
+      - print
+  - title: "S+ compatibility"
+    contents:
+      - colIds
+      - rowIds
+  - title: "Deprecated functions"
+    contents:
+      - "fBasics-deprecated"

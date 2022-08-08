@@ -14,9 +14,9 @@ tsHessian(x, fun, ...)
 
 \arguments{
 
-  \item{x}{arugment to be passed to function}
-  \item{fun}{function}
-  \item{\dots}{additional paramters to be passed to function}
+  \item{x}{argument to be passed to \code{fun}.}
+  \item{fun}{function.}
+  \item{\dots}{additional parameters to be passed to \code{fun}.}
 
   }
 
