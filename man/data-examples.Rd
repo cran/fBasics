@@ -15,7 +15,7 @@
 \alias{usdthb}
 
 %--------------------------------------------------------------
-\title{fBasics Data Sets} 
+\title{fBasics data sets} 
 
 \description{
   The following data sets are part of this package:
@@ -61,6 +61,10 @@
  \code{msft.dat}
  contains daily prices (open, high, low and close) and
  volumes for the Microsoft stocks.
+
+ Note: there is a dataset, \code{MSFT}, in package \pkg{timeSeries}
+ which is of class \code{"timeSeries"} object but seems to contain the
+ same data. See also the examples. \emph{TODO:} consolidate?
  
  \bold{nyse:}\cr
  \code{nyse}
@@ -148,6 +152,15 @@
    series <- timeSeries::as.timeSeries(DowJones30)
    head(series)
    plot(series[,1:6], type = "l")
+
+## msft.dat contains (almost?) the same data as MSFT in package timeSeries
+data(MSFT, package = "timeSeries")
+
+m1 <- as.matrix(msft.dat[, -1]) # drop date stamps in column 1
+m2 <- as.matrix(MSFT)
+all.equal(m1, m2, check.attributes = FALSE) # TRUE
+## compare the dates:
+all.equal(format(msft.dat[ , 1]), format(time(MSFT))) # TRUE
 }
  
 \keyword{datasets}

@@ -4,7 +4,7 @@
 \alias{pdl}
 
 
-\title{Polynomial Distributed Lags}
+\title{Polynomial distributed lags}
 
 
 \description{

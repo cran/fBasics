@@ -1,10 +1,8 @@
 \name{hilbert}
-
-
 \alias{hilbert}
 
 
-\title{Hilbert Matrix}
+\title{Hilbert matrix}
 
 
 \description{

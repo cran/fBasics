@@ -2,12 +2,12 @@
 
 \alias{hypFit}
 
-\title{Fit of a Hyperbolic Distribution}
+\title{Fit a Hyperbolic distribution}
 
 
 \description{
 
-    Estimates the parameters of a hyperbolic distribution.
+  Estimates the parameters of a hyperbolic distribution.
 
 }
 
@@ -79,6 +79,10 @@ hypFit(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 
 
 \value{
+  an object from class \code{"fDISTFIT"}.
+
+  Slot \code{fit} is a list with the following components:
+  
   
     The functions \code{tFit}, \code{hypFit} and \code{nigFit} return 
     a list with the following components:

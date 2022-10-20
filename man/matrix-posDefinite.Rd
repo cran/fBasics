@@ -6,7 +6,7 @@
 \alias{makePositiveDefinite}
 
 
-\title{Positive Definite Matrixes}
+\title{Positive definite matrices}
 
 
 \description{

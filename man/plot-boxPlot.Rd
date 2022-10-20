@@ -1,11 +1,10 @@
 \name{BoxPlot}
-
-
 \alias{boxPlot}
+
 \alias{boxPercentilePlot}
 
 
-\title{Time Series Box Plots}
+\title{Time series box plots}
 
 
 \description{
@@ -55,7 +54,7 @@ boxPercentilePlot(x, col = "steelblue", title = TRUE, \dots)
 
 \value{
     
-    displays a time series plot.
+  displays a time series plot
     
 }
 

@@ -5,12 +5,12 @@
 \alias{Triang}
 
 
-\title{Upper and Lower Triangular Matrixes}
+\title{Upper and lower triangular matrices}
 
 
 \description{
     
-    Extracs the pper or lower tridiagonal part from a matrix.    
+    Extracs the upper or lower tridiagonal part from a matrix.    
 
 }
 

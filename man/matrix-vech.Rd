@@ -5,7 +5,7 @@
 \alias{vech}
 
 
-\title{Stacking Vectors and Matrixes}
+\title{Stacking vectors and matrices}
 
 
 \description{

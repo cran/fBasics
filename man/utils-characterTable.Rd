@@ -4,7 +4,7 @@
 \alias{characterTable}
 
 
-\title{Table of Characters}
+\title{Table of characters}
 
 
 \description{
@@ -48,8 +48,8 @@ characterTable(font = 1, cex = 0.7)
 
 \seealso{
 
-    \code{link{colorTable}},
-    \code{link{symbolTable}}.
+    \code{\link{colorTable}},
+    \code{\link{symbolTable}}
     
 }
 

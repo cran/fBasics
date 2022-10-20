@@ -1,14 +1,13 @@
 \name{acfPlot}
-
-
 \alias{acfPlot}
+
 \alias{pacfPlot}
 \alias{teffectPlot}
 
 \alias{lacfPlot}
 
 
-\title{Autocorrelation Function Plots}
+\title{Autocorrelation function plots}
 
 
 \description{
@@ -43,66 +42,73 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
 
 \arguments{
 
-    \item{deltas}{
-        the exponents, a numeric vector, by default ranging 
-        from 0.2 to 3.0 in steps of 0.2.
-        }
-    \item{labels}{
-        a logical value. Whether or not x- and y-axes should be automatically 
-        labeled and a default main title should be added to the plot.
-        By default \code{TRUE}.
-        }
-    \item{lag.max}{
-        maximum lag for which the autocorrelation should be 
-        calculated, an integer.
-        }
-    \item{n}{
-        an integer value, the number of lags.
-        }
-    \item{standardize}{
-        a logical value. Should the vector \code{x} be standardized?
-        }
-    \item{type}{
-        [lacf] - \cr
-        a character string which specifies the type of the input
-        series, either "returns" or series "values". In the case of 
-        a return series as input, the required value series is 
-        computed by cumulating the financial returns: 
-        \code{exp(colCumsums(x))}
-        }
     \item{x}{
-        an uni- or multivariate return series of class \code{timeSeries} 
-        or any other object which can be transformed by the function
-        \code{as.timeSeries()} into an object of class \code{timeSeries}.
-        }
-    \item{ymax}{
-        maximum y-axis value on plot, \code{is.na(ymax)} TRUE, then
-        the value is selected automatically.
-        }
-    \item{\dots}{
-        arguments to be passed.
-        }
 
+      an uni- or multivariate return series of class \code{timeSeries}
+      or any other object which can be transformed by the function
+      \code{as.timeSeries()} into an object of class \code{timeSeries}.
+
+    }
+    \item{labels}{
+
+      a logical value. Whether or not x- and y-axes should be
+      automatically labeled and a default main title should be added to
+      the plot.  By default \code{TRUE}.
+
+    }
+    \item{n}{
+      an integer value, the number of lags.
+    }
+    \item{lag.max}{
+
+      maximum lag for which the autocorrelation should be calculated, an
+      integer.
+
+    }
+    \item{type}{
+
+      a character string which specifies the type of the input series,
+      either "returns" or series "values". In the case of a return
+      series as input, the required value series is computed by
+      cumulating the financial returns: \code{exp(colCumsums(x))}
+
+    }
+    \item{deltas}{
+
+      the exponents, a numeric vector, by default ranging from 0.2 to
+      3.0 in steps of 0.2.
+
+    }
+    \item{ymax}{
+
+      maximum y-axis value on plot, \code{is.na(ymax)} TRUE, then the
+      value is selected automatically.
+
+    }
+    \item{standardize}{
+
+      a logical value. Should the vector \code{x} be standardized?
+
+    }
+    \item{\dots}{
+      arguments to be passed.
+    }
 }
 
 
 \value{
     
-    
-    \code{acfPlot}, \code{pacfplot},
-    \cr
-    return an object of class \code{"acf"}, see \code{\link{acf}}.
+    for \code{acfPlot} and \code{pacfplot}, an object of class
+    \code{"acf"}, see \code{\link{acf}};
     \cr
     
-    \code{lacfPlot}
-    returns a list with the following two elements: \code{Rho}, the
-    autocorrelation function, \code{lagged}, the lagged correlations.
+    for \code{lacfPlot}, a list with the following two elements:
+    \item{Rho}{the autocorrelation function,}
+    \code{lagged}{the lagged correlations.}
     \cr
     
-    \code{teffectPlot}
-    \cr
-    returns a numeric matrix of order \code{deltas} by \code{max.lag} 
-    with the values of the autocorrelations.
+    for \code{teffectPlot}, a numeric matrix of order \code{deltas} by
+    \code{max.lag} with the values of the autocorrelations.
     
 }
 
@@ -113,7 +119,7 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
     The functions \code{acfPlot} and \code{pacfPlot}, plot and estimate 
     autocorrelation and partial autocorrelation function. The functions 
     allow to get a first view on correlations within the time series. 
-    The functions are synonyme function calls for R's \code{acf} and 
+    The functions are synonym function calls for R's \code{acf} and 
     \code{pacf} from the the \code{ts} package.
     \cr
         

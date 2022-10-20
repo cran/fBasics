@@ -1,22 +1,14 @@
 \name{ReturnSeriesGUI}
-
 \alias{returnSeriesGUI}
 
 
-\title{Return Series Plots}
-
+\title{Return series plots}
 
 \description{
     
-    A graphical user interface to display
-    finanical time series plots.
-    \cr
+  A graphical user interface to display finanical time series plots.
+  \code{returnSeriesGUI} opens a GUI for return series plots.
 
-    List of Functions:
-    
-    \tabular{ll}{
-    \code{returnSeriesGUI} \tab Opens a GUI for return series plots.}
-    
 }
     
 
@@ -24,28 +16,24 @@
 returnSeriesGUI(x)
 }
 
-
 \arguments{
   
     \item{x}{
-        an object of class \code{"timeSeries"} or any other object which
-        can be transformed by the function \code{as.timeSeries} into an
-        object of class \code{timeSeries}. The latter case, other then
-        \code{timeSeries} objects, is more or less untested.
-        }  
-    
-}
 
+      an object of class \code{"timeSeries"} or any other object which
+      can be transformed by the function \code{as.timeSeries} into an
+      object of class \code{timeSeries}. The latter case, other than
+      \code{timeSeries} objects, is more or less untested.
+	
+    }  
+}
 
 \value{
        
-    \code{returnSeriesGUI}
-    \cr
-    For the \code{returnSeriesGUI} function, beside the graphical
-    user interface no values are returned.\cr
+    For \code{returnSeriesGUI} function, besides the graphical
+    user interface no values are returned.
     
 }
-
 
 \author{
 
@@ -53,11 +41,4 @@ returnSeriesGUI(x)
     
 }
 
-
-\examples{
-## 
-}
-
-
 \keyword{programming}
-

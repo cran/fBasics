@@ -1,15 +1,13 @@
 \name{symbolTable}
-
-
 \alias{symbolTable}
 
 
-\title{Table of Symbols}
+\title{Table of symbols}
 
 
 \description{
     
-    Displays a Table of plot characters and symbols.
+  Displays a table of plot characters and symbols.
     
 }
     
@@ -36,19 +34,19 @@ symbolTable(font = par('font'), cex = 0.7)
 
 \value{
 
-    \code{symbolTable}
-    
-    displays a table with the plot characters and symbols numbered from 
-    0 to 255 and returns invisible the name of the font.
+  displays a table with the plot characters and symbols numbered from 
+  0 to 255 and returns invisibly the name of the font.
        
 }
 
+\note{
+  Symbols with codes on the range 128-255 are not legitimate in some
+  locales, most notably UTF-8.
+}
 
 \seealso{
-
-    \code{link{characterTable}},
-    \code{link{colorTable}}.
-    
+  \code{\link{characterTable}},
+  \code{\link{colorTable}}
 }
 
 

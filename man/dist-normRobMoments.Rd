@@ -1,5 +1,4 @@
 \name{normRobMoments}
-
 \alias{normRobMoments}
 
 \alias{normMED}
@@ -8,13 +7,12 @@
 \alias{normKURT}
 
 
-\title{Robust Moments for the NORM}
-
+\title{Robust moments for the Normal distribution}
 
 \description{
 
     Computes the first four robust moments for the
-    Normal Distribution.
+    Normal distribution.
 
 }
 
@@ -56,7 +54,7 @@ normKURT(mean = 0, sd = 1)
 
 \author{
 
-    Diethelm Wuertz.
+    Diethelm Wuertz
 
 }
 

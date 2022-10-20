@@ -1,11 +1,8 @@
 \name{nigShapeTriangle}
-
-
 \alias{nigShapeTriangle}
 
 
 \title{NIG Shape Triangle}
-
 
 \description{
     

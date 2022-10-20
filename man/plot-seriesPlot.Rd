@@ -7,7 +7,7 @@
 \alias{drawdownPlot}
 
 
-\title{Financial Time Series Plots}
+\title{Financial time series plots}
 
 
 \description{
@@ -121,7 +121,7 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
 
 \value{
     
-    displays a time series plot.
+    displays a time series plot
     
 }
 

@@ -4,7 +4,7 @@
 \alias{inv}
 
 
-\title{The Inverse of a Matrix}
+\title{The inverse of a matrix}
 
 
 \description{
@@ -30,14 +30,14 @@ inv(x)
 
 \note{
 
-    The function \code{inv} is a synonyme to the function \code{solve}.
+    The function \code{inv} is a synonym to the function \code{solve}.
 
 }
 
 
 \value{
 
-    returns the inverse matrix.
+  the inverse matrix.
        
 }
 

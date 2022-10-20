@@ -1,20 +1,12 @@
 \name{DistributionFits}
-
 \alias{DistributionFits}
-
-\alias{fDISTFIT}
-\alias{fDISTFIT-class}
-
-\alias{show,fDISTFIT-method}
 
 \alias{nFit}
 \alias{tFit}
 
 \alias{stableFit}
 
-\alias{print.fDISTFIT}
-
-\title{Parameter Fit of a Distribution}
+\title{Parametric fit of a distribution}
 
 
 \description{
@@ -43,13 +35,26 @@ tFit(x, df = 4, doplot = TRUE, span = "auto", trace = FALSE, title = NULL,
 stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0, 
     type = c("q", "mle"), doplot = TRUE, control = list(),
     trace = FALSE, title = NULL, description = NULL) 
-    
-\S4method{show}{fDISTFIT}(object)
 }
 
 
 \arguments{
   
+    \item{x}{
+        a numeric vector. 
+        }
+    \item{doplot}{
+        a logical flag. Should a plot be displayed?
+        }
+    \item{span}{
+        x-coordinates for the plot, by default 100 values 
+        automatically selected and ranging between the 0.001, 
+        and 0.999 quantiles. Alternatively, you can specify
+        the range by an expression like \code{span=seq(min, max,
+        times = n)}, where, \code{min} and \code{max} are the 
+        left and right endpoints of the range, and \code{n} gives 
+        the number of the intermediate points.
+        }
     \item{control}{
         [stableFit] - \cr
         a list of control parameters, see function \code{nlminb}.
@@ -71,22 +76,6 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
         \code{df > 2}, maybe non-integer. By default a value of 4 is
         assumed.
         }
-    \item{object}{
-        [show] - \cr
-        an S4 class object as returned from the fitting functions.
-        }
-    \item{doplot}{
-        a logical flag. Should a plot be displayed?
-        }
-    \item{span}{
-        x-coordinates for the plot, by default 100 values 
-        automatically selected and ranging between the 0.001, 
-        and 0.999 quantiles. Alternatively, you can specify
-        the range by an expression like \code{span=seq(min, max,
-        times = n)}, where, \code{min} and \code{max} are the 
-        left and right endpoints of the range, and \code{n} gives 
-        the number of the intermediate points.
-        }
     \item{title}{
         a character string which allows for a project title.
         }
@@ -99,9 +88,6 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
         parameter estimation: \code{"mle"}, the maximum log likelihood
         approach, or \code{"qm"}, McCulloch's quantile method.
         }
-    \item{x}{
-        a numeric vector. 
-        }
     \item{\dots}{
         parameters to be parsed.
         }
@@ -110,31 +96,9 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
 
 
 \value{
-  
-    The functions \code{tFit}, \code{hypFit} and \code{nigFit} return 
-    a list with the following components:
-  
-    \item{estimate}{
-        the point at which the maximum value of the log liklihood 
-        function is obtained.
-        }
-    \item{minimum}{
-        the value of the estimated maximum, i.e. the value of the
-        log liklihood function.
-        }
-    \item{code}{
-        an integer indicating why the optimization process terminated.
-        }
-    \item{gradient}{
-        the gradient at the estimated maximum.
-        }
-        
-    Remark: The parameter estimation for the stable distribution via the 
-    maximum Log-Likelihood approach may take a quite long time.
-              
+  an object from class \code{"fDISTFIT"}
 }
-
-
+              
 \details{
     
     \bold{Stable Parameter Estimation:}
@@ -146,7 +110,10 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
     five quantiles from a sample to estimate \code{alpha} and \code{beta}
     without asymptotic bias. Unfortunately, the estimators provided by
     McCulloch have restriction \code{alpha>0.6}.
-       
+
+    \emph{Remark:} The parameter estimation for the stable distribution
+    via the maximum Log-Likelihood approach may take a quite long time.
+    
 }
 
 
@@ -163,4 +130,3 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
 
 
 \keyword{distribution}
-

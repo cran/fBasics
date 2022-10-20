@@ -1,15 +1,13 @@
 \name{gridVector}
-
-
 \alias{gridVector}
 
 
-\title{Grid Vector Coordinates}
+\title{Grid vector coordinates}
 
 
 \description{
 
-    Creates from two vectors rectangular grid coordinates..
+  Creates rectangular grid coordinates from two vectors.
     
 }
 
@@ -31,8 +29,8 @@ gridVector(x, y = NULL)}
 
 \value{
 
-    returns a list with two entries named \code{$X} and \code{$Y},
-    giving the coordinates which span the bivariate grid.
+  a list with two entries named \code{$X} and \code{$Y},
+  giving the coordinates which span the bivariate grid.
 
 }
 

@@ -14,7 +14,7 @@
 
 \description{
     
-    Calculates moments of the generalized hyperbbolic
+    Calculates moments of the generalized hyperbolic
     distribution function
     
 }

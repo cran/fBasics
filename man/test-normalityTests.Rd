@@ -1,5 +1,4 @@
 \name{NormalityTests}
-
 \alias{NormalityTests}
 
 \alias{normalTest}
@@ -20,8 +19,7 @@
 \alias{sfTest}
 
 
-\title{Normality Tests}
-
+\title{Normality tests}
 
 \description{
 
@@ -110,106 +108,67 @@ sfTest(x, title = NULL, description = NULL)
 
 
 \value{
+  an object from class \code{\link{fHTEST}}
 
-    In contrast to R's output report from S3 objects of class \code{"htest"}
-    a different output report is produced. The tests here return an S4
-    object of class \code{"fHTEST"}. The object contains the following slots:
+  Slot \code{test} is a list containing the following (optionally empty)
+  elements (in addition to those described in \code{\link{fHTEST}}):
 
-    \item{@call}{
-        the function call.
-        }
-    \item{@data}{
-        the data as specified by the input argument(s).
-        }
-    \item{@test}{
-        a list whose elements contain the results from the statistical
-        test. The information provided is similar to a list object of
-        class \code{"htest"}.
-        }
-    \item{@title}{
-        a character string with the name of the test. This can be
-        overwritten specifying a user defined input argument.
-        }
-    \item{@description}{
-        a character string with an optional user defined description.
-        By default just the current date when the test was applied will
-        be returned.
-        }
+  \describe{
 
+    \item{ksnormTest}{
 
-    The slot \code{@test} returns an object of class \code{"list"}
-    containing the following (otionally empty) elements:
+      the 'D' statistic and p-values for the three alternatives
+      'two-sided, 'less' and 'greater'.
 
-    \item{statistic}{
-        the value(s) of the test statistic.
-        }
-    \item{p.value}{
-        the p-value(s) of the test.
-        }
-    \item{parameters}{
-        a numeric value or vector of parameters.
-        }
-    \item{estimate}{
-        a numeric value or vector of sample estimates.
-        }
-    \item{conf.int}{
-        a numeric two row vector or matrix of 95% confidence levels.
-        }
-    \item{method}{
-        a character string indicating what type of test was performed.
-        }
-    \item{data.name}{
-        a character string giving the name(s) of the data.
-        }
+    }
+    \item{shapiroTest}{
+      
+      the 'W' statistic and the p-value.
 
-    The meaning of the elements of the \code{@test} slot is the following:
+    }
+    \item{jarqueberaTest}{}
+    \item{jbTest}{
+      
+      the 'Chi-squared' statistic with 2 degrees of freedom and the
+      asymptotic p-value. \code{jbTest} is the finite sample version of
+      the Jarque Bera Lagrange multiplier, LM, and adjusted Lagrange
+      multiplier test, ALM.
 
-    \code{ksnormTest}
-    \cr
-    returns the values for the 'D' statistic and p-values for the three
-    alternatives 'two-sided, 'less' and 'greater'.
+    }
+    \item{dagoTest}{
 
-    \code{shapiroTest}
-    \cr
-    returns the values for the 'W' statistic and the p-value.
+      the 'Chi-squared', the 'Z3' (Skewness) and 'Z4' (Kurtosis)
+      statistic together with the corresponding p values.
 
-    \code{jarqueberaTest}\cr
-    \code{jbTest}
-    \cr
-    returns the values for the 'Chi-squared' statistic with 2 degrees of
-    freedom, and the asymptotic p-value. \code{jbTest} is the finite sample
-    version of the Jarque Bera Lagrange multiplier, LM, and adjusted
-    Lagrange multiplier test, ALM.
+    }
+    \item{adTest}{
+      
+      the 'A' statistic and the p-value.
 
-    \code{dagoTest}
-    \cr
-    returns the values for the 'Chi-squared', the 'Z3' (Skewness) and 'Z4'
-    (Kurtosis) statistic together with the corresponding p values.
+    }
+    \item{cvmTest}{
+      
+      the 'W' statistic and the p-value.
 
-    \code{adTest}
-    \cr
-    returns the value for the 'A' statistic and the p-value.
+    }
+    \item{lillieTest}{
+      the 'D' statistic and the p-value.
+    }
 
-    \code{cvmTest}
-    \cr
-    returns the value for the 'W' statistic and the p-value.
+    \item{pchiTest}{
+      
+      the value for the 'P' statistic and the p-values for the adjusted
+      and not adjusted test cases.  In addition the number of classes is
+      printed, taking the default value due to Moore (1986) computed
+      from the expression \code{n.classes = ceiling(2 * (n^(2/5)))},
+      where \code{n} is the number of observations.
 
-    \code{lillieTest}
-    \cr
-    returns the value for the 'D' statistic and the p-value.
+    }
+    \item{sfTest}{
+      the 'W' statistic and the p-value.
+    }
 
-    \code{pchiTest}
-    \cr
-    returns the value for the 'P' statistic and the p-values for the
-    adjusted and not adjusted test cases.  In addition the number of
-    classes is printed, taking the default value due to Moore (1986)
-    computed from the expression \code{n.classes = ceiling(2 * (n^(2/5)))},
-    where \code{n} is the number of observations.
-
-    \code{sfTest}
-    \cr
-    returns the value for the 'W' statistic and the p-value.
-
+  }
 }
 
 
@@ -340,6 +299,7 @@ Wuertz D., Katzgraber H.G. (2005);
 
 
 \examples{
+\dontshow{set.seed(1234)}
 ## Series:
    x = rnorm(100)
 
@@ -358,4 +318,3 @@ Wuertz D., Katzgraber H.G. (2005);
 
 
 \keyword{htest}
-

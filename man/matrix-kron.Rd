@@ -4,12 +4,12 @@
 \alias{kron}
 
 
-\title{Kronecker Product}
+\title{Kronecker product}
 
 
 \description{
     
-    Returns the Kronecker product.
+  Returns the Kronecker product.
 
 }
 
@@ -22,7 +22,7 @@ kron(x, y)
 \arguments{
 
     \item{x, y}{
-        two numeric matrixes.
+        two numeric matrices.
         }
         
 }
@@ -39,7 +39,7 @@ kron(x, y)
 
 \note{
 
-    \code{kron} is a synonyme to \code{\%x\%}.
+    \code{kron} is a synonym to \code{\%x\%}.
 
 }
 

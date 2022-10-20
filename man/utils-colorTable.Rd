@@ -1,15 +1,13 @@
 \name{colorTable}
-
-
 \alias{colorTable}
 
 
-\title{Table of Colors}
+\title{Table of colors}
 
 
 \description{
     
-    Displays a Table of color codes and plots the colors themselves.
+  Displays a table of color codes and plots the colors themselves.
         
 }
     
@@ -41,8 +39,8 @@ colorTable(cex = 0.7)
 
 \seealso{
 
-    \code{link{characterTable}},
-    \code{link{symbolTable}}.
+    \code{\link{characterTable}},
+    \code{\link{symbolTable}}
     
 }
 

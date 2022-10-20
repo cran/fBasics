@@ -8,7 +8,7 @@
 \alias{sampleKURT}
 
 
-\title{Robust Moments for the GLD}
+\title{Robust moments for the GLD}
 
 
 \description{

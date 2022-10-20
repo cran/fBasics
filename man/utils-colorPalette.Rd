@@ -1,6 +1,4 @@
 \name{colorPalette}
-
-
 \alias{colorPalette}
 
 \alias{rainbowPalette} 
@@ -22,7 +20,7 @@
 \alias{monoPalette}
 
 
-\title{Color Palettes}
+\title{Color palettes}
 
 
 \description{
@@ -124,7 +122,7 @@ monoPalette(n, name = c("redmono", "greenmono", "bluemono"))
     color close to the starting one. To pass additional arguments to the
     underlying functions we refer to consult \code{help(rainbow)}.
     With rainbow, the parameters start and end can be used to specify 
-    particular subranges of hues. Synonyme function calls are 
+    particular subranges of hues. Synonym function calls are 
     \code{rainbow},  \code{heat.colors},\code{terrain.colors}, 
     \code{topo.colors}, and the \code{cm.colors}. 
     \cr
@@ -135,7 +133,7 @@ monoPalette(n, name = c("redmono", "greenmono", "bluemono"))
     The function \code{grayPalette} chooses a series of \code{n} 
     gamma-corrected gray levels. The range of the gray levels can be
     optionally monitored through the \code{\dots} arguments, for
-    details \code{help(gray.colors)}, which is a synonyme function call
+    details \code{help(gray.colors)}, which is a synonym function call
     in the \code{grDevices} package.
     \cr
     

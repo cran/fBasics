@@ -1,5 +1,4 @@
 \name{hypRobMoments}
-
 \alias{hypRobMoments}
 
 \alias{hypMED}
@@ -8,7 +7,7 @@
 \alias{hypKURT}
 
 
-\title{Robust Moments for the HYP}
+\title{Robust moments for the HYP}
 
 
 \description{
@@ -74,7 +73,7 @@ hypKURT(alpha = 1, beta = 0, delta = 1, mu = 0)
 
 \author{
 
-  Diethelm Wuertz.
+  Diethelm Wuertz
 
 }
 

@@ -1,9 +1,11 @@
 \name{distCheck}
 \alias{distCheck}
-\title{Distribution Check}
+
+
+\title{Distribution check}
 
 \description{
-  Tests properties of an \R implementation of a distribution, i.e. of
+  Tests properties of an \R implementation of a distribution, i.e., of
   all four of its \dQuote{dpqr} functions.
 }
 
@@ -11,14 +13,23 @@
 distCheck(fun = "norm", n = 1000, robust = TRUE, subdivisions = 100, \dots)
 }
 \arguments{
-    \item{fun}{a character string denoting the name of the distribution.}
-    \item{n}{an integer specifying the number of random variates to be
-        generated.}
-    \item{robust}{logical flag, should robust estimates be used? By
-        default \code{TRUE}.}
-    \item{subdivisions}{integer specifying the numbers of subdivisions
-      in integration.}
-    \item{\dots}{the distributional parameters.}
+  \item{fun}{
+    a character string, the name of the distribution.
+  }
+  \item{n}{
+    an integer specifying the number of random variates to be
+    generated.
+  }
+  \item{robust}{
+    logical flag, should robust estimates be used? By default
+    \code{TRUE}.
+  }
+  \item{subdivisions}{
+    integer specifying the numbers of subdivisions in integration.
+  }
+  \item{\dots}{
+    the distributional parameters.
+  }
 }
 
 \examples{

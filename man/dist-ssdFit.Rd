@@ -1,8 +1,7 @@
 \name{ssdFit}
-
 \alias{ssdFit}
 
-\title{Fit Density Using Smoothing Splines }
+\title{Fit density using smoothing splines}
 
 
 \description{
@@ -29,11 +28,9 @@ ssdFit(x)
 
 \value{
   
-    The function \code{ssdFit}, \code{hypFit} returns an object of class
-    \code{ssden}.
-    The returned object can be used to evaluate density, probabilities
-    and quantiles.
-              
+    for \code{ssdFit}, an object of class \code{ssden}.  The returned
+    object can be used to evaluate density, probabilities and quantiles.
+
 }
 
 

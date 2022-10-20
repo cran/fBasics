@@ -1,7 +1,6 @@
 \name{rowStats}
-
-
 \alias{rowStats} 
+
 % \alias{rowSums}
 % \alias{rowMeans}
 \alias{rowSds}
@@ -17,7 +16,7 @@
 \alias{rowStdevs}
 
 
-\title{Row Statistics}
+\title{Row statistics}
 
 
 \description{
@@ -67,7 +66,7 @@ rowAvgs(x, \dots)
 \arguments{
   
     \item{FUN}{
-        a function name. The statistical function to be applied.
+        a function name, the statistical function to be applied.
         }
     \item{prob}{
         a numeric value, the probability with value in [0,1].
@@ -85,15 +84,13 @@ rowAvgs(x, \dots)
 
 \value{
     
-    the functions return a numeric vector of the statistics.
+  each function returns a numeric vector of the statistics
 }
 
 
 
 \seealso{
-
-    \code{link{colStats}}.
-    
+  \code{\link{colStats}}
 }
 
 
@@ -111,4 +108,3 @@ rowAvgs(x, \dots)
 
 
 \keyword{univar}
-

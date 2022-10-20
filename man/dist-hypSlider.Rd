@@ -1,10 +1,8 @@
 \name{hypSlider}
-
-
 \alias{hypSlider}
 
 
-\title{Hyperbolic Distribution Slider}
+\title{Hyperbolic distribution slider}
 
 
 \description{

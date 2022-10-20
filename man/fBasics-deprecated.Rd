@@ -10,24 +10,41 @@
 %% \alias{qstable}
 %% \alias{rstable}
 %% \alias{stableMode}
-\title{Deprecated Functions in Package fBasics}
+
+\alias{listDescription}
+
+
+\title{Deprecated functions in package fBasics}
+
 \description{
   These functions are provided for compatibility with older versions of
   the package only, and may be defunct as soon as of the next release.
-
-  There are none currently.
-  \code{\link[stabledist]{dstable}} etc now are defunct, as they have
-  been available from \pkg{stabledist} since early 2011.
-%% dstable(x, alpha, beta, gamma = 1, delta = 0, pm = 0)
-%% pstable(q, alpha, beta, gamma = 1, delta = 0, pm = 0)
-%% qstable(p, alpha, beta, gamma = 1, delta = 0, pm = 0)
-%% rstable(n, alpha, beta, gamma = 1, delta = 0, pm = 0)
-%% stableMode(alpha, beta)
 }
-%% \usage{
-%% }
-%% \arguments{
-%% }
+
+%\usage{
+%}
+%\arguments{
+%}
+
+\details{
+
+  \describe{
+
+    \item{listDescription}{use \code{\link{packageDescription}} instead.}
+
+  }
+  
+  % There are none currently.
+
+  \code{\link[stabledist]{dstable}}, etc., now are defunct, as they have
+  been available from \pkg{stabledist} since early 2011.
+  %% dstable(x, alpha, beta, gamma = 1, delta = 0, pm = 0)
+  %% pstable(q, alpha, beta, gamma = 1, delta = 0, pm = 0)
+  %% qstable(p, alpha, beta, gamma = 1, delta = 0, pm = 0)
+  %% rstable(n, alpha, beta, gamma = 1, delta = 0, pm = 0)
+  %% stableMode(alpha, beta)
+}
+
 \seealso{
   \code{\link{Deprecated}}, \code{\link{Defunct}}
 }

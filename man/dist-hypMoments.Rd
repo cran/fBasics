@@ -1,5 +1,4 @@
 \name{hypMoments}
-
 \alias{hypMoments}
 
 \alias{hypMean}
@@ -9,13 +8,11 @@
 \alias{hypMoments}
 
 
-\title{Hyperbolic Distribution Moments}
-
+\title{Hyperbolic distribution moments}
 
 \description{
     
-    Calculates moments of the hyperbbolic distribution 
-    function
+  Calculates moments of the hyperbolic distribution function.
     
 }
 
@@ -53,9 +50,7 @@ hypMoments(order, type = c("raw", "central", "mu"),
 
 
 \value{
-
-    a numerical value.
-    
+  a numerical value
 }
 
 
@@ -87,4 +82,3 @@ Scott, D. J., Wuertz, D. and Tran, T. T. (2008)
 
 
 \keyword{distribution}
-

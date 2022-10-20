@@ -4,7 +4,7 @@
 \alias{pascal}
 
 
-\title{Pascal Matrix}
+\title{Pascal matrix}
 
 
 \description{

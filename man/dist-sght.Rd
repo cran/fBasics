@@ -1,11 +1,12 @@
 \name{sght}
-
 \alias{sght}
 
 \alias{dsght}
 \alias{psght}
 \alias{qsght}
 \alias{rsght}
+
+\concept{Standardized generalized hyperbolic Student-t distribution}
 
 
 \title{Standardized generalized hyperbolic Student-t Distribution}

@@ -5,7 +5,7 @@
 \alias{qqghtPlot}
 \alias{qqgldPlot}
 
-\title{Quantile-Quantile Plots}
+\title{Quantile-Quantile plots}
 
 
 \description{

@@ -1,13 +1,8 @@
 \name{ScalingLawPlot}
-
 \alias{scalinglawPlot}
 
 
-\alias{scalinglawPlot}
-
-
-\title{Scaling Law Bahaviour}
-
+\title{Scaling law behaviour}
 
 \description{
 
@@ -57,9 +52,10 @@ scalinglawPlot(x, span = ceiling(log(length(x)/252)/log(2)), doplot = TRUE,
 
 \value{
     
-    returns a list with the following components: \code{Intercept},
-    \code{Exponent} the scaling exponent, and \code{InverseExponent}
-    its inverse value.
+  a list with the following components:
+  \code{Intercept}{intercept,}
+  \code{Exponent}{the scaling exponent,}
+  \code{InverseExponent}{the inverse of the scaling component.}
     
 }
 

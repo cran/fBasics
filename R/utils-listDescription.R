@@ -29,8 +29,8 @@ function(package, character.only = FALSE)
     # Description:
     #   Extracts package description
 
-## MM: I would
-### .Deprecated("packageDescription")
+## MM: I would .Deprecated("packageDescription")
+    .Deprecated("packageDescription")
 
     # FUNCTION:
 
@@ -48,4 +48,3 @@ function(package, character.only = FALSE)
 
 
 ################################################################################
-

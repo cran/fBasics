@@ -436,7 +436,8 @@ double *ecks, double *u, int *pl)
 	int i,j;
 	double df,dx,dxold,f,fh,fl;
 	double temp,xh,xl,rts;
-	void funcd();
+	// void funcd();   // 2022-10-20 GNB: warning from CRAN about absence of
+	                   //   prototype. Also it is declared before this point
 
 	x1 = *px1; x2 = *px2; xacc = *pxacc;
 	a = *pa; b = *pb; c = *pc; d = *pd;
@@ -499,9 +500,9 @@ for (i=0;i<l;i++)
 }
 }
 
-
-static void funcd(u,a,b)
-double u,*a,*b;
+// 2022-10-20 GNB: fixed old style declarations (CRAN warns about them now)
+static void funcd(double u, double *a, double *b)
+// double u,*a,*b;
 {
 
 /* function is the gld F-1(u)  */

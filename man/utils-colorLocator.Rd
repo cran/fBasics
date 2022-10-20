@@ -3,7 +3,7 @@
 \alias{colorLocator}
 \alias{colorMatrix}
 
-\title{Color Selection}
+\title{Color selection}
 
 \description{
     Displays \R's 657 named colors for selection and

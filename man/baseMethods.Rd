@@ -14,7 +14,7 @@
 \alias{stdev.default}
 
 
-\title{Generic Functions Extensions}
+\title{Generic functions extensions}
 
 
 \description{
@@ -27,8 +27,8 @@
     Added and/or modified functions:
     
     \tabular{ll}{
-    \code{attach} \tab extends attach function, \cr
-    \code{rank} \tab extends rank function, \cr
+    \code{attach} (defunct) \tab extends attach function, \cr
+    \code{rank} (defunct) \tab extends rank function, \cr
     \code{stdev} \tab adds stdev function, \cr
     \code{termPlot} \tab adds term plot function, \cr
     \code{volatility} \tab adds volatility function. }
@@ -48,7 +48,7 @@
 \arguments{
 
     \item{na.rm}{
-        an logical value - should the NA values be removed.
+        a logical value - should the NA values be removed.
         }  
     \item{model}{
         a fitted model object.

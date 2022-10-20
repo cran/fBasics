@@ -4,7 +4,7 @@
 \alias{tslag}
 
 
-\title{Lagged or Leading Vector/Matrix}
+\title{Lagged or leading vector/matrix}
 
 
 \description{

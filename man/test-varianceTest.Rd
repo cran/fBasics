@@ -1,11 +1,8 @@
 \name{varianceTest}
-
-
 \alias{varianceTest}
 
 
-\title{Two Sample Variance Tests}
-
+\title{Two sample variance tests}
 
 \description{
     
@@ -39,63 +36,6 @@ varianceTest(x, y, method = c("varf", "bartlett", "fligner"),
        
 }
 
-
-\value{
-
-    In contrast to R's output report from S3 objects of class \code{"htest"}
-    a different output report is produced. The classical tests presented
-    here return an S4 object of class \code{"fHTEST"}. The object contains
-    the following slots:
-    
-    \item{@call}{
-        the function call.  
-        }
-    \item{@data}{
-        the data as specified by the input argument(s).
-        }
-    \item{@test}{
-        a list whose elements contain the results from the statistical
-        test. The information provided is similar to a list object of
-        class \code{"htest"}.
-        }
-    \item{@title}{
-        a character string with the name of the test. This can be 
-        overwritten specifying a user defined input argument.
-        }
-    \item{@description}{
-        a character string with an optional user defined description. 
-        By default just the current date when the test was applied will
-        be returned.
-        }
-    
-    
-    The slot \code{@test} returns an object of class \code{"list"} 
-    containing (at least) the following elements:
-
-    \item{statistic}{
-        the value(s) of the test statistic.
-        }
-    \item{p.value}{
-        the p-value(s) of the test.
-        }
-    \item{parameters}{
-        a numeric value or vector of parameters.
-        }
-    \item{estimate}{
-        a numeric value or vector of sample estimates.
-        }
-    \item{conf.int}{
-        a numeric two row vector or matrix of 95% confidence levels.
-        }
-    \item{method}{
-        a character string indicating what type of test was performed.
-        }
-    \item{data.name}{
-        a character string giving the name(s) of the data.
-        }
-}
-
-
 \details{
     
     The \code{method="varf"} can be used to compare variances of two 
@@ -118,6 +58,9 @@ varianceTest(x, y, method = c("varf", "bartlett", "fligner"),
     
 }
 
+\value{
+  an object from class \code{\link{fHTEST}}
+}
 
 \note{
 
@@ -149,6 +92,7 @@ Lehmann E.L. (1986);
 
 
 \examples{
+\dontshow{set.seed(1234)}
 ## rnorm - 
    # Generate Series:
    x = rnorm(50)
@@ -162,4 +106,3 @@ Lehmann E.L. (1986);
 
 
 \keyword{htest}
-

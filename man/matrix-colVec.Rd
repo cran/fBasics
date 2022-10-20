@@ -5,7 +5,7 @@
 \alias{rowVec}
 
 
-\title{Column and Row Vectors}
+\title{Column and row vectors}
 
 
 \description{

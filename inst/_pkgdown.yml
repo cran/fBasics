@@ -1,3 +1,8 @@
+url: https://geobosh.github.io/fBasicsDoc/
+
+deploy:
+  install_metadata: true
+
 template:
   bootstrap: 5
   
@@ -9,16 +14,6 @@ reference:
     contents:
       - "fBasics-package"
       - fBasicsData
-  - title: "Unclassified"
-    contents:
-      - stdev
-      - termPlot
-      - volatility
-  - title: "Fit distributions by MLE or moments"
-    contents:
-      - nFit
-      - tFit
-      - stableFit
   - title: "Tests"
     contents:
       - correlationTest
@@ -74,8 +69,12 @@ reference:
       - runif.lcg
       - rnorm.lcg
       - rt.lcg
-  - title: "Distributions"
+  - title: "Distributions and dstribution fitting"
     contents:
+      - nFit
+      - tFit
+      - stableFit
+      - "fDISTFIT-class"
       - distCheck
   - title: "Hyperbolic Distribution"
     contents:
@@ -276,14 +275,31 @@ reference:
   - title: "Package utilities"
     contents:
       - listDescription
+      - listIndex
       - listFunctions
       - countFunctions
-      - listIndex
-      - print
+      - print.control
+  - title: "Deprecated functions"
+    contents:
+      - "fBasics-deprecated"
+  - title: "Reexported functions"
+    desc: >
+      The following functions are re-exported from packages 'timeDate'
+      and 'timeSeries', for convenience. If you need more functionality
+      from those packages, run 'library()' in your session.
+    contents:
+      - fBasics_reexports
+  - title: "Unclassified"
+    desc: >
+      TODO: these are generic functions for the corresponding base R ones
+      (which serve as default methods). Seem abandoned.
+      Remove? (except for volatility which is new and should be described
+      elsewhere.
+    contents:
+      - stdev
+      - termPlot
+      - volatility
   - title: "S+ compatibility"
     contents:
       - colIds
       - rowIds
-  - title: "Deprecated functions"
-    contents:
-      - "fBasics-deprecated"

@@ -89,9 +89,9 @@ nigFit(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 
 
 \value{
-  
-    The functions \code{tFit}, \code{hypFit} and \code{nigFit} return 
-    a list with the following components:
+  an object from class \code{"fDISTFIT"}.
+
+  Slot \code{fit} is a list with the following components:
   
     \item{estimate}{
         the point at which the maximum value of the log liklihood 

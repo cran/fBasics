@@ -1,33 +1,20 @@
 \name{Heaviside}
-
-
 \alias{Heaviside}
+
 \alias{Sign}
 \alias{Delta}
 \alias{Boxcar}
 \alias{Ramp}
 
 
-\title{Heaviside and Related Functions}
-
+\title{Heaviside and related functions}
 
 \description{
 
-    Functions which compute the Heaviside and 
-    related functions. These include the sign 
-    function, the delta function, the boxcar 
-    function, and the ramp function.
-    \cr
+    Functions which compute the Heaviside and related functions. These
+    include the Heaviside function, the sign function, the delta
+    function, the boxcar function, and the ramp function.
     
-    The functions are:
-    
-    \tabular{ll}{
-    \code{Heaviside} \tab Computes Heaviside unit step function, \cr
-    \code{Sign} \tab Just another signum function, \cr
-    \code{Delta} \tab Computes delta function, \cr
-    \code{Boxcar} \tab Computes boxcar function, \cr
-    \code{Ramp} \tab Computes ramp function. }
-            
 }
 
 
@@ -41,61 +28,54 @@ Ramp(x, a = 0)
 
 
 \arguments{
-     
-    \item{a}{
-        a numeric value, the location of the break.\cr
-        }
-    \item{x}{
-        a numeric vector.
-        }
+  \item{x}{
+    a numeric vector.
+  }
+  \item{a}{
+    a numeric value, the location of the break.
+  }
 }
 
 
 \details{
-  
-    The Heaviside step function \code{Heaviside} is 1 for \code{x>a}, 
-    \code{1/2} for \code{x=a}, and \code{0} for \code{x<a}.
-    \cr
+
+  \code{Heaviside}  computes the Heaviside unit step function. 
+  \code{Heaviside} is 1 for \code{x > a}, 
+  \code{1/2} for \code{x = a}, and \code{0} for \code{x < a}.
     
-    The Sign function \code{Sign} is \code{1} for \code{x>a}, 
-    \code{0} for \code{x=a}, and \code{-1} for \code{x<a}.
-    \cr
+  \code{Sign} computes
+  the sign function. \code{Sign} is \code{1} for \code{x > a}, 
+  \code{0} for \code{x = a}, and \code{-1} for \code{x < a}.
     
-    The delta function \code{Delta} is defined as: 
-    \code{Delta(x) = d/dx H(x-a)}.
-    \cr
+  \code{Delta} computes the delta function.
+  \code{Delta} is defined as: \code{Delta(x) = d/dx H(x-a)}.
     
-    The boxcar function \code{Boxcar} is defined as: 
-    \code{Boxcar(x) = H(x+a) - H(x-a)}.
-    \cr
+  \code{Boxcar} computes the boxcar function.
+  \code{Boxcar} is defined as: \code{Boxcar(x) = H(x+a) - H(x-a)}.
     
-    The ramp function is defined as: 
-    \code{Ramp(x)= (x-a)*H(x-a)}.
+  \code{Ramp} computes ramp function. 
+  The ramp function is defined as: \code{Ramp(x) = (x-a) * H(x-a)}.
     
 }
 
 
 \value{
-
-    returns the function values of the selected function.
-    
+  numeric vector
 }
 
 
 \note{
 
-    The Heaviside function is used in the implementation of the skew
-    Normal, Student-t, and Generalized Error distributions, distributions
-    functions which play an important role in modelling GARCH processes.
+  The Heaviside function is used in the implementation of the skew
+  Normal, Student-t, and Generalized Error distributions, distributions
+  functions which play an important role in modelling GARCH processes.
     
 }
 
 
 \seealso{
-  
-    \code{GarchDistribution},
-    \code{GarchDistributionFits}.
-    
+  \code{GarchDistribution},
+  \code{GarchDistributionFits}
 }
 
 

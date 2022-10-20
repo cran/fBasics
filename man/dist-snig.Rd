@@ -1,6 +1,4 @@
 \name{snig}
-
-
 \alias{snig}
 
 \alias{dsnig}
@@ -9,8 +7,11 @@
 \alias{rsnig}
 
 
-\title{Standardized Normal Inverse Gaussian Distribution}
+\concept{Standardized normal inverse Gaussian distribution}
 
+
+
+\title{Standardized Normal Inverse Gaussian Distribution}
 
 \description{
     

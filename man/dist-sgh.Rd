@@ -1,11 +1,12 @@
 \name{sgh}
-
 \alias{sgh}
 
 \alias{dsgh}
 \alias{psgh}
 \alias{qsgh}
 \alias{rsgh}
+
+\concept{Standardized generalized hyperbolic distribution}
 
 
 \title{Standardized Generalized Hyperbolic Distribution}

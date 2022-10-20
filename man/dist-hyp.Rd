@@ -1,7 +1,6 @@
 \name{hyp}
-
-
 \alias{hyp}
+
 \alias{dhyp}
 \alias{phyp}
 \alias{qhyp}
@@ -9,7 +8,7 @@
 
 
 
-\title{Hyperbolic Distribution}
+\title{Hyperbolic distribution}
 
 
 \description{

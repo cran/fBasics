@@ -1,5 +1,4 @@
 \name{maxdd}
-
 \alias{maxdd}
 
 \alias{dmaxdd}
@@ -9,20 +8,18 @@
 \alias{maxddStats}
 
 
-\title{Drawdown Statistics}
+\title{Drawdown statistics}
 
 
 \description{
   
-    This is a collection and description of 
-    functions which compute drawdown statistics. 
-    Included are density, distribution function,  
-    and random generation for the maximum drawdown 
-    distribution. In addition the expectation of 
-    drawdowns for Brownian motion can be computed.
-    \cr
+  A collection of functions which compute drawdown statistics.  Included
+  are density, distribution function, and random generation for the
+  maximum drawdown distribution. In addition the expectation of
+  drawdowns for Brownian motion can be computed.
+  \cr
     
-    The functions are:
+  The functions are:
     
     \tabular{ll}{
     \code{dmaxdd} \tab the Density function, \cr
@@ -76,7 +73,6 @@ maxddStats(mean = 0, sd = 1, horizon = 1000)
 \value{
 
     \code{dmaxdd} 
-    \cr
     returns for a trendless Brownian process \code{mean=0} and
     standard deviation "sd" the density from the probability 
     that the maximum drawdown "D" is larger or equal to "h"  
@@ -85,21 +81,19 @@ maxddStats(mean = 0, sd = 1, horizon = 1000)
     \cr
     
     \code{pmaxdd} 
-    \cr
     returns for a trendless Brownian process \code{mean=0} and
-    standard deviation "sd" the the probability 
+    standard deviation "sd" the probability 
     that the maximum drawdown "D" is larger or equal to "h"  
     in the interval [0,T], where "T" denotes the time \code{horizon}  
     of the investor.
     \cr
     
     \code{rmaxdd}
-    \cr
     returns for a Brownian Motion process with mean \code{mean} and 
     standard deviation \code{sd} random variates of maximum drawdowns.
-  
-    \code{maxddStats} 
     \cr
+    
+    \code{maxddStats} 
     returns the expectation Value E[D] of maximum drawdowns of
     Brownian Motion for a given drift \code{mean}, variance \code{sd},  
     and runtime \code{horizon} of the Brownian Motion process. 

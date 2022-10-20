@@ -4,7 +4,7 @@
 \alias{rk}
 
 
-\title{The Rank of a Matrix}
+\title{The rank of a matrix}
 
 
 \description{

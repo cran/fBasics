@@ -1,7 +1,6 @@
 \name{nig}
-
-
 \alias{nig}
+
 \alias{dnig}
 \alias{pnig}
 \alias{qnig}
@@ -9,7 +8,6 @@
 
 
 \title{Normal Inverse Gaussian Distribution}
-
 
 \description{
     
@@ -29,54 +27,60 @@ rnig(n, alpha = 1, beta = 0, delta = 1, mu = 0)
 
 
 \arguments{
- 
-    \item{alpha, beta, delta, mu}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These are the parameters in the first parameterization.
-        }
-    \item{log}{
-        a logical flag by default \code{FALSE}. 
-        Should labels and a main title drawn to the plot?
-        }
-    \item{n}{
-        number of observations.
-        } 
+    \item{x,q}{
+      a numeric vector of quantiles.
+    }
     \item{p}{
-        a numeric vector of probabilities.
-        }
-    \item{x, q}{
-        a numeric vector of quantiles.
-        }
-    
-}
-
-
-\value{
-
-    All values for the \code{*nig} functions are numeric vectors: 
-    \code{d*} returns the density,
-    \code{p*} returns the distribution function,
-    \code{q*} returns the quantile function, and
-    \code{r*} generates random deviates.
-    
-    All values have attributes named \code{"param"} listing
-    the values of the distributional parameters.
-    
+      a numeric vector of probabilities.
+    }
+    \item{n}{
+      number of observations.
+    } 
+    \item{alpha}{
+      shape parameter.
+    }
+    \item{beta}{
+      skewness parameter \code{beta}, \code{abs(beta)} is in the range
+      \code{(0, alpha)}.
+    }
+    \item{delta}{
+      scale parameter, must be zero or positive.
+    }
+    \item{mu}{
+      location parameter, by default 0.
+    }
+    \item{log}{
+      a logical flag by default \code{FALSE}.  Should labels and a main
+      title be drawn to the plot?
+    }
 }
 
 
 \details{
+
+  The parameters \code{alpha, beta, delta, mu} are in the first
+  parameterization of the distribution.
   
-    The random deviates are calculated with the method described by 
-    Raible (2000).
+  The random deviates are calculated with the method described by
+  Raible (2000).
     
 }
 
+\value{
+
+  \code{dnig} gives the density,
+  \code{pnig} gives the distribution function,
+  \code{qnig} gives the quantile function, and
+  \code{rnig} generates random deviates.
+    
+  Each function returns a numeric vector with attribute \code{"param"}
+  containing the parameters of the distribution.
+
+  \strong{GNB TODO:} It seems that only \code{rnig} has an attribute and
+  that is called \code{"control"} (but it indeed contains the
+  parameters).
+    
+}
 
 \author{
 

@@ -4,7 +4,7 @@
 \alias{sampleLmoments}
 
 
-\title{Sample L-Moments}
+\title{Sample L-moments}
 
 
 \description{

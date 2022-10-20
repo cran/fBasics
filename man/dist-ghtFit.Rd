@@ -1,13 +1,8 @@
 \name{ghtFit}
-
-
 \alias{ghtFit}
 
 
-\alias{ghtFit}
-
-
-\title{GHT Distribution Fit}
+\title{GHT distribution fit}
 
 
 \description{
@@ -77,8 +72,9 @@ ghtFit(x, beta = 0.1, delta = 1, mu = 0, nu = 10,
 
 
 \value{
-  
-    returns a list with the following components:
+  an object from class \code{"fDISTFIT"}.
+
+  Slot \code{fit} is a list with the following components:
   
     \item{estimate}{
         the point at which the maximum value of the log liklihood 
@@ -133,4 +129,3 @@ ghtFit(x, beta = 0.1, delta = 1, mu = 0, nu = 10,
 
 
 \keyword{distribution}
-

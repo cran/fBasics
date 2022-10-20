@@ -1,15 +1,12 @@
 \name{hypMode}
-
-
 \alias{hypMode}
 
 
-\title{Hyperbolic Mode}
-
+\title{Hyperbolic mode}
 
 \description{
     
-    Computes the mode of the hyperbolic function.
+  Computes the mode of the hyperbolic function.
     
 }
 

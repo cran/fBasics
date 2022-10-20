@@ -1,6 +1,4 @@
 \name{lcg}
-
-
 \alias{lcg}
 
 \alias{set.lcgseed}
@@ -10,7 +8,7 @@
 \alias{rt.lcg}
 
 
-\title{Generator for Portable Random Innovations}
+\title{Generator for Portable random innovations}
 
 
 \description{

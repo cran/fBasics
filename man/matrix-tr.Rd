@@ -4,7 +4,7 @@
 \alias{tr}
 
 
-\title{Trace of a Matrix}
+\title{Trace of a matrix}
 
 
 \description{

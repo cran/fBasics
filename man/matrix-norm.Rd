@@ -4,7 +4,7 @@
 \alias{norm2}
 
 
-\title{Matrix Norm}
+\title{Matrix norm}
 
 
 \description{
@@ -42,7 +42,7 @@ norm2(x, p = 2)
 
 \value{
 
-    returns the value of the norm of the matrix.
+  the value of the norm of the matrix.
     
 }
 

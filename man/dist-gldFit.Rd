@@ -78,8 +78,9 @@ gldFit(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
 
 
 \value{
-  
-    returns a list with the following components:
+  an object from class \code{"fDISTFIT"}.
+
+  Slot \code{fit} is a list with the following components:
   
     \item{estimate}{
         the point at which the maximum value of the log liklihood 

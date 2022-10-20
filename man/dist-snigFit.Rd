@@ -1,9 +1,10 @@
 \name{snigFit}
-
 \alias{snigFit}
 
-\title{Fit of a Standardized NIG Distribution}
+\concept{Standardized normal inverse Gaussian distribution}
 
+
+\title{Fit of a Standardized NIG Distribution}
 
 \description{
 
@@ -63,9 +64,10 @@ snigFit(x, zeta = 1, rho = 0, scale = TRUE, doplot = TRUE,
 
 
 \value{
+  an object from class \code{"fDISTFIT"}.
+
+  Slot \code{fit} is a list with the following components:
   
-    The function \code{snigFit} returns a list with the following 
-    components:
   
     \item{estimate}{
         the point at which the maximum value of the log liklihood 

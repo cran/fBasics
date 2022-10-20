@@ -8,12 +8,12 @@
 \docType{package}
 
 
-\title{Portfolio Modelling, Optimization and Backtesting}
+\title{Portfolio modelling, optimization and backtesting}
 
 
 \description{
 
-    The Rmetrics "fBasics" package is a collection of functions to 
+    The Rmetrics \pkg{fBasics} package is a collection of functions to 
     explore and to investigate basic properties of financial returns 
     and related quantities.
     
@@ -25,19 +25,19 @@
 }
 
 
-\details{
+\author{
+Diethelm Wuertz [aut] (original code),
+Tobias Setz [aut],
+Yohan Chalabi [aut],
+Martin Maechler [ctb] (<https://orcid.org/0000-0002-8685-9910>),
+Georgi N. Boshnakov [cre, ctb]
+CRAN Team [ctb]
 
-    \preformatted{
-        Package:    \tab fBasics\cr
-        Type:       \tab Package\cr
-        Date:       \tab 2014\cr
-        License:    \tab GPL Version 2 or later\cr
-        Copyright:  \tab (c) 1999-2014 Rmetrics Association\cr
-        Repository: \tab R-FORGE\cr
-        URL:        \tab \url{https://www.rmetrics.org}
-    }
-    
+Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 }
+
+%\details{
+%}
 
 
 \section{1 Introduction}{

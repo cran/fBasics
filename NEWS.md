@@ -1,3 +1,13 @@
+# fBasics 4021.93
+
+- fixed CRAN warnings about a function declaration without a prototype, which is
+  deprecated by modern C compilers.
+
+- further updates and improvements to the documentation.
+
+- website built with `pkgdown` is now linked to in file `DESCRIPTION`.
+
+
 # fBasics 4021.92
 
 - new maintainer: Georgi N. Boshnakov.

@@ -9,7 +9,7 @@
 \alias{rowIds<-}
 
 
-\title{Set and Retrieve Column/Row Names}
+\title{Set and retrieve column/row names}
 
 
 \description{
@@ -40,7 +40,7 @@ rowIds(x, \dots)
 
 \details{
     
-    Usualli in R the functions \code{colnames}, and \code{rownames} are 
+    Usually in R the functions \code{colnames}, and \code{rownames} are 
     used to retrieve and set the names of matrices. The functions 
     \code{rowIds} and \code{colIds}, are S-Plus like synonyms.
     

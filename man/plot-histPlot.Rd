@@ -6,7 +6,7 @@
 \alias{logDensityPlot}
 
 
-\title{Histogram and Density Plots}
+\title{Histogram and density plots}
 
 
 \description{
@@ -89,9 +89,7 @@ logDensityPlot(x, labels = TRUE, col = "steelblue", robust = TRUE,
 
 
 \value{
-    
-    displays a time series plot.
-    
+    displays a time series plot
 }
 
 

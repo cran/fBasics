@@ -1,16 +1,13 @@
 \name{print}
 
-
-\alias{print}
 \alias{print.control}
 
 
-\title{Print Control}
-
+\title{Print control}
 
 \description{
 
-    Unlists and prints a control object.
+  Unlists and prints a control object.
 
 }
 
@@ -33,11 +30,7 @@
 
 
 \value{
-    
-    \code{print.control}
-    
-    prints control.
-    
+  prints control
 }
 
 
@@ -51,4 +44,3 @@
 
 
 \keyword{programming}
-
