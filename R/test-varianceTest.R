@@ -66,7 +66,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Arguments:
     #   x, y - a numeric vector of data values.
-    #   description - a brief description of the porject of type 
+    #   description - a brief description of the project of type 
     #       character.
     #   title - a character string which allows for a project title.
     
@@ -142,7 +142,7 @@ function(x, y, title = NULL, description = NULL)
    
     # Add:
     if(is.null(title)) title = "F Test of Variances"
-    if(is.null(description)) description = date()
+    if(is.null(description)) description = ""
         
     # Return Value:
     new("fHTEST",     
@@ -208,7 +208,7 @@ function(x, y, title = NULL, description = NULL)
     
     # Add:
     if(is.null(title)) title = "Bartlett Test for Homogeneity of Variances"
-    if(is.null(description)) description = date()  
+    if(is.null(description)) description = ""  
     
     # Return Value:
     new("fHTEST",     
@@ -276,7 +276,7 @@ function(x, y, title = NULL, description = NULL)
     
     # Add:
     if(is.null(title)) title = "Fligner-Killeen Test for Homogeneity of Variances"
-    if(is.null(description)) description = date()  
+    if(is.null(description)) description = ""  
     
     # Return Value:
     new("fHTEST",     

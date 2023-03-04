@@ -92,7 +92,7 @@ function(x, beta = 0.1, delta = 1, mu = 0, nu = 10,
 
     # Add Title and Description:
     if (is.null(title)) title = "Generalized Hyperbolic Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Fit:
     fit = list(
@@ -107,7 +107,7 @@ function(x, beta = 0.1, delta = 1, mu = 0, nu = 10,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 

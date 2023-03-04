@@ -1,3 +1,32 @@
+# fBasics 4022.94
+
+- `dagotest()` was returning NaN for the value of the test statistic based on
+  kurtosis when the argument of a cube root was negative. Reported by Cameron
+  Willden who suggested the fix.
+
+- the name of the first column of dataset `msft.dat` is not mangled any more (it
+  was "X.Y..m..d" and now is "%Y-%m-%d", as in the input file). the rest of the
+  dataset is as before. The file from which the dataset is created is now taken
+  from an identical file in package `timeSeries`.
+
+- the `show` methods for classes `fHTEST` and `fDISTFIT` no longer print
+  'Description:' when slot `description = ""`.
+
+- many fitting functions, e.g., `nFit`, were inadvertently ignoring argument
+  `description` by using `description = description()` instead of `description =
+  description` in the call to \code{new} when creating the return value.
+
+- `correlationTest`, `pearsonTest`, `spearmanTest`, `kendallTest`, `ks2Test`,
+  `scaleTest`, `varianceTest`, and `locationTest` now set slot `description` of
+  the result to `""` by default. Previously they were setting it to the current
+  date/time, with the consequence that the functions gave different objects at
+  each run. Use `description = date()` in the call if you want the
+  date. Similarly for `ksnormTest`, `shapiroTest`, `jarqueberaTest`, `dagoTest`,
+  `normalTest`, `adTest`, `cvmTest`, `lillieTest`, `pchiTest`, `sfTest`,
+  `jbTest`, `nFit`, `tFit`, `stableFit`, and many others, which had default
+  setting `description = description()`.
+
+
 # fBasics 4021.93
 
 - fixed CRAN warnings about a function declaration without a prototype, which is

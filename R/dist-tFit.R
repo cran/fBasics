@@ -85,7 +85,7 @@ function(x, df = 4, doplot = TRUE, span = "auto", trace = FALSE,
 
     # Add Title and Description:
     if (is.null(title)) title = "Student-t Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Fit:
     fit = list(estimate = c(df = r$estimate), minimum = -r$minimum,
@@ -98,7 +98,7 @@ function(x, df = 4, doplot = TRUE, span = "auto", trace = FALSE,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 

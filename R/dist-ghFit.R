@@ -90,7 +90,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2,
 
     # Add Title and Description:
     if (is.null(title)) title = "Generalized Hyperbolic Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Fit:
     fit = list(estimate = r$par, minimum = -r$objective, code = r$convergence)
@@ -102,7 +102,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 

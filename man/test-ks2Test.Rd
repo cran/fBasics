@@ -6,7 +6,8 @@
 
 \description{
     
-  Tests if two series are distributionally equivalent.
+  Tests if two series are distributionally equivalent using two sample
+  Kolmogorov-Smirnov test.
     
 }
 
@@ -38,6 +39,15 @@ ks2Test(x, y, title = NULL, description = NULL)
     same distribution, not necessarily a normal distribution. That means
     that it is not specified what that common distribution is.
 
+    \code{ks2Test} calls several times base R's \code{\link[stats]{ks.test}}
+    p-values for all three alternatives (two-sided, less, and greater),
+    as well as the exact p-value for the two-sided case.
+
+    Note that the p-values are computed under a hypothesis of i.i.d.,
+    which is rarely the case for time series. So, the results should be
+    interpreted cautiosly if that is the case. The same applies when the
+    data are residuals from fitted models.
+
 }
 
 \value{
@@ -56,13 +66,6 @@ Lehmann E.L. (1986);
 
 }
 
-
-\author{
-
-    R-core team for hypothesis tests implemented from \R's 
-    package \code{ctest}.
-    
-}
 
 
 \examples{

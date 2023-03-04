@@ -69,7 +69,7 @@ reference:
       - runif.lcg
       - rnorm.lcg
       - rt.lcg
-  - title: "Distributions and dstribution fitting"
+  - title: "Distributions and distribution fitting"
     contents:
       - nFit
       - tFit

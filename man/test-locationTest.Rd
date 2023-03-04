@@ -1,9 +1,11 @@
 \name{locationTest}
 \alias{locationTest}
 
+\concept{two sample t-test}
+\concept{Kruskal-Wallis rank sum test}
+
 
 \title{Two sample location tests}
-
 
 \description{
     
@@ -27,7 +29,7 @@ locationTest(x, y, method = c("t", "kw2"), title = NULL,
     a character string naming which test should be applied.
   } 
   \item{title}{
-    an optional title string, if not specified the inputs data 
+    an optional title string, if not specified the input's data 
     name is deparsed.
   }
   \item{description}{

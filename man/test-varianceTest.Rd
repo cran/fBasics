@@ -1,6 +1,9 @@
 \name{varianceTest}
 \alias{varianceTest}
+\alias{Ftest}
 
+\concept{Bartlett's test for equal variances}
+\concept{Fligner-Killeen test for equal variances}
 
 \title{Two sample variance tests}
 

@@ -1,7 +1,6 @@
 Package: fBasics
 Title: Rmetrics - Markets and Basic Statistics
-Date: 2022-10-20
-Version: 4021.93
+Version: 4022.94
 Authors@R: c(person("Diethelm", "Wuertz", role="aut", comment = "original code")
 	   , person("Tobias", "Setz", role = c("aut"), email = "tobias.setz@live.com")
 	   , person("Yohan", "Chalabi", role = "aut")
@@ -17,8 +16,8 @@ Description: Provides a collection of functions to
     parameter estimation and hypothesis testing. Even more there are
     several utility functions for data handling and management.
 Depends: R (>= 2.15.1)
-Imports: timeDate, timeSeries, stats, grDevices, graphics, methods,
-        utils, MASS, spatial, gss, stabledist
+Imports: timeDate, timeSeries (>= 4021.105), stats, grDevices,
+        graphics, methods, utils, MASS, spatial, gss, stabledist
 Suggests: interp, RUnit, tcltk
 LazyData: yes
 License: GPL (>= 2)
@@ -29,7 +28,7 @@ URL:
         https://geobosh.github.io/fBasicsDoc/ (doc)
 BugReports: https://r-forge.r-project.org/projects/rmetrics
 NeedsCompilation: yes
-Packaged: 2022-10-20 11:29:15 UTC; georgi
+Packaged: 2023-03-04 12:30:15 UTC; georgi
 Author: Diethelm Wuertz [aut] (original code),
   Tobias Setz [aut],
   Yohan Chalabi [aut],
@@ -38,4 +37,4 @@ Author: Diethelm Wuertz [aut] (original code),
   Georgi N. Boshnakov [cre, ctb]
 Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 Repository: CRAN
-Date/Publication: 2022-10-20 12:25:10 UTC
+Date/Publication: 2023-03-04 16:30:05 UTC

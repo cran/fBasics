@@ -131,7 +131,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 
     # Add Title and Description:
     if (is.null(title)) title = "Normal Inverse Gaussian Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Optional Plot:
     if (doplot) .distFitPlot(
@@ -148,7 +148,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 
@@ -204,7 +204,7 @@ function(x,
     
     # Add Title and Description:
     if (is.null(title)) title = "Normal Inverse Gaussian Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Rescale Result:
     if (scale) {
@@ -239,7 +239,7 @@ function(x,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 
@@ -297,7 +297,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 
     # Add Title and Description:
     if (is.null(title)) title = "NIG mps Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Result:
     if (scale) {
@@ -336,7 +336,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 
@@ -399,7 +399,7 @@ function (x, alpha = 1, beta = 0, delta = 1, mu = 0,
     
     # Add Title and Description:
     if (is.null(title)) title = "NIG varMPS Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
     
     # Result:
     if (scale) {
@@ -439,7 +439,7 @@ function (x, alpha = 1, beta = 0, delta = 1, mu = 0,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 

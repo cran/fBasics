@@ -19,41 +19,58 @@
 \alias{sfTest}
 
 
-\title{Normality tests}
+\concept{Kolmogorov-Smirnov test for normality}
+\concept{Shapiro-Wilk's test for normality}
+\concept{Jarque-Bera test for normality}
+\concept{D'Agostino test for normality}
+
+\concept{finite sample adjusted JB test}
+\concept{finite sample adjusted LM test}
+\concept{finite sample adjusted ALM test}
+
+\concept{Anderson-Darling test for normality}
+\concept{Cramer-von Mises test for normality}
+\concept{Lilliefors test for normality}
+\concept{Pearson chi-square test for normality}
+\concept{Shapiro-Francia test for normality}
+
+
+
+
+\title{Tests for normality}
 
 \description{
 
-    A collection and description of functions of one
-    sample tests for testing normality of financial
-    return series.
-    \cr
+  A collection of functions of one sample tests for testing normality
+  of financial return series.
+  \cr
 
-    The functions for testing normality are:
+  The functions for testing normality are:
 
-    \tabular{ll}{
-    \code{ksnormTest} \tab Kolmogorov-Smirnov normality test, \cr
-    \code{shapiroTest} \tab Shapiro-Wilk's test for normality, \cr
-    \code{jarqueberaTest} \tab Jarque--Bera test for normality, \cr
-    \code{dagoTest} \tab D'Agostino normality test. }
+  \tabular{ll}{
+  \code{ksnormTest} \tab Kolmogorov-Smirnov normality test, \cr
+  \code{shapiroTest} \tab Shapiro-Wilk's test for normality, \cr
+  \code{jarqueberaTest} \tab Jarque-Bera test for normality, \cr
+  \code{dagoTest} \tab D'Agostino normality test. }
 
-    Functions for high precision Jarque Bera LM and ALM tests:
+  Functions for high precision Jarque Bera LM and ALM tests:
 
-    \tabular{ll}{
-    \code{jbTest} \tab Performs finite sample adjusted JB LM and ALM test. }
+  \tabular{ll}{
+  \code{jbTest} \tab Performs finite sample adjusted JB LM and ALM test. }
 
-    Additional functions for testing normality from the 'nortest' package:
+  Additional functions for testing normality from the 'nortest' package:
 
-    \tabular{ll}{
-    \code{adTest} \tab Anderson--Darling normality test, \cr
-    \code{cvmTest} \tab Cramer--von Mises normality test, \cr
-    \code{lillieTest} \tab Lilliefors (Kolmogorov-Smirnov) normality test, \cr
-    \code{pchiTest} \tab Pearson chi--square normality test, \cr
-    \code{sfTest} \tab Shapiro--Francia normality test. }
+  \tabular{ll}{
+  \code{adTest} \tab Anderson--Darling normality test, \cr
+  \code{cvmTest} \tab Cramer--von Mises normality test, \cr
+  \code{lillieTest} \tab Lilliefors (Kolmogorov-Smirnov) normality test, \cr
+  \code{pchiTest} \tab Pearson chi-square normality test, \cr
+  \code{sfTest} \tab Shapiro-Francia normality test. }
 
-    For SPlus/Finmetrics Compatibility:
+  For SPlus/Finmetrics Compatibility:
 
-    \tabular{ll}{
-    \code{normalTest} \tab test suite for some normality tests. }
+  \tabular{ll}{
+  \code{normalTest} \tab test suite for some normality tests. }
 
 }
 

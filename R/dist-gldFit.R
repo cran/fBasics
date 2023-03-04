@@ -143,7 +143,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
 
     # Add Title and Description:
     if (is.null(title)) title = "GLD Region 4 Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Rescale Result:
     if (scale) {
@@ -178,7 +178,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 
@@ -253,7 +253,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
 
     # Add Title and Description:
     if (is.null(title)) title = "GLD Region 4 MPS Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Rescale Result:
     if (scale) {
@@ -288,7 +288,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 
@@ -377,7 +377,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
 
     # Add Title and Description:
     if (is.null(title)) title = paste("GLD Region 4", TYPE, "Estimation")
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Rescale Result:
     if (scale) {
@@ -412,7 +412,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 
@@ -480,7 +480,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
 
     # Add Title and Description:
     if (is.null(title)) title = "GLD Region 4 Histogram Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Rescale Result:
     if (scale) {
@@ -515,7 +515,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 
@@ -591,7 +591,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
 
     # Add Title and Description:
     if (is.null(title)) title = "GLD Region 4 Robust Moment Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Rescale Result:
     if (scale) {
@@ -626,7 +626,7 @@ function(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 

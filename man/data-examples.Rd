@@ -1,6 +1,4 @@
 \name{fBasicsData}
-
-
 \alias{fBasicsData}
 
 \alias{Capitalization}
@@ -61,10 +59,12 @@
  \code{msft.dat}
  contains daily prices (open, high, low and close) and
  volumes for the Microsoft stocks.
+ It is a data frame with column names \code{"\%Y-\%m-\%d"},
+ \code{"Open"}, \code{"High"}, \code{"Low"}, \code{"Close"},
+ \code{"Volume"}.
 
  Note: there is a dataset, \code{MSFT}, in package \pkg{timeSeries}
- which is of class \code{"timeSeries"} object but seems to contain the
- same data. See also the examples. \emph{TODO:} consolidate?
+ which contains the same data but is of class \code{"timeSeries"}.
  
  \bold{nyse:}\cr
  \code{nyse}

@@ -96,10 +96,15 @@ Objects are created by some statistical test functions.
 % 
 % %% ~Make other sections like Warning with \section{Warning }{....} ~
 % 
-% \seealso{
-% %%  ~~objects to See Also as \code{\link{~~fun~~}}, ~~~
-% %%  ~~or \code{\linkS4class{CLASSNAME}} for links to other classes ~~~
-% }
+\seealso{
+  for functions returning objects from class \code{"fHTEST"}, see
+  \code{\link{scaleTest}},
+  \code{\link{correlationTest}},
+  \code{\link{ks2Test}},
+  \code{\link{locationTest}},
+  \code{\link{NormalityTests}},
+  \code{\link{varianceTest}}
+}
 \examples{
 showClass("fHTEST")
 }

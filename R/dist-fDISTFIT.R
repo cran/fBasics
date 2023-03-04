@@ -37,37 +37,42 @@ setClass("fDISTFIT",
 # ------------------------------------------------------------------------------
 
 setMethod("show", "fDISTFIT",
-      function(object)
-{   # A function implemented by Diethelm Wuertz
-
-    # Description:
-    #   Prints Results from a Fitted Distribution
-
-    # FUNCTION:
-
-    # Title:
-    cat("\nTitle:\n ")
-    cat(object@title, "\n")
-
-    # Call:
-    cat("\nCall:\n ")
-    cat(paste(deparse(object@call), sep = "\n", collapse = "\n"),
-        "\n", sep = "")
-
-    # Model:
-    cat("\nModel:\n ", object@model, "\n", sep = "")
-
-    # Estimate:
-    cat("\nEstimated Parameter(s):\n")
-    print(object@fit$estimate)
-
-    # Description:
-    cat("\nDescription:\n ")
-    cat(object@description, "\n\n")
-
-    # Return Value:
-    invisible()
-})
+    function(object) {
+        ## A function implemented by Diethelm Wuertz
+        ##
+        ## Description:
+        ##   Prints Results from a Fitted Distribution
+        
+        ## FUNCTION:
+        
+        ## Title:
+        cat("\nTitle:\n ")
+        cat(object@title, "\n")
+        
+        ## Call:
+        cat("\nCall:\n ")
+        cat(paste(deparse(object@call), sep = "\n", collapse = "\n"),
+            "\n", sep = "")
+        
+        ## Model:
+        cat("\nModel:\n ", object@model, "\n", sep = "")
+        
+        ## Estimate:
+        cat("\nEstimated Parameter(s):\n")
+        print(object@fit$estimate)
+        
+        ## Description:
+        ## GNB: don't print description if it is ""
+        if(!identical(object@description, "")) { 
+            cat("\nDescription:\n ")
+            cat(object@description, "\n")
+        }
+        
+        cat("\n")
+      
+        ## Return Value:
+        invisible()
+    })
 
 
 # ------------------------------------------------------------------------------

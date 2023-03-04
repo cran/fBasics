@@ -134,9 +134,13 @@ setMethod("show", "fHTEST",
         cat(test$output, fill = FALSE, sep = "\n")
     }
 
-    # Description:
-    cat("\nDescription:\n ", x@description, sep = "")
-    cat("\n\n")
+    ## Description:
+    ## GNB: don't print description if it is ""
+    if(!identical(x@description, "")) {
+        cat("\nDescription:\n ", x@description, sep = "")
+    }
+
+    cat("\n")
 
     # Return Value:
     #   invisible()  # made visible by DW

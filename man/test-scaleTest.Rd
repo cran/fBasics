@@ -4,6 +4,9 @@
 
 \title{Two sample scale tests}
 
+\concept{Ansari-Bradley test}
+\concept{Mood test}
+
 
 \description{
     
@@ -40,13 +43,13 @@ scaleTest(x, y, method = c("ansari", "mood"),
 \details{
     
     
-    The \code{method="ansari"} performs the Ansari--Bradley two--sample 
+    The \code{method="ansari"} performs the Ansari-Bradley two-sample 
     test for a difference in scale parameters. The test returns for 
     any sizes of the series \code{x} and \code{y} the exact p value 
     together with its asymptotic limit.  
     
     The \code{method="mood"}, is another test which performs a 
-    two--sample test for a difference in scale parameters. The underlying 
+    two-sample test for a difference in scale parameters. The underlying 
     model is that the two samples are drawn from \emph{f(x-l)} and 
     \emph{f((x-l)/s)/s}, respectively, where \emph{l} is a common 
     location parameter and \emph{s} is a scale parameter. The null 

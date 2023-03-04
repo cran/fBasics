@@ -86,7 +86,7 @@ function(x, y, title = NULL, description = NULL)
     
     # Add:
     if (is.null(title)) title = "Kolmogorov-Smirnov Two Sample Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = ""
     
     # Return Value:
     new("fHTEST",     

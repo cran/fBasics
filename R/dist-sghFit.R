@@ -92,7 +92,7 @@ function(x, zeta = 1, rho = 0, lambda = 1, include.lambda = TRUE,
     if (is.null(title)) 
         title = "SGH Parameter Estimation"
     if (is.null(description)) 
-        description = description()
+        description = ""
     
     # Fit:
     fit = list(
@@ -124,7 +124,7 @@ function(x, zeta = 1, rho = 0, lambda = 1, include.lambda = TRUE,
         data = as.data.frame(x.orig), 
         fit = fit, 
         title = as.character(title), 
-        description = description())
+        description = description )
 }
 
 

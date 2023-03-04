@@ -6,6 +6,15 @@
 \alias{spearmanTest}
 
 
+\concept{Pearson's product moment correlation test}
+\concept{Kendall's tau correlation test}
+\concept{Spearman's rho correlation test}
+
+\concept{Pearson's correlation}
+\concept{Kendall's correlation}
+\concept{Spearman's correlation}
+
+
 \title{Correlation tests}
 
 \description{
@@ -25,7 +34,7 @@ spearmanTest(x, y, title = NULL, description = NULL)
 
 \arguments{
   
-  \item{x, y}{
+  \item{x,y}{
     numeric vectors of data values.
   }
   \item{method}{
@@ -42,23 +51,27 @@ spearmanTest(x, y, title = NULL, description = NULL)
 }
 
 \details{
-     
-  The function \code{correlationTest} tests for association between
-  paired samples allowing to compute Pearson's product moment
-  correlation coefficient, Kendall's tau, or Spearman's rho.
+
+  These functions test for association/correlation between paired
+  samples based on the Pearson's product moment correlation coefficient
+  (a.k.a. sample correlation), Kendall's tau, and Spearman's rho
+  coefficients.
     
+  \code{pearsonTest}, \code{kendallTest}, and \code{spearmanTest} are
+  wrappers of base R's \code{\link[stats]{cor.test}} with simplified
+  interface.  They provide 'exact' and approximate p-values for all
+  three alternatives (two-sided, less, and greater), as well as 95\%
+  confidence intervals. This is particularly convenient in interactive
+  use.
+
+  Instead of calling the individual functions, one can use
+  \code{correlationTest} and specify the required test with argument
+  \code{method}.
+
 }
 
 \value{
   an object from class \code{\link{fHTEST}}
-}
-
-
-\note{
-
-    Some of the test implementations are selected from package
-    \code{ctest}.
-    
 }
 
 
@@ -74,14 +87,6 @@ Lehmann E.L. (1986);
 
 }
 
-\author{
-
-    R-core team for hypothesis tests implemented from \R's 
-    package \code{ctest}.
-    
-}
-
-
 \seealso{
 
     \code{\link{locationTest}},
@@ -89,7 +94,6 @@ Lehmann E.L. (1986);
     \code{\link{varianceTest}}.
     
 }
-
 
 \examples{
 \dontshow{

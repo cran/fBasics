@@ -438,7 +438,7 @@ stableFit <-
 
     # Add Title and Description:
     if (is.null(title)) title = "Stable Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     if (is.na(U) | is.na(V)) {
         GAM = NA
@@ -465,7 +465,7 @@ stableFit <-
         data = as.data.frame(x),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 
@@ -524,7 +524,7 @@ stableFit <-
 
     # Add Title and Description:
     if (is.null(title)) title = "Stable Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Fit:
     fit = list(estimate = c(alpha, beta, gamma, delta), 
@@ -537,7 +537,7 @@ stableFit <-
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = description )
 }
 
 

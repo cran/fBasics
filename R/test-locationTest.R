@@ -156,7 +156,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Add:
     if (is.null(title)) title = "t Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = ""
 
     # Return Value:
     new("fHTEST",
@@ -246,7 +246,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Add:
     if(is.null(title)) title = "Kruskal-Wallis Two Sample Test"
-    if(is.null(description)) description = date()
+    if(is.null(description)) description = ""
 
     # Return Value:
     new("fHTEST",

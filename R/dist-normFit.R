@@ -78,7 +78,7 @@ function(x, doplot = TRUE, span = "auto", title = NULL,
 
     # Add Title and Description:
     if (is.null(title)) title = "Normal Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Fit:
     fit = list(
@@ -93,7 +93,7 @@ function(x, doplot = TRUE, span = "auto", title = NULL,
         data = as.data.frame(x.orig),
         fit = fit,
         title = as.character(title),
-        description = description() )
+        description = "" )
 }
 
 

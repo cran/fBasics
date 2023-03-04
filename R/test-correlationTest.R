@@ -23,6 +23,8 @@
 #  spearmanTest          Spearman's rho correlation test
 ################################################################################
 
+## GNB: changed the default 'description = date()' to 'description = ""', to
+##      avoid getting different objects in repeated calls.
 
 correlationTest <-
 function(x, y, method = c("pearson", "kendall", "spearman"),
@@ -65,7 +67,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Arguments:
     #   x - a numeric vector of data values.
-    #   description - a brief description of the porject of type
+    #   description - a brief description of the project of type
     #       character.
     #   title - a character string which allows for a project title.
 
@@ -138,7 +140,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Add:
     if (is.null(title)) title = "Pearson's Correlation Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = ""
 
     # Return Value:
     new("fHTEST",
@@ -163,7 +165,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Arguments:
     #   x - a numeric vector of data values.
-    #   description - a brief description of the porject of type
+    #   description - a brief description of the project of type
     #       character.
     #   title - a character string which allows for a project title.
 
@@ -263,7 +265,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Add:
     if (is.null(title)) title = "Kendall's tau Correlation Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = ""
 
     # Return Value:
     new("fHTEST",
@@ -288,7 +290,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Arguments:
     #   x - a numeric vector of data values.
-    #   description - a brief description of the porject of type
+    #   description - a brief description of the project of type
     #       character.
     #   title - a character string which allows for a project title.
 
@@ -343,7 +345,7 @@ function(x, y, title = NULL, description = NULL)
 
     # Add:
     if (is.null(title)) title = "Spearman's rho Correlation Test"
-    if (is.null(description)) description = date()
+    if (is.null(description)) description = ""
 
     # Return Value:
     new("fHTEST",

@@ -13,6 +13,23 @@
 
 \alias{listDescription}
 
+% functions with names starting with '.' still used by other packages;
+% (see file NAMESPACE)
+\alias{.acfPlot}
+\alias{.contourPlot}
+\alias{.distCheck}
+\alias{.firePlot}
+\alias{.mrlPlot}
+\alias{.pacfPlot}
+\alias{.perspPlot}
+\alias{.plot}
+\alias{.predict}
+\alias{.qStableFit}
+\alias{.residualsPlot}
+\alias{.responsesPlot}
+\alias{.sliderMenu}
+\alias{.unirootNA}
+
 
 \title{Deprecated functions in package fBasics}
 

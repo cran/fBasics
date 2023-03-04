@@ -65,7 +65,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0, scale = TRUE,
 
     # Add Title and Description:
     if (is.null(title)) title = "Hyperbolic Parameter Estimation"
-    if (is.null(description)) description = description()
+    if (is.null(description)) description = ""
 
     # Result:
     if (scale) {

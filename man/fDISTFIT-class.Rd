@@ -4,7 +4,6 @@
 \alias{fDISTFIT-class}
 
 \alias{show,fDISTFIT-method}
-\alias{print.fDISTFIT}
 
 
 \title{Class \code{"fDISTFIT"}}
@@ -60,8 +59,9 @@
 \section{Methods}{
   \describe{
     \item{show}{\code{signature(object = "fDISTFIT")}: ... }
-	 }
+  }
 }
+
 %\references{
 %%%  ~~put references to the literature/web site here~~
 %}
@@ -69,7 +69,6 @@
 %%%  ~~who you are~~
 %}
 %\note{
-%%%  ~~further notes~~
 %}
 %
 %%% ~Make other sections like Warning with \section{Warning }{....} ~
