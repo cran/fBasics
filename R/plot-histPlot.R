@@ -71,8 +71,10 @@ function(x, labels = TRUE, col = "steelblue", fit = TRUE,
         }
 
         # Add Fit:
+        ## 2023-10-07 GNB: moved assignment to mean outside if(fit){...},
+        ##        as otherwise v = mean(X) further below is wrong when fit = FALSE
+        mean = mean(X) 
         if (fit) {
-            mean = mean(X)
             sd = sd(X)
             xlim = range(H$breaks)
             s = seq(xlim[1], xlim[2], length = 201)
@@ -81,7 +83,7 @@ function(x, labels = TRUE, col = "steelblue", fit = TRUE,
 
         # Add Mean:
         if (labels) {
-            abline(v = mean, lwd = 2, col = "orange")
+            abline(v = mean(X), lwd = 2, col = "orange")
             Text = paste("Mean:", signif(mean, 3))
             mtext(Text, side = 4, adj = 0, col = "darkgrey", cex = 0.7)
         }

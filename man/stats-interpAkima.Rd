@@ -1,11 +1,15 @@
 \name{akimaInterp}
-\title{Bivariate Spline Interpolation}
 \alias{akimaInterp}
 \alias{akimaInterpp}
+
+
+\title{Bivariate Spline Interpolation}
+
 \description{
     Interpolates bivariate data sets using Akima
     spline interpolation.
 }
+
 \usage{
 akimaInterp(x, y = NULL, z = NULL, gridPoints = 21,
     xo = seq(min(x), max(x), length = gridPoints),
@@ -13,6 +17,7 @@ akimaInterp(x, y = NULL, z = NULL, gridPoints = 21,
 
 akimaInterpp(x, y = NULL, z = NULL, xo, yo, extrap = FALSE)
 }
+
 \arguments{
     \item{x, y, z}{
         for \code{akimaInterp} the arguments \code{x} and \code{y} are
@@ -41,22 +46,23 @@ akimaInterpp(x, y = NULL, z = NULL, xo, yo, extrap = FALSE)
         }
 }
 \details{
-    Two options are available gridded and pointwise interpolation.
+  
+  Two options are available: gridded and pointwise interpolation.
 
-    \code{akimaInterp} is a function wrapper to the \code{interp}
-    function provided by the contributed R package \code{akima}.
-    The Fortran code of the Akima spline interpolation routine was
-    written by H. Akima.
+  \code{akimaInterp} is a wrapper to \code{interp} provided by the
+  contributed R package \code{akima}.  The Fortran code of the Akima
+  spline interpolation routine was written by H. Akima.
 
-    Linear surface fitting and krige surface fitting are provided by
-    the functions \code{linearInterp} and \code{krigeInterp}.
+  Linear surface fitting and krige surface fitting are provided by the
+  functions \code{\link{linearInterp}} and \code{\link{krigeInterp}}.
+
 }
 
 \note{
-    IMPORTANT: The contributed package \pkg{akima} is not in the
-    dependence list of the DESCRIPTION file due to license conditions.
-    The user has to install this package from CRAN on
-    his own responsibility, please check the license conditions.
+
+  Package \code{akima} is no longer needed. Equivalent functions from
+  package \code{interp} are now called instead.
+
 }
 
 \value{

@@ -28,7 +28,13 @@ function(font = 1, cex = 0.7)
     
     # Description:
     #   Prints numeric equivalents to all latin characters.
-
+    ##
+    ##  2023-10-07 GNB: Actually the function had been showing the characters
+    ##     having codes below 256 in the current locale and working properly
+    ##     only for some of them. Today's explicitly sets latin1.
+    ##
+    ##     TODO: This function could be safely removed, I think.
+    
     # Notes:
     #   The printed version doesn't allways corresponds to the 
     #   screen display. The character on line "xy" and column 
@@ -55,17 +61,23 @@ function(font = 1, cex = 0.7)
     v = v[v %% 100 < 80 & v %% 10 < 8]
     par(mar = c(5, 5, 4, 2) + 0.1)
     plot(-1:7, seq(4, 33, length = 9), type = "n", axes = FALSE, 
-        xlab = "", ylab = "", cex = cex, main = "Table of Characters")
+         xlab = "", ylab = "", cex = cex, main = "Table of Characters")
     k = 1
     for(i in 4:31)
         for(j in 0:7) {
-            text(j, 35 - i, eval(parse(text = paste("\"\\", v[k], "\"",
-                    sep = ""))), font = font, cex = cex)
-            k = k + 1 }
+            ## 2023-10-07 GNB: include encoding in the string to fix error on
+            ##     CRAN, see Hornik's report around this date. Note that the
+            ##     function had never worked properly in UTF8 locales but no
+            ##     errors were raised before.
+            ch <- eval(parse(text = paste("\"\\", v[k], "\"",  sep = "")))
+            Encoding(ch) <- "latin1"
+            text(j, 35 - i, ch, font = font, cex = cex)
+            k = k + 1
+        }
     
     text(0:7, rep(33, 7), as.character(0:7), font = 3, cex = cex)
     text(rep(-1, 28), 31:4, as.character(c(4:7, 10:17, 20:27, 
-        30:37)), font = 3, cex = cex)
+                                           30:37)), font = 3, cex = cex)
     
     # Return Value:
     invisible(font)
@@ -73,4 +85,3 @@ function(font = 1, cex = 0.7)
 
 
 ################################################################################
-

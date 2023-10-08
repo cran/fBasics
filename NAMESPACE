@@ -121,7 +121,7 @@ export(
     # .checkGHRawMoments,
     # .circlesPlot,
     # .cnvrt.coords,
-    .contourPlot,     # fAssets, fCopulae
+    .contourPlot,     # fAssets, fMultivar
     # .counts1Plot,
     # .counts2Plot,
     # .cvmGLD,
@@ -193,7 +193,7 @@ export(
     # .omnibus.test,
     .pacfPlot,  # fRegression
     # .paramGH,
-    .perspPlot,  # fAssets, fCopulae
+    .perspPlot,  # fAssets, fMultivar
     # .pgld,
     # .phiStable,
     # .PhiStable,
@@ -384,7 +384,6 @@ export(
     lillieTest,
     linearInterp,
     linearInterpp,
-    listDescription,
     listFunctions,
     listIndex,
     locationTest,

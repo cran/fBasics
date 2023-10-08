@@ -58,8 +58,9 @@ test.distributionTest =
 function()
 {
     # Data:
-    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
-    set.seed(4711, kind = "Marsaglia-Multicarry")
+    ## RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    ## set.seed(4711, kind = "Marsaglia-Multicarry")
+    set.seed(4711)
     X = rnorm(100)
     Y = rt(50, df = 3)
 
@@ -80,8 +81,9 @@ test.locationTests =
 function()
 {
     # Data:
-    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
-    set.seed(4711, kind = "Marsaglia-Multicarry")
+    ## RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    ## set.seed(4711, kind = "Marsaglia-Multicarry")
+    set.seed(4711)
     X = rnorm(100)
     Y = rt(50, df = 3)
 
@@ -107,8 +109,9 @@ test.varianceTests =
 function()
 {
     # Data:
-    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
-    set.seed(4711, kind = "Marsaglia-Multicarry")
+    ## RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    ## set.seed(4711, kind = "Marsaglia-Multicarry")
+    set.seed(4711)
     X = rnorm(100)
     Y = rt(50, df = 3)
 
@@ -139,8 +142,9 @@ test.scaleTests =
 function()
 {
     # Data:
-    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
-    set.seed(4711, kind = "Marsaglia-Multicarry")
+    ## RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    ## set.seed(4711, kind = "Marsaglia-Multicarry")
+    set.seed(4711)
     X = rnorm(100)
     Y = rt(50, df = 3)
 
@@ -166,8 +170,9 @@ test.correlationTests =
 function()
 {
     # Data:
-    RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
-    set.seed(4711, kind = "Marsaglia-Multicarry")
+    ## RNGkind(kind = "Marsaglia-Multicarry", normal.kind = "Inversion")
+    ## set.seed(4711, kind = "Marsaglia-Multicarry")
+    set.seed(4711)
     X = rnorm(100)
     Y = rt(100, df = 3)
 
@@ -190,6 +195,4 @@ function()
     return()
 }
 
-
 ################################################################################
-

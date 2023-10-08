@@ -44,7 +44,6 @@ function()
     #  colStats              Computes sample statistics by column
     #   colAvgs               Computes sample mean by column
     #   colVars               Computes sample variance by column
-    #   colStdevs             Computes sample variance by column
     #   colSkewness           Computes sample skewness by column
     #   colKurtosis           Computes sample kurtosis by column
     #   colCumsums            Computes sample cumulated sums by column

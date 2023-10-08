@@ -1,8 +1,5 @@
 \name{baseMethods}
-
-
 \alias{baseMethods}
-
 
 \alias{volatility}
 \alias{volatility.default}
@@ -16,25 +13,12 @@
 
 \title{Generic functions extensions}
 
-
 \description{
 
-    Basic extensions which add and/or modify
-    additional functionality which is not available
-    in R's basic packages.
-    \cr
+  Basic extensions which add and/or modify additional functionality
+  which is not available in R's basic packages.
     
-    Added and/or modified functions:
-    
-    \tabular{ll}{
-    \code{attach} (defunct) \tab extends attach function, \cr
-    \code{rank} (defunct) \tab extends rank function, \cr
-    \code{stdev} \tab adds stdev function, \cr
-    \code{termPlot} \tab adds term plot function, \cr
-    \code{volatility} \tab adds volatility function. }
-
 }
-
 
 \usage{
 \method{stdev}{default}(x, na.rm = FALSE)
@@ -47,43 +31,39 @@
 
 \arguments{
 
-    \item{na.rm}{
-        a logical value - should the NA values be removed.
-        }  
-    \item{model}{
-        a fitted model object.
-        }
-    \item{object}{
-        an object from which to extract the volatility.
-        }
-    \item{x}{
-        [align] - \cr
-        x-coordinates of the points to be aligned.\cr
-        [log][sort][var] - \cr
-        first argument.\cr
-        [print.control] - cr
-        prints an unlisted object of class control.\cr
-        [as.matrix.ts][as.matrix.mts] - \cr
-        an univariate or multivariate time series object
-        of class \code{"ts"} or \code{"mts"} which will be
-        transformed into an one-column or multi-column rectangular
-        object of class \code{"matrix"}.\cr
-        [as.POSIXlt] - \cr
-        an object to be converted.
-        }
-    \item{\dots}{
-        arguments to be passed.
-    }
+  \item{model}{
+    a fitted model object.
+  }
+  \item{object}{
+    an object from which to extract the volatility.
+  }
+  \item{x}{
+    an object for which to compute the standard deviation.
+  }
+
+  \item{na.rm}{
+    a logical value - should the NA values be removed.
+  }  
+  \item{\dots}{
+    arguments to be passed.
+  }
 
 }
-
 
 \details{
 
-    For details we refer to the original help pages.
+  \code{stdev} and \code{termPlot} are generic functions with default
+  methods \code{stats::sd} and \code{stats::termplot}, respectively.
+
+  \code{volatility} is a generic function, whose default method centers
+  and squares the values in \code{object}. Other packages can (and do)
+  define methods for it.
 
 }
 
+\seealso{
+  \code{sd},
+  \code{termplot}
+}
 
 \keyword{programming}
-

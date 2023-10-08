@@ -4,24 +4,13 @@
 
 \title{Basic time series statistics}
 
-
 \description{
-    
-    Computes basic financial time series statististics.
-    \cr
-
-    List of Functions:
-    
-    \tabular{ll}{
-    \code{basicStats} \tab Computes an overview of basic statistical values.}
-    
+  Computes basic financial time series statististics.
 }
-    
 
 \usage{ 
 basicStats(x, ci = 0.95)
 }
-
 
 \arguments{
   
@@ -34,9 +23,7 @@ basicStats(x, ci = 0.95)
 
   }  
   \item{ci}{
-    
     confidence interval, a numeric value, by default 0.95, i.e. 95\%.
-    
   }
 }
 
@@ -59,30 +46,28 @@ basicStats(x, ci = 0.95)
   
 }
 
-
 \value{
        
   a data frame with one column for each column of \code{x} and the
-  following row names:
-  \code{"nobs"},
-  \code{"NAs"},
-  \code{"Minimum"},
-  \code{"Maximum "},
-  \code{"1. Quartile"},
-  \code{"3. Quartile"},
-  \code{"Mean"},
-  \code{"Median"},
-  \code{"Sum"},
-  \code{"SE Mean"},
-  \code{"LCL Mean"},
-  \code{"UCL Mean"},
-  \code{"Variance"},
-  \code{"Stdev"},
-  \code{"Skewness"},
-  \code{"Kurtosis"}.
+  following rows:
+  \item{"nobs"}{number of observations,}
+  \item{"NAs"}{number of \code{NA}s}
+  \item{"Minimum"}{minimum,}
+  \item{"Maximum "}{maximum,}
+  \item{"1. Quartile"}{lower quartile,}
+  \item{"3. Quartile"}{upper quartile,}
+  \item{"Mean"}{mean, }
+  \item{"Median"}{median,}
+  \item{"Sum"}{sum of the values,}
+  \item{"SE Mean"}{standard error of the mean,}
+  \item{"LCL Mean"}{lower limit of the CI for the mean,}
+  \item{"UCL Mean"}{upper limit of the CI for the mean,}
+  \item{"Variance"}{variance, }
+  \item{"Stdev"}{standard deviation,}
+  \item{"Skewness"}{skewness coefficient,}
+  \item{"Kurtosis"}{excess kurtosis.}
     
 }
-
 
 \examples{
 \dontshow{set.seed(1234)}
@@ -92,6 +77,4 @@ basicStats(x, ci = 0.95)
    basicStats(tS)
 }
 
-
 \keyword{programming}
-

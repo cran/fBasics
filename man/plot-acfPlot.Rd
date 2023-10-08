@@ -81,8 +81,8 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
     }
     \item{ymax}{
 
-      maximum y-axis value on plot, \code{is.na(ymax)} TRUE, then the
-      value is selected automatically.
+      maximum y-axis value on plot. If \code{NA}, then the value is
+      selected automatically.
 
     }
     \item{standardize}{
@@ -93,23 +93,6 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
     \item{\dots}{
       arguments to be passed.
     }
-}
-
-
-\value{
-    
-    for \code{acfPlot} and \code{pacfplot}, an object of class
-    \code{"acf"}, see \code{\link{acf}};
-    \cr
-    
-    for \code{lacfPlot}, a list with the following two elements:
-    \item{Rho}{the autocorrelation function,}
-    \code{lagged}{the lagged correlations.}
-    \cr
-    
-    for \code{teffectPlot}, a numeric matrix of order \code{deltas} by
-    \code{max.lag} with the values of the autocorrelations.
-    
 }
 
 \details{
@@ -140,6 +123,20 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
     
 }
 
+\value{
+    
+  for \code{acfPlot} and \code{pacfplot},
+  an object of class \code{"acf"}, see \code{\link{acf}};
+    
+  for \code{teffectPlot}, a numeric matrix
+  of order \code{deltas} by \code{max.lag} with
+  the values of the autocorrelations;
+    
+  for \code{lacfPlot}, a list with the following two elements:
+  \item{Rho}{the autocorrelation function,}
+  \item{lagged}{the lagged correlations.}
+    
+}
 
 \references{
 
@@ -153,7 +150,6 @@ Ding Z., Granger C.W.J., Engle R.F. (1993);
     
 }
 
-
 \examples{   
 ## data - 
    data(LPP2005REC, package = "timeSeries")
@@ -166,6 +162,4 @@ Ding Z., Granger C.W.J., Engle R.F. (1993);
    teffectPlot(SPI)
 }
 
-
 \keyword{hplot}
-

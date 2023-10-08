@@ -1,8 +1,11 @@
 \name{krigeInterp}
-\title{Bivariate Krige Interpolation}
 \alias{krigeInterp}
+
+
+\title{Bivariate Krige Interpolation}
+
 \description{
-    Bivariate Krige Interpolation.
+  Bivariate Krige Interpolation.
 }
 \usage{
 krigeInterp(x, y = NULL, z = NULL, gridPoints = 21,
@@ -32,21 +35,24 @@ krigeInterp(x, y = NULL, z = NULL, gridPoints = 21,
         the polynomial krige degree, an integer ranging between 1 and 6.
         }
 }
+
 \note{
-    The function \code{krigeInterp()} requires the \R package
-    \pkg{spatial}.
+  \code{krigeInterp()} requires package \pkg{spatial}.
 }
+
 \value{
-    \code{krigeInterp}
-    returns a list with at least three entries, \code{x}, \code{y}
-    and \code{z}. Note, that the returned values, can be directly
-    used by the  \code{\link{persp}} and \code{\link{contour}} 3D
-    plotting methods.
+
+  a list with at least three entries, \code{x}, \code{y} and
+  \code{z}. The returned values can be used directly in
+  \code{\link{persp}} and \code{\link{contour}} 3D plotting methods.
+
 }
+
 \seealso{
     \code{\link{akimaInterp}},
     \code{\link{linearInterp}}.
 }
+
 \examples{\donttest{
 ## The akima library is not auto-installed because of a different licence.
 ## krigeInterp -  Kriging:
@@ -61,4 +67,3 @@ contour(ans)
 }
 }
 \keyword{programming}
-

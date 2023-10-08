@@ -45,7 +45,16 @@ function(font = par('font'), cex = 0.7)
     for(i in 0:255) {
         if(i %% 25 == 0) {j = j+1; k = 26}
         k = k-1
-        points(j, k, pch = i, font = font, cex = cex, col = 2)
+
+        ## 2023-10-07 GNB: fix to work in UTF locale as latin1 chars.
+        ##
+        ## Note: according to ?points, R ignores values in 26:31. Indeed, it
+        ##       issues warnings but actually plots them!
+        ##       Some other symbols are replaced by boxes.
+        ch.i <- rawToChar(as.raw(i))
+        Encoding(ch.i) <- "latin1"
+        points(j, k, pch = ch.i, font = font, cex = cex, col = 2)
+
         text(j + 0.50, k, i, cex = cex) 
     }
     

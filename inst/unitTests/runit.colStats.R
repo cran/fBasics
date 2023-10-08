@@ -29,7 +29,6 @@
 #  colProds                  Computes product of all values in each colum
 # FUNCTION:                 NO LONGER USED:
 #  colAvgs                   Computes sample mean by column
-#  colStdevs                 Computes sample standard deviation by column
 #  mean.timeSeries           Computes sample means by column
 #  var.timeSeries            Computes sample variance by column
 ################################################################################

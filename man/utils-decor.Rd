@@ -1,6 +1,6 @@
 \name{decor}
-
 \alias{decor}
+
 \alias{hgrid}
 \alias{vgrid}
 \alias{boxL}
@@ -10,9 +10,7 @@
 \title{Functions for decorating plots}
 
 \description{
-
-    Functions for decorating plots.
-    
+  Functions for decorating plots.
 }
 
 \usage{
@@ -45,29 +43,28 @@ copyright()
 }
 
 \details{
-  The plot decorating functions are:
   
-  \describe{    
-    \item{decor}{
-      simple decoration function, equivalent to \code{hgrid()} followed
-      by \code{boxL()},
-    }
-    \item{hgrid}{creates horizontal grid lines,}
-    \item{vgrid}{creates vertical grid lines,}
-    \item{boxL}{creates an L-shaped box,}
-    \item{box_}{creates a bottom line box,}
-    \item{copyright}{adds Rmetrics copyright to a plot.}
-  }
+  \code{decor} is equivalent to \code{hgrid()} followed by \code{boxL()}.
+    
+  \code{hgrid} creates horizontal grid lines.
+
+  \code{vgrid} creates vertical grid lines.
+
+  \code{boxL}  creates an L-shaped box
+
+  \code{box_} creates a bottom line box.
+
+  \code{copyright} adds Rmetrics copyright to a plot.
+
 }
 
 \examples{
-## Test Plot Function:
-   plot(x = rnorm(100), type = "l", col = "red", 
+plot(x = rnorm(100), type = "l", col = "red", 
      xlab = "", ylab = "Variates", las = 1)
-   title("Normal Deviates", adj = 0)
-   hgrid()
-   boxL()
-   copyright()
+title("Normal Deviates", adj = 0)
+hgrid()
+boxL()
+copyright()
 }
 
 \keyword{hplot}

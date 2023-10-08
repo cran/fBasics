@@ -10,7 +10,10 @@ if(require("RUnit", quietly = TRUE))
     ## --- Testing ---
 
     ## Define tests
+    ## (2023-10-07) GNB: use default generators as the defaults for RUinit issue warnings
     testSuite <- defineTestSuite(name = paste(pkg, "unit testing"),
+                                 rngKind = RNGkind()[1],         # GNB
+                                 rngNormalKind = RNGkind()[2],   # GNB
                                  dirs = path)
 
     if(interactive()) {

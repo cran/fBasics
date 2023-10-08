@@ -1,46 +1,28 @@
 \name{inv}
-
-
 \alias{inv}
 
 
 \title{The inverse of a matrix}
 
-
 \description{
-    
-    Returns the inverse of a matrix.      
-
+  Computes the inverse of a matrix.      
 }
-
 
 \usage{
 inv(x)
 }
 
-
 \arguments{
 
-    \item{x}{
-        a numeric matrix.
-        }
+  \item{x}{
+    a numeric matrix.
+  }
         
 }
 
-
-\note{
-
-    The function \code{inv} is a synonym to the function \code{solve}.
-
-}
-
-
 \value{
-
-  the inverse matrix.
-       
+  a matrix
 }
-
 
 \references{
 
@@ -49,7 +31,6 @@ Golub, van Loan, (1996);
     3rd edition. Johns Hopkins University Press. 
     
 }
-
 
 \examples{
 ## Create Pascal Matrix:
@@ -67,6 +48,4 @@ Golub, van Loan, (1996);
    solve(P)                     
 }
 
-
 \keyword{math}
-

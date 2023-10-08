@@ -10,7 +10,6 @@
 
 \title{Generator for Portable random innovations}
 
-
 \description{
 
     Functions to generate portable random innovations. 
@@ -43,26 +42,24 @@ rt.lcg(n, df)
 
 
 \arguments{
-
-    \item{df}{
-        number of degrees of freedom, a positive integer, maybe 
-        non-integer.
-        }
-    \item{mean, sd}{
-        means and standard deviation of the normal distributed 
-        innovations.
-        }
-    \item{min, max}{
-        lower and upper limits of the uniform distributed 
-        innovations.
-        }
-    \item{seed}{
-        an integer value, the random number seed.
-        }
-    \item{n}{
-        an integer, the number of random innovations to be 
-        generated.
-        }
+  
+  \item{seed}{
+    an integer value, the random number seed.
+  }
+  \item{n}{
+    an integer, the number of random innovations to be generated.
+  }
+  \item{df}{
+    degrees of freedom, a positive number, may be non-integer.
+  }
+  \item{mean, sd}{
+    mean and standard deviation of the normally distributed 
+    innovations.
+  }
+  \item{min, max}{
+    lower and upper limits of the uniformly distributed 
+    innovations.
+  }
             
 }
 

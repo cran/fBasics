@@ -1,20 +1,16 @@
 \name{linearInterp}
-
-
 \alias{linearInterp}
 \alias{linearInterpp}
 
 
 \title{Bivariate Linear Interpolation}
 
-
 \description{
     
-    Bivariate Linear Interpolation. Two options are
-    available gridded and pointwise interpolation.
+  Bivariate Linear Interpolation. Options are available for gridded and
+  pointwise interpolation.
     
 }
-    
 
 \usage{ 
 linearInterp(x, y = NULL, z = NULL, gridPoints = 21,
@@ -23,7 +19,6 @@ linearInterp(x, y = NULL, z = NULL, gridPoints = 21,
     
 linearInterpp(x, y = NULL, z = NULL, xo, yo)
 }
-
 
 \arguments{
   
@@ -51,30 +46,23 @@ linearInterpp(x, y = NULL, z = NULL, xo, yo)
         }
     
 }
-       
     
 \value{
     
-    \code{linearInterp}
-
-    returns a list with at least three entries, \code{x}, \code{y} 
-    and \code{z}. Note, that the returned values, can be directly 
-    used by the  \code{persp} and \code{contour} 3D plotting methods.
+    for \code{linearInterp}, a list with at least three entries,
+    \code{x}, \code{y} and \code{z}. The returned values, can be used
+    directly in \code{persp} and \code{contour} 3D plotting methods.
     
-    \code{linearInterpp} 
-    
-    returns a data.frame with columns \code{"x"}, \code{"y"}, 
-    and \code{"z"}.
+    for \code{linearInterpp}, a \code{data.frame} with columns
+    \code{"x"}, \code{"y"}, and \code{"z"}.
     
 }
-
 
 \seealso{
 
-    \code{\link{akimaInterp}}, and \code{\link{krigeInterp}}.
+  \code{\link{akimaInterp}} and \code{\link{krigeInterp}}
     
 }
-
 
 \examples{ 
 ## linearInterp -
@@ -91,6 +79,4 @@ linearInterpp(x, y = NULL, z = NULL, xo, yo)
    }
 }
 
-
 \keyword{programming}
-

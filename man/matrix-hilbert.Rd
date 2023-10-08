@@ -4,48 +4,37 @@
 
 \title{Hilbert matrix}
 
-
 \description{
-    
-    Creates a Hilbert matrix.
+  Creates a Hilbert matrix.
 }
-
 
 \usage{
 hilbert(n)
 }
 
-
 \arguments{
 
-    \item{n}{
-        an integer value, the dimension of the square matrix.
-        }
-        
+  \item{n}{
+    an integer value, the dimension of the square matrix.
+  }
 }
-
-
-\value{
-
-    \code{hilbert} generates a Hilbert matrix of order \code{n}.
-
-}
-
 
 \details{
-    
-    In linear algebra, a Hilbert matrix is a matrix with the unit 
-    fraction elements.
-    
-    The Hilbert matrices are canonical examples of ill-conditioned 
-    matrices, making them notoriously difficult to use in numerical 
-    computation. For example, the 2-norm condition number of a
-    5x5 Hilbert matrix above is about 4.8e5.
-    
-    The Hilbert matrix is symmetric and positive definite.
+
+  An \eqn{n,n} matrix with \eqn{(i,j)}th element equal to
+  \eqn{1/(i+j-1)} is said to be a Hilbert matrix of order \eqn{n}.
+  Hilbert matrices are symmetric and positive definite.
+
+  They are canonical examples of ill-conditioned matrices, making them
+  notoriously difficult to use in numerical computation. For example,
+  the 2-norm condition number of a 5x5 Hilbert matrix above is about
+  4.8e5.
     
 }
 
+\value{
+  a matrix
+}
 
 \references{
 
@@ -71,13 +60,10 @@ Wilf, H.S., (1970);
 
 }
 
-
 \examples{
 ## Create a Hilbert Matrix:
    H = hilbert(5)
    H                              
 }
 
-
 \keyword{math}
-

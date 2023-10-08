@@ -1,48 +1,35 @@
 \name{kron}
-
-
 \alias{kron}
 
 
 \title{Kronecker product}
 
-
 \description{
-    
-  Returns the Kronecker product.
-
+  Computes the Kronecker product of two matrices.
 }
-
 
 \usage{
 kron(x, y)
 }
 
-
 \arguments{
 
-    \item{x, y}{
-        two numeric matrices.
-        }
-        
+  \item{x, y}{
+    numeric matrices.
+  }
 }
-
 
 \details{
     
-    The \emph{Kronecker product} can be computed using the operator 
-    \code{\%x\%} or alternatively using the function \code{kron}
-    for SPlus compatibility.
+  The \emph{Kronecker product} can be computed using the operator 
+  \code{\%x\%} or alternatively using the function \code{kron}
+  for SPlus compatibility.
    
 }
 
-
 \note{
-
-    \code{kron} is a synonym to \code{\%x\%}.
-
+  \code{kron} is a synonym to \code{\%x\%}.
 }
-
 
 \references{
 
@@ -51,7 +38,6 @@ Golub, van Loan, (1996);
     3rd edition. Johns Hopkins University Press. 
 
 }
-
 
 \examples{
 ## Create Pascal Matrix:
@@ -64,6 +50,4 @@ Golub, van Loan, (1996);
                            
 }
 
-
 \keyword{math}
-

@@ -1,77 +1,71 @@
 \name{norm}
-
-
 \alias{norm2}
 
 
 \title{Matrix norm}
 
-
 \description{
-    
-    Returns the norm of a matrix.
-
+  Computes the norm of a matrix.
 }
-
 
 \usage{
 norm2(x, p = 2)
 }
 
-
 \arguments{
 
-    \item{x}{
-        a numeric matrix.
-        }
-    \item{p}{
-        an integer value, \code{1}, \code{2} or \code{Inf}.
-        \code{p=1} - The maximum absolute column sum norm which is defined 
-        as the maximum of the sum of the absolute valued elements of columns 
-        of the matrix.
-        \code{p=2} - The spectral norm is "the norm" of a matrix \code{X}. 
-        This value is computed as the square root of the maximum eigenvalue 
-        of \code{CX} where \code{C} is the conjugate transpose.
-        \code{p=Inf} - The maximum absolute row sum norm is defined 
-        as the maximum of the sum of the absolute valued elements
-        of rows of the matrix.
-        }
-        
+  \item{x}{
+    a numeric matrix.
+  }
+  \item{p}{
+    an integer value, \code{1}, \code{2} or \code{Inf}, see section
+    \sQuote{Details}.
+  }
 }
-
-
-\value{
-
-  the value of the norm of the matrix.
-    
-}
-
 
 \details{
-    
 
-    The function \code{norm2} computes the norm of a matrix. Three choices 
-    are possible: 
+  The function \code{norm2} computes the norm of a matrix. Three choices
+  are possible:
+
+  \describe{
      
-    \code{p=1} - The maximum absolute column sum norm which is defined 
-    as the maximum of the sum of the absolute valued elements of columns 
-    of the matrix. 
-    
-    \code{p=2} - The spectral norm is "the norm" of a matrix \code{X}. 
-    This value is computed as the square root of the maximum eigenvalue 
-    of \code{CX} where \code{C} is the conjugate transpose.
-    
-    \code{p=Inf} - The maximum absolute row sum norm is defined 
-    as the maximum of the sum of the absolute valued elements
-    of rows of the matrix.
-    
-    Note, the function \code{fBasics::norm()} has become obsolete, since 
-    \code{base::norm()} has become available in the R base environment.
-    To avoid conflicts with \code{norm()} we have renamed in the fBasics
-    package as \code{norm2}.
-    
+    \item{\code{p=1}}{
+
+      The maximum absolute column sum norm which is defined as the
+      maximum of the sum of the absolute valued elements of columns of
+      the matrix.
+
+    }
+    \item{\code{p=2}}{
+
+      The spectral norm is "the norm" of a matrix \code{X}.  This value
+      is computed as the square root of the maximum eigenvalue of
+      \code{CX}, where \code{C} is the conjugate transpose.
+
+    }
+    \item{\code{p=Inf}}{
+
+      The maximum absolute row sum norm is defined as the maximum of the
+      sum of the absolute valued elements of rows of the matrix.
+
+    }
+  }
+  
 }
 
+\note{
+
+  Since \code{base::norm()} has become available in the R base
+  environment, the function \code{fBasics::norm()} has become obsolete.
+  To avoid conflicts with \code{norm()} we have renamed the fBasics' one
+  to \code{norm2}.
+
+}
+
+\value{
+  the requested norm of the matrix, a non-negative number
+}
 
 \references{
 
@@ -80,7 +74,6 @@ Golub, van Loan, (1996);
     3rd edition. Johns Hopkins University Press. 
 
 }
-
 
 \examples{
 ## Create Pascal Matrix:
@@ -91,6 +84,4 @@ Golub, van Loan, (1996);
    norm2(P)                                                       
 }
 
-
 \keyword{math}
-

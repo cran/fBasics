@@ -1,40 +1,33 @@
 \name{tr}
-
-
 \alias{tr}
 
 
 \title{Trace of a matrix}
 
-
 \description{
-    
-    Returns trace of a matrix.
-    
+    Computes the trace of a matrix.
 }
-
 
 \usage{
 tr(x)
 }
 
-
 \arguments{
 
-    \item{x}{
-        a numeric matrix.
-        }
+  \item{x}{
+    a numeric matrix.
+  }
         
 }
 
-
 \details{
     
-    The function \code{tr} computes the trace of a square matrix which
-    is the sum of the diagonal elements of the matrix under consideration.
+    \code{tr} computes the trace of a square matrix, i.e., the sum of
+    its diagonal elements.
+
+    If the matrix is not square, \code{tr} returns \code{NA}.
   
 }
-
 
 \references{
 
@@ -43,7 +36,6 @@ Golub, van Loan, (1996);
     3rd edition. Johns Hopkins University Press. 
     
 }
-
 
 \examples{
 ## Create Pascal Matrix:
@@ -54,6 +46,4 @@ Golub, van Loan, (1996);
    tr(P)                                  
 }
 
-
 \keyword{math}
-

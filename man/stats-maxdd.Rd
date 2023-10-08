@@ -17,18 +17,8 @@
   are density, distribution function, and random generation for the
   maximum drawdown distribution. In addition the expectation of
   drawdowns for Brownian motion can be computed.
-  \cr
-    
-  The functions are:
-    
-    \tabular{ll}{
-    \code{dmaxdd} \tab the Density function, \cr
-    \code{pmaxdd} \tab the Distribution function, \cr
-    \code{rmaxdd} \tab the random number generator, \cr
-    \code{maxddStats} \tab the expectation of drawdowns. }
-    
+
 }
-    
 
 \usage{
 dmaxdd(x, sd = 1, horizon = 100, N = 1000) 
@@ -37,7 +27,6 @@ rmaxdd(n, mean = 0, sd = 1, horizon = 100)
 
 maxddStats(mean = 0, sd = 1, horizon = 1000)
 }
-
 
 \arguments{
   
@@ -61,45 +50,45 @@ maxddStats(mean = 0, sd = 1, horizon = 1000)
         
 }
 
+\details{
 
-\note{
+  \code{dmaxdd} computes the density function of the maximum drawdown
+  distribution.  \code{pmaxdd} computes the distribution function.
+  \code{rmaxdd} generates random numbers from that distribution.
+  \code{maxddStats} computes the expectation of drawdowns.
 
-    Currrently, for the functions \code{dmaxdd} and \code{pmaxdd} only the
-    trend or driftless case is implemented. 
+  \code{dmaxdd} returns for a trendless Brownian process \code{mean=0}
+  and standard deviation "sd"
+  the density from
+  the probability that the maximum drawdown "D" is larger or equal to
+  "h" in the interval [0,T], where "T" denotes the time \code{horizon}
+  of the investor.
     
-}
-
-
-\value{
-
-    \code{dmaxdd} 
-    returns for a trendless Brownian process \code{mean=0} and
-    standard deviation "sd" the density from the probability 
-    that the maximum drawdown "D" is larger or equal to "h"  
-    in the interval [0,T], where "T" denotes the time \code{horizon}  
-    of the investor.
-    \cr
+  \code{pmaxdd} returns for a trendless Brownian process \code{mean=0}
+  and standard deviation "sd"
+  the probability that the maximum drawdown "D" is larger or equal to
+  "h" in the interval [0,T], where "T" denotes the time \code{horizon}
+  of the investor.
     
-    \code{pmaxdd} 
-    returns for a trendless Brownian process \code{mean=0} and
-    standard deviation "sd" the probability 
-    that the maximum drawdown "D" is larger or equal to "h"  
-    in the interval [0,T], where "T" denotes the time \code{horizon}  
-    of the investor.
-    \cr
+  \code{rmaxdd} returns for a Brownian Motion process with mean
+  \code{mean} and standard deviation \code{sd} random variates of
+  maximum drawdowns.
     
-    \code{rmaxdd}
-    returns for a Brownian Motion process with mean \code{mean} and 
-    standard deviation \code{sd} random variates of maximum drawdowns.
-    \cr
-    
-    \code{maxddStats} 
-    returns the expectation Value E[D] of maximum drawdowns of
-    Brownian Motion for a given drift \code{mean}, variance \code{sd},  
-    and runtime \code{horizon} of the Brownian Motion process. 
+  \code{maxddStats} returns the expected value, E[D], of maximum
+  drawdowns of Brownian Motion for a given drift \code{mean}, variance
+  \code{sd}, and runtime \code{horizon} of the Brownian Motion process.
   
 }
 
+\note{
+
+  Currrently, only the driftless case is implemented.
+    
+}
+
+%\value{
+%
+%}
 
 \references{
 
@@ -108,7 +97,6 @@ Magdon-Ismail M., Atiya A.F., Pratap A., Abu-Mostafa Y.S. (2003);
     Preprint, CalTech, Pasadena USA, p. 24. 
     
 }
-
 
 \examples{
 ## rmaxdd -
@@ -150,6 +138,5 @@ Magdon-Ismail M., Atiya A.F., Pratap A., Abu-Mostafa Y.S. (2003);
    maxddStats(mean =  0.0, sd = 1, horizon = 10^(1:4))
    maxddStats(mean =  0.5, sd = 1, horizon = 10^(1:4))
 }
-
 
 \keyword{distribution}

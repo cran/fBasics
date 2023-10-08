@@ -11,7 +11,7 @@
 %% \alias{rstable}
 %% \alias{stableMode}
 
-\alias{listDescription}
+%% \alias{listDescription}
 
 % functions with names starting with '.' still used by other packages;
 % (see file NAMESPACE)
@@ -45,13 +45,13 @@
 
 \details{
 
-  \describe{
-
-    \item{listDescription}{use \code{\link{packageDescription}} instead.}
-
-  }
+  %% \describe{
+  %% 
+  %%   \item{listDescription}{use \code{\link{packageDescription}} instead.}
+  %% 
+  %% }
   
-  % There are none currently.
+  There are none currently.
 
   \code{\link[stabledist]{dstable}}, etc., now are defunct, as they have
   been available from \pkg{stabledist} since early 2011.

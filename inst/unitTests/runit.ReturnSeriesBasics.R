@@ -79,7 +79,7 @@ function()
     # Histogram Plot:
     par(mfrow = c(1, 1))
     histPlot(tS)
-    histPlot(tS, add.fit = FALSE)
+    histPlot(tS, fit = FALSE)
 
     # Return Value:
     return()

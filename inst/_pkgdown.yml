@@ -274,7 +274,6 @@ reference:
       - getArgs
   - title: "Package utilities"
     contents:
-      - listDescription
       - listIndex
       - listFunctions
       - countFunctions
