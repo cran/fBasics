@@ -79,23 +79,13 @@ Objects are created by some statistical test functions.
     }
   }
 }
+
 \section{Methods}{
   \describe{
     \item{show}{\code{signature(object = "fHTEST")}: ... }
   }
 }
-% \references{
-% %%  ~~put references to the literature/web site here~~
-% }
-% \author{
-% %%  ~~who you are~~
-% }
-% \note{
-% %%  ~~further notes~~
-% }
-% 
-% %% ~Make other sections like Warning with \section{Warning }{....} ~
-% 
+
 \seealso{
   for functions returning objects from class \code{"fHTEST"}, see
   \code{\link{scaleTest}},
@@ -105,8 +95,10 @@ Objects are created by some statistical test functions.
   \code{\link{NormalityTests}},
   \code{\link{varianceTest}}
 }
+
 \examples{
 showClass("fHTEST")
 }
+
 \keyword{classes}
 \keyword{htest}

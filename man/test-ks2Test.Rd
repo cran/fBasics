@@ -11,11 +11,9 @@
     
 }
 
-
 \usage{
 ks2Test(x, y, title = NULL, description = NULL)
 }
-
 
 \arguments{
   
@@ -34,19 +32,19 @@ ks2Test(x, y, title = NULL, description = NULL)
 
 \details{
      
-    The test \code{ks2Test} performs a Kolmogorov-Smirnov two sample
-    test that the two data samples, \code{x} and \code{y}, come from the
-    same distribution, not necessarily a normal distribution. That means
-    that it is not specified what that common distribution is.
+  The test \code{ks2Test} performs a Kolmogorov-Smirnov two sample
+  test that the two data samples, \code{x} and \code{y}, come from the
+  same distribution, not necessarily a normal distribution. That means
+  that it is not specified what that common distribution is.
 
-    \code{ks2Test} calls several times base R's \code{\link[stats]{ks.test}}
-    p-values for all three alternatives (two-sided, less, and greater),
-    as well as the exact p-value for the two-sided case.
+  \code{ks2Test} calls several times base R's \code{\link[stats]{ks.test}}
+  p-values for all three alternatives (two-sided, less, and greater),
+  as well as the exact p-value for the two-sided case.
 
-    Note that the p-values are computed under a hypothesis of i.i.d.,
-    which is rarely the case for time series. So, the results should be
-    interpreted cautiosly if that is the case. The same applies when the
-    data are residuals from fitted models.
+  Note that the p-values are computed under a hypothesis of i.i.d.,
+  which is rarely the case for time series. So, the results should be
+  interpreted cautiosly if that is the case. The same applies when the
+  data are residuals from fitted models.
 
 }
 
@@ -66,8 +64,6 @@ Lehmann E.L. (1986);
 
 }
 
-
-
 \examples{
 \dontshow{set.seed(1234)}
 ## rnorm - 
@@ -78,6 +74,5 @@ Lehmann E.L. (1986);
 ## ks2Test - 
    ks2Test(x, y)
 }
-
 
 \keyword{htest}

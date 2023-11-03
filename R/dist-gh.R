@@ -172,10 +172,6 @@ function(n, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2)
     # Random Numbers:
     ans = .rghyp(n, theta)
 
-    # Attributes:
-    attr(ans, "control") = c(dist = "gh", alpha = alpha, beta = beta,
-    delta = delta, mu = mu, lambda = lambda)
-
     # Return Value:
     ans
 }

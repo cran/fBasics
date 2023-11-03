@@ -200,11 +200,6 @@ function(n, alpha = 1, beta = 0, delta = 1, mu = 0)
         X = mu + beta*Z + sqrt(Z)*rnorm(n)
     }
 
-    # Attributes:
-    attr(X, "control") = c(dist = "nig", alpha = alpha, beta = beta,
-        delta = delta, mu = mu)
-
-
     # Return Value:
     X
 }

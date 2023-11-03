@@ -2,59 +2,57 @@
 \alias{hypMode}
 
 
+\concept{hyperbolic distribution}
+\concept{mode}
+
+
 \title{Hyperbolic mode}
 
 \description{
     
-  Computes the mode of the hyperbolic function.
+  Computes the mode of the hyperbolic distribution.
     
 }
-
 
 \usage{
-hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
+hypMode(alpha = 1, beta = 0, delta = 1, mu = 0, pm = 1)
 }
-
 
 \arguments{
-
-    \item{alpha, beta, delta, mu}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These is the meaning of the parameters in the first 
-        parameterization \code{pm=1} which is the default 
-        parameterization selection.
-        In the second parameterization, \code{pm=2} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{zeta} and \code{rho}.
-        In the third parameterization, \code{pm=3} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{xi} and \code{chi}.
-        In the fourth parameterization, \code{pm=4} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{a.bar} and \code{b.bar}.
-        }
-    \item{pm}{
-        an integer value between \code{1} and \code{4} for the 
-        selection of the parameterization. The default takes the
-        first parameterization.       
-        }
+  \item{alpha}{
     
-}
+    shape parameter, a positive number. \code{alpha} can also be a
+    vector of length four, containing \code{alpha}, \code{beta},
+    \code{delta} and \code{mu} (in that order).
+    
+  }
+  \item{beta}{
 
+    skewness parameter, \code{abs(beta)} is in the 
+    range \code{(0, alpha)}.
+
+  }
+  \item{delta}{
+    scale parameter, must be zero or positive.
+  }
+  \item{mu}{
+    location parameter, by default 0.
+  }
+  \item{pm}{
+
+    an integer value between \code{1} and \code{4} for the selection of
+    the parameterization. The default takes the first parameterization.
+
+  }
+  
+}
 
 \value{
-    
-    returns the mode in the appropriate parameterization for the
-    hyperbolic distribution. A numeric value.
+
+  a numeric value, the mode in the appropriate parameterization for the
+  hyperbolic distribution.
     
 }
-
-
 
 \references{
 Atkinson, A.C. (1982); 
@@ -78,20 +76,14 @@ Raible S. (2000);
     PhD Thesis, University of Freiburg, Germany, 161 pages.
 }
 
-
 \author{
-
-    David Scott for code implemented from \R's 
-    contributed package \code{HyperbolicDist}.
-    
+  David Scott for code implemented from \R's contributed package
+  \code{HyperbolicDist}.
 }
-
 
 \examples{   
 ## hypMode -
    hypMode()
 }
 
-
 \keyword{distribution}
-

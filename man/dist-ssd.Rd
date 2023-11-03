@@ -1,6 +1,4 @@
 \name{ssd}
-
-
 \alias{ssd}
 
 \alias{dssd}
@@ -9,16 +7,17 @@
 \alias{rssd}
 
 
-\title{Spline Smoothed Distribution}
+\concept{Spline Smoothed Distribution}
 
+
+\title{Spline Smoothed Distribution}
 
 \description{
     
-    Density, distribution function, quantile function 
-    and random generation from smoothing spline estimates.
+  Density, distribution function, quantile function and random
+  generation from smoothing spline estimates.
     
 }
-
 
 \usage{
 dssd(x, param, log = FALSE)
@@ -27,49 +26,40 @@ qssd(p, param)
 rssd(n, param)
 }
 
-
 \arguments{
  
-    \item{param}{
-        an object as returned by the function \code{ssdFit}..
-        }
-    \item{log}{
-        a logical flag by default \code{FALSE}. 
-        Should labels and a main title drawn to the plot?
-        }
-    \item{n}{
-        number of observations.
-        } 
-    \item{p}{
-        a numeric vector of probabilities.
-        }
-    \item{x, q}{
-        a numeric vector of quantiles.
-        }
-    
+  \item{x, q}{
+    a numeric vector of quantiles.
+  }
+  \item{p}{
+    a numeric vector of probabilities.
+  }
+  \item{n}{
+    number of observations.
+  } 
+  \item{param}{
+    an object as returned by the function \code{ssdFit}.
+  }
+  \item{log}{
+    a logical flag by default \code{FALSE}. 
+    Should labels and a main title drawn to the plot?
+  }
 }
 
+\details{
+  \code{dssd} gives the density,
+  \code{pssd} gives the distribution function,
+  \code{qssd} gives the quantile function, and
+  \code{rssd} generates random deviates.
+}
 
 \value{
-
-    All values for the \code{*ssd} functions are numeric vectors: 
-    \code{d*} returns the density,
-    \code{p*} returns the distribution function,
-    \code{q*} returns the quantile function, and
-    \code{r*} generates random deviates.
-    
-    All values have attributes named \code{"param"} listing
-    the values of the distributional parameters.
-    
+  numeric vector
 }
-
 
 \author{
-
-    Diethelm Wuertz, Chong Gu for the underlying \code{gss} package.
-    
+  Diethelm Wuertz, Chong Gu for the underlying \code{gss} package.
 }
-
 
 \references{
 
@@ -83,7 +73,6 @@ Gu, C. and Wang, J. (2003),
     Statistica Sinica, 13, 811--826. 
     
 }
-
 
 \examples{   
 ## ssdFit -
@@ -101,6 +90,4 @@ Gu, C. and Wang, J. (2003),
    lines(u, v, col = "orange", lwd = 2)
 }
 
-
 \keyword{distribution}
-

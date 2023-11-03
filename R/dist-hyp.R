@@ -25,8 +25,7 @@
 
 
 dhyp <-
-function(x, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"), 
-    log = FALSE)
+function(x, alpha = 1, beta = 0, delta = 1, mu = 0, pm = 1, log = FALSE)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -42,10 +41,10 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"),
 
     # Parameters:
     if (length(alpha) == 4) {
-       mu = alpha[4]
-       delta = alpha[3]
-       beta = alpha[2]
-       alpha = alpha[1]
+       mu <- alpha[4]
+       delta <- alpha[3]
+       beta <- alpha[2]
+       alpha <- alpha[1]
     } 
     
     # Checks:
@@ -53,21 +52,23 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"),
     if (delta <= 0) stop("delta must be greater than zero")
     if (abs(beta) >= alpha) stop("abs value of beta must be less than alpha")
     
-    # Settings:
-    pm = match.arg(pm)
-
     # Density:
-    ans = NA
-    if (pm == 1) ans = .dhyp1(x, alpha, beta, delta, mu)
-    if (pm == 2) ans = .dhyp2(x, alpha, beta, delta, mu)
-    if (pm == 3) ans = .dhyp3(x, alpha, beta, delta, mu)
-    if (pm == 4) ans = .dhyp4(x, alpha, beta, delta, mu)
-    
-    # Log:
-    if (log) ans = log(ans)
+    ans <- if (pm == 1)
+               .dhyp1(x, alpha, beta, delta, mu)
+           else if (pm == 2)
+               .dhyp2(x, alpha, beta, delta, mu)
+           else if (pm == 3)
+               .dhyp3(x, alpha, beta, delta, mu)
+           else if (pm == 4)
+               .dhyp4(x, alpha, beta, delta, mu)
+           else
+               stop("argument 'pm' should be one of the numbers 1, 2, 3, or 4")
     
     # Return value:
-    ans
+    if (log)
+        log(ans)
+    else
+        ans
 }
 
 
@@ -75,8 +76,7 @@ function(x, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"),
 
 
 phyp <-
-function(q, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"), 
-    ...)
+function(q, alpha = 1, beta = 0, delta = 1, mu = 0, pm = 1, ...)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -90,20 +90,30 @@ function(q, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"),
 
     # FUNCTION:
 
+    # Parameters:
+    if (length(alpha) == 4) {
+       mu <- alpha[4]
+       delta <- alpha[3]
+       beta <- alpha[2]
+       alpha <- alpha[1]
+    } 
+    
     # Checks:
     if (alpha <= 0) stop("alpha must be greater than zero")
     if (delta <= 0) stop("delta must be greater than zero")
     if (abs(beta) >= alpha) stop("abs value of beta must be less than alpha")
     
-    # Settings:
-    pm = match.arg(pm)
-
     # Return Value:
-    ans = NA
-    if (pm == 1) return(.phyp1(q, alpha, beta, delta, mu, ...))
-    if (pm == 2) return(.phyp2(q, alpha, beta, delta, mu, ...))
-    if (pm == 3) return(.phyp3(q, alpha, beta, delta, mu, ...))
-    if (pm == 4) return(.phyp4(q, alpha, beta, delta, mu, ...))
+    if (pm == 1)
+        .phyp1(q, alpha, beta, delta, mu, ...)
+    else if (pm == 2)
+        .phyp2(q, alpha, beta, delta, mu, ...)
+    else if (pm == 3)
+        .phyp3(q, alpha, beta, delta, mu, ...)
+    else if (pm == 4)
+        .phyp4(q, alpha, beta, delta, mu, ...)
+    else
+        stop("argument 'pm' should be one of the numbers 1, 2, 3, or 4")
 }
 
 
@@ -111,8 +121,7 @@ function(q, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"),
 
 
 qhyp <-
-function(p, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"), 
-    ...)
+function(p, alpha = 1, beta = 0, delta = 1, mu = 0, pm = 1, ...)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -129,20 +138,30 @@ function(p, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"),
 
     # FUNCTION:
 
+    # Parameters:
+    if (length(alpha) == 4) {
+       mu <- alpha[4]
+       delta <- alpha[3]
+       beta <- alpha[2]
+       alpha <- alpha[1]
+    } 
+    
     # Checks:
     if (alpha <= 0) stop("alpha must be greater than zero")
     if (delta <= 0) stop("delta must be greater than zero")
     if (abs(beta) >= alpha) stop("abs value of beta must be less than alpha")
     
-    # Settings:
-    pm = match.arg(pm)
-
     # Return Value:
-    ans = NA
-    if (pm == 1) return(.qhyp1(p, alpha, beta, delta, mu, ...))
-    if (pm == 2) return(.qhyp2(p, alpha, beta, delta, mu, ...))
-    if (pm == 3) return(.qhyp3(p, alpha, beta, delta, mu, ...))
-    if (pm == 4) return(.qhyp4(p, alpha, beta, delta, mu, ...))
+    if (pm == 1)
+        .qhyp1(p, alpha, beta, delta, mu, ...)
+    else if (pm == 2)
+        .qhyp2(p, alpha, beta, delta, mu, ...)
+    else if (pm == 3)
+        .qhyp3(p, alpha, beta, delta, mu, ...)
+    else if (pm == 4)
+        .qhyp4(p, alpha, beta, delta, mu, ...)
+    else
+        stop("argument 'pm' should be one of the numbers 1, 2, 3, or 4")
 }
 
 
@@ -150,7 +169,7 @@ function(p, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"),
 
 
 rhyp <-
-function(n, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"))
+function(n, alpha = 1, beta = 0, delta = 1, mu = 0, pm = 1)
 {
     # A function implemented by Diethelm Wuertz
 
@@ -171,29 +190,30 @@ function(n, alpha = 1, beta = 0, delta = 1, mu = 0, pm = c("1", "2", "3", "4"))
 
     # FUNCTION:
 
+    # Parameters:
+    if (length(alpha) == 4) {
+       mu <- alpha[4]
+       delta <- alpha[3]
+       beta <- alpha[2]
+       alpha <- alpha[1]
+    } 
+    
     # Checks:
     if (alpha <= 0) stop("alpha must be greater than zero")
     if (delta <= 0) stop("delta must be greater than zero")
     if (abs(beta) >= alpha) stop("abs value of beta must be less than alpha")
     
-    # Settings:
-    pm = match.arg(pm)
-
     # Result:
-    ans = NA
-    if (pm == 1) ans = .rhyp1(n, alpha, beta, delta, mu)
-    if (pm == 2) ans = .rhyp2(n, alpha, beta, delta, mu)
-    if (pm == 3) ans = .rhyp3(n, alpha, beta, delta, mu)
-    if (pm == 4) ans = .rhyp4(n, alpha, beta, delta, mu)
-
-    # Attributes:
-    attr(ans, "control") = c(dist = "hyp", alpha = alpha, beta = beta,
-    delta = delta, mu = mu)
-
-    # Return Value:
-    ans
+    if (pm == 1)
+        .rhyp1(n, alpha, beta, delta, mu)
+    else if (pm == 2)
+        .rhyp2(n, alpha, beta, delta, mu)
+    else if (pm == 3)
+        .rhyp3(n, alpha, beta, delta, mu)
+    else if (pm == 4) 
+        .rhyp4(n, alpha, beta, delta, mu)
+    else
+        stop("argument 'pm' should be one of the numbers 1, 2, 3, or 4")
 }
 
-
 ################################################################################
-

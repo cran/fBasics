@@ -6,20 +6,18 @@
 \alias{qsgh}
 \alias{rsgh}
 
-\concept{Standardized generalized hyperbolic distribution}
+
+\concept{standardized generalized hyperbolic distribution}
 
 
 \title{Standardized Generalized Hyperbolic Distribution}
 
-
 \description{
     
-    Density, distribution function, quantile function 
-    and random generation for the standardized generalized
-    hyperbolic distribution.
+  Density, distribution function, quantile function and random
+  generation for the standardized generalized hyperbolic distribution.
     
 }
-
 
 \usage{
 dsgh(x, zeta = 1, rho = 0, lambda = 1, log = FALSE)
@@ -28,58 +26,43 @@ qsgh(p, zeta = 1, rho = 0, lambda = 1)
 rsgh(n, zeta = 1, rho = 0, lambda = 1)
 }
 
-
 \arguments{
-
-    \item{zeta, rho, lambda}{
-        shape parameter \code{zeta} is positive,
-        skewness parameter \code{rho} is in the range (-1, 1).
-        }
-    \item{log}{
-        a logical flag by default \code{FALSE}. 
-        If TRUE, log values are returned.
-        }
-    \item{n}{
-        number of observations.
-        } 
-    \item{p}{
-        a numeric vector of probabilities.
-        }
-    \item{x, q}{
-        a numeric vector of quantiles.
-        }
-    
+  \item{x, q}{
+    a numeric vector of quantiles.
+  }
+  \item{p}{
+    a numeric vector of probabilities.
+  }
+  \item{n}{
+    number of observations.
+  } 
+  \item{zeta}{shape parameter, a positive number.}
+  \item{rho}{skewness parameter, a number in the range \eqn{(-1, 1)}.}
+  \item{lambda}{
+    ??
+  }
+  \item{log}{
+    a logical flag by default \code{FALSE}. 
+    If \code{TRUE}, log values are returned.
+  }
 }
-
 
 \value{
-
-    All values for the \code{*sgh} functions are numeric vectors: 
-    \code{d*} returns the density,
-    \code{p*} returns the distribution function,
-    \code{q*} returns the quantile function, and
-    \code{r*} generates random deviates.
-    
-    All values have attributes named \code{"param"} listing
-    the values of the distributional parameters.
-    
+  numeric vector
 }
-
 
 \details{
-  
-    The generator \code{rsgh} is based on the GH algorithm given 
-    by Scott (2004).
- 
+  \code{dsgh} gives the density,
+  \code{psgh} gives the distribution function,
+  \code{qsgh} gives the quantile function, and
+  \code{rsgh} generates random deviates.
+    
+  The generator \code{rsgh} is based on the GH algorithm given by Scott (2004).
 }
-
 
 \author{
-
-    Diethelm Wuertz.
-    
+  Diethelm Wuertz
 }
-
 
 \examples{   
 ## rsgh -
@@ -105,6 +88,4 @@ rsgh(n, zeta = 1, rho = 0, lambda = 1)
    round(qsgh(psgh(seq(-5, 5, 1), zeta = 1, rho = 0.5), zeta = 1, rho = 0.5), 4)
 }
 
-
 \keyword{distribution}
-

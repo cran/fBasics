@@ -1,58 +1,47 @@
 \name{ghMode}
-
-
 \alias{ghMode}
 
 
 \title{Generalized Hyperbolic Mode}
 
-
 \description{
     
-    Computes the mode of the generalized hyperbolic function.
+  Computes the mode of the generalized hyperbolic function.
     
 }
-
 
 \usage{
 ghMode(alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2)
 }
 
-
 \arguments{
-
-    \item{alpha, beta, delta, mu, lambda}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These is the meaning of the parameters in the first 
-        parameterization \code{pm=1} which is the default 
-        parameterization selection.
-        In the second parameterization, \code{pm=2} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{zeta} and \code{rho}.
-        In the third parameterization, \code{pm=3} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{xi} and \code{chi}.
-        In the fourth parameterization, \code{pm=4} \code{alpha}
-        and \code{beta} take the meaning of the shape parameters
-        (usually named) \code{a.bar} and \code{b.bar}.
-        }
-    
+  \item{alpha}{
+    first shape parameter.
+  }
+  \item{beta}{
+    second shape parameter, should in the range \code{(0, alpha).}
+  }
+  \item{delta}{
+    scale parameter, must be zero or positive.
+  }
+  \item{mu}{
+    location parameter, by default 0.
+  }
+  \item{lambda}{
+    defines the sublclass, by default \eqn{-1/2}.
+  }
 }
 
+\details{
+
+  The meanings of the parameters correspond to the first
+  parameterization, see \code{\link{gh}} for further details.
+    
+}
 
 \value{
-    
-    returns the mode for the generalized hyperbolic distribution. 
-    A numeric value.
-    
+  a numeric value, the mode of the generalized hyperbolic distribution
 }
-
-
 
 \references{
 Atkinson, A.C. (1982); 
@@ -76,12 +65,9 @@ Raible S. (2000);
     PhD Thesis, University of Freiburg, Germany, 161 pages.
 }
 
-
 \examples{   
 ## ghMode -
    ghMode()
 }
 
-
 \keyword{distribution}
-

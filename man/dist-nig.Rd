@@ -7,16 +7,17 @@
 \alias{rnig}
 
 
+\concept{normal inverse Gaussian distribution}
+
+
 \title{Normal Inverse Gaussian Distribution}
 
 \description{
-    
-    Density, distribution function, quantile function 
-    and random generation for the normal inverse
-    Gaussian distribution.
+
+  Density, distribution function, quantile function and random
+  generation for the normal inverse Gaussian distribution.
     
 }
-
 
 \usage{
 dnig(x, alpha = 1, beta = 0, delta = 1, mu = 0, log = FALSE)
@@ -25,39 +26,41 @@ qnig(p, alpha = 1, beta = 0, delta = 1, mu = 0)
 rnig(n, alpha = 1, beta = 0, delta = 1, mu = 0)
 }
 
-
 \arguments{
-    \item{x,q}{
-      a numeric vector of quantiles.
-    }
-    \item{p}{
-      a numeric vector of probabilities.
-    }
-    \item{n}{
-      number of observations.
-    } 
-    \item{alpha}{
-      shape parameter.
-    }
-    \item{beta}{
-      skewness parameter \code{beta}, \code{abs(beta)} is in the range
-      \code{(0, alpha)}.
-    }
-    \item{delta}{
-      scale parameter, must be zero or positive.
-    }
-    \item{mu}{
-      location parameter, by default 0.
-    }
-    \item{log}{
-      a logical flag by default \code{FALSE}.  Should labels and a main
-      title be drawn to the plot?
-    }
+  \item{x,q}{
+    a numeric vector of quantiles.
+  }
+  \item{p}{
+    a numeric vector of probabilities.
+  }
+  \item{n}{
+    number of observations.
+  } 
+  \item{alpha}{
+    shape parameter.
+  }
+  \item{beta}{
+    skewness parameter \code{beta}, \code{abs(beta)} is in the range
+    \code{(0, alpha)}.
+  }
+  \item{delta}{
+    scale parameter, must be zero or positive.
+  }
+  \item{mu}{
+    location parameter, by default 0.
+  }
+  \item{log}{
+    a logical flag by default \code{FALSE}.  Should labels and a main
+    title be drawn to the plot?
+  }
 }
 
-
 \details{
-
+  \code{dnig} gives the density.
+  \code{pnig} gives the distribution function.
+  \code{qnig} gives the quantile function, and
+  \code{rnig} generates random deviates.
+    
   The parameters \code{alpha, beta, delta, mu} are in the first
   parameterization of the distribution.
   
@@ -67,28 +70,13 @@ rnig(n, alpha = 1, beta = 0, delta = 1, mu = 0)
 }
 
 \value{
-
-  \code{dnig} gives the density,
-  \code{pnig} gives the distribution function,
-  \code{qnig} gives the quantile function, and
-  \code{rnig} generates random deviates.
-    
-  Each function returns a numeric vector with attribute \code{"param"}
-  containing the parameters of the distribution.
-
-  \strong{GNB TODO:} It seems that only \code{rnig} has an attribute and
-  that is called \code{"control"} (but it indeed contains the
-  parameters).
-    
+  numeric vector
 }
 
 \author{
-
-    David Scott for code implemented from \R's 
-    contributed package \code{HyperbolicDist}.
-    
+  David Scott for code implemented from \R's contributed package
+  \code{HyperbolicDist}.
 }
-
 
 \references{
 
@@ -114,7 +102,6 @@ Raible S. (2000);
     
 }
 
-
 \examples{   
 ## nig -
    set.seed(1953)
@@ -139,6 +126,4 @@ Raible S. (2000);
      alpha = 1, beta = 0.3, delta = 1) 
 }
 
-
 \keyword{distribution}
-

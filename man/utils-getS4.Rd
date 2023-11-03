@@ -1,6 +1,6 @@
 \name{getS4}
-
 \alias{getS4}
+
 \alias{getCall}
 \alias{getCall,ANY-method}
 \alias{getModel}
@@ -12,7 +12,6 @@
 
 
 \title{General S4 Class Extractor Functions}
-
 
 \description{
 
@@ -44,7 +43,6 @@ getSlot(object, slotName)
 getArgs(f, signature)
 }
 
-
 \arguments{
   \item{f}{a generic function or the character-string name of one.}
   \item{object}{
@@ -61,18 +59,13 @@ getArgs(f, signature)
 }
 
 \value{
-    % \code{getCall}\cr
-    \code{getModel}\cr
-    \code{getTitle}\cr
-    \code{getDescription}\cr
-    \code{getSlot}\cr
-    return the content of the slot.
+  for
+  \code{getModel}, \code{getTitle}, \code{getDescription}, and
+  \code{getSlot}
+  - the content of the corresponding slot.
 
-    \code{getArgs}
-    returns the names of the arguments.
-
+  for \code{getArgs} the names of the arguments.
 }
-
 
 \examples{
 ## Example S4 Representation:
@@ -108,9 +101,6 @@ getArgs(returns)
 getArgs("returns")
 getArgs(returns, "timeSeries")
 getArgs("returns", "timeSeries")
-
 }
 
-
 \keyword{programming}
-

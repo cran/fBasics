@@ -7,16 +7,17 @@
 \alias{hypKURT}
 
 
-\title{Robust moments for the HYP}
+\concept{hyperbolic distribution}
 
+
+\title{Robust moments for the HYP}
 
 \description{
 
-  Computes the first four robust moments for the
-  hyperbolic distribution.
+  Computes the first four robust moments for the hyperbolic
+  distribution.
 
 }
-
 
 \usage{
 hypMED(alpha = 1, beta = 0, delta = 1, mu = 0)
@@ -25,58 +26,41 @@ hypSKEW(alpha = 1, beta = 0, delta = 1, mu = 0)
 hypKURT(alpha = 1, beta = 0, delta = 1, mu = 0)
 }
 
-
 \arguments{
 
-  \item{alpha, beta, delta, mu}{
-    shape parameter \code{alpha};
-    skewness parameter \code{beta}, \code{abs(beta)} is in the
-    range (0, alpha);
-    scale parameter \code{delta}, \code{delta} must be zero or
-    positive;
-    location parameter \code{mu}, by default 0.
-    These is the meaning of the parameters in the first
-    parameterization \code{pm=1} which is the default
-    parameterization selection.
-    In the second parameterization, \code{pm=2} \code{alpha}
-    and \code{beta} take the meaning of the shape parameters
-    (usually named) \code{zeta} and \code{rho}.
-    In the third parameterization, \code{pm=3} \code{alpha}
-    and \code{beta} take the meaning of the shape parameters
-    (usually named) \code{xi} and \code{chi}.
-    In the fourth parameterization, \code{pm=4} \code{alpha}
-    and \code{beta} take the meaning of the shape parameters
-    (usually named) \code{a.bar} and \code{b.bar}.
+  \item{alpha}{
+    
+    shape parameter, a positive number. \code{alpha} can also be a
+    vector of length four, containing \code{alpha}, \code{beta},
+    \code{delta} and \code{mu} (in that order).
+    
   }
+  \item{beta}{
 
+    skewness parameter, \code{abs(beta)} is in the 
+    range \code{(0, alpha)}.
+
+  }
+  \item{delta}{
+    scale parameter, must be zero or positive.
+  }
+  \item{mu}{
+    location parameter, by default 0.
+  }
 }
-
 
 \value{
 
-  All values for the \code{*hyp} functions are numeric vectors:
-  \code{d*} returns the density,
-  \code{p*} returns the distribution function,
-  \code{q*} returns the quantile function, and
-  \code{r*} generates random deviates.
-
-  All values have attributes named \code{"param"} listing
-  the values of the distributional parameters.
+  a named numerical value.  The name is
+  one of \code{MED}, \code{IQR}, \code{SKEW}, or \code{KURT}, obtained
+  by dropping the \code{hyp} prefix from the name of the corresponding
+  function.
 
 }
-
-
-%\references{
-%    go here ...
-%}
-
 
 \author{
-
   Diethelm Wuertz
-
 }
-
 
 \examples{
 ## hypMED -
@@ -96,6 +80,5 @@ hypKURT(alpha = 1, beta = 0, delta = 1, mu = 0)
    hypKURT(alpha = 1, beta = 0, delta = 1, mu = 0)
 
 }
-
 
 \keyword{distribution}

@@ -1,48 +1,40 @@
 \name{nigMode}
-
-
 \alias{nigMode}
 
 
 \title{Normal Inverse Gaussian Mode}
 
-
 \description{
     
-    Computes the mode of the norm inverse Gaussian
-    distribution.
+  Computes the mode of the norm inverse Gaussian distribution.
     
 }
-
 
 \usage{
 nigMode(alpha = 1, beta = 0, delta = 1, mu = 0)
 }
 
-
 \arguments{
-
-    \item{alpha, beta, delta, mu}{
-        shape parameter \code{alpha};
-        skewness parameter \code{beta}, \code{abs(beta)} is in the 
-        range (0, alpha);
-        scale parameter \code{delta}, \code{delta} must be zero or 
-        positive; 
-        location parameter \code{mu}, by default 0.
-        These are the parameters in the first parameterization.
-        }
-    
+    \item{alpha}{
+      shape parameter.
+    }
+    \item{beta}{
+      skewness parameter \code{beta}, \code{abs(beta)} is in the range
+      \code{(0, alpha)}.
+    }
+    \item{delta}{
+      scale parameter, must be zero or positive.
+    }
+    \item{mu}{
+      location parameter, by default 0.
+    }
 }
-
 
 \value{
     
-    returns the mode for the normal inverse Gaussian distribution. 
-    A numeric value.
+  a numeric value, the mode of the normal inverse Gaussian distribution
     
 }
-
-
 
 \references{
 Atkinson, A.C. (1982); 
@@ -66,12 +58,9 @@ Raible S. (2000);
     PhD Thesis, University of Freiburg, Germany, 161 pages.
 }
 
-
 \examples{   
 ## nigMode -
    nigMode()
 }
 
-
 \keyword{distribution}
-

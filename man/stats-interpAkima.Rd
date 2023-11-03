@@ -2,6 +2,11 @@
 \alias{akimaInterp}
 \alias{akimaInterpp}
 
+\concept{interpolation}
+\concept{bivariate interpolation}
+\concept{bivariate spline interpolation}
+\concept{Akima method}
+
 
 \title{Bivariate Spline Interpolation}
 
@@ -123,5 +128,4 @@ if (requireNamespace("spatial")) {
 }
 }
 }
-\keyword{programming}
-
+\keyword{math}

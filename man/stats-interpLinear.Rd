@@ -2,6 +2,10 @@
 \alias{linearInterp}
 \alias{linearInterpp}
 
+\concept{interpolation}
+\concept{bivariate interpolation}
+\concept{bivariate linear interpolation}
+
 
 \title{Bivariate Linear Interpolation}
 
@@ -79,4 +83,4 @@ linearInterpp(x, y = NULL, z = NULL, xo, yo)
    }
 }
 
-\keyword{programming}
+\keyword{math}

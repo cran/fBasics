@@ -110,6 +110,4 @@ Altman, N.S. (1988);
    # rm(rnorm)
 }
 
-
-\keyword{programming}
-
+\keyword{distribution}

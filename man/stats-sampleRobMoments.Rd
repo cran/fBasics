@@ -1,63 +1,41 @@
 \name{sampleLMoments}
-
 \alias{sampleLMoments}
+
 \alias{sampleLmoments}
 
 
 \title{Sample L-moments}
 
-
 \description{
     
-    Computes L-moments from an empirical sample data set.
+  Computes L-moments from an empirical sample data set.
     
 }
 
-
 \usage{
-sampleLmoments(x, rmax=4)
-
+sampleLmoments(x, rmax = 4)
 }
-
 
 \arguments{
 
-    \item{x}{
-        are numeric vector, the sample values.
-        }
-    \item{rmax}{
-        an integer value, the number of L-moments to
-        be returned.
-        }
-        
+  \item{x}{
+    numeric vector, the sample values.
+  }
+  \item{rmax}{
+    an integer value, the number of L-moments to be returned.
+  }
 }
-
 
 \value{
 
-    All values for the \code{*sample} functions are numeric vectors: 
-    \code{d*} returns the density,
-    \code{p*} returns the distribution function,
-    \code{q*} returns the quantile function, and
-    \code{r*} generates random deviates.
-    
-    All values have attributes named \code{"param"} listing
-    the values of the distributional parameters.
+  a named numeric vector of length \code{rmax} with names
+  \code{c("L1", "L2", ..., "L<rmax>")}
     
 }
-
-
-%\references{
-%    go here ...
-%}
-
 
 \author{
-
-    Diethelm Wuertz.
-    
+  Diethelm Wuertz
 }
-
 
 \examples{   
 ## Sample:
@@ -67,6 +45,4 @@ sampleLmoments(x, rmax=4)
    sampleLmoments(x)
 }
 
-
 \keyword{distribution}
-

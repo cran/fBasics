@@ -24,24 +24,27 @@
 
 
 hypMode <- 
-function(alpha = 1, beta = 0, delta = 1, mu = 0, pm = c(1, 2, 3, 4))
+function(alpha = 1, beta = 0, delta = 1, mu = 0, pm = 1)
 {   
     # A function implemented by Diethelm Wuertz
-    
+    # Modified by Georgi N. Boshnakov
+
     # Description:
     #   Computes the mode of the Hyperbolic PDF
   
     # FUNCTION:
     
-    # Settings:
-    pm = pm[1]
-    
     # Return Value:
-    ans = NA
-    if (pm == 1) return(.hyp1Mode(alpha, beta, delta, mu))
-    if (pm == 2) return(.hyp2Mode(alpha, beta, delta, mu))
-    if (pm == 3) return(.hyp3Mode(alpha, beta, delta, mu))
-    if (pm == 4) return(.hyp4Mode(alpha, beta, delta, mu))  
+    if (pm == 1)
+        .hyp1Mode(alpha, beta, delta, mu)
+    else if (pm == 2)
+        .hyp2Mode(alpha, beta, delta, mu)
+    else if (pm == 3)
+        .hyp3Mode(alpha, beta, delta, mu)
+    else if (pm == 4)
+        .hyp4Mode(alpha, beta, delta, mu)
+    else
+        stop("argument 'pm' must be one of the numbers 1,2,3 or 4")
 }
 
 
@@ -138,4 +141,3 @@ function(a.bar = 1, b.bar = 0, delta  = 1, mu = 0)
 
 
 ################################################################################
-

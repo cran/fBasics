@@ -1,15 +1,21 @@
 \name{StableSlider}
-\title{Slider GUI for Stable Distribution}
 \alias{stableSlider}
+
+
+\title{Slider GUI for Stable Distribution}
+
 \description{
   The \code{stableSlider()} function provides interactive displays of
   density and probabilities of stable distributions.
 }
+
 \usage{
 stableSlider(col= "steelblue", col.med = "gray30")
 }
+
 \arguments{
-  \item{col, col.med}{optional arguments for the slider.}
+  \item{col}{colour for the density and distributions functions.}
+  \item{col.med}{colour for the median.}
 }
 
 \value{
@@ -17,6 +23,7 @@ stableSlider(col= "steelblue", col.med = "gray30")
     probabilities of the skew stable distribution, for educational
     purposes.
 }
+
 \author{
   Diethelm Wuertz for the Rmetrics \R-port.
 }
@@ -29,4 +36,5 @@ stableSlider(col= "steelblue", col.med = "gray30")
 if(dev.interactive())
    stableSlider()
 }
+
 \keyword{distribution}

@@ -65,15 +65,12 @@ listIndex(package, character.only = FALSE)
   \code{\link{packageDescription}}
 }
 
-
 \examples{
 ## listFunctions -
    listFunctions("fBasics")
    
 ## countFunctions -
    countFunctions("fBasics")
-
 }
-
 
 \keyword{package}

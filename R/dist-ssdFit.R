@@ -18,7 +18,6 @@
 ################################################################################
 # FUNCTIONS:       DESCRIPTION
 #   ssdFit          Estimate probability densities using smoothing spline ANOVA
-#   .print.ssd      S3 Print Method
 ################################################################################
 
 
@@ -42,38 +41,4 @@ ssdFit <-
 }
 
 
-# ------------------------------------------------------------------------------
-
-
-.print.ssd <- 
-    function(x, ...)
-{
-    # A function implemented by Diethelm Wuertz
-    
-    # Description:
-    
-    # FUNCTION:
-    
-    # call
-    cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
-    
-    # Terms:
-    cat("Terms:\n")
-    print.default(x$terms$labels)
-    cat("\n")
-    
-    # terms overview
-    cat("Number of unpenalized and penalized terms:\n\n")
-    print.default(x$desc)
-    cat("\n")
-    cat("Smoothing parameters are selected by CV with alpha=", x$alpha, ".", 
-        sep = "")
-    cat("\n")
-    
-    # the rest are suppressed
-    invisible()
-}
-
-
 ################################################################################
-

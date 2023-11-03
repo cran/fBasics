@@ -16,7 +16,6 @@
 
 }
 
-
 \usage{
 normMED(mean = 0, sd = 1)
 normIQR(mean = 0, sd = 1)
@@ -24,40 +23,26 @@ normSKEW(mean = 0, sd = 1)
 normKURT(mean = 0, sd = 1)
 }
 
-
 \arguments{
-
-  \item{mean}{locaiton parameter}
-  \item{sd}{scale parameter}
-
+  \item{mean}{
+    locaiton parameter.
+  }
+  \item{sd}{
+    scale parameter.
+  }
 }
-
 
 \value{
 
-    All values for the \code{*norm} functions are numeric vectors:
-    \code{d*} returns the density,
-    \code{p*} returns the distribution function,
-    \code{q*} returns the quantile function, and
-    \code{r*} generates random deviates.
-
-    All values have attributes named \code{"param"} listing
-    the values of the distributional parameters.
+  a named numerical value.  The name is one of \code{MED}, \code{IQR},
+  \code{SKEW}, or \code{KURT}, obtained by dropping the \code{gh} prefix
+  from the name of the corresponding function.
 
 }
-
-
-%\references{
-%    go here ...
-%}
-
 
 \author{
-
-    Diethelm Wuertz
-
+  Diethelm Wuertz
 }
-
 
 \examples{
 ## normMED -
@@ -77,6 +62,5 @@ normKURT(mean = 0, sd = 1)
    normKURT(mean = 0, sd = 1)
 
 }
-
 
 \keyword{distribution}

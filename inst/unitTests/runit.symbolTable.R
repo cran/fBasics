@@ -32,17 +32,17 @@
 ################################################################################
 
 
-test.symbolTable <- 
-    function()
-{
-    # Symbol Table:
-    args(symbolTable)
-    par(mfrow = c(1, 1))
-    symbolTable()
-    
-    # Return Value:
-    return()
-}
+## test.symbolTable <- 
+##     function()
+## {
+##     # Symbol Table:
+##     args(symbolTable)
+##     par(mfrow = c(1, 1))
+##     symbolTable()
+##     
+##     # Return Value:
+##     return()
+## }
    
 
 ################################################################################

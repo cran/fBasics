@@ -5,7 +5,7 @@
 \title{Basic time series statistics}
 
 \description{
-  Computes basic financial time series statististics.
+  Computes basic financial time series statistics.
 }
 
 \usage{ 
@@ -77,4 +77,4 @@ basicStats(x, ci = 0.95)
    basicStats(tS)
 }
 
-\keyword{programming}
+\keyword{stats}

@@ -6,20 +6,19 @@
 \alias{qsght}
 \alias{rsght}
 
-\concept{Standardized generalized hyperbolic Student-t distribution}
+
+\concept{standardized generalized hyperbolic Student-t distribution}
 
 
 \title{Standardized generalized hyperbolic Student-t Distribution}
 
-
 \description{
 
-  Density, distribution function, quantile function
-  and random generation for the standardized generalized
-  hyperbolic distribution.
+  Density, distribution function, quantile function and random
+  generation for the standardized generalized hyperbolic Student-t
+  distribution.
 
 }
-
 
 \usage{
 dsght(x, beta = 0.1, delta = 1, mu = 0, nu = 10, log = FALSE)
@@ -28,22 +27,8 @@ qsght(p, beta = 0.1, delta = 1, mu = 0, nu = 10)
 rsght(n, beta = 0.1, delta = 1, mu = 0, nu = 10)
 }
 
-
 \arguments{
 
-
-  \item{beta, delta, mu}{
-    numeric values.
-    \code{beta} is the skewness parameter in the range \code{(0, alpha)};
-    \code{delta} is the scale parameter, must be zero or positive;
-    \code{mu} is the location parameter, by default 0.
-    These are the parameters in the first parameterization.
-  }
-  \item{nu}{
-    a numeric value, the number of degrees of freedom.
-    Note, \code{alpha} takes the limit of \code{abs(beta)},
-    and \code{lambda=-nu/2}.
-  }
   \item{x, q}{
     a numeric vector of quantiles.
   }
@@ -53,33 +38,51 @@ rsght(n, beta = 0.1, delta = 1, mu = 0, nu = 10)
   \item{n}{
     number of observations.
   }
+  \item{beta}{
+
+    numeric value, \code{beta} is the skewness parameter in the range
+    \code{(0, alpha)}.
+
+  }
+  \item{delta}{
+
+    numeric value, the scale parameter, must be zero or positive.
+
+  }
+  \item{mu}{
+
+    numeric value, the location parameter, by default 0.
+
+  }
+  \item{nu}{
+
+    a numeric value, the number of degrees of freedom.  Note,
+    \code{alpha} takes the limit of \code{abs(beta)}, and
+    \code{lambda=-nu/2}.
+
+  }
   \item{log}{
     a logical, if TRUE, probabilities \code{p} are given as
     \code{log(p)}.
   }
 }
 
-\value{
+\details{
+  \code{dsght} gives the density,
+  \code{psght} gives the distribution function,
+  \code{qsght} gives the quantile function, and
+  \code{rsght} generates random deviates.
 
-  All values for the \code{*sght} functions are numeric vectors:
-  \code{d*} returns the density,
-  \code{p*} returns the distribution function,
-  \code{q*} returns the quantile function, and
-  \code{r*} generates random deviates.
-
-  All values have attributes named \code{"param"} listing
-  the values of the distributional parameters.
-
+  These are the parameters in the first parameterization.
 }
 
-
+\value{
+  numeric vector
+}
 
 \author{
-
-  Diethelm Wuertz.
-
+  Diethelm Wuertz
 }
-
 
 \examples{
 ## rsght -
@@ -103,9 +106,6 @@ rsght(n, beta = 0.1, delta = 1, mu = 0, nu = 10)
    # Compute Quantiles:
    round(qsght(psght(seq(-5, 5, 1), beta = 0.1, delta = 1, mu = 0, nu =10),
                beta = 0.1, delta = 1, mu = 0, nu = 10), 4)
-
 }
 
-
 \keyword{distribution}
-

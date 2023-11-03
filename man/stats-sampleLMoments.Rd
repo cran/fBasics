@@ -1,5 +1,4 @@
 \name{sampleRobMoments}
-
 \alias{sampleRobMoments}
 
 \alias{sampleMED}
@@ -10,14 +9,12 @@
 
 \title{Robust moments for the GLD}
 
-
 \description{
     
     Computes the first four robust moments for the
     Normal Inverse Gaussian Distribution. 
     
 }
-
 
 \usage{
 sampleMED(x)
@@ -26,41 +23,23 @@ sampleSKEW(x)
 sampleKURT(x)
 }
 
-
 \arguments{
-
-    \item{x}{
-        are numeric vector, the sample values.
-        }
-        
+  \item{x}{
+    numeric vector, the sample values.
+  }
 }
-
 
 \value{
 
-    All values for the \code{*sample} functions are numeric vectors: 
-    \code{d*} returns the density,
-    \code{p*} returns the distribution function,
-    \code{q*} returns the quantile function, and
-    \code{r*} generates random deviates.
-    
-    All values have attributes named \code{"param"} listing
-    the values of the distributional parameters.
-    
+  a named numerical value.  The name is one of \code{MED}, \code{IQR},
+  \code{SKEW}, or \code{KURT}, obtained by dropping the \code{sample} prefix
+  from the name of the corresponding function.
+
 }
-
-
-%\references{
-%    go here ...
-%}
-
 
 \author{
-
-    Diethelm Wuertz.
-    
+  Diethelm Wuertz
 }
-
 
 \examples{   
 ## Sample:
@@ -83,6 +62,4 @@ sampleKURT(x)
    sampleKURT(x)
 }
 
-
 \keyword{distribution}
-

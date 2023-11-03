@@ -28,7 +28,7 @@
 
 ################################################################################
 # FUNCTION:                 DESCRIPTION:
-#  .distCheck                Checks consistency of distributions
+#   distCheck                Checks consistency of distributions
 ################################################################################
 
 

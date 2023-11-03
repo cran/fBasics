@@ -8,6 +8,9 @@
 \alias{hypMoments}
 
 
+\concept{hyperbolic distribution}
+
+
 \title{Hyperbolic distribution moments}
 
 \description{
@@ -15,7 +18,6 @@
   Calculates moments of the hyperbolic distribution function.
     
 }
-
 
 \usage{
 hypMean(alpha=1, beta=0, delta=1, mu=0)
@@ -27,32 +29,41 @@ hypMoments(order, type = c("raw", "central", "mu"),
     alpha=1, beta=0, delta=1, mu=0)
 }
 
-
 \arguments{
 
-    \item{alpha, beta, delta, mu}{
-        numeric values.
-        \code{alpha} is the first shape parameter;
-        \code{beta} is the second shape parameter in the range \code{(0, alpha)};
-        \code{delta} is the scale parameter, must be zero or positive; 
-        \code{mu} is the location parameter, by default 0.
-        }
-    \item{order}{
-        an integer value, the order of the moment.
-        }
-    \item{type}{
-        a character value, 
-        \code{"raw"} returns the moments about zero,
-        \code{"central"} returns the central moments about the mean, and
-        \code{"mu"} returns the moments about the location parameter \code{mu}.
-        }    
+  \item{alpha}{
+    numeric value, the first shape parameter.
+  }
+  \item{beta}{
+    numeric value, the second shape parameter in the range \code{(0, alpha)}.
+  }
+  \item{delta}{
+    numeric value, the scale parameter, must be zero or positive.
+  }
+  \item{mu}{
+    numeric value, the location parameter, by default 0.
+  }
+  \item{order}{
+    an integer value, the order of the moment.
+  }
+  \item{type}{
+    a character string, 
+    \code{"raw"} returns the moments about zero,
+    \code{"central"} returns the central moments about the mean, and
+    \code{"mu"} returns the moments about the location parameter \code{mu}.
+  }    
 }
-
 
 \value{
-  a numerical value
-}
 
+  a named numerical value.  The name is one
+  of \code{mean}, \code{var}, \code{skew}, or \code{kurt}, obtained by
+  dropping the \code{hyp} prefix from the name of the corresponding
+  function and lowercasing it.
+
+  for \code{hypMoments}, the name is obtained by \code{paste0("m", order, type)}.
+
+}
 
 \references{
 Scott, D. J., Wuertz, D. and Tran, T. T. (2008) 
@@ -60,13 +71,9 @@ Scott, D. J., Wuertz, D. and Tran, T. T. (2008)
     Preprint. 
 }
 
-
 \author{
-
-    Diethelm Wuertz.
-    
+  Diethelm Wuertz
 }
-
 
 \examples{   
 ## hypMean -
@@ -79,6 +86,5 @@ Scott, D. J., Wuertz, D. and Tran, T. T. (2008)
    hypMoments(4, alpha=1.1, beta=0.1, delta=0.8, mu=-0.3)
    hypMoments(4, "central", alpha=1.1, beta=0.1, delta=0.8, mu=-0.3)
 }
-
 
 \keyword{distribution}

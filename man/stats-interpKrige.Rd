@@ -1,6 +1,10 @@
 \name{krigeInterp}
 \alias{krigeInterp}
 
+\concept{interpolation}
+\concept{bivariate interpolation}
+\concept{Bivariate Krige Interpolation}
+
 
 \title{Bivariate Krige Interpolation}
 
@@ -66,4 +70,4 @@ persp(ans, theta = -40, phi = 30, col = "steelblue",
 contour(ans)
 }
 }
-\keyword{programming}
+\keyword{math}

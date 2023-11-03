@@ -11,28 +11,23 @@
 
 }
 
-
 \usage{
 \method{print}{control}(x, \dots)
 }
 
-
 \arguments{
   
-    \item{x}{
-        the object to be printed.      
-        }
-    \item{\dots}{
-        arguments to be passed.
-        }
-        
+  \item{x}{
+    the object to be printed.      
+  }
+  \item{\dots}{
+    arguments to be passed.
+  }
 }
-
 
 \value{
   prints control
 }
-
 
 \examples{   
 ## print -
@@ -41,6 +36,5 @@
    class(control) = "control"
    print(control)  
 }
-
 
 \keyword{programming}

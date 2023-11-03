@@ -1,29 +1,25 @@
 \name{fBasics-package}
-
-
 \alias{fBasics-package}
-\alias{fBasics}
 
+\alias{fBasics}
 
 \docType{package}
 
 
 \title{Portfolio modelling, optimization and backtesting}
 
-
 \description{
 
-    The Rmetrics \pkg{fBasics} package is a collection of functions to 
-    explore and to investigate basic properties of financial returns 
-    and related quantities.
-    
-    The covered fields include techniques of explorative data analysis
-    and the investigation of distributional properties, including
-    parameter estimation and hypothesis testing. Evenmore there are
-    several utility functions for data handling and managemnet.
+  The Rmetrics \pkg{fBasics} package is a collection of functions to 
+  explore and to investigate basic properties of financial returns 
+  and related quantities.
+  
+  The covered fields include techniques of explorative data analysis
+  and the investigation of distributional properties, including
+  parameter estimation and hypothesis testing. Evenmore there are
+  several utility functions for data handling and managemnet.
     
 }
-
 
 \author{
 Diethelm Wuertz [aut] (original code),
@@ -39,7 +35,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 %\details{
 %}
 
-
 \section{1 Introduction}{
 
   The fBasics package contains \emph{basics tools} often required
@@ -48,8 +43,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
   hypothesis testing, plotting routines, matrix computations and 
   linear algebra, and some usefule utility functions.
 }
-
-
    
 \section{2 Basic Statistics Functions}{
 
@@ -127,7 +120,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
     rowQuantiles          Computes product of values in each row
     }
 }
-
 
 \section{3 Financial Return Distributions}{
 
@@ -285,7 +277,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
     }
 }
 
-
 \section{4 Hypthesis Testing}{
 
 
@@ -352,7 +343,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
     
 }
 
-
 \section{5 Plotting Routines}{
 
 
@@ -402,7 +392,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
     }
 
 }
-
 
 \section{5. Matrix Computations and Linear Algebra}{
 
@@ -454,7 +443,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
     }
   
 }
-
 
 \section{6 Utility Functions}{
 
@@ -533,7 +521,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 
 \section{About Builtin Functions}{
 
-
     Builtin functions are borrowed from contributed R packages and other 
     sources.
     There are several reasons why we have modified and copied code from 
@@ -573,7 +560,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
     }
 }
         
-
 \section{Compiled Fortran and C Code:}{
 
     \preformatted{
@@ -584,7 +570,6 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 
 }
 
-
 \section{About Rmetrics:}{
 
     The \code{fBasics} Rmetrics package is written for educational 
@@ -593,6 +578,4 @@ Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
     
 }
 
-
 \keyword{package}
-

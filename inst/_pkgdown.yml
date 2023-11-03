@@ -36,7 +36,7 @@ reference:
       - scaleTest
       - varianceTest
       - fHTEST
-  - title: "Stats utilities"
+  - title: "Other statistical functions"
     contents:
       - pdl
       - basicStats
@@ -69,6 +69,7 @@ reference:
       - runif.lcg
       - rnorm.lcg
       - rt.lcg
+      - volatility
   - title: "Distributions and distribution fitting"
     contents:
       - nFit
@@ -292,12 +293,10 @@ reference:
     desc: >
       TODO: these are generic functions for the corresponding base R ones
       (which serve as default methods). Seem abandoned.
-      Remove? (except for volatility which is new and should be described
-      elsewhere.
+      Remove?
     contents:
       - stdev
       - termPlot
-      - volatility
   - title: "S+ compatibility"
     contents:
       - colIds

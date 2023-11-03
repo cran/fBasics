@@ -103,6 +103,7 @@ function(order, type = c("raw", "central", "mu"),
     alpha=1, beta=0, delta=1, mu=0)
 {
     # A function implemented by Diethelm Wuertz
+    # Modified by Georgi N. Boshnakov
     
     # Descriptions:
     #   Returns true moments of the hyperbolic distribution
@@ -110,22 +111,22 @@ function(order, type = c("raw", "central", "mu"),
     # FUNCTION:
     
     # Settings:
-    type = match.arg(type)
+    type <- match.arg(type)
     
     # Moments:
     lambda = 1
-    if (type == "raw") {
-        ans = .ghRawMoments(order, alpha, beta, delta, mu, lambda)
-    } else if (type == "central") {
-        ans = .ghCentralMoments(order, alpha, beta, delta, mu, lambda)
-    } else if (type == "central") {
-        ans = .ghMuMoments(order, alpha, beta, delta, mu, lambda)  
-    }
-    
+    ans <- if (type == "raw") {
+               .ghRawMoments(order, alpha, beta, delta, mu, lambda)
+           } else if (type == "central") {
+               .ghCentralMoments(order, alpha, beta, delta, mu, lambda)
+           } else if (type == "central") {
+               .ghMuMoments(order, alpha, beta, delta, mu, lambda)  
+           }
+    names(ans) <- paste0("m", order, type)
+
     # Return Value:
     ans   
 }
 
 
 ################################################################################
-

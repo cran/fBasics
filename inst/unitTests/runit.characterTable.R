@@ -32,17 +32,17 @@
 ################################################################################
 
 
-test.characterTable <- 
-    function()
-{
-    # Character Table:
-    args(characterTable)
-    par(mfrow = c(1, 1))
-    characterTable()
-    
-    # Return Value:
-    return()
-}
+## test.characterTable <- 
+##     function()
+## {
+##     # Character Table:
+##     args(characterTable)
+##     par(mfrow = c(1, 1))
+##     characterTable()
+##     
+##     # Return Value:
+##     return()
+## }
 
 
 ################################################################################

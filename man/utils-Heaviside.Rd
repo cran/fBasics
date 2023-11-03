@@ -11,12 +11,11 @@
 
 \description{
 
-    Functions which compute the Heaviside and related functions. These
-    include the Heaviside function, the sign function, the delta
-    function, the boxcar function, and the ramp function.
+  Functions which compute the Heaviside and related functions. These
+  include the Heaviside function, the sign function, the delta
+  function, the boxcar function, and the ramp function.
     
 }
-
 
 \usage{
 Heaviside(x, a = 0)
@@ -26,7 +25,6 @@ Boxcar(x, a = 0.5)
 Ramp(x, a = 0)
 }
 
-
 \arguments{
   \item{x}{
     a numeric vector.
@@ -35,7 +33,6 @@ Ramp(x, a = 0)
     a numeric value, the location of the break.
   }
 }
-
 
 \details{
 
@@ -58,11 +55,9 @@ Ramp(x, a = 0)
     
 }
 
-
 \value{
   numeric vector
 }
-
 
 \note{
 
@@ -72,12 +67,10 @@ Ramp(x, a = 0)
     
 }
 
-
 \seealso{
   \code{GarchDistribution},
   \code{GarchDistributionFits}
 }
-
 
 \references{
 
@@ -86,7 +79,6 @@ Weisstein W. (2004);
     Mathworld.
     
 }
-
 
 \examples{
 ## Heaviside -
@@ -107,6 +99,4 @@ Weisstein W. (2004);
    cbind(x = x, Step = h, Signum = s, Delta = d, Pi = Pi, R = r)        
 }
 
-
-\keyword{programming}
-
+\keyword{math}

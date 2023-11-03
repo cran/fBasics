@@ -30,15 +30,13 @@ returnSeriesGUI(x)
 
 \value{
        
-    For \code{returnSeriesGUI} function, besides the graphical
-    user interface no values are returned.
+  For \code{returnSeriesGUI} function, besides the graphical
+  user interface no values are returned.
     
 }
 
 \author{
-
-    Diethelm Wuertz for the Rmetrics \R-port.
-    
+  Diethelm Wuertz for the Rmetrics \R-port.
 }
 
-\keyword{programming}
+\keyword{hplot}

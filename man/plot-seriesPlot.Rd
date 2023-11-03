@@ -1,6 +1,5 @@
 \name{TimeSeriesPlots}
 
-
 \alias{seriesPlot}
 \alias{returnPlot}
 \alias{cumulatedPlot}
@@ -9,20 +8,10 @@
 
 \title{Financial time series plots}
 
-
 \description{
     
-    Returns an index/price, a return, or a
-    drawdown plot.
-    \cr
-
-    List of Functions:
-    
-    \tabular{ll}{
-    \code{seriesPlot} \tab Returns a tailored return series plot, \cr
-    \code{cumulatedPlot} \tab Displays a cumulated series given the returns, \cr
-    \code{returnPlot} \tab Displays returns given the cumulated series, \cr
-    \code{drawdownPlot} \tab Displays drawdowns given the return series.}
+   Produces an index/price, a cumulated return, a return, or a drawdown
+   plot.
     
 }
     
@@ -37,7 +26,6 @@ returnPlot(x, labels = TRUE, type = "l", col = "steelblue",
 drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue", 
     title = TRUE, grid = TRUE, box = TRUE, rug = TRUE, \dots) 
 }
-
 
 \arguments{
   
@@ -89,42 +77,44 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
     
 }
 
-
 \details{
 
-    The plot functions can be used to plot univariate and multivariate
-    time series of class \code{timeSeries}.
+  List of Functions:
     
-    The graphical parameters \code{type} and \code{col} can be set by the
-    values specified through the argument list. In the case of multivariate
-    time series \code{col} can be specified by the values returned by
-    a color palette.
+  \tabular{ll}{
+  \code{seriesPlot} \tab Returns a tailored return series plot, \cr
+  \code{cumulatedPlot} \tab Displays a cumulated series given the returns, \cr
+  \code{returnPlot} \tab Displays returns given the cumulated series, \cr
+  \code{drawdownPlot} \tab Displays drawdowns given the return series.}
+
+  The plot functions can be used to plot univariate and multivariate
+  time series of class \code{timeSeries}.
     
-    Automated titles including main title, x- and y-lables, grid lines,
-    box style and rug represenatations cann be selected by setting these
-    arguments to \code{TRUE} which is the default. If the title flag
-    is unset, then the main title, x-, and y-labels are empty strings.
-    This allows to set user defined labels with the function \code{title}
-    after the plot is drawn.
+  The graphical parameters \code{type} and \code{col} can be set by the
+  values specified through the argument list. In the case of multivariate
+  time series \code{col} can be specified by the values returned by
+  a color palette.
     
-    Beside \code{type}, \code{col}, \code{main}, \code{xlab} and 
-    \code{ylab}, all other \code{par} arguments can be passed to the
-    \code{plot} function.
+  Automated titles including main title, x- and y-lables, grid lines,
+  box style and rug represenatations cann be selected by setting these
+  arguments to \code{TRUE} which is the default. If the title flag
+  is unset, then the main title, x-, and y-labels are empty strings.
+  This allows to set user defined labels with the function \code{title}
+  after the plot is drawn.
     
-    If the \code{labels} flag is unset to \code{FALSE}, then no decorations 
-    will be added tothe  plot, and the plot can be fully decorated by the
-    user.
+  Beside \code{type}, \code{col}, \code{main}, \code{xlab} and 
+  \code{ylab}, all other \code{par} arguments can be passed to the
+  \code{plot} function.
+    
+  If the \code{labels} flag is unset to \code{FALSE}, then no decorations 
+  will be added tothe  plot, and the plot can be fully decorated by the
+  user.
     
 } 
-    
-
 
 \value{
-    
-    displays a time series plot
-    
+  displays a time series plot
 }
-
 
 \examples{
 ## seriesPlot -
@@ -133,6 +123,4 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
    seriesPlot(tS)
 }
 
-
-\keyword{programming}
-
+\keyword{hplot}

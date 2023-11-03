@@ -23,15 +23,11 @@ importFrom("stats", acf, ansari.test, approx, ar, arima,
              pnorm, ppoints, qchisq, qf, qnorm, qqline,
              qqnorm, qt, residuals, rexp, rnorm, runif, sd,
              shapiro.test, spline, t.test, uniroot, var, na.omit, quantile)
-importFrom("utils", menu)
+importFrom("utils", menu, packageVersion)
 
-#import(methods)
 importFrom("methods", getMethod, is, new, slot, show)
 
 importFrom("spatial", prmat, surf.gls)
-
-## 'akima' is *not* here because of its non-GPL Licence
-## importFrom("akima", interp, interpp)
 
 importFrom("timeDate", getRmetricsOptions, setRmetricsOptions,
            kurtosis, skewness)
@@ -50,18 +46,9 @@ S3method("termPlot", "default")
 S3method("volatility", "default")
 
 S3method(".plot", "histogram")
-S3method(".print", "ssd")
 S3method(".summary", "gel")
 S3method(".summary", "gmm")
 
-
-## #exportPattern(".")
-## ## Avoid ^C_, include those starting with . , be locale-independent
-## ## Ideally avoid S3 methods, but not e.g. runif.lcg
-## exportPattern("^[ABDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.]")
-
-# In the future this should be used:
-#exportPattern("^[^\\.]")
 
 # To do before implementation:
 #The porfolio book needs:
@@ -74,7 +61,7 @@ S3method(".summary", "gmm")
 
 ## explicitly name exports, start with
 ##     cat(ls("package:fBasics", all.names = TRUE), sep =",\n")
-## then clean up; for now just comment out, in case havoc ensues for dependencies.
+## then clean up;
 
 exportMethods("show")
 exportClasses("fDISTFIT", "fHTEST")
@@ -86,188 +73,28 @@ export(
 
     kurtosis,  # from timeDate, reexport
     skewness,  # from timeDate, reexport
-    ## datasets
-    ##   .HedgeFund1,  removed, used only to create .HedgeFund
-    ##   .HedgeFund2,  ditto
-    ##   msft.dat,
-    ##   Capitalization,
-    ##   cars2,
-    ##   DowJones30,
-    ##   HedgeFund,
-    ##   nyse,
-    ##   PensionFund,
-    ##   swissEconomy,
-    ##   SWXLP,
-    ##   usdthb,
 
     ## exports starting with '.'
     ##    all not documented, it seems (regex search for aliases starting with '.')
     .acfPlot,  # fRegression
-    # .adGLD,
-    # .ansari2Test,
-    # .ansariTest,
-    # .aRecursionGH,
-    # .asRGB,
-    # .bartlett2Test,
-    # .besselZ,
-    # .blue2greenPalette,
-    # .blue2redPalette,
-    # .blue2yellowPalette,
-    # .bwAndrews2,
-    # .bwNeweyWest2,
-    # .ccfPlot,
-    # .chcode,
-    # .checkGHMuMoments,
-    # .checkGHRawMoments,
-    # .circlesPlot,
-    # .cnvrt.coords,
-    .contourPlot,     # fAssets, fMultivar
-    # .counts1Plot,
-    # .counts2Plot,
-    # .cvmGLD,
-    # .cyan2magentaPalette,
-    # .dec.to.hex,
-    # .deltaKappaGH,
-    # .dgld,
-    # .dhyp1,
-    # .dhyp2,
-    # .dhyp3,
-    # .dhyp4,
-    .distCheck,    # imported by distrRmetrics and others
-    # .distFitPlot,
-    # .distStandardErrors,
-    # .dnig,
-    # .emptyPlot,
-    .firePlot, # fRegression
-    # .fligner2Test,
-    # .gel,
-    # .get_dat,
-    # .get_lamb,
-    # .ghCentralMoments,
-    # .ghMuMoments,
-    # .ghMuMomentsIntegrated,
-    # .ghRawMoments,
-    # .ghRawMomentsIntegrated,
-    # .gl.check.lambda,
-    # .gl.parameter.tidy,
-    # .gldFit.gof,
-    # .gldFit.hist,
-    # .gldFit.mle,
-    # .gldFit.mps,
-    # .gldFit.rob,
-    # .gmm,
-    # .green2redPalette,
-    # .HAC,
-    # .heavisideSlider,
-    # .hex.to.dec,
-    # .histStack,
-    # .hyp1Mode,
-    # .hyp2Mode,
-    # .hyp3Mode,
-    # .hyp4Mode,
-    # .hyperb.change.pars,
-    # .is.positive.definite,
-    # .jb.test,
-    # .jbALM,
-    # .jbLM,
-    # .jbPlot,
-    # .jbTable,
-    # .kappaGH,
-    # .ksGLD,
-    # .kurtosis.test,
-    # .kw2Test,
-    # .kweights,
-    # .lintest,
-    # .lmacfPlot,
-    # .logpdfPlot,
-    # .make.positive.definite,
-    # .maxddStats,
-    # .mleStableFit,
-    # .moodTest,
-    .mrlPlot,   # fRegression
-    # .nigFit.gmm,
-    # .nigFit.mle,
-    # .nigFit.mps,
-    # .nigFit.vmps,
-    # .normFit,
-    # .omnibus.test,
-    .pacfPlot,  # fRegression
-    # .paramGH,
-    .perspPlot,  # fAssets, fMultivar
-    # .pgld,
-    # .phiStable,
-    # .PhiStable,
-    # .phyp1,
-    # .phyp2,
-    # .phyp3,
-    # .phyp4,
-    # .pjb,
-    .plot,  # fRegression
-    # .plot.histogram,
-    # .pnigC,
-    .predict,  # fRegression
-    # .print,
-    # .print.ssd,
-    # .psnigC,
-    # .purple2greenPalette,
-    # .qdgl.fm5,
-    # .qdgl.fmkl,
-    # .qdgl.rs,
-    # .qdgld,
-    # .qgl.fm5,
-    # .qgl.fmkl,
-    # .qgl.rs,
-    # .qgld,
-    # .qhyp1,
-    # .qhyp2,
-    # .qhyp3,
-    # .qhyp4,
-    # .qjb,
-    # .qnigC,
-    # .qqgaussPlot,
-    # .qsnigC,
-    .qStableFit,   # StableEstim
-    # .recessionLines,
+    .contourPlot,    # fAssets, fMultivar
+    
+    .firePlot,       # fRegression
+    .mrlPlot,        # fRegression
+    .pacfPlot,       # fRegression
+    
+    .perspPlot,      # fAssets, fMultivar
+    
+    .plot,           # fRegression
+    .predict,        # fRegression
+    
+    .qStableFit,     # StableEstim
+    
     .residualsPlot,  # fRegression
     .responsesPlot,  # fRegression
-    # .rghyp,
-    # .rgigjd,
-    # .rgigjd1,
-    # .rgld,
-    # .rho,
-    # .rhyp1,
-    # .rhyp2,
-    # .rhyp3,
-    # .rhyp4,
-    # .rhyperb,
-    # .skewness.test,
-    # .slider.env,
-    .sliderMenu,
-    # .smooth_g,
-    # .stablePlot,
-    # .stylizedFactsGUI,
-    # .subPlot,
-    # .subStars,
-    # .summary,
-    # .summary.gel,
-    # .summary.gmm,
-    # .tdSliderMenu,
-    # .tslag1,
-    # .tTest,
-    .unirootNA,  # fCopulae
-    # .varfTest,
-    # .varpieDemo,
-    # .varpiePlot,
-    # .weightsAndrews2,
-    # .xrug,
-    # .yrug,
-
-    ## S3 methods
-    ##   getModel.default,
-    ##   print.control,
-    ##   stdev.default,
-    ##   termPlot.default,
-    ##   volatility.default,
+    
+    .sliderMenu,     # fCopulae
+    .unirootNA,      # fCopulae
 
     ## look like S3 methods but aren't
     get.lcgseed, set.lcgseed, # get/set an Rmetric option
@@ -308,6 +135,8 @@ export(
     dgld,
     dhyp,
     distCheck,
+    .distCheck, # can't drop it since fGarch (< 4031.90) imported it explicitly;
+                # difficult to ask everybody to require fGarch (>= 4031.90)
     divPalette,
     dmaxdd,
     dnig,

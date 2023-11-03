@@ -33,66 +33,81 @@
 
 %--------------------------------------------------------------
 \details{
- \bold{Capitalization:}\cr
- \code{Capitalization}
- contains market capitalization of domestic companies from
- 2003 - 2008 in USD millions.
- 
- \bold{cars2:}\cr
- \code{cars2}
- contains the price, country, reliability, mileage, type, weight,
- engine displacement and net horsepower of various car
- models.
- 
- \bold{DowJones30:}\cr
- \code{DowJones30}
- contains daily observations from the Dow Jones 30 Index series.
- Each of the thirty columns represents the closing price 
- of a stock in the Index.
- 
- \bold{HedgeFund:}\cr
- \code{HedgeFund}
- contains monthly percentual returns of various hedge fund
- strategies from Hennessee Group LLC.
- 
- \bold{msft.dat:}\cr
- \code{msft.dat}
- contains daily prices (open, high, low and close) and
- volumes for the Microsoft stocks.
- It is a data frame with column names \code{"\%Y-\%m-\%d"},
- \code{"Open"}, \code{"High"}, \code{"Low"}, \code{"Close"},
- \code{"Volume"}.
 
- Note: there is a dataset, \code{MSFT}, in package \pkg{timeSeries}
- which contains the same data but is of class \code{"timeSeries"}.
+  All datasets are data frames. A brief description is given below.
+  
+  \bold{Capitalization:}\cr
+  \code{Capitalization}
+  contains market capitalization of 13 domestic companies for 6 years
+  (from 2003 to 2008) in USD millions. Each row contains the data for
+  one company/stock exchange.
  
- \bold{nyse:}\cr
- \code{nyse}
- contains daily records of the NYSE Composite Index.
+  \bold{cars2:}\cr
+  \code{cars2}
+  contains columns \code{rowNames} (model), \code{Price},
+  \code{Country}, \code{Reliability}, \code{Mileage}, (\code{Type}),
+  (\code{Weight}), \code{Disp.} (engine displacement) and \code{HP}
+  (\code{net horsepower}) reprsenting the indicated properties of 60 car
+  models.
  
- \bold{PensionFund:}\cr
- \code{PensionFund}
- is a daily data set of the Swiss pension fund benchmark LPP-2005.
- The data set ranges from 2005-11-01 to 2007-04-11.
- The columns are named: SBI, SPI, SII, LMI, MPI, ALT, LPP25, LPP40, LPP60
+  \bold{DowJones30:}\cr
+  \code{DowJones30}
+  contains 2529 daily observations from the \sQuote{Dow Jones 30} Index
+  series.  The first row contains the dates (from 1990-12-31 to
+  2001-01-02). Each of the remaining thirty columns represents the
+  closing price of a stock in the Index.
  
- \bold{swissEconomy:}\cr
- \code{swissEconomy}
- contains the GDP per capita, exports, imports, interest rates, inflation,
- unemployment and population for the years 1964 - 1999 for Switzerland.
+  \bold{HedgeFund:}\cr
+  \code{HedgeFund}
+  contains monthly percentage returns of 16 hedge fund strategies from
+  Hennessee Group LLC for year 2005.
  
- \bold{SWXLP:}\cr
- \code{SWXLP}
- is a daily data set of the Swiss pension fund benchmark LPP-2000.
- The data set ranges from 2000-01-03 to 2007-05-08.
- The columns are named: SBI, SPI, SII, LP25, LP40, LP60.
+  \bold{msft.dat:}\cr
+  \code{msft.dat}
+  contains daily prices (open, high, low and close) and volumes for the
+  Microsoft stocks.  It is a data frame with column names
+  \code{"\%Y-\%m-\%d"}, \code{"Open"}, \code{"High"}, \code{"Low"},
+  \code{"Close"}, \code{"Volume"}.
+
+  \emph{Note:} there is a dataset, \code{MSFT}, in package
+  \pkg{timeSeries} which contains the same data but is of class
+  \code{"timeSeries"}.
  
- \bold{usdthb:}\cr
- \code{usdthb}
- Tick data of US Dollar (USD) in Thailand Bhat (THB) colleted from
- Reuters. Format: YYYYMMDDhhmm. Column variables: delay time,
- contributer, bid and ask prices, and quality flag. It covers the 
- Asia FX crisis in June 1997.
+  \bold{nyse:}\cr
+  \code{nyse}
+  contains daily records of the NYSE Composite Index from 1966-01-04 to
+  2002-12-31 (9311 observations). The data is in column \code{"NYSE"}
+  (second column). The first column contains the dates.
+ 
+  \bold{PensionFund:}\cr
+  \code{PensionFund}
+  is a daily data set of the Swiss pension fund benchmark LPP-2005.
+  The data set ranges from 2005-11-01 to 2007-04-11.
+  The columns are named: SBI, SPI, SII, LMI, MPI, ALT, LPP25, LPP40, LPP60.
+ 
+  \bold{swissEconomy:}\cr
+  \code{swissEconomy}
+  contains the GDP per capita (\code{GDPR}), exports (\code{EXPO}),
+  imports (\code{IMPO}), interest rates (\code{INTR}), inflation
+  (\code{INFL}), unemployment (\code{UNEM}) and population (\code{POPU})
+  foryears 1964 to 1999 for Switzerland.
+ 
+  \bold{SWXLP:}\cr
+  \code{SWXLP}
+  is a daily data set of the Swiss pension fund benchmark LPP-2000.  The
+  data set ranges from 2000-01-03 to 2007-05-08 (1917 observations). The
+  first column contains the dates. The remaining columns are named: SBI,
+  SPI, SII, LP25, LP40, LP60.
+ 
+  \bold{usdthb:}\cr
+  \code{usdthb}
+  Tick data of US Dollar (USD) in Thailand Bhat (THB) collected from
+  Reuters. The date is in the first column in YYYYMMDDhhmm format. The
+  remaining columns contain: delay time (\code{DELAY}), contributor
+  (\code{CONTRIBUTOR}), bid (\code{BID}) and ask (\code{ASK}) prices,
+  and quality flag (\code{FLAG}). It covers the Asia FX crisis in June
+  1997.
+
 }
 
 %--------------------------------------------------------------
@@ -114,28 +129,28 @@
  % http://www.uni-muenster.de/ZIV.BennoSueselbeck/s-html/helpfiles/car.all.html
  
  \bold{DowJones30}\cr
- http://www.yahoo.com.
+ https://www.yahoo.com.
  
  \bold{HedgeFund:}\cr
  http://www.hennesseegroup.com/indices/returns/year/2005.html.
  
  \bold{msft.dat:}\cr
- http://www.yahoo.com.
+ https://www.yahoo.com.
  
  \bold{nyse:}\cr
- http://www.nyse.com.
+ https://www.nyse.com.
  
  \bold{PensionFund:}\cr
  SBI, SPI, SII: SIX (Swiss Exchange Zurich);
  LPP25, LPP40, LPP60: Banque Pictet Geneva;
- LMI, MPI, ALT: Recalculated from the indices and benchmarks
+ LMI, MPI, ALT: Recalculated from the indices and benchmarks.
  
  \bold{swissEconomy:}\cr
- http://www.oecd.org/ and http://www.imf.org/.
+ https://www.oecd.org/ and https://www.imf.org/.
  
  \bold{SWXLP:}\cr
  SBI, SPI, SII: SIX (Swiss Exchange Zurich);
- LPP25, LPP40, LPP60: Banque Pictet Geneva
+ LPP25, LPP40, LPP60: Banque Pictet Geneva.
  
  \bold{usdthb:}\cr
  Reuters Select Feed Terminal (1997).

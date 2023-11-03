@@ -1,9 +1,6 @@
 \name{baseMethods}
 \alias{baseMethods}
 
-\alias{volatility}
-\alias{volatility.default}
-
 \alias{termPlot}
 \alias{termPlot.default}
 
@@ -24,8 +21,6 @@
 \method{stdev}{default}(x, na.rm = FALSE)
 
 \method{termPlot}{default}(model, \dots)
-   
-\method{volatility}{default}(object, \dots)
 }
 
 
@@ -33,9 +28,6 @@
 
   \item{model}{
     a fitted model object.
-  }
-  \item{object}{
-    an object from which to extract the volatility.
   }
   \item{x}{
     an object for which to compute the standard deviation.
@@ -55,15 +47,12 @@
   \code{stdev} and \code{termPlot} are generic functions with default
   methods \code{stats::sd} and \code{stats::termplot}, respectively.
 
-  \code{volatility} is a generic function, whose default method centers
-  and squares the values in \code{object}. Other packages can (and do)
-  define methods for it.
-
 }
 
 \seealso{
-  \code{sd},
-  \code{termplot}
+  \code{\link[stats]{sd}},
+  \code{\link[stats]{termplot}}
 }
 
 \keyword{programming}
+\keyword{stats}

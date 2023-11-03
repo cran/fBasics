@@ -49,7 +49,7 @@ function(alpha=1, beta=0, delta=1, mu=0, lambda=-1/2)
     # Return Value:
     zeta = delta * sqrt(alpha*alpha-beta*beta)
     mean = mu + beta * delta^2 * .kappaGH(zeta, lambda)
-    mean
+    c(mean = mean)
 }
 
 
@@ -65,7 +65,7 @@ function(alpha=1, beta=0, delta=1, mu=0, lambda=-1/2)
     
     # Return Value:
     var = .ghCentralMoments(k=2, alpha, beta, delta, mu, lambda)[[1]]
-    var
+    c(var = var)
 }
 
 
@@ -85,7 +85,7 @@ function(alpha=1, beta=0, delta=1, mu=0, lambda=-1/2)
     
     # Return Value:
     skew = k3/(k2^(3/2))     
-    skew          
+    c(skew = skew)
 }
 
 
@@ -105,7 +105,7 @@ function(alpha=1, beta=0, delta=1, mu=0, lambda=-1/2)
 
     # Return Value:
     kurt = k4/k2^2 - 3 
-    kurt
+    c(kurt = kurt)
 }
 
 
@@ -117,23 +117,25 @@ function(order, type = c("raw", "central", "mu"),
     alpha=1, beta=0, delta=1, mu=0, lambda=-1/2)
 {
     # A function implemented by Diethelm Wuertz
-    
+    # Modified by Georgi N. Boshnakov
+
     # Descriptions:
     #   Returns moments of the GH distribution
     
     # FUNCTION:
     
     # Settings:
-    type = match.arg(type)
+    type <- match.arg(type)
     
-    # Moments:
-    if (type == "raw") {
-        ans = .ghRawMoments(order, alpha, beta, delta, mu, lambda)
-    } else if (type == "central") {
-        ans = .ghCentralMoments(order, alpha, beta, delta, mu, lambda)
-    } else if (type == "mu") {
-        ans = .ghMuMoments(order, alpha, beta, delta, mu, lambda)  
-    }
+    ## Moments:
+    ans <- if (type == "raw") {
+               .ghRawMoments(order, alpha, beta, delta, mu, lambda)
+           } else if (type == "central") {
+               .ghCentralMoments(order, alpha, beta, delta, mu, lambda)
+           } else if (type == "mu") {
+               .ghMuMoments(order, alpha, beta, delta, mu, lambda)  
+           }
+    names(ans) <- paste0("m", order, type)
     
     # Return Value:
     ans   

@@ -1,11 +1,8 @@
 \name{ghSlider}
-
-
 \alias{ghSlider}
 
 
 \title{Generalized Hyperbolic Distribution Slider}
-
 
 \description{
     
@@ -14,11 +11,9 @@
     
 }
 
-
 \usage{
 ghSlider()
 }
-
 
 \value{
 
@@ -29,12 +24,9 @@ ghSlider()
     distribution.
 }
 
-
 \examples{   
 ## ghSlider -
    # ghSlider()
 }
 
-
 \keyword{distribution}
-

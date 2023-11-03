@@ -3,12 +3,10 @@
 
 \alias{pacfPlot}
 \alias{teffectPlot}
-
 \alias{lacfPlot}
 
 
 \title{Autocorrelation function plots}
-
 
 \description{
 
@@ -39,60 +37,59 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
     ymax = NA, standardize = TRUE, labels = TRUE, \dots)
 }
 
-
 \arguments{
 
-    \item{x}{
+  \item{x}{
 
-      an uni- or multivariate return series of class \code{timeSeries}
-      or any other object which can be transformed by the function
-      \code{as.timeSeries()} into an object of class \code{timeSeries}.
+    an uni- or multivariate return series of class \code{timeSeries} or
+    any other object which can be transformed by the function
+    \code{as.timeSeries()} into an object of class \code{timeSeries}.
 
-    }
-    \item{labels}{
+  }
+  \item{labels}{
 
-      a logical value. Whether or not x- and y-axes should be
-      automatically labeled and a default main title should be added to
-      the plot.  By default \code{TRUE}.
+    a logical value. Whether or not x- and y-axes should be
+    automatically labeled and a default main title should be added to
+    the plot.  By default \code{TRUE}.
 
-    }
-    \item{n}{
-      an integer value, the number of lags.
-    }
-    \item{lag.max}{
+  }
+  \item{n}{
+    an integer value, the number of lags.
+  }
+  \item{lag.max}{
 
-      maximum lag for which the autocorrelation should be calculated, an
-      integer.
+    maximum lag for which the autocorrelation should be calculated, an
+    integer.
 
-    }
-    \item{type}{
+  }
+  \item{type}{
 
-      a character string which specifies the type of the input series,
-      either "returns" or series "values". In the case of a return
-      series as input, the required value series is computed by
-      cumulating the financial returns: \code{exp(colCumsums(x))}
+    a character string which specifies the type of the input series,
+    either "returns" or series "values". In the case of a return series
+    as input, the required value series is computed by cumulating the
+    financial returns: \code{exp(colCumsums(x))}
 
-    }
-    \item{deltas}{
+  }
+  \item{deltas}{
 
-      the exponents, a numeric vector, by default ranging from 0.2 to
-      3.0 in steps of 0.2.
+    the exponents, a numeric vector, by default ranging from 0.2 to 3.0
+    in steps of 0.2.
 
-    }
-    \item{ymax}{
+  }
+  \item{ymax}{
 
-      maximum y-axis value on plot. If \code{NA}, then the value is
-      selected automatically.
+    maximum y-axis value on plot. If \code{NA}, then the value is
+    selected automatically.
 
-    }
-    \item{standardize}{
+  }
+  \item{standardize}{
 
-      a logical value. Should the vector \code{x} be standardized?
+    a logical value. Should the vector \code{x} be standardized?
 
-    }
-    \item{\dots}{
-      arguments to be passed.
-    }
+  }
+  \item{\dots}{
+    arguments to be passed.
+  }
 }
 
 \details{

@@ -5,6 +5,7 @@
 \concept{Bartlett's test for equal variances}
 \concept{Fligner-Killeen test for equal variances}
 
+
 \title{Two sample variance tests}
 
 \description{
@@ -14,12 +15,10 @@
     
 }
 
-
 \usage{ 
 varianceTest(x, y, method = c("varf", "bartlett", "fligner"), 
     title = NULL, description = NULL)
 }
-
 
 \arguments{
   
@@ -41,23 +40,23 @@ varianceTest(x, y, method = c("varf", "bartlett", "fligner"),
 
 \details{
     
-    The \code{method="varf"} can be used to compare variances of two 
-    normal samples performing an F test. The null hypothesis is that 
-    the ratio of the variances of the populations from which they were 
-    drawn is equal to one. 
-    
-    The \code{method="bartlett"} performs the Bartlett test of the 
-    null hypothesis that the variances in each of the samples are the 
-    same. This fact of equal variances across samples is also called 
-    \emph{homogeneity of variances}. Note, that Bartlett's test is 
-    sensitive to departures from normality. That is, if the samples 
-    come from non-normal distributions, then Bartlett's test may simply 
-    be testing for non-normality. The Levene test (not yet implemented)
-    is an alternative to the Bartlett test that is less sensitive to 
-    departures from normality. 
-    
-    The \code{method="fligner"} performs the Fligner-Killeen test of 
-    the null that the variances in each of the two samples are the same. 
+  The \code{method="varf"} can be used to compare variances of two 
+  normal samples performing an F test. The null hypothesis is that 
+  the ratio of the variances of the populations from which they were 
+  drawn is equal to one. 
+  
+  The \code{method="bartlett"} performs the Bartlett test of the 
+  null hypothesis that the variances in each of the samples are the 
+  same. This fact of equal variances across samples is also called 
+  \emph{homogeneity of variances}. Note, that Bartlett's test is 
+  sensitive to departures from normality. That is, if the samples 
+  come from non-normal distributions, then Bartlett's test may simply 
+  be testing for non-normality. The Levene test (not yet implemented)
+  is an alternative to the Bartlett test that is less sensitive to 
+  departures from normality. 
+  
+  The \code{method="fligner"} performs the Fligner-Killeen test of 
+  the null that the variances in each of the two samples are the same. 
     
 }
 
@@ -67,11 +66,10 @@ varianceTest(x, y, method = c("varf", "bartlett", "fligner"),
 
 \note{
 
-    Some of the test implementations are selected from \R's \code{ctest} 
-    package.  
+  Some of the test implementations are selected from \R's \code{ctest} 
+  package.  
        
 }
-
 
 \references{
 
@@ -85,14 +83,12 @@ Lehmann E.L. (1986);
 
 }
 
-
 \author{
 
-    R-core team for hypothesis tests implemented from \R's 
-    package \code{ctest}.
+  R-core team for hypothesis tests implemented from \R's 
+  package \code{ctest}.
     
 }
-
 
 \examples{
 \dontshow{set.seed(1234)}
@@ -106,6 +102,5 @@ Lehmann E.L. (1986);
    varianceTest(x, y, "bartlett")
    varianceTest(x, y, "fligner")
 }
-
 
 \keyword{htest}

@@ -1,5 +1,5 @@
 \name{HistogramPlot}
-
+\alias{HistogramPlot}
 
 \alias{histPlot}
 \alias{densityPlot}
@@ -8,22 +8,12 @@
 
 \title{Histogram and density plots}
 
-
 \description{
-    
-    Returns a histogram, a density, or a logarithmic 
-    density plot.
-    \cr
 
-    List of Functions:
-    
-    \tabular{ll}{
-    \code{histPlot} \tab Returns a tailored histogram plot, \cr
-    \code{densityPlot} \tab Returns a tailored kernel density estimate plot, \cr
-    \code{logDensityPlot} \tab Returns a tailored log kernel density estimate plot.}
-    
+  Produce tailored histogram plots and kernel density/log-density
+  estimate plots.
+  
 }
-    
 
 \usage{        
 histPlot(x, labels = TRUE, col = "steelblue", fit = TRUE, 
@@ -34,64 +24,83 @@ logDensityPlot(x, labels = TRUE, col = "steelblue", robust = TRUE,
     title = TRUE, grid = TRUE, rug = TRUE, skip = FALSE, \dots)    
 }
 
-
 \arguments{
+
+  \item{x}{
+    an object of class \code{"timeSeries"}.
+  }
+  \item{labels}{
+
+    a logical flag, should the plot be returned with default labels
+    and decorated in an automated way? By default \code{TRUE}.
+
+  }   
   
-    \item{col}{
-        the color for the series. In the univariate case use just a 
-        color name like the default, \code{col="steelblue"}, in the
-        multivariate case we recommend to select the colors from a 
-        color palette, e.g. \code{col=heat.colors(ncol(x))}. 
-        }
-    \item{fit}{
-        a logical flag, should a fit added to the Plot?
-        }
-    \item{grid}{
-        a logical flag, should a grid be added to the plot? 
-        By default \code{TRUE}. To plot a horizontal lines only
-        use \code{grid="h"} and for vertical lines use \code{grid="h"},
-        respectively.
-        }
-    \item{hist}{
-        a logical flag, by default TRUE. Should a histogram to be 
-        underlaid to the plot?
-        }
-    \item{labels}{
-        a logical flag, should the plot be returned with default labels
-        and decorated in an automated way? By default \code{TRUE}.
-        }   
-    \item{rug}{
-        a logical flag, by default TRUE. Should a rug representation 
-        of the data added to the plot?
-        }
-    \item{skip}{
-        a logical flag, should zeros be skipped in the return Series?
-        }
-    \item{robust}{
-        a logical flag, by default TRUE. Should a robust fit added to
-        the plot?
-        }
-    \item{title}{
-        a logical flag, by default TRUE. Should a default title added 
-        to the plot?
-        }
-    \item{x}{
-        an object of class \code{"timeSeries"} or any other object which
-        can be transformed by the function \code{as.timeSeries} into an
-        object of class \code{timeSeries}. The latter case, other then
-        \code{timeSeries} objects, is more or less untested.
-        }
-    \item{\dots}{
-        optional arguments to be passed.
-        }
+  \item{col}{
+
+    the color for the series. In the univariate case use just a color
+    name like the default, \code{col="steelblue"}, in the multivariate
+    case we recommend to select the colors from a color palette,
+    e.g. \code{col=heat.colors(ncol(x))}.
+
+  }
+  \item{fit}{
+    a logical flag, should a fit be added to the plot?
+  }
+  \item{hist}{
+
+    a logical flag, by default \code{TRUE}. Should a histogram be laid
+    under the plot?
+
+  }
+  \item{title}{
+
+    a logical flag, by default \code{TRUE}. Should a default title be
+    added to the plot?
+
+  }
+  \item{grid}{
+
+    a logical flag, should a grid be added to the plot?  By default
+    \code{TRUE}. To plot a horizontal lines only use \code{grid="h"} and
+    for vertical lines use \code{grid="h"}, respectively.
+
+  }
+  \item{rug}{
+    
+    a logical flag, by default TRUE. Should a rug representation of the
+    data be added to the plot?
+
+  }
+  \item{skip}{
+    
+    a logical flag, should zeros be skipped in the return Series?
+
+  }
+  \item{robust}{
+
+    a logical flag, by default \code{TRUE}. Should a robust fit be added
+    to the plot?
+
+  }
+  \item{\dots}{
+    optional arguments to be passed on.
+  }
     
 }
+\details{
 
-
-\value{
-    displays a time series plot
+  \code{histPlot} produces a tailored histogram plot.
+  
+  \code{densityPlot} produces a tailored kernel density estimate plot.
+  
+  \code{logDensityPlot} produces a tailored log kernel density estimate plot.
+  
 }
-
+\value{
+  \code{NULL}, invisibly. The functions are used for the side effect of
+  producing a plot.
+}
 
 \examples{
 ## data - 
@@ -107,6 +116,4 @@ logDensityPlot(x, labels = TRUE, col = "steelblue", robust = TRUE,
    densityPlot(SPI) 
 }
 
-
-\keyword{programming}
-
+\keyword{hplot}

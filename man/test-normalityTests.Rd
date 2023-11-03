@@ -35,8 +35,6 @@
 \concept{Shapiro-Francia test for normality}
 
 
-
-
 \title{Tests for normality}
 
 \description{
@@ -56,7 +54,7 @@
   Functions for high precision Jarque Bera LM and ALM tests:
 
   \tabular{ll}{
-  \code{jbTest} \tab Performs finite sample adjusted JB LM and ALM test. }
+  \code{jbTest} \tab Performs finite sample adjusted JB, LM and ALM test. }
 
   Additional functions for testing normality from the 'nortest' package:
 
@@ -73,7 +71,6 @@
   \code{normalTest} \tab test suite for some normality tests. }
 
 }
-
 
 \usage{
 ksnormTest(x, title = NULL, description = NULL)
@@ -92,37 +89,77 @@ pchiTest(x, title = NULL, description = NULL)
 sfTest(x, title = NULL, description = NULL)
 }
 
-
 \arguments{
 
-    \item{description}{
-        optional description string, or a vector of character strings.
-        }
-    \item{method}{
-        [normalTest] - \cr
-        indicates four different methods for the normality test,
-        \code{"ks"} for the Kolmogorov-Smirnov one--sample test,
-        \code{"sw"} for the Shapiro-Wilk test,
-        \code{"jb"} for the Jarque-Bera Test, and
-        \code{"da"} for the D'Agostino Test.
-        The default value is \code{"ks"}.
-        }
-    \item{na.rm}{
-        [normalTest] - \cr
-        a logical value. Should missing values removed before computing
-        the tests? The default value is \code{FALSE}.
-        }
-    \item{title}{
-        an optional title string, if not specified the inputs data
-        name is deparsed.
-        }
-    \item{x}{
-        a numeric vector of data values or a S4 object of class
-        \code{timeSeries}.
-        }
+  \item{x}{
+    a numeric vector of data values or an S4 object of class
+    \code{"timeSeries"}.
+  }
+  \item{title}{
 
+    an optional character string, if not specified the inputs data name
+    is deparsed.
+
+  }
+  \item{description}{
+
+    optional description string, or a vector of character strings.
+
+  }
+  \item{method}{
+    
+    for \code{normalTest} only, indicates one of four different methods
+    for the normality test, one of \code{"ks"} (Kolmogorov-Smirnov
+    one-sample test, the the default), \code{"sw"} (Shapiro-Wilk test),
+    \code{"jb"} (Jarque-Bera Test), and \code{"da"} (D'Agostino Test).
+	
+  }
+  \item{na.rm}{
+
+    for \code{normalTest} only, a logical value. Should missing values
+    removed before computing the tests? The default value is
+    \code{FALSE}.
+    
+  }
 }
 
+\details{
+
+    The hypothesis tests may be of interest for many financial
+    and economic applications, especially for the investigation
+    of univariate time series returns.
+
+    Several tests for testing if the records from a data set are normally
+    distributed are available. The input to all these functions may be
+    just a vector \code{x} or a univariate time series object \code{x}
+    of class \code{timeSeries}.
+
+    First, there exists a wrapper function which allows to call one from
+    two normal tests either the Shapiro--Wilks test or the Jarque--Bera
+    test. This wrapper was introduced for compatibility with S-Plus'
+    FinMetrics package.
+
+    Also available are the Kolmogorov--Smirnov one sample test and the
+    D'Agostino normality test.
+
+    The remaining five normal tests are the Anderson--Darling test,
+    the Cramer--von Mises test, the Lilliefors (Kolmogorov--Smirnov)
+    test, the Pearson chi--square test, and the Shapiro--Francia test.
+    They are calling functions from R's contributed package \code{nortest}.
+    The difference to the original test functions implemented in R and
+    from contributed R packages is that the Rmetrics functions accept
+    time series objects as input and give a more detailed output report.
+
+    The Anderson-Darling test is used to test if a sample of data came
+    from a population with a specific distribution, here the normal
+    distribution. The \code{adTest} goodness-of-fit test can be
+    considered as a modification of the Kolmogorov--Smirnov test which
+    gives more weight to the tails than does the \code{ksnormTest}.
+
+  Note that \code{jarqueBeraTest} computes the asymptotic statistic
+  and p-value, while \code{jbTesT} gives final sample approximations.
+
+}
 
 \value{
   an object from class \code{\link{fHTEST}}
@@ -143,7 +180,9 @@ sfTest(x, title = NULL, description = NULL)
       the 'W' statistic and the p-value.
 
     }
-    \item{jarqueberaTest}{}
+    \item{jarqueberaTest}{
+      no additional elements.
+    }
     \item{jbTest}{
       
       the 'Chi-squared' statistic with 2 degrees of freedom and the
@@ -188,53 +227,12 @@ sfTest(x, title = NULL, description = NULL)
   }
 }
 
-
-\details{
-
-    The hypothesis tests may be of interest for many financial
-    and economic applications, especially for the investigation
-    of univariate time series returns.
-    \cr
-
-    \bold{Normal Tests:}
-    \cr\cr
-    Several tests for testing if the records from a data set are normally
-    distributed are available. The input to all these functions may be
-    just a vector \code{x} or a univariate time series object \code{x}
-    of class \code{timeSeries}.
-
-    First there exists a wrapper function which allows to call one from
-    two normal tests either the Shapiro--Wilks test or the Jarque--Bera
-    test. This wrapper was introduced for compatibility with S-Plus'
-    FinMetrics package.
-
-    Also available are the Kolmogorov--Smirnov one sample test and the
-    D'Agostino normality test.
-
-    The remaining five normal tests are the Anderson--Darling test,
-    the Cramer--von Mises test, the Lilliefors (Kolmogorov--Smirnov)
-    test, the Pearson chi--square test, and the Shapiro--Francia test.
-    They are calling functions from R's contributed package \code{nortest}.
-    The difference to the original test functions implemented in R and
-    from contributed R packages is that the Rmetrics functions accept
-    time series objects as input and give a more detailed output report.
-
-    The Anderson-Darling test is used to test if a sample of data came
-    from a population with a specific distribution, here the normal
-    distribution. The \code{adTest} goodness-of-fit test can be
-    considered as a modification of the Kolmogorov--Smirnov test which
-    gives more weight to the tails than does the \code{ksnormTest}.
-
-}
-
-
 \note{
 
     Some of the test implementations are selected from R's \code{ctest}
     and \code{nortest} packages.
 
 }
-
 
 \references{
 Anderson T.W., Darling D.A. (1954);
@@ -301,7 +299,6 @@ Wuertz D., Katzgraber H.G. (2005);
     ETHZ Preprint.
 }
 
-
 \author{
 
     R-core team for the tests from \R's ctest package,\cr
@@ -313,7 +310,6 @@ Wuertz D., Katzgraber H.G. (2005);
     Earlier versions of theses functions  were based on Fortran code of Paul Johnson.
 
 }
-
 
 \examples{
 \dontshow{set.seed(1234)}
@@ -332,6 +328,5 @@ Wuertz D., Katzgraber H.G. (2005);
    # jarqueberaTest(x)
    # jbTest(x)
 }
-
 
 \keyword{htest}

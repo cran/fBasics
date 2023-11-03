@@ -3,43 +3,33 @@
 
 \title{Fit density using smoothing splines}
 
-
 \description{
 
-    Estimates the parameters of a density function
-    using smoothing splines.
+  Estimates the parameters of a density function using smoothing
+  splines.
 
 }
-
 
 \usage{   
 ssdFit(x) 
 }
 
-
 \arguments{
-        
-    \item{x}{
-        a numeric vector. 
-        }
-
+  \item{x}{
+    a numeric vector. 
+  }
 }
-
 
 \value{
   
-    for \code{ssdFit}, an object of class \code{ssden}.  The returned
-    object can be used to evaluate density, probabilities and quantiles.
+  for \code{ssdFit}, an object of class \code{ssden}.  The returned
+  object can be used to evaluate density, probabilities and quantiles.
 
 }
-
 
 \author{
-
-    Diethelm Wuertz, Chong Gu for the underlying \code{gss} package.
-    
+  Diethelm Wuertz, Chong Gu for the underlying \code{gss} package.
 }
-
 
 \references{
 
@@ -53,7 +43,6 @@ Gu, C. and Wang, J. (2003),
     Statistica Sinica, 13, 811--826. 
     
 }
-
 
 \examples{     
 ## ssdFit -
@@ -71,6 +60,4 @@ Gu, C. and Wang, J. (2003),
    lines(u, v, col = "orange", lwd = 2)
 }
 
-
 \keyword{distribution}
-

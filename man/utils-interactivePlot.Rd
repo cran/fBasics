@@ -1,53 +1,70 @@
 \name{interactivePlot}
-
-
 \alias{interactivePlot}
 
 
 \title{Interactive Plot Utility}
 
-
 \description{
-
-    Plots with emphasis on interactive plots.
-    
+  Plots with emphasis on interactive plots.
 }
-
 
 \usage{
 interactivePlot(x, choices = paste("Plot", 1:9), 
     plotFUN = paste("plot.", 1:9, sep = ""), which = "all", \dots)
 }
 
-
 \arguments{
 
-    \item{choices}{
-        a vector of character strings for the
-        choice menu. By Default \code{"Plot 1"} ... \code{"Plot 9"}
-        allowing for 9 plots at maximum.
-        }
-    \item{plotFUN}{
-        a vector of character strings naming the
-        plot functions. By Default \code{"plot.1"} ... \code{"plot.9"}
-        allowing for 9 plots at maximum.
-        } 
-    \item{which}{
-        plot selection, which graph should be displayed? If \code{"which"}
-        is a character string named "ask" the user is interactively asked 
-        which to plot, if a logical vector of length \code{N}, those plots 
-        which are set \code{TRUE} are displayed, if a character string
-        named \code{"all"} all plots are displayed.
-        }
-    \item{x}{
-        an object to be plotted. 
-        }
-    \item{\dots}{
-        additional arguments passed to the FUN or plot function.
-        }
+  \item{x}{
+    an object to be plotted. 
+  }
+  \item{choices}{
+
+    a character vector of length at most 9, giving descriptive names of
+    the plots for the menu presented to the user.
+    
+  }
+  \item{plotFUN}{
+
+    a vector of the same length as \code{choices}, containing functions
+    and/or names of functions. \code{plotFUN[[i]]} is called to produce
+    the plot corresponding to \code{choice[i]}.
+
+  } 
+  \item{which}{
+    
+    Which graph(s) should be displayed?
+    One of the character strings \code{"ask"} (ask the user) or
+    \code{"all"} (produce all plots), or a logical vector in which the
+    positions of the \code{TRUE} values designating the plots to
+    produce.
+    
+  }
+  \item{\dots}{
+
+    additional arguments passed to the FUN or plot function.
+    (2023-10-21 GNB: currently the \code{"..."} arguments are not
+    really passed on to the plotting functions.)
+    
+  }
         
 }
 
+\details{
+
+  If \code{"which"} is the character string \code{"ask"}, then the user
+  is presented with a menu to interactively choose which plot(s) to
+  show.  Argument \code{choices} is used for the choices in the menu, so
+  they should be informative.
+
+  If \code{"which"} is equal to \code{"all"} all plots are drawn. If
+  \code{"which"} is a logical vector, the indicate plots are displayed.
+
+  Note that if more plots are to be shown in one window, the arrangement
+  should be made in advance (and cleaned up afterwards), see the
+  examples.
+
+}
 
 \examples{
 ## Test Plot Function:
@@ -64,16 +81,36 @@ interactivePlot(x, choices = paste("Plot", 1:9),
        which = which, ...)       
      # Return Value:
      invisible()
-   }  
-   # Plot:
-   par(mfrow = c(2, 2), cex = 0.7)
-   testPlot(rnorm(500))
-      
+   }
+## Plot:
+   # prepare the window and store its previous state
+   op <- par(mfrow = c(2, 2), cex = 0.7)
+   # produce the plot
+   testPlot(rnorm(500))            
+   # restore the previous state
+   par(op)
+
    # Try:
    # par(mfrow = c(1,1))
    # testPlot(rnorm(500), which = "ask")
+
+## similar to above but using functions for plotFUN
+   testPlot_2 = function(x, which = "all", ...) {   
+     interactivePlot(x,
+       choices = c("Series Plot", "ACF", "Histogram", "QQ Plot"),
+       plotFUN = c(plot.1 = function(x, ...) plot(x, ...),
+                   plot.2 = function(x, ...) acf(x, ...),
+                   plot.3 = function(x, ...) hist(x, ...),
+                   plot.4 = function(x, ...) qqnorm(x, ...) ),
+       which = which, ...)       
+   
+       # Return Value:
+       invisible()
+   }
+   # produce the plot
+   op <- par(mfrow = c(2, 2), cex = 0.7)
+   testPlot_2(rnorm(500))            
+   par(op)
 }
 
-
 \keyword{hplot}
-

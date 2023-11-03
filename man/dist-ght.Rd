@@ -1,22 +1,22 @@
 \name{ght}
 
-
 \alias{dght}
 \alias{pght}
 \alias{qght}
 \alias{rght}
 
 
-\title{Generalized Hyperbolic Student-t}
+\concept{generalized hyperbolic Student-t distribution}
 
+
+\title{Generalized Hyperbolic Student-t distribution}
 
 \description{
     
-    Density, distribution function, quantile function 
-    and random generation for the hyperbolic distribution.
+  Density, distribution function, quantile function and random
+  generation for the generalized hyperbolic Student-t distribution.
     
 }
-
 
 \usage{
 dght(x, beta = 0.1, delta = 1, mu = 0, nu = 10, log = FALSE)
@@ -25,52 +25,51 @@ qght(p, beta = 0.1, delta = 1, mu = 0, nu = 10)
 rght(n, beta = 0.1, delta = 1, mu = 0, nu = 10)
 }
 
-
 \arguments{
 
+  \item{x, q}{
+    a numeric vector of quantiles.
+  }
+  \item{p}{
+    a numeric vector of probabilities.
+  }
+  \item{n}{
+    number of observations.
+  }
+  \item{beta}{
+    numeric value, the skewness parameter in the range \code{(0, alpha)}.
+  }
+  \item{delta}{
+    numeric value, the scale parameter, must be zero or positive.
+  }
+  \item{mu}{
+    numeric value, the location parameter, by default 0.
+  }
+  \item{nu}{
 
-    \item{beta, delta, mu}{
-        numeric values.
-        \code{beta} is the skewness parameter in the range \code{(0, alpha)};
-        \code{delta} is the scale parameter, must be zero or positive; 
-        \code{mu} is the location parameter, by default 0.
-        These are the parameters in the first parameterization.
-        }
-    \item{nu}{
-        a numeric value, the number of degrees of freedom.
-        Note, \code{alpha} takes the limit of \code{abs(beta)}, 
-        and \code{lambda=-nu/2}.
-        }
-    \item{x, q}{
-        a numeric vector of quantiles.
-        }
-    \item{p}{
-        a numeric vector of probabilities.
-        }
-    \item{n}{
-        number of observations.
-        }
-    \item{log}{
-        a logical, if TRUE, probabilities \code{p} are given as 
-        \code{log(p)}.
-        }
-    
+    a numeric value, the number of degrees of freedom.  Note,
+    \code{alpha} takes the limit of \code{abs(beta)}, and \code{lambda=-nu/2}.
+
+  }
+  \item{log}{
+    a logical, if TRUE, probabilities \code{p} are given as \code{log(p)}.
+  }
 }
 
+\details{
+
+  \code{dght} gives the density,
+  \code{pght} gives the distribution function,
+  \code{qght} gives the quantile function, and
+  \code{rght} generates random deviates.
+    
+  The parameters are as in the first parameterization.
+
+}
 
 \value{
-
-    All values for the \code{*ght} functions are numeric vectors: 
-    \code{d*} returns the density,
-    \code{p*} returns the distribution function,
-    \code{q*} returns the quantile function, and
-    \code{r*} generates random deviates.
-    
-    All values have attributes named \code{"param"} listing
-    the values of the distributional parameters.
-    
+  numeric vector
 }
-
 
 \references{
 
@@ -96,12 +95,9 @@ Raible S. (2000);
     
 }
 
-
 \examples{   
 ## ght -
    #
 }
 
-
 \keyword{distribution}
-

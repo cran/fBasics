@@ -36,7 +36,7 @@
 # FUNCTION:               BASIC STATISTICS:
 #  basicStats              Returns a basic statistics summary
 # FUNCTION:               DESCRIPTION:
-#  .distCheck              Checks consistency of distributions
+#   distCheck              Checks consistency of distributions
 # FUNCTION:               SPLUS FUNCTIONALITY:
 #  stdev                   S-PLUS: Returns the standard deviation of a vector
 ################################################################################
@@ -177,7 +177,7 @@ function()
     #   .distCheck(fun = "norm", n = 1000, seed = 4711, ...)
 
     # Normal Distribution Check:
-    fBasics:::.distCheck()
+    fBasics::distCheck()
 
     # Return Value:
     return()

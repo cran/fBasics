@@ -25,8 +25,10 @@ interactivePlot <-
 function(x, choices = paste("Plot", 1:9),
     plotFUN = paste("plot.", 1:9, sep = ""), which = "all", ...)
 {
-    # A function implemented by Diethelm Wuertz
-
+    # A function implemented by Diethelm Wuertz.
+    # Modified by GNB to accept a list of functions for argument 'which'
+    #   (previously it had to be a character vector)
+    
     # Description:
     #   Plot method for an object of class "template".
 
@@ -57,47 +59,44 @@ function(x, choices = paste("Plot", 1:9),
         stop("Sorry, only 9 plots at max are supported.")
 
     # Internal "askPlot" Function:
-    multPlot = function(x, choices, ...)
-    {
-        # Selective Plot:
-        selectivePlot <-
-    function(x, choices, FUN, which){
-            # Internal Function:
-            askPlot <-
-        function(x, choices, FUN) {
-                # Pick and Plot:
+    multPlot = function(x, choices, ...) {
+        ## Selective Plot:
+        selectivePlot <- function(x, choices, FUN, which){
+            ## Internal Function:
+            askPlot <- function(x, choices, FUN) {
+                ## Pick and Plot:
                 pick = 1
                 setRmetricsOptions(n.plots = length(choices))
-                while (pick > 0) { pick = menu (
-                    choices = paste("plot:", choices),
-                    title = "\nMake a plot selection (or 0 to exit):")
-                    if (pick > 0) match.fun(FUN[pick])(x) }
+                while (pick > 0) {
+                    pick = menu (choices = paste("plot:", choices),
+                                 title = "\nMake a plot selection (or 0 to exit):")
+                    if (pick > 0) match.fun(FUN[[pick]])(x)
+                }
             }
             if (as.character(which[1]) == "ask") {
                 askPlot(x, choices = choices, FUN = FUN, ...)
             } else {
                 for (i in 1:getRmetricsOptions("n.plots"))
-                    if (which[i]) match.fun(FUN[i])(x)
+                    if (which[i]) match.fun(FUN[[i]])(x)
             }
             invisible()
         }
 
         # match Functions, up to nine ...
-        if (length(plotFUN) < 9) plotFUN =
-            c(plotFUN, rep(plotFUN[1], times = 9 - length(plotFUN)))
-        plot.1 = match.fun(plotFUN[1]); plot.2 = match.fun(plotFUN[2])
-        plot.3 = match.fun(plotFUN[3]); plot.4 = match.fun(plotFUN[4])
-        plot.5 = match.fun(plotFUN[5]); plot.6 = match.fun(plotFUN[6])
-        plot.7 = match.fun(plotFUN[7]); plot.8 = match.fun(plotFUN[8])
-        plot.9 = match.fun(plotFUN[9])
+        if (length(plotFUN) < 9)
+            plotFUN = c(plotFUN, rep(plotFUN[[1]], times = 9 - length(plotFUN)))
+        plot.1 = match.fun(plotFUN[[1]]); plot.2 = match.fun(plotFUN[[2]])
+        plot.3 = match.fun(plotFUN[[3]]); plot.4 = match.fun(plotFUN[[4]])
+        plot.5 = match.fun(plotFUN[[5]]); plot.6 = match.fun(plotFUN[[6]])
+        plot.7 = match.fun(plotFUN[[7]]); plot.8 = match.fun(plotFUN[[8]])
+        plot.9 = match.fun(plotFUN[[9]])
         pick = 1
-        while (pick > 0) { pick = menu (
-            ### choices = paste("plot:", choices),
-            choices = paste(" ", choices),
-            title = "\nMake a plot selection (or 0 to exit):")
-            # up to 9 plot functions ...
+        while (pick > 0) {
+            pick = menu (choices = paste(" ", choices),
+                         title = "\nMake a plot selection (or 0 to exit):")
+            ## up to 9 plot functions ...
             switch (pick, plot.1(x), plot.2(x), plot.3(x), plot.4(x),
-                plot.5(x), plot.6(x), plot.7(x), plot.8(x), plot.9(x) )
+                    plot.5(x), plot.6(x), plot.7(x), plot.8(x), plot.9(x) )
         }
     }
 
@@ -114,7 +113,7 @@ function(x, choices = paste("Plot", 1:9),
         multPlot(x, choices, ...)
     } else {
         for ( i in 1:length(which) ) {
-            FUN = match.fun(plotFUN[i])
+            FUN = match.fun(plotFUN[[i]])
             if (which[i]) FUN(x)
         }
     }
@@ -125,4 +124,3 @@ function(x, choices = paste("Plot", 1:9),
 
 
 ################################################################################
-

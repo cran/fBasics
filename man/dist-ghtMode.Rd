@@ -1,51 +1,44 @@
 \name{ghtMode}
-
-
 \alias{ghtMode}
 
 
 \title{Generalized Hyperbolic Student-t Mode}
 
-
 \description{
     
-    Computes the mode of the generalized hyperbolic 
-    Student-t distribution.
+  Computes the mode of the generalized hyperbolic Student-t
+  distribution.
     
 }
-
 
 \usage{
 ghtMode(beta = 0.1, delta = 1, mu = 0, nu = 10)
 }
 
-
 \arguments{
 
-    \item{beta, delta, mu}{
-        numeric values.
-        \code{beta} is the skewness parameter in the range \code{(0, alpha)};
-        \code{delta} is the scale parameter, must be zero or positive; 
-        \code{mu} is the location parameter, by default 0.
-        These are the parameters in the first parameterization.
-        }
-    \item{nu}{
-        a numeric value, the number of degrees of freedom.
-        Note, \code{alpha} takes the limit of \code{abs(beta)}, 
-        and \code{lambda=-nu/2}.
-        }
-    
+  \item{beta}{the skewness parameter in the range \code{(0, alpha).}}
+  \item{delta}{the scale parameter, must be zero or positive.}
+  \item{mu}{the location parameter, by default 0.}
+  \item{nu}{
+    a numeric value, the number of degrees of freedom.
+    Note, \code{alpha} takes the limit of \code{abs(beta)}, 
+    and \code{lambda=-nu/2}.
+  }
 }
 
+\details{
+
+  These are the parameters in the first parameterization.
+
+}
 
 \value{
-    
-    returns the mode for the generalized hyperbolic Student-t
-    distribution. A numeric value.
+
+  a numeric value, the mode for the generalized hyperbolic Student-t
+  distribution.
     
 }
-
-
 
 \references{
 Atkinson, A.C. (1982); 
@@ -69,12 +62,9 @@ Raible S. (2000);
     PhD Thesis, University of Freiburg, Germany, 161 pages.
 }
 
-
 \examples{   
 ## ghtMode -
    ghtMode()
 }
 
-
 \keyword{distribution}
-

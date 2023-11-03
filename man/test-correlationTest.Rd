@@ -74,7 +74,6 @@ spearmanTest(x, y, title = NULL, description = NULL)
   an object from class \code{\link{fHTEST}}
 }
 
-
 \references{
 
 Conover, W. J. (1971);
@@ -108,6 +107,5 @@ set.seed(1234)
    correlationTest(x, y, "kendall")
    spearmanTest(x, y)
 }
-
 
 \keyword{htest}

@@ -6,52 +6,44 @@
 
 \description{
     
-    Plots the normal inverse Gaussian Shape Triangle.
+  Plots the normal inverse Gaussian Shape Triangle.
     
 }
-
 
 \usage{
 nigShapeTriangle(object, add = FALSE, labels = TRUE, \dots)
 }
 
-
 \arguments{
 
-    \item{object}{
-        an object of class \code{"fDISTFIT"} as returned by the function
-        \code{nigFit}.
-        } 
-    \item{add}{
-        a logical value. Should another point added to the NIG
-        shape triangle? By default FALSE, a new plot will be created.
-        } 
-    \item{labels}{
-        a logical flag by default \code{TRUE}. 
-        Should the logarithm of the density be returned?
-        }
-    \item{\dots}{
-        arguments to be passed to the function \code{integrate}.
-        }
-    
+  \item{object}{
+    an object of class \code{"fDISTFIT"} as returned by the function
+    \code{nigFit}.
+  } 
+  \item{add}{
+    a logical value. Should another point added to the NIG
+    shape triangle? By default FALSE, a new plot will be created.
+  } 
+  \item{labels}{
+    a logical flag by default \code{TRUE}. 
+    Should the logarithm of the density be returned?
+  }
+  \item{\dots}{
+    arguments to be passed to the function \code{integrate}.
+  }
 }
-
 
 \value{
 
-    displays the parameters of fitted distributions in the
-    NIG shape triangle.
+  displays the parameters of fitted distributions in the
+  NIG shape triangle.
     
 }
-
 
 \author{
-
-    David Scott for code implemented from \R's 
-    contributed package \code{HyperbolicDist}.
-    
+  David Scott for code implemented from \R's contributed package
+  \code{HyperbolicDist}.
 }
-
 
 \references{
 
@@ -77,12 +69,9 @@ Raible S. (2000);
     
 }
 
-
 \examples{   
 ## nigShapeTriangle -
    #
 }
 
-
 \keyword{distribution}
-

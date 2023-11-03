@@ -123,12 +123,20 @@ distCheck <- function(fun = "norm", n = 1000, robust = TRUE, subdivisions = 100,
 
 # ------------------------------------------------------------------------------
 
-
-.distCheck <- distCheck
-
-    # Keep for older Rmetrics Versions
-
-
+## (2023-10-15) GNB: Can't remove .distCheck easily since in recent versions of
+## fGarch it was imported explicitly in NAMESPACE. This means that if I remove
+## it, I need to ask every maintainer importing fGarch to require fGarch (>=
+## 4031.90) - not impossible, but not particularly reasonable in the short term.
+##
+## So, keep it for now.
+.distCheck <- function(...) {
+    if(("fGarch" %in% loadedNamespaces() && packageVersion("fGarch") < "4031.90") ||
+       ("fExtremes" %in% loadedNamespaces() && packageVersion("fExtremes") <= "4021.83") ||
+       ("stabledist" %in% loadedNamespaces() && packageVersion("stabledist") <= "0.7-1") ) {
+        ## let it work with old versions of fGarch, fExtremes, stabledist
+        distCheck(...)
+    } else
+        stop("'.distCheck' is defunct. Use 'distCheck' instead.")
+}
 
 ################################################################################
-

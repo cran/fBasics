@@ -18,7 +18,6 @@
 
 \title{Row statistics}
 
-
 \description{
 
     Functions to compute row statistical properties 
@@ -42,7 +41,6 @@
 
 }
 
-
 \usage{
 rowStats(x, FUN, \dots) 
 
@@ -62,38 +60,30 @@ rowStdevs(x, \dots)
 rowAvgs(x, \dots)
 }
 
-
 \arguments{
   
-    \item{FUN}{
-        a function name, the statistical function to be applied.
-        }
-    \item{prob}{
-        a numeric value, the probability with value in [0,1].
-        }
-    \item{x}{
-        a rectangular object which can be transformed into a matrix
-        by the function \code{as.matrix}.  
-        }
-    \item{\dots}{
-        arguments to be passed.
-        }
-        
+  \item{FUN}{
+    a function name, the statistical function to be applied.
+  }
+  \item{prob}{
+    a numeric value, the probability with value in [0,1].
+  }
+  \item{x}{
+    a rectangular object which can be transformed into a matrix
+    by the function \code{as.matrix}.  
+  }
+  \item{\dots}{
+    arguments to be passed.
+  }
 }
-
 
 \value{
-    
   each function returns a numeric vector of the statistics
 }
-
-
 
 \seealso{
   \code{\link{colStats}}
 }
-
-
 
 \examples{
 ## Simulated Return Data in Matrix Form:
@@ -105,6 +95,5 @@ rowAvgs(x, \dots)
 ## rowMaxs -
    rowMaxs(x)  
 }
-
 
 \keyword{univar}

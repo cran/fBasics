@@ -1,11 +1,8 @@
 \name{nigSlider}
-
-
 \alias{nigSlider}
 
 
 \title{nigerbolic Distribution Slider}
-
 
 \description{
     
@@ -14,28 +11,23 @@
     
 }
 
-
 \usage{
 nigSlider()
 }
 
-
 \value{
 
-    a tcl/tk based graphical user interface.
+  a tcl/tk based graphical user interface.
     
-    This is a nice display for educational purposes to investigate
-    the densities and probabilities of the invetrse Gaussian 
-    distribution.
+  This is a nice display for educational purposes to investigate
+  the densities and probabilities of the invetrse Gaussian 
+  distribution.
     
 }
-
 
 \examples{   
 ## nigSlider -
    # nigSlider()
 }
 
-
 \keyword{distribution}
-

@@ -16,7 +16,6 @@
   Objects can be created by calls of the form \code{new("fDISTFIT", ...)}
   but are typically created by functions fitting distributions.
   
-  
 %%  ~~ describe objects here ~~ 
 }
 \section{Slots}{
@@ -62,22 +61,8 @@
   }
 }
 
-%\references{
-%%%  ~~put references to the literature/web site here~~
-%}
-%\author{
-%%%  ~~who you are~~
-%}
-%\note{
-%}
-%
-%%% ~Make other sections like Warning with \section{Warning }{....} ~
-%
-%\seealso{
-%%%  ~~objects to See Also as \code{\link{~~fun~~}}, ~~~
-%%%  ~~or \code{\linkS4class{CLASSNAME}} for links to other classes ~~~
-%}
 \examples{
 showClass("fDISTFIT")
 }
+
 \keyword{classes}
