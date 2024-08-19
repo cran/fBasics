@@ -22,14 +22,12 @@ rowIds(x, \dots)
 }
 
 \arguments{
-
   \item{x}{
     a numeric matrix.
   }
   \item{\dots}{
     passed on to \code{colnames} or \code{rownames}.
   }
-        
 }
 
 \details{
@@ -41,18 +39,15 @@ rowIds(x, \dots)
 }
 
 \examples{
-## pascal -
-   # Create Pascal Matrix:
-   P = pascal(3)
-   P
+## Create Pascal Matrix:
+P <- pascal(3)
+P
  
-## rownames -  
-   rownames(P) <- letters[1:3]
-   P   
+rownames(P) <- letters[1:3]
+P   
    
-## colIds<- -  
-   colIds(P) <- as.character(1:3)
-   P                            
+colIds(P) <- as.character(1:3)
+P                            
 }
 
 \keyword{math}

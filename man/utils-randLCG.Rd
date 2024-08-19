@@ -86,23 +86,19 @@ rt.lcg(n, df)
 
 
 \references{
-
 Altman, N.S. (1988);
     \emph{Bitwise Behavior of Random Number Generators},
      SIAM J. Sci. Stat. Comput., 9(5), September, 941--949.
-
 }
 
 
 \examples{
-## set.lcgseed -
-   set.lcgseed(seed = 65890)
+set.lcgseed(seed = 65890)
  
-## runif.lcg - rnorm.lcg - rt.lcg -
-   cbind(runif.lcg(10), rnorm.lcg(10), rt.lcg(10, df = 4))
+## runif.lcg, rnorm.lcg, rt.lcg
+cbind(runif.lcg(10), rnorm.lcg(10), rt.lcg(10, df = 4))
 
-## get.lcgseed -
-   get.lcgseed()  
+get.lcgseed()  
    
 ## Note, to overwrite rnorm, use
    # rnorm = rnorm.lcg

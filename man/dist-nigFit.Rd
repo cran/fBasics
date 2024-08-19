@@ -84,51 +84,31 @@ nigFit(x, alpha = 1, beta = 0, delta = 1, mu = 0,
 }
 
 \value{
-  an object from class \code{"fDISTFIT"}.
+  an object from class \code{"\linkS4class{fDISTFIT}"}.
 
-  Slot \code{fit} is a list with the following components:
-  
-    \item{estimate}{
-        the point at which the maximum value of the log liklihood 
-        function is obtained.
-        }
-    \item{minimum}{
-        the value of the estimated maximum, i.e. the value of the
-        log liklihood function.
-        }
-    \item{code}{
-        an integer indicating why the optimization process terminated.\cr
-        1: relative gradient is close to zero, current iterate is probably 
-            solution; \cr
-        2: successive iterates within tolerance, current iterate is probably 
-            solution; \cr
-        3: last global step failed to locate a point lower than \code{estimate}. 
-            Either \code{estimate} is an approximate local minimum of the 
-            function or \code{steptol} is too small; \cr
-        4: iteration limit exceeded; \cr
-        5: maximum step size \code{stepmax} exceeded five consecutive times. 
-            Either the function is unbounded below, becomes asymptotic to a 
-            finite value from above in some direction or \code{stepmax} 
-            is too small.
-            }
-    \item{gradient}{
-        the gradient at the estimated maximum.
-        }
-    \item{steps}{
-        number of function calls.
-        }
-              
+  Slot \code{fit} is a list, whose components depend on the method. See
+  \code{"\linkS4class{fDISTFIT}"} for the meaning of the most common
+  ones.
+
+  Here is an \strong{informal} list of components for the various methods:
+
+  for mle: \code{par}, \code{scale}, \code{estimate}, \code{minimum}, \code{code}
+       plus components from \code{nlminb()}
+       plus additions from  \code{.distStandardErrors()};
+
+  for gmm:  only \code{estimate};
+
+  for mps and vmps: \code{estimate}, \code{minimum}, \code{error} (s.e.'s), \code{code}.
+
 }
 
-\examples{    
-## nigFit -
-   # Simulate Random Variates:
-   set.seed(1953)
-   s = rnig(n = 1000, alpha = 1.5, beta = 0.3, delta = 0.5, mu = -1.0) 
+\examples{
+## Simulate Random Variates
+set.seed(1953)
+s <- rnig(n = 1000, alpha = 1.5, beta = 0.3, delta = 0.5, mu = -1.0) 
 
-## nigFit -  
-   # Fit Parameters:
-   nigFit(s, alpha = 1, beta = 0, delta = 1, mu = mean(s), doplot = TRUE) 
+nigFit(s, alpha = 1, beta = 0, delta = 1, mu = mean(s), doplot = TRUE,
+       trace = FALSE) 
 }
 
 \keyword{distribution}

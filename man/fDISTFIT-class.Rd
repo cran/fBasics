@@ -28,10 +28,10 @@
     \item{\code{description}:}{Object of class \code{"character"} ~~ }
   }
 
-  Slot \code{fit} is a list with components:
+  Slot \code{fit} is a list. Its components depend on the fitting
+  functions. Here is the meaning of some common ones:
 
   \describe{
-
     \item{estimate}{
       the point at which the maximum value of the log liklihood 
       function is obtained.
@@ -41,19 +41,25 @@
       log liklihood function.
     }
     \item{code}{
-      an integer indicating why the optimization process terminated.
+      an integer indicating why the optimization process terminated.\cr
+      1: relative gradient is close to zero, current iterate is probably 
+          solution; \cr
+      2: successive iterates within tolerance, current iterate is probably 
+          solution; \cr
+      3: last global step failed to locate a point lower than \code{estimate}. 
+          Either \code{estimate} is an approximate local minimum of the 
+          function or \code{steptol} is too small; \cr
+      4: iteration limit exceeded; \cr
+      5: maximum step size \code{stepmax} exceeded five consecutive times. 
+          Either the function is unbounded below, becomes asymptotic to a 
+          finite value from above in some direction or \code{stepmax} 
+          is too small.
     }
     \item{gradient}{
       the gradient at the estimated maximum.
     }
-
   }
 
-  The above description of slot \code{fit} is taken from the
-  documentation for \code{\link{tFit}}, \code{\link{nFit}} and
-  \code{\link{stableFit}}. \strong{TODO:} needs checking and also is it the same for
-  other distribution fitting functions.
-  
 }
 \section{Methods}{
   \describe{

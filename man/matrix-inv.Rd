@@ -34,18 +34,18 @@ Golub, van Loan, (1996);
 
 \examples{
 ## Create Pascal Matrix:
-   P = pascal(5)
-   P
+P = pascal(5)
+P
          
 ## Compute the Inverse Matrix:
-   inv(P)
+inv(P)
    
 ## Check:
-   inv(P) \%*\% P    
+inv(P) \%*\% P    
    
 ## Alternatives:
-   chol2inv(chol(P))
-   solve(P)                     
+chol2inv(chol(P))
+solve(P)                     
 }
 
 \keyword{math}

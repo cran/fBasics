@@ -48,12 +48,12 @@ Golub, van Loan, (1996);
 
 \examples{
 ## Create Pascal Matrix:
-   P = pascal(5)
-   P
+P = pascal(5)
+P
    
 ## Compute the Rank:
-   rk(P)
-   rk(P, "chol")                                
+rk(P)
+rk(P, "chol")                                
 }
 
 \keyword{math}

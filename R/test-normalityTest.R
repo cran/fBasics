@@ -196,7 +196,7 @@ function(x, title = NULL, description = NULL)
         data.name = DNAME)
 
     # Add:
-    if (is.null(title)) title = "Jarque - Bera Normalality Test"
+    if (is.null(title)) title = "Jarque-Bera Normality Test"
     if (is.null(description)) description = ""
 
     # Return Value:
@@ -299,7 +299,7 @@ function(x)
     ## was: pos = ((1-2/A)/(1+U4*sqrt(2/(A-4))))**(1/3)
     pos0 = ((1-2/A)/(1+U4*sqrt(2/(A-4))))
     pos <- sign(pos0) * abs(pos0) ^ (1/3)
-    
+
     Z4 = (1-2/(9*A)-pos)/jm
     pZ4 = 2*(1-pnorm(abs(Z4),0,1))
     names(Z4) = "Z4"
@@ -356,7 +356,7 @@ function(x)
     ## was: pos = ((1-2/A)/(1+U4*sqrt(2/(A-4))))**(1/3)
     pos0 = ((1-2/A)/(1+U4*sqrt(2/(A-4))))
     pos <- sign(pos0) * abs(pos0) ^ (1/3)
-    
+
     Z4 = (1-2/(9*A)-pos)/jm
     omni = Z3**2+Z4**2
     pomni = 1-pchisq(omni,2)

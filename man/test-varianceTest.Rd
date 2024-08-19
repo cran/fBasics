@@ -10,8 +10,8 @@
 
 \description{
     
-    Tests if two series differ in their distributional
-    variance parameter.
+  Tests if two series differ in their distributional
+  variance parameter.
     
 }
 
@@ -21,21 +21,19 @@ varianceTest(x, y, method = c("varf", "bartlett", "fligner"),
 }
 
 \arguments{
-  
-    \item{x, y}{
-        numeric vectors of data values.
-        }
-    \item{method}{
-        a character string naming which test should be applied.
-        } 
-    \item{title}{
-        an optional title string, if not specified the inputs data 
-        name is deparsed.
-        }
-    \item{description}{
-        optional description string, or a vector of character strings.
-        } 
-       
+  \item{x, y}{
+    numeric vectors of data values.
+  }
+  \item{method}{
+    a character string naming which test should be applied.
+  } 
+  \item{title}{
+    an optional title string, if not specified the inputs data 
+    name is deparsed.
+  }
+  \item{description}{
+    optional description string, or a vector of character strings.
+  } 
 }
 
 \details{
@@ -84,23 +82,18 @@ Lehmann E.L. (1986);
 }
 
 \author{
-
   R-core team for hypothesis tests implemented from \R's 
   package \code{ctest}.
-    
 }
 
 \examples{
 \dontshow{set.seed(1234)}
-## rnorm - 
-   # Generate Series:
-   x = rnorm(50)
-   y = rnorm(50)
+x <- rnorm(50)
+y <- rnorm(50)
    
-## varianceTest -
-   varianceTest(x, y, "varf")
-   varianceTest(x, y, "bartlett")
-   varianceTest(x, y, "fligner")
+varianceTest(x, y, "varf")
+varianceTest(x, y, "bartlett")
+varianceTest(x, y, "fligner")
 }
 
 \keyword{htest}

@@ -15,7 +15,6 @@ colorTable(cex = 0.7)
 }
 
 \arguments{
-  
   \item{cex}{
     
     a numeric value, determines the character size in the color plot,
@@ -29,13 +28,12 @@ colorTable(cex = 0.7)
 }
 
 \seealso{
-    \code{\link{characterTable}},
-    \code{\link{symbolTable}}
+  \code{\link{characterTable}},
+  \code{\link{symbolTable}}
 }
 
-\examples{   
-## Color Table:
-   colorTable()
+\examples{
+colorTable()
 }
 
 \keyword{programming}

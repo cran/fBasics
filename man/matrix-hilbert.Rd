@@ -62,8 +62,8 @@ Wilf, H.S., (1970);
 
 \examples{
 ## Create a Hilbert Matrix:
-   H = hilbert(5)
-   H                              
+H = hilbert(5)
+H                              
 }
 
 \keyword{math}

@@ -18,6 +18,8 @@
 \alias{pchiTest}
 \alias{sfTest}
 
+\concept{normality test}
+\concept{test for normality}
 
 \concept{Kolmogorov-Smirnov test for normality}
 \concept{Shapiro-Wilk's test for normality}
@@ -162,7 +164,7 @@ sfTest(x, title = NULL, description = NULL)
 }
 
 \value{
-  an object from class \code{\link{fHTEST}}
+  an object from class \code{\link{fHTEST}}.
 
   Slot \code{test} is a list containing the following (optionally empty)
   elements (in addition to those described in \code{\link{fHTEST}}):
@@ -313,20 +315,17 @@ Wuertz D., Katzgraber H.G. (2005);
 
 \examples{
 \dontshow{set.seed(1234)}
-## Series:
-   x = rnorm(100)
+x <- rnorm(100)
 
-## ksnormTests -
-   # Kolmogorov - Smirnov One-Sampel Test
-   ksnormTest(x)
+## Kolmogorov-Smirnov one-sampe test
+ksnormTest(x)
 
-## shapiroTest - Shapiro-Wilk Test
-   shapiroTest(x)
+## Shapiro-Wilk test
+shapiroTest(x)
 
-## jarqueberaTest -
-   # Jarque - Bera Test
-   # jarqueberaTest(x)
-   # jbTest(x)
+## Jarque-Bera Test
+jarqueberaTest(x)
+jbTest(x)
 }
 
 \keyword{htest}

@@ -75,7 +75,6 @@ spearmanTest(x, y, title = NULL, description = NULL)
 }
 
 \references{
-
 Conover, W. J. (1971);
     \emph{Practical nonparametric statistics},
     New York: John Wiley & Sons.
@@ -83,29 +82,25 @@ Conover, W. J. (1971);
 Lehmann E.L. (1986); 
     \emph{Testing Statistical Hypotheses}, 
     John Wiley and Sons, New York.
-
 }
 
 \seealso{
-
     \code{\link{locationTest}},
     \code{\link{scaleTest}},
-    \code{\link{varianceTest}}.
-    
+    \code{\link{varianceTest}}
 }
 
 \examples{
 \dontshow{
 set.seed(1234)
 }
-## x, y -
-   x = rnorm(50)
-   y = rnorm(50)
+x <- rnorm(50)
+y <- rnorm(50)
   
-## correlationTest - 
-   correlationTest(x, y, "pearson")
-   correlationTest(x, y, "kendall")
-   spearmanTest(x, y)
+correlationTest(x, y, "pearson")
+correlationTest(x, y, "kendall")
+
+spearmanTest(x, y)
 }
 
 \keyword{htest}

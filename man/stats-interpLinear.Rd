@@ -68,19 +68,18 @@ linearInterpp(x, y = NULL, z = NULL, xo, yo)
     
 }
 
-\examples{ 
-## linearInterp -
-   # Linear Interpolation:    
-   if (requireNamespace("interp")) {
-     set.seed(1953)
-     x = runif(999) - 0.5
-     y = runif(999) - 0.5
-     z = cos(2*pi*(x^2+y^2))
-     ans = linearInterp(x, y, z, gridPoints = 41)
-     persp(ans, theta = -40, phi = 30, col = "steelblue",
-        xlab = "x", ylab = "y", zlab = "z")
-     contour(ans)
-   }
+\examples{
+## Linear Interpolation:    
+if (requireNamespace("interp")) {
+    set.seed(1953)
+    x <- runif(999) - 0.5
+    y <- runif(999) - 0.5
+    z <- cos(2 * pi * (x^2 + y^2))
+    ans = linearInterp(x, y, z, gridPoints = 41)
+    persp(ans, theta = -40, phi = 30, col = "steelblue",
+          xlab = "x", ylab = "y", zlab = "z")
+    contour(ans)
+}
 }
 
 \keyword{math}

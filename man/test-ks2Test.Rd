@@ -53,7 +53,6 @@ ks2Test(x, y, title = NULL, description = NULL)
 }
 
 \references{
-
 Conover, W. J. (1971);
     \emph{Practical nonparametric statistics},
     New York: John Wiley & Sons.
@@ -61,18 +60,14 @@ Conover, W. J. (1971);
 Lehmann E.L. (1986); 
     \emph{Testing Statistical Hypotheses}, 
     John Wiley and Sons, New York.
-
 }
 
 \examples{
 \dontshow{set.seed(1234)}
-## rnorm - 
-   # Generate Series:
-   x = rnorm(50)
-   y = rnorm(50)
+x <- rnorm(50)
+y <- rnorm(50)
   
-## ks2Test - 
-   ks2Test(x, y)
+ks2Test(x, y)
 }
 
 \keyword{htest}

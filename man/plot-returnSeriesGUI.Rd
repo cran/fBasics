@@ -10,14 +10,12 @@
   \code{returnSeriesGUI} opens a GUI for return series plots.
 
 }
-    
 
 \usage{ 
 returnSeriesGUI(x)
 }
 
 \arguments{
-  
     \item{x}{
 
       an object of class \code{"timeSeries"} or any other object which

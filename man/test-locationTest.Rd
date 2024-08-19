@@ -13,12 +13,10 @@
 
 }
 
-
 \usage{
 locationTest(x, y, method = c("t", "kw2"), title = NULL,
     description = NULL)
 }
-
 
 \arguments{
   
@@ -39,7 +37,6 @@ locationTest(x, y, method = c("t", "kw2"), title = NULL,
 }
 
 \details{
-    
   
   The \code{method = "t"} can be used to determine if the two sample 
   means are equal for unpaired data sets. Two variants are used,
@@ -67,7 +64,6 @@ locationTest(x, y, method = c("t", "kw2"), title = NULL,
 }
 
 \references{
-
 Conover, W. J. (1971);
     \emph{Practical nonparametric statistics},
     New York: John Wiley & Sons.
@@ -75,27 +71,20 @@ Conover, W. J. (1971);
 Lehmann E.L. (1986); 
     \emph{Testing Statistical Hypotheses}, 
     John Wiley and Sons, New York.
-
 }
 
 \author{
-
   R-core team for hypothesis tests implemented from \R's 
   package \code{ctest}.
-    
 }
 
 \examples{
 \dontshow{set.seed(1234)}
-## rnorm - 
-   # Generate Series:
-   x = rnorm(50)
-   y = rnorm(50)
+x <- rnorm(50)
+y <- rnorm(50)
   
-## locationTest -
-   locationTest(x, y, "t")
-   locationTest(x, y, "kw2")
-
+locationTest(x, y, "t")
+locationTest(x, y, "kw2")
 }
 
 \keyword{htest}

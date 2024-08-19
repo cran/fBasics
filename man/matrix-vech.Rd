@@ -39,13 +39,13 @@ vech(x)
 
 \examples{
 ## Create Pascal Matrix:
-   P = pascal(3)
+P = pascal(3)
    
-## Stack a matrix
-   vec(P) 
+## Stack the matrix
+vec(P) 
    
 ## Stack the lower triangle
-   vech(P)                                        
+vech(P)                                        
 }
 
 \keyword{math}

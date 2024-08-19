@@ -93,7 +93,7 @@ export(
     .residualsPlot,  # fRegression
     .responsesPlot,  # fRegression
     
-    .sliderMenu,     # fCopulae
+    .sliderMenu,     # fCopulae, fGarch and others
     .unirootNA,      # fCopulae
 
     ## look like S3 methods but aren't

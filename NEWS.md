@@ -1,3 +1,9 @@
+# fBasics 4041.97
+
+- fixed the missing package qualifier in a link to another ackage.
+
+
+
 # fBasics 4032.96
 
 - modified `interactivePlot` to allow also functions in argument
@@ -32,7 +38,7 @@
 - `hypMode` now throws error if argument 'pm' doesn't have one of the allowed
   values.
 
-- the return values of`*Mean()`, `*Var()`, `*Skew()`, `*Kurt()`, `*Moments()`,
+- the return values of `*Mean()`, `*Var()`, `*Skew()`, `*Kurt()`, `*Moments()`,
   where '*' is a distribution prefix (such as 'gh' or 'ght'), are now all named.
   Previously, only some of them were.
 
@@ -74,7 +80,7 @@
 
 - many fitting functions, e.g., `nFit`, were inadvertently ignoring argument
   `description` by using `description = description()` instead of
-  `description = description` in the call to \code{new} when creating the return
+  `description = description` in the call to `new` when creating the return
   value.
 
 - `correlationTest`, `pearsonTest`, `spearmanTest`, `kendallTest`, `ks2Test`,

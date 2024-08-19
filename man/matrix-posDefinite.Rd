@@ -42,9 +42,8 @@ makePositiveDefinite(x)
 }
 
 \examples{
-## isPositiveDefinite - 
-   # the 3x3 Pascal Matrix is positive define 
-   isPositiveDefinite(pascal(3))                
+# the 3x3 Pascal Matrix is positive define 
+isPositiveDefinite(pascal(3))                
 }
 
 \keyword{math}

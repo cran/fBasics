@@ -30,12 +30,10 @@ rowVec(x)
 }
 
 \examples{
-## Create a numeric Vector:
-   x = rnorm(5)
+x = rnorm(5)
    
-## Column and Row Vectors:
-   colVec(x)
-   rowVec(x)                        
+colVec(x)
+rowVec(x)                        
 }
 
 \keyword{math}

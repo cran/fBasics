@@ -17,7 +17,6 @@ volatility(object, \dots)
 }
 
 \arguments{
-
   \item{object}{
     an object from which to extract or compute the volatility.
   }
@@ -25,7 +24,6 @@ volatility(object, \dots)
   \item{\dots}{
     arguments for methods. Ignored by the default method.
   }
-
 }
 
 \details{

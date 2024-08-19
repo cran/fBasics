@@ -1,6 +1,6 @@
 Package: fBasics
 Title: Rmetrics - Markets and Basic Statistics
-Version: 4032.96
+Version: 4041.97
 Authors@R: c(person("Diethelm", "Wuertz", role="aut", comment = "original code")
 	   , person("Tobias", "Setz", role = c("aut"), email = "tobias.setz@live.com")
 	   , person("Yohan", "Chalabi", role = "aut")
@@ -27,7 +27,7 @@ URL: https://geobosh.github.io/fBasicsDoc/ (doc),
         (devel), https://www.rmetrics.org
 BugReports: https://r-forge.r-project.org/projects/rmetrics
 NeedsCompilation: yes
-Packaged: 2023-11-03 15:29:06 UTC; georgi
+Packaged: 2024-08-18 18:37:43 UTC; georgi
 Author: Diethelm Wuertz [aut] (original code),
   Tobias Setz [aut],
   Yohan Chalabi [aut],
@@ -36,4 +36,4 @@ Author: Diethelm Wuertz [aut] (original code),
   Georgi N. Boshnakov [cre, aut]
 Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 Repository: CRAN
-Date/Publication: 2023-11-03 16:10:02 UTC
+Date/Publication: 2024-08-19 10:00:02 UTC

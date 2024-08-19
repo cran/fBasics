@@ -103,17 +103,15 @@ logDensityPlot(x, labels = TRUE, col = "steelblue", robust = TRUE,
 }
 
 \examples{
-## data - 
-   data(LPP2005REC, package = "timeSeries")
-   SPI <- LPP2005REC[, "SPI"]
-   plot(SPI, type = "l", col = "steelblue", main = "SP500")
-   abline(h = 0, col = "grey")
+## data
+data(LPP2005REC, package = "timeSeries")
+SPI <- LPP2005REC[, "SPI"]
+plot(SPI, type = "l", col = "steelblue", main = "SP500")
+abline(h = 0, col = "grey")
    
-## histPlot -
-   histPlot(SPI) 
+histPlot(SPI) 
    
-## densityPlot -
-   densityPlot(SPI) 
+densityPlot(SPI) 
 }
 
 \keyword{hplot}

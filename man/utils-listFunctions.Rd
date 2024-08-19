@@ -66,11 +66,9 @@ listIndex(package, character.only = FALSE)
 }
 
 \examples{
-## listFunctions -
-   listFunctions("fBasics")
+listFunctions("fBasics")
    
-## countFunctions -
-   countFunctions("fBasics")
+countFunctions("fBasics")
 }
 
 \keyword{package}

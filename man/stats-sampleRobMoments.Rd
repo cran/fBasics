@@ -37,12 +37,10 @@ sampleLmoments(x, rmax = 4)
   Diethelm Wuertz
 }
 
-\examples{   
-## Sample:
-   x = rt(100, 4)
+\examples{
+x <- rt(100, 4)
    
-## sampleLmoments -
-   sampleLmoments(x)
+sampleLmoments(x)
 }
 
 \keyword{distribution}

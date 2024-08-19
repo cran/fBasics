@@ -73,38 +73,9 @@ ghFit(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2,
 }
 
 \value{
-  
-  a list with the following components:
-  
-  \item{estimate}{
-    the point at which the maximum value of the log liklihood 
-    function is obtained.
-  }
-  \item{minimum}{
-    the value of the estimated maximum, i.e. the value of the
-    log liklihood function.
-  }
-  \item{code}{
-    an integer indicating why the optimization process terminated.\cr
-    1: relative gradient is close to zero, current iterate is probably 
-    solution; \cr
-    2: successive iterates within tolerance, current iterate is probably 
-    solution; \cr
-    3: last global step failed to locate a point lower than \code{estimate}. 
-    Either \code{estimate} is an approximate local minimum of the 
-    function or \code{steptol} is too small; \cr
-    4: iteration limit exceeded; \cr
-    5: maximum step size \code{stepmax} exceeded five consecutive times. 
-    Either the function is unbounded below, becomes asymptotic to a 
-    finite value from above in some direction or \code{stepmax} 
-    is too small.
-  }
-  \item{gradient}{
-    the gradient at the estimated maximum.
-  }
-  \item{steps}{
-    number of function calls.
-  }
+  an object from class \code{"fDISTFIT"}.
+  Slot \code{fit} is a list, currently with components
+  \code{estimate}, \code{minimum} and \code{code}.
 }
 
 \details{
@@ -118,15 +89,11 @@ ghFit(x, alpha = 1, beta = 0, delta = 1, mu = 0, lambda = -1/2,
        
 }
 
-\examples{    
-## ghFit -
-   # Simulate Random Variates:
-   set.seed(1953)
-   s = rgh(n = 1000, alpha = 1.5, beta = 0.3, delta = 0.5, mu = -1.0) 
+\examples{
+set.seed(1953)
+s <- rgh(n = 1000, alpha = 1.5, beta = 0.3, delta = 0.5, mu = -1.0) 
 
-## ghFit -  
-   # Fit Parameters:
-   ghFit(s, alpha = 1, beta = 0, delta = 1, mu = mean(s), doplot = TRUE) 
+ghFit(s, alpha = 1, beta = 0, delta = 1, mu = mean(s), doplot = TRUE, trace = FALSE) 
 }
 
 \keyword{distribution}

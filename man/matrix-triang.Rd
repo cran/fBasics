@@ -70,12 +70,12 @@ Golub, van Loan, (1996);
 
 \examples{
 ## Create Pascal Matrix:
-   P = pascal(3)
-   P
+P = pascal(3)
+P
    
 ## Create lower triangle matrix
-   L = triang(P)
-   L                                
+L = triang(P)
+L                                
 }
 
 \keyword{math}

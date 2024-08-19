@@ -39,11 +39,10 @@ Golub, van Loan, (1996);
 
 \examples{
 ## Create Pascal Matrix:
-   P = pascal(3)
-   P
+P = pascal(3)
+P
   
-## Trace:
-   tr(P)                                  
+tr(P)                                  
 }
 
 \keyword{math}

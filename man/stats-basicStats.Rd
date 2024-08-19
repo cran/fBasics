@@ -13,7 +13,6 @@ basicStats(x, ci = 0.95)
 }
 
 \arguments{
-  
   \item{x}{
 
     an object of class \code{"timeSeries"} or any other object which can
@@ -71,10 +70,9 @@ basicStats(x, ci = 0.95)
 
 \examples{
 \dontshow{set.seed(1234)}
-## basicStats -
-   # Simulated Monthly Return Data:
-   tS = timeSeries(matrix(rnorm(12)), timeDate::timeCalendar())
-   basicStats(tS)
+## Simulated Monthly Return Data
+tS <- timeSeries(matrix(rnorm(12)), timeDate::timeCalendar())
+basicStats(tS)
 }
 
 \keyword{stats}

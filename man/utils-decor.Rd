@@ -26,7 +26,6 @@ copyright()
 }
 
 \arguments{
-
   \item{col}{
     the color of the background, \code{"black"} and foreground
     \code{"white"} lines of the box.
@@ -39,7 +38,6 @@ copyright()
   \item{\dots}{
     additional arguments passed to the \code{grid()} function.
   }
-  
 }
 
 \details{

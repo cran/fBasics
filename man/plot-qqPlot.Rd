@@ -5,8 +5,8 @@
 \alias{qqghtPlot}
 \alias{qqgldPlot}
 
-\title{Quantile-Quantile plots}
 
+\title{Quantile-Quantile plots}
 
 \description{
     
@@ -16,7 +16,6 @@
     distribution.
     
 }
-    
 
 \usage{     
 qqnormPlot(x, labels = TRUE, col = "steelblue", pch = 19,
@@ -33,9 +32,7 @@ qqgldPlot(x, labels = TRUE, col = "steelblue", pch = 19,
     scale = TRUE, \dots)
 }
 
-
 \arguments{
-
   \item{x}{
 
     an object of class \code{"timeSeries"} or any other object which can
@@ -100,8 +97,8 @@ qqgldPlot(x, labels = TRUE, col = "steelblue", pch = 19,
   }
     
 }
-\details{
 
+\details{
   List of Functions:
     
   \tabular{ll}{
@@ -109,8 +106,8 @@ qqgldPlot(x, labels = TRUE, col = "steelblue", pch = 19,
     \code{qqnigPlot}  Produces a tailored NIG quantile-quantile plot, \cr
     \code{qqghtPlot}  Produces a tailored GHT quantile-quantile plot, \cr
     \code{qqgldPlot}  Produces a tailored GLD quantile-quantile plot.}
-
 }
+
 \value{
   displays a quantile-quantile plot.
 }
@@ -120,14 +117,13 @@ qqgldPlot(x, labels = TRUE, col = "steelblue", pch = 19,
 }
 
 \examples{
-## data - 
-   data(LPP2005REC, package = "timeSeries")
-   SPI <- LPP2005REC[, "SPI"]
-   plot(SPI, type = "l", col = "steelblue", main = "SP500")
-   abline(h = 0, col = "grey")
+## data
+data(LPP2005REC, package = "timeSeries")
+SPI <- LPP2005REC[, "SPI"]
+plot(SPI, type = "l", col = "steelblue", main = "SP500")
+abline(h = 0, col = "grey")
    
-## qqPlot -
-   qqnormPlot(SPI) 
+qqnormPlot(SPI) 
 }
 
 \keyword{hplot}

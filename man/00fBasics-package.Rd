@@ -17,8 +17,7 @@
   The covered fields include techniques of explorative data analysis
   and the investigation of distributional properties, including
   parameter estimation and hypothesis testing. Evenmore there are
-  several utility functions for data handling and managemnet.
-    
+  several utility functions for data handling and management.
 }
 
 \author{
@@ -26,14 +25,20 @@ Diethelm Wuertz [aut] (original code),
 Tobias Setz [aut],
 Yohan Chalabi [aut],
 Martin Maechler [ctb] (<https://orcid.org/0000-0002-8685-9910>),
-Georgi N. Boshnakov [cre, ctb]
+Georgi N. Boshnakov [cre, ctb],
 CRAN Team [ctb]
 
 Maintainer: Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>
 }
 
-%\details{
-%}
+\details{
+
+  \emph{Note by the maintainer (GNB):} Some of the information on this
+  overview page may be outdated.  The documentation website
+  \url{https://geobosh.github.io/fBasicsDoc/} of the package (generated
+  with pkgdown) provides up-to-date help pages, arranged by topic.
+
+}
 
 \section{1 Introduction}{
 

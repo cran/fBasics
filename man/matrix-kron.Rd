@@ -32,22 +32,19 @@ kron(x, y)
 }
 
 \references{
-
 Golub, van Loan, (1996);
     \emph{Matrix Computations}, 
     3rd edition. Johns Hopkins University Press. 
-
 }
 
 \examples{
 ## Create Pascal Matrix:
-   P = pascal(3)
-   P
+P = pascal(3)
+P
    
 ## Return the Kronecker Product                     
-   kron(P, diag(3))
-   P \%x\% diag(3)                        
-                           
+kron(P, diag(3))
+P \%x\% diag(3)                        
 }
 
 \keyword{math}

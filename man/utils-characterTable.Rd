@@ -13,7 +13,6 @@ characterTable(font = 1, cex = 0.7)
 }
 
 \arguments{
-  
   \item{cex}{
 
     a numeric value, determines the character size, the default 

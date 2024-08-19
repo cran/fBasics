@@ -77,11 +77,11 @@ Golub, van Loan, (1996);
 
 \examples{
 ## Create Pascal Matrix:
-   P <- pascal(5)
-   P                  
+P <- pascal(5)
+P                  
      
 ## Return the Norm of the Matrix:                      
-   norm2(P)                                                       
+norm2(P)                                                       
 }
 
 \keyword{math}

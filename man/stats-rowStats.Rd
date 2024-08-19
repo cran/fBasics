@@ -82,18 +82,15 @@ rowAvgs(x, \dots)
 }
 
 \seealso{
-  \code{\link{colStats}}
+  \code{\link{apply}}
 }
 
 \examples{
 ## Simulated Return Data in Matrix Form:
-   x = matrix(rnorm(10*10), nrow = 10)
+x <- matrix(rnorm(10*10), nrow = 10)
      
-## rowStats -
-   rowStats(x, FUN = mean)
-   
-## rowMaxs -
-   rowMaxs(x)  
+rowStats(x, FUN = mean)
+rowMaxs(x)  
 }
 
 \keyword{univar}

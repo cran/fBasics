@@ -17,7 +17,7 @@
 \section{Objects from the Class}{
 % Objects can be created by calls of the form \code{new("fHTEST", ...)}.
 
-Objects are created by some statistical test functions.
+Objects from this class are created by some statistical test functions.
 
 %%  ~~ describe objects here ~~ 
 
@@ -94,6 +94,7 @@ Objects are created by some statistical test functions.
   \code{\link{locationTest}},
   \code{\link{NormalityTests}},
   \code{\link{varianceTest}}
+  \code{\link{scaleTest}}
 }
 
 \examples{

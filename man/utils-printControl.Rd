@@ -16,7 +16,6 @@
 }
 
 \arguments{
-  
   \item{x}{
     the object to be printed.      
   }
@@ -29,12 +28,11 @@
   prints control
 }
 
-\examples{   
-## print -
-   control = list(n = 211, seed = 54, name = "generator")
-   print(control) 
-   class(control) = "control"
-   print(control)  
+\examples{
+control <- list(n = 211, seed = 54, name = "generator")
+print(control) 
+class(control) <- "control"
+print(control)  
 }
 
 \keyword{programming}

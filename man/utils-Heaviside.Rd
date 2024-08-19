@@ -73,30 +73,21 @@ Ramp(x, a = 0)
 }
 
 \references{
-
 Weisstein W. (2004);
     \emph{http://mathworld.wolfram.com/HeavisideStepFunction.html},
     Mathworld.
-    
 }
 
 \examples{
-## Heaviside -
-   x = sort(round(c(-1, -0.5, 0, 0.5, 1, 5*rnorm(5)), 2))
-   h = Heaviside(x)
-    
-## Sign -
-   s = Sign(x)
-   
-## Delta -
-   d = Delta(x)
-   
-## Boxcar -
-   Pi = Boxcar(x)
+x <- sort(round(c(-1, -0.5, 0, 0.5, 1, 5*rnorm(5)), 2))
 
-## Ramp - 
-   r = Ramp(x)
-   cbind(x = x, Step = h, Signum = s, Delta = d, Pi = Pi, R = r)        
+h <- Heaviside(x)
+s <- Sign(x)
+d <- Delta(x)
+Pi <- Boxcar(x)
+r <- Ramp(x)
+
+cbind(x = x, Step = h, Signum = s, Delta = d, Pi = Pi, R = r)        
 }
 
 \keyword{math}

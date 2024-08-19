@@ -15,11 +15,11 @@
 
 \description{
 
-    A collection and description of functions to extract
-    slots from S4 class objects.
-    \cr
+  A collection and description of functions to extract
+  slots from S4 class objects.
+  \cr
 
-    The extractor functions are:
+  The extractor functions are:
 
     \tabular{ll}{
     % \code{getCall} \tab Extracts the call slot from a S4 object, \cr
@@ -44,7 +44,9 @@ getArgs(f, signature)
 }
 
 \arguments{
-  \item{f}{a generic function or the character-string name of one.}
+  \item{f}{
+    a generic function or the character-string name of one.
+  }
   \item{object}{
     an object of class S4.
     % (For \code{getCall()} and \R 2.14.0 and newer: \dQuote{any} object.)
@@ -69,31 +71,31 @@ getArgs(f, signature)
 
 \examples{
 ## Example S4 Representation:
-   # Hyothesis Testing with Control Settings
-   setClass("hypTest",
-     representation(
-       call = "call",
-       data = "numeric",
-       test = "list",
-       description = "character")
-   )
+## Hyothesis Testing with Control Settings
+setClass("hypTest",
+         representation(
+             call = "call",
+             data = "numeric",
+             test = "list",
+             description = "character")
+         )
 
 ## Shapiro Wilk Normaility Test
-   swTest = function(x, description = "") {
-     ans = shapiro.test(x)
-     class(ans) = "list"
-     new("hypTest",
-       call = match.call(),
-       data = x,
-       test = ans,
-       description = description)
-   }
-   test = swTest(x = rnorm(500), description = "500 RVs")
+swTest = function(x, description = "") {
+    ans = shapiro.test(x)
+    class(ans) = "list"
+    new("hypTest",
+        call = match.call(),
+        data = x,
+        test = ans,
+        description = description)
+}
+test = swTest(x = rnorm(500), description = "500 RVs")
 
 ## Extractor Functions:
-   isS4(test)
-   getCall(test)
-   getDescription(test)
+isS4(test)
+getCall(test)
+getDescription(test)
 
 ## get arguments
 args(returns)

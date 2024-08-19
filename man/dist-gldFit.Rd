@@ -70,42 +70,6 @@ gldFit(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
   }
 }
 
-\value{
-  an object from class \code{"fDISTFIT"}.
-
-  Slot \code{fit} is a list with the following components:
-  
-  \item{estimate}{
-    the point at which the maximum value of the log liklihood 
-    function is obtained.
-  }
-  \item{minimum}{
-    the value of the estimated maximum, i.e. the value of the
-    log liklihood function.
-  }
-  \item{code}{
-    an integer indicating why the optimization process terminated.\cr
-    1: relative gradient is close to zero, current iterate is probably 
-        solution; \cr
-    2: successive iterates within tolerance, current iterate is probably 
-        solution; \cr
-    3: last global step failed to locate a point lower than \code{estimate}. 
-        Either \code{estimate} is an approximate local minimum of the 
-        function or \code{steptol} is too small; \cr
-    4: iteration limit exceeded; \cr
-    5: maximum step size \code{stepmax} exceeded five consecutive times. 
-        Either the function is unbounded below, becomes asymptotic to a 
-        finite value from above in some direction or \code{stepmax} 
-        is too small.
-  }
-  \item{gradient}{
-    the gradient at the estimated maximum.
-  }
-  \item{steps}{
-    number of function calls.
-  }
-}
-
 \details{
 
   The function \code{\link{nlminb}} is used to minimize the objective 
@@ -129,16 +93,18 @@ gldFit(x, lambda1 = 0, lambda2 = -1, lambda3 = -1/8, lambda4 = -1/8,
        
 }
 
-\examples{    
-## gldFit -
-   # Simulate Random Variates:
-   set.seed(1953)
-   s = rgld(n = 1000, lambda1=0, lambda2=-1, lambda3=-1/8, lambda4=-1/8) 
+\value{
+  an object from class \code{"fDISTFIT"}.
+  Slot \code{fit} is a list, currently with components
+  \code{estimate}, \code{minimum} and \code{code}.
+}
 
-## gldFit -  
-   # Fit Parameters:
-   gldFit(s, lambda1=0, lambda2=-1, lambda3=-1/8, lambda4=-1/8, 
-     doplot = TRUE, trace = TRUE) 
+\examples{
+set.seed(1953)
+s <- rgld(n = 1000, lambda1=0, lambda2=-1, lambda3=-1/8, lambda4=-1/8) 
+
+gldFit(s, lambda1=0, lambda2=-1, lambda3=-1/8, lambda4=-1/8, 
+       doplot = TRUE, trace = FALSE) 
 }
 
 \keyword{distribution}

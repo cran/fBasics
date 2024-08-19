@@ -6,14 +6,13 @@
 
 \alias{stableFit}
 
-\title{Parametric fit of a distribution}
+\title{Fit normal, Student-t and stable distributions}
 
 
 \description{
 
-  A collection and description of moment and maximum 
-  likelihood estimators to fit the parameters of a 
-  distribution. 
+  A collection of moment and maximum likelihood estimators to fit the
+  parameters of a distribution.
   \cr
 
   The functions are:
@@ -91,7 +90,12 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
 }
 
 \value{
-  an object from class \code{"fDISTFIT"}
+  an object from class \code{"\linkS4class{fDISTFIT}"}.
+
+  Slot \code{fit} has components \code{estimate}, \code{minimum}, \code{code}
+  and \code{gradient} (but for \code{nFit} \code{code} is \code{NA} and
+  \code{gradient} is missing).
+
 }
               
 \details{
@@ -111,15 +115,11 @@ stableFit(x, alpha = 1.75, beta = 0, gamma = 1, delta = 0,
     
 }
 
-\examples{    
-## nFit -
-   # Simulate random normal variates N(0.5, 2.0):
-   set.seed(1953)
-   s = rnorm(n = 1000, 0.5, 2) 
+\examples{
+set.seed(1953)
+s <- rnorm(n = 1000, 0.5, 2) 
 
-## nigFit -  
-   # Fit Parameters:
-   nFit(s, doplot = TRUE) 
+nFit(s, doplot = TRUE) 
 }
 
 \keyword{distribution}

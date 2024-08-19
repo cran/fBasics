@@ -246,8 +246,7 @@ monoPalette(n, name = c("redmono", "greenmono", "bluemono"))
 }
 
 \examples{
-## GreyPalette:
-   greyPalette()
+greyPalette()
 }
 
 \keyword{programming}

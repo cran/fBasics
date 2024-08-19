@@ -60,14 +60,13 @@ boxPercentilePlot(x, col = "steelblue", title = TRUE, \dots)
 }
 
 \examples{
-## data - 
-   data(LPP2005REC, package = "timeSeries")
-   LPP <- LPP2005REC[, 1:6]
-   plot(LPP, type = "l", col = "steelblue", main = "SP500")
-   abline(h = 0, col = "grey")
+## data
+data(LPP2005REC, package = "timeSeries")
+LPP <- LPP2005REC[, 1:6]
+plot(LPP, type = "l", col = "steelblue", main = "SP500")
+abline(h = 0, col = "grey")
    
-## boxPlot -
-   boxPlot(LPP) 
+boxPlot(LPP) 
 }
 
 \keyword{hplot}

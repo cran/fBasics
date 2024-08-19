@@ -17,7 +17,6 @@ scalinglawPlot(x, span = ceiling(log(length(x)/252)/log(2)), doplot = TRUE,
 }
 
 \arguments{
-
   \item{x}{
     an uni- or multivariate return series of class \code{"timeSeries"} 
     or any other object which can be transformed by the function
@@ -74,27 +73,24 @@ scalinglawPlot(x, span = ceiling(log(length(x)/252)/log(2)), doplot = TRUE,
 }
 
 \references{
-
 Taylor S.J. (1986); 
     \emph{Modeling Financial Time Series},
     John Wiley and Sons, Chichester.
-    
 }
 
 \author{
   Diethelm Wuertz for the Rmetrics \R-port.
 }
 
-\examples{   
-## data - 
-   data(LPP2005REC, package = "timeSeries")
-   SPI <- LPP2005REC[, "SPI"]
-   plot(SPI, type = "l", col = "steelblue", main = "SP500")
-   abline(h = 0, col = "grey")
+\examples{
+## data
+data(LPP2005REC, package = "timeSeries")
+SPI <- LPP2005REC[, "SPI"]
+plot(SPI, type = "l", col = "steelblue", main = "SP500")
+abline(h = 0, col = "grey")
 
-## teffectPlot -
-   # Scaling Law Effect:
-   scalinglawPlot(SPI)
+## Scaling Law Effect
+scalinglawPlot(SPI)
 }
 
 \keyword{hplot}

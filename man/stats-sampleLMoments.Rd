@@ -41,25 +41,21 @@ sampleKURT(x)
   Diethelm Wuertz
 }
 
-\examples{   
-## Sample:
-   x = rt(100, 4)
+\examples{
+## Sample
+x <- rt(100, 4)
    
-## sampleMED -
-   # Median:
-   sampleMED(x)
+## Median
+sampleMED(x)
  
-## sampleIQR - 
-   # Inter-quartile Range:
-   sampleIQR(x)
+## Inter-quartile Range
+sampleIQR(x)
  
-## sampleSKEW -  
-   # Robust Skewness:
-   sampleSKEW(x)
+## Robust Skewness
+sampleSKEW(x)
    
-## sampleKURT -
-   # Robust Kurtosis:
-   sampleKURT(x)
+## Robust Kurtosis
+sampleKURT(x)
 }
 
 \keyword{distribution}

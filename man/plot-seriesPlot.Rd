@@ -14,7 +14,6 @@
    plot.
     
 }
-    
 
 \usage{ 
 seriesPlot(x, labels = TRUE, type = "l", col = "steelblue", 
@@ -28,53 +27,69 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
 }
 
 \arguments{
-  
-    \item{box}{
-        a logical flag, should a box be added to the plot? 
-        By default \code{TRUE}.
-        }
-    \item{col}{
-        the color for the series. In the univariate case use just a 
-        color name like the default, \code{col="steelblue"}, in the
-        multivariate case we recommend to select the colors from a 
-        color palette, e.g. \code{col=heat.colors(ncol(x))}. 
-        } 
-    \item{grid}{
-        a logical flag, should a grid be added to the plot? 
-        By default \code{TRUE}.
-        }
-    \item{index}{
-        a numeric value, by default 100. The function cumulates 
-        column by colum the returns and multiplies the result with 
-        the index value: \code{index*exp(colCumsums(x))}. 
-        }
-    \item{labels}{
-        a logical flag, should the plot be returned with default labels
-        and decorated in an automated way? By default \code{TRUE}.
-        }   
-    \item{rug}{
-        a logical flag, by default TRUE. Should a rug representation 
-        of the data added to the plot?
-        }
-    \item{title}{
-        a logical flag, by default TRUE. Should a default title added 
-        to the plot?
-        }        
-    \item{type}{
-        what type of plot should be drawn? By default we use a line plot,
-        \code{type="l"}. An alternative plot style which produces nice 
-        figures is for example \code{type="h"}.
-        }    
-     \item{x}{
-        an object of class \code{"timeSeries"} or any other object which
-        can be transformed by the function \code{as.timeSeries} into an
-        object of class \code{timeSeries}. The latter case, other then
-        \code{timeSeries} objects, is more or less untested.
-        }                
-    \item{\dots}{
-        optional arguments to be passed.
-        }
+  \item{x}{
+
+    an object of class \code{"timeSeries"} or any other object which can
+    be transformed by the function \code{as.timeSeries} into an object
+    of class \code{timeSeries}. The latter case, other then
+    \code{timeSeries} objects, is more or less untested.
+
+  }
+  \item{index}{
+
+    a numeric value, by default 100. The function cumulates column by
+    columN the returns and multiplies the result with the index value:
+    \code{index * exp(colCumsums(x))}.
+
+  }
+  \item{labels}{
+
+    a logical flag, should the plot be returned with default labels and
+    decorated in an automated way? By default \code{TRUE}.
+
+  }   
+  \item{type}{
+
+    what type of plot should be drawn? By default we use a line plot,
+    \code{type="l"}. An alternative plot style which produces nice
+    figures is for example \code{type="h"}.
+
+  }
+  \item{col}{
+
+    the color for the series. In the univariate case use just a color
+    name like the default, \code{col="steelblue"}, in the multivariate
+    case we recommend to select the colors from a color palette,
+    e.g. \code{col=heat.colors(ncol(x))}.
+
+  } 
+  \item{title}{
+
+    a logical flag, by default TRUE. Should a default title added 
+    to the plot?
     
+  }        
+  \item{grid}{
+
+    a logical flag, should a grid be added to the plot?  By default
+    \code{TRUE}.
+
+  }
+  \item{box}{
+
+    a logical flag, should a box be added to the plot?  By default
+    \code{TRUE}.
+
+  }
+  \item{rug}{
+
+    a logical flag, by default TRUE. Should a rug representation of the
+    data added to the plot?
+
+  }
+  \item{\dots}{
+    optional arguments to be passed.
+  }
 }
 
 \details{
@@ -117,10 +132,10 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
 }
 
 \examples{
-## seriesPlot -
-   data(LPP2005REC, package = "timeSeries")
-   tS <- as.timeSeries(LPP2005REC)
-   seriesPlot(tS)
+data(LPP2005REC, package = "timeSeries")
+tS <- as.timeSeries(LPP2005REC)
+
+seriesPlot(tS)
 }
 
 \keyword{hplot}

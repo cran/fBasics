@@ -164,9 +164,9 @@
 %--------------------------------------------------------------
 \examples{
 ## Plot DowJones30 Example Data Set
-   series <- timeSeries::as.timeSeries(DowJones30)
-   head(series)
-   plot(series[,1:6], type = "l")
+series <- timeSeries::as.timeSeries(DowJones30)
+head(series)
+plot(series[,1:6], type = "l")
 
 ## msft.dat contains (almost?) the same data as MSFT in package timeSeries
 data(MSFT, package = "timeSeries")

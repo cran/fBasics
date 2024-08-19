@@ -13,7 +13,6 @@ symbolTable(font = par('font'), cex = 0.7)
 }
 
 \arguments{
-  
   \item{cex}{
     a numeric value, determines the character size, the default 
     size is 0.7.
@@ -22,7 +21,6 @@ symbolTable(font = par('font'), cex = 0.7)
     an integer value, the number of the \code{font}, by default font 
     number 1.
   }  
-    
 }
 
 \value{
