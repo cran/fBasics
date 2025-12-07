@@ -25,11 +25,39 @@ stableSlider(col= "steelblue", col.med = "gray30")
 }
 
 \author{
-  Diethelm Wuertz for the Rmetrics \R-port.
+  Diethelm Wuertz for the Rmetrics \R-port
 }
 
 \references{
   see those in \code{\link[stabledist]{dstable}}, in package \pkg{stabledist}.
+}
+
+\seealso{
+  \code{\link{seriesPlot}},
+  \code{\link{returnPlot}},
+  \code{\link{cumulatedPlot}},
+  \code{\link{drawdownPlot}}
+
+  \code{\link{qqnormPlot}},
+  \code{\link{qqnigPlot}},
+  \code{\link{qqghtPlot}},
+  \code{\link{qqgldPlot}}
+
+  \code{\link{histPlot}},
+  \code{\link{densityPlot}},
+  \code{\link{logDensityPlot}}
+
+  \code{\link{boxPlot}},
+  \code{\link{boxPercentilePlot}}
+
+  \code{\link{acfPlot}},
+  \code{\link{pacfPlot}},
+  \code{\link{teffectPlot}},
+  \code{\link{lacfPlot}}
+
+  \code{\link{scalinglawPlot}}
+
+  \code{\link{returnSeriesGUI}}
 }
 
 \examples{

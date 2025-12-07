@@ -23,11 +23,11 @@ scalinglawPlot(x, span = ceiling(log(length(x)/252)/log(2)), doplot = TRUE,
     \code{as.timeSeries()} into an object of class \code{"timeSeries"}.
   }
   \item{span}{
-    an integer value, determines for the \code{qqgaussPlot} the 
-    plot range, by default 5, and for the \code{scalingPlot} a
-    reasonable number of points for the scaling range, by
-    default daily data with 252 business days per year are
-    assumed.
+
+    an integer value, determines the plot range.  The defaault computes
+    a reasonable number of points for the scaling range, assuming daily
+    data with 252 business days per year.
+
   }
   \item{doplot}{
     a logical value. Should a plot be displayed?
@@ -41,34 +41,29 @@ scalinglawPlot(x, span = ceiling(log(length(x)/252)/log(2)), doplot = TRUE,
     a logical value. Should the computation be traced?
   }
   \item{\dots}{
-    arguments to be passed.
+    arguments to be passed to \code{plot}.
   }
 }
 
 \value{
-    
   a list with the following components:
   \item{Intercept}{intercept,}
   \item{Exponent}{the scaling exponent,}
   \item{InverseExponent}{the inverse of the scaling component.}
-    
 }
 
 \details{
     
-  \bold{Scaling Behavior:}
-  \cr\cr
-  The function \code{scalingPlot} plots the scaling law of financial 
-  time series under aggregation and returns an estimate for the scaling 
-  exponent. The scaling behavior is a very striking effect of the 
+  The function \code{scalinglawPlot} plots the scaling law of financial
+  time series under aggregation and returns an estimate for the scaling
+  exponent. The scaling behavior is a very striking effect of the
   foreign exchange market and also other markets expressing a regular
-  structure for the volatility. Considering the average absolute
-  return over individual data periods one finds a scaling power law
-  which relates the mean volatility over given time intervals
-  to the size of these intervals. The power law is in many cases 
-  valid over several orders of magnitude in time. Its exponent  
-  usually deviates significantly from a Gaussian random walk model 
-  which implies 1/2. 
+  structure for the volatility. Considering the average absolute return
+  over individual data periods one finds a scaling power law which
+  relates the mean volatility over given time intervals to the size of
+  these intervals. The power law is in many cases valid over several
+  orders of magnitude in time. Its exponent usually deviates
+  significantly from a Gaussian random walk model which implies 1/2.
   
 }
 
@@ -79,9 +74,34 @@ Taylor S.J. (1986);
 }
 
 \author{
-  Diethelm Wuertz for the Rmetrics \R-port.
+  Diethelm Wuertz for the Rmetrics \R-port
 }
 
+\seealso{
+  \code{\link{seriesPlot}},
+  \code{\link{returnPlot}},
+  \code{\link{cumulatedPlot}},
+  \code{\link{drawdownPlot}}
+
+  \code{\link{qqnormPlot}},
+  \code{\link{qqnigPlot}},
+  \code{\link{qqghtPlot}},
+  \code{\link{qqgldPlot}}
+
+  \code{\link{histPlot}},
+  \code{\link{densityPlot}},
+  \code{\link{logDensityPlot}}
+
+  \code{\link{boxPlot}},
+  \code{\link{boxPercentilePlot}}
+
+  \code{\link{acfPlot}},
+  \code{\link{pacfPlot}},
+  \code{\link{teffectPlot}},
+  \code{\link{lacfPlot}}
+
+  \code{\link{returnSeriesGUI}}
+}
 \examples{
 ## data
 data(LPP2005REC, package = "timeSeries")

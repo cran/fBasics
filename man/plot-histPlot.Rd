@@ -39,9 +39,9 @@ logDensityPlot(x, labels = TRUE, col = "steelblue", robust = TRUE,
   \item{col}{
 
     the color for the series. In the univariate case use just a color
-    name like the default, \code{col="steelblue"}, in the multivariate
+    name like the default, \code{col = "steelblue"}, in the multivariate
     case we recommend to select the colors from a color palette,
-    e.g. \code{col=heat.colors(ncol(x))}.
+    e.g. \code{col = heat.colors(ncol(x))}.
 
   }
   \item{fit}{
@@ -62,8 +62,7 @@ logDensityPlot(x, labels = TRUE, col = "steelblue", robust = TRUE,
   \item{grid}{
 
     a logical flag, should a grid be added to the plot?  By default
-    \code{TRUE}. To plot a horizontal lines only use \code{grid="h"} and
-    for vertical lines use \code{grid="h"}, respectively.
+    \code{TRUE}.
 
   }
   \item{rug}{
@@ -100,6 +99,30 @@ logDensityPlot(x, labels = TRUE, col = "steelblue", robust = TRUE,
 \value{
   \code{NULL}, invisibly. The functions are used for the side effect of
   producing a plot.
+}
+
+\seealso{
+  \code{\link{seriesPlot}},
+  \code{\link{returnPlot}},
+  \code{\link{cumulatedPlot}},
+  \code{\link{drawdownPlot}}
+
+  \code{\link{qqnormPlot}},
+  \code{\link{qqnigPlot}},
+  \code{\link{qqghtPlot}},
+  \code{\link{qqgldPlot}}
+
+  \code{\link{boxPlot}},
+  \code{\link{boxPercentilePlot}}
+
+  \code{\link{acfPlot}},
+  \code{\link{pacfPlot}},
+  \code{\link{teffectPlot}},
+  \code{\link{lacfPlot}}
+
+  \code{\link{scalinglawPlot}}
+
+  \code{\link{returnSeriesGUI}}
 }
 
 \examples{

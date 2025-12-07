@@ -32,11 +32,10 @@ interactivePlot(x, choices = paste("Plot", 1:9),
   } 
   \item{which}{
     
-    Which graph(s) should be displayed?
-    One of the character strings \code{"ask"} (ask the user) or
-    \code{"all"} (produce all plots), or a logical vector in which the
-    positions of the \code{TRUE} values designating the plots to
-    produce.
+    Which graph(s) should be displayed?  One of the character strings
+    \code{"ask"} (ask the user) or \code{"all"} (produce all plots), or
+    a logical vector in which the positions of the \code{TRUE} values
+    designate the plots to produce.
     
   }
   \item{\dots}{
@@ -50,13 +49,13 @@ interactivePlot(x, choices = paste("Plot", 1:9),
 
 \details{
 
-  If \code{"which"} is the character string \code{"ask"}, then the user
+  If \code{which} is the character string \code{"ask"}, then the user
   is presented with a menu to interactively choose which plot(s) to
   show.  Argument \code{choices} is used for the choices in the menu, so
   they should be informative.
 
-  If \code{"which"} is equal to \code{"all"} all plots are drawn. If
-  \code{"which"} is a logical vector, the indicate plots are displayed.
+  If \code{which} is equal to \code{"all"} all plots are drawn. If
+  \code{which} is a logical vector, the indicated plots are displayed.
 
   Note that if more plots are to be shown in one window, the arrangement
   should be made in advance (and cleaned up afterwards), see the
@@ -64,6 +63,34 @@ interactivePlot(x, choices = paste("Plot", 1:9),
 
 }
 
+\seealso{
+  \code{\link{seriesPlot}},
+  \code{\link{returnPlot}},
+  \code{\link{cumulatedPlot}},
+  \code{\link{drawdownPlot}}
+
+  \code{\link{qqnormPlot}},
+  \code{\link{qqnigPlot}},
+  \code{\link{qqghtPlot}},
+  \code{\link{qqgldPlot}}
+
+  \code{\link{histPlot}},
+  \code{\link{densityPlot}},
+  \code{\link{logDensityPlot}}
+
+  \code{\link{boxPlot}},
+  \code{\link{boxPercentilePlot}}
+    
+  \code{\link{acfPlot}},
+  \code{\link{pacfPlot}},
+  \code{\link{teffectPlot}},
+  \code{\link{lacfPlot}}
+
+  \code{\link{scalinglawPlot}}
+
+  \code{\link{returnSeriesGUI}}
+}
+  
 \examples{
 ## Test Plot Function
 testPlot <- function(x, which = "all", ...) {   

@@ -5,15 +5,22 @@
 \alias{qqghtPlot}
 \alias{qqgldPlot}
 
+\concept{quantile-quantile plot}
+\concept{qq-plot}
+\concept{qqplot}
 
-\title{Quantile-Quantile plots}
+\concept{normal distribution}
+\concept{inverse Gaussian distribution}
+\concept{generalized hyperbolic Student-t distribution}
+\concept{generalized lambda distribution}
+
+\title{Quantile-quantile plots}
 
 \description{
     
-    Returns quantile-quantile plots for the normal,
-    the normal inverse Gaussian, the generalized 
-    hyperbolic Student-t and the generalized lambda
-    distribution.
+    Produce quantile-quantile plots for the normal, inverse Gaussian,
+    generalized hyperbolic Student-t and the generalized lambda
+    distributions.
     
 }
 
@@ -36,9 +43,7 @@ qqgldPlot(x, labels = TRUE, col = "steelblue", pch = 19,
   \item{x}{
 
     an object of class \code{"timeSeries"} or any other object which can
-    be transformed by\code{as.timeSeries} into an object of class
-    \code{"timeSeries"}. The latter case, other then \code{"timeSeries"}
-    objects, is more or less untested.
+    be transformed by \code{as.timeSeries}.
 
   }  
   \item{labels}{
@@ -50,9 +55,9 @@ qqgldPlot(x, labels = TRUE, col = "steelblue", pch = 19,
   \item{col}{
 
     the color for the series. In the univariate case use just a color
-    name like the default, \code{col="steelblue"}, in the multivariate
+    name like the default, \code{col = "steelblue"}, in the multivariate
     case we recommend to select the colors from a color palette,
-    e.g. \code{col=heat.colors(ncol(x))}.
+    e.g. \code{col = heat.colors(ncol(x))}.
 
   }
   \item{pch}{
@@ -63,8 +68,8 @@ qqgldPlot(x, labels = TRUE, col = "steelblue", pch = 19,
   }
   \item{title}{
 
-    a logical flag, by default \code{TRUE}. Should a default title added
-    to the plot?
+    a logical flag, by default \code{TRUE}. Should a default title be
+    added to the plot?
 
   }
   \item{mtext}{
@@ -76,46 +81,77 @@ qqgldPlot(x, labels = TRUE, col = "steelblue", pch = 19,
   \item{grid}{
 
     a logical flag, should a grid be added to the plot?  By default
-    \code{TRUE}. To plot a horizontal lines only use \code{grid="h"} and
-    for vertical lines use \code{grid="h"}, respectively.
+    \code{TRUE}.
 
   } 
   \item{rug}{
 
-    a logical flag, by default \code{TRUE} . Should a rug representation
-    of the data added to the plot?
+    a logical flag, by default \code{TRUE}. Should a rug representation
+    of the data be added to the plot?
 
   }
   \item{scale}{
 
-    a logical flag, by default \code{TRUE}. Should the time series be
-    scaled for the investigation?
+    a logical flag, by default \code{TRUE}. Should the plot be for the
+    scaled time series? Used by \code{qqnormPlot} only, ignored silently
+    by the others.
 
   }
   \item{\dots}{
-    optional arguments to be passed.
+    optional arguments passed to \code{plot()}.
   }
     
 }
 
 \details{
-  List of Functions:
     
-  \tabular{ll}{
-    \code{qqnormPlot} Produces a tailored Normal quantile-quantile plot, \cr
-    \code{qqnigPlot}  Produces a tailored NIG quantile-quantile plot, \cr
-    \code{qqghtPlot}  Produces a tailored GHT quantile-quantile plot, \cr
-    \code{qqgldPlot}  Produces a tailored GLD quantile-quantile plot.}
+  \code{qqnormPlot} produces a tailored Normal quantile-quantile plot.
+  
+  \code{qqnigPlot}  produces a tailored NIG quantile-quantile plot.
+  
+  \code{qqghtPlot}  produces a tailored GHT quantile-quantile plot.
+  
+  \code{qqgldPlot}  produces a tailored GLD quantile-quantile plot.
 }
 
 \value{
-  displays a quantile-quantile plot.
+  a list containing some of the quantities computed for the plot,
+  invisibly. Currently contains the following components:
+  \item{x}{the quantiles of the reference distribution, used for the
+    x-axis,}
+  \item{y}{the (possibly scaled) ordered values of the time series, used
+    for the y-axis.}
+
+  The list has attribute \code{"control"} containing the parameters of
+  the fitted distribution.
 }
 
 \author{
   Diethelm Wuertz for the Rmetrics \R-port.
 }
 
+\seealso{
+  \code{\link{seriesPlot}},
+  \code{\link{returnPlot}},
+  \code{\link{cumulatedPlot}},
+  \code{\link{drawdownPlot}}
+
+  \code{\link{histPlot}},
+  \code{\link{densityPlot}},
+  \code{\link{logDensityPlot}}
+
+  \code{\link{boxPlot}},
+  \code{\link{boxPercentilePlot}}
+
+  \code{\link{acfPlot}},
+  \code{\link{pacfPlot}},
+  \code{\link{teffectPlot}},
+  \code{\link{lacfPlot}}
+
+  \code{\link{scalinglawPlot}}
+
+  \code{\link{returnSeriesGUI}}
+}
 \examples{
 ## data
 data(LPP2005REC, package = "timeSeries")

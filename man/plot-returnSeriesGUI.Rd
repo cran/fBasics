@@ -16,25 +16,50 @@ returnSeriesGUI(x)
 }
 
 \arguments{
-    \item{x}{
+  \item{x}{
 
-      an object of class \code{"timeSeries"} or any other object which
-      can be transformed by the function \code{as.timeSeries} into an
-      object of class \code{timeSeries}. The latter case, other than
-      \code{timeSeries} objects, is more or less untested.
-	
-    }  
+    an object of class \code{"timeSeries"} or any other object which can
+    be transformed by the function \code{as.timeSeries} into an object
+    of class \code{"timeSeries"}.
+
+  }  
 }
 
 \value{
-       
-  For \code{returnSeriesGUI} function, besides the graphical
-  user interface no values are returned.
+
+  \code{NULL}, invisibly. \code{returnSeriesGUI} is used for the
+  graphical user interface it provides.
     
 }
 
 \author{
-  Diethelm Wuertz for the Rmetrics \R-port.
+  Diethelm Wuertz for the Rmetrics \R-port
+}
+
+\seealso{
+  \code{\link{seriesPlot}},
+  \code{\link{returnPlot}},
+  \code{\link{cumulatedPlot}},
+  \code{\link{drawdownPlot}}
+
+  \code{\link{qqnormPlot}},
+  \code{\link{qqnigPlot}},
+  \code{\link{qqghtPlot}},
+  \code{\link{qqgldPlot}}
+
+  \code{\link{histPlot}},
+  \code{\link{densityPlot}},
+  \code{\link{logDensityPlot}}
+
+  \code{\link{boxPlot}},
+  \code{\link{boxPercentilePlot}}
+
+  \code{\link{acfPlot}},
+  \code{\link{pacfPlot}},
+  \code{\link{teffectPlot}},
+  \code{\link{lacfPlot}}
+
+  \code{\link{scalinglawPlot}}
 }
 
 \keyword{hplot}

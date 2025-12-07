@@ -1,4 +1,3 @@
-
 ////////////////////////////////////////////////////////////////////////////////
 //
 // pnigC and qnigC Code
@@ -12,22 +11,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-#include <string.h>
 #include <stdlib.h>
-// #include <time.h>
 #include <math.h>
-// #include <setjmp.h>
-// #include <R.h>
-// #include <Rdefines.h>
-// #include <Rinternals.h>
-// #include <R_ext/Constants.h>
-#include <R_ext/PrtUtil.h>
 #include <R_ext/Error.h>
 
 #define  SIGN(a,b) ((b) >= 0.0 ? fabs(a) : -fabs(a))
 #define  MIN(a, b) ((a) < (b) ? (a) : (b))
 #define  MAX(a, b) ((a) > (b) ? (a) : (b))
 
+// "FIXME" (GNB): use M_PI, M_PI4, etc.? Similarly for some of the other constants.
+//
+//   also, pi had been defined with greater accuracy in very old versions but
+//   intentionally rounded to 6 sig. digits later without wtatement of the reason
 #define  pi        3.141593
 #define  EPS       1e-12
 #define  XLEAST    2.23e-308
@@ -566,4 +561,3 @@ void qNIG(double* p, double* i_mu, double* i_delta, double* i_alpha,
 
 
 ////////////////////////////////////////////////////////////////////////////////
-

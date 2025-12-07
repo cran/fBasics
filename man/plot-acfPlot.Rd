@@ -5,26 +5,21 @@
 \alias{teffectPlot}
 \alias{lacfPlot}
 
+\concept{acf}
+\concept{autocorrelation}
+\concept{pacf}
+\concept{partial autocorrelation}
+\concept{Taylor effect plot}
+
 
 \title{Autocorrelation function plots}
 
 \description{
 
-    Returns plots of autocorrelations including
-    the autocorrelation function ACF, the partial
-    ACF, the lagged ACF, and the Taylor effect plot.
-    \cr
+  Produce plots of the autocorrelation function (ACF), the partial ACF,
+  the lagged ACF, and the Taylor effect plot.
 
-    The functions to display stylized facts are:
-    
-    \tabular{ll}{
-    \code{acfPlot} \tab autocorrelation function plot, \cr
-    \code{pacfPlot} \tab partial autocorrelation function plot, \cr
-    \code{lacfPlot} \tab lagged autocorrelation function plot, \cr
-    \code{teffectPlot} \tab Taylor effect plot.}
-     
 }
-
 
 \usage{
 acfPlot(x, labels = TRUE, \dots)
@@ -41,14 +36,14 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
 
   \item{x}{
 
-    an uni- or multivariate return series of class \code{timeSeries} or
+    an uni- or multivariate time series of class \code{"timeSeries"} or
     any other object which can be transformed by the function
-    \code{as.timeSeries()} into an object of class \code{timeSeries}.
+    \code{as.timeSeries()} into an object of class \code{"timeSeries"}.
 
   }
   \item{labels}{
 
-    a logical value. Whether or not x- and y-axes should be
+    a logical value, whether or not x- and y-axes should be
     automatically labeled and a default main title should be added to
     the plot.  By default \code{TRUE}.
 
@@ -65,9 +60,9 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
   \item{type}{
 
     a character string which specifies the type of the input series,
-    either "returns" or series "values". In the case of a return series
-    as input, the required value series is computed by cumulating the
-    financial returns: \code{exp(colCumsums(x))}
+    either \code{"returns"} or \code{"values"}. In the case of a return
+    series as input, the required value series is computed by cumulating
+    the financial returns: \code{exp(colCumsums(x))}
 
   }
   \item{deltas}{
@@ -94,30 +89,40 @@ teffectPlot(x, deltas = seq(from = 0.2, to = 3, by = 0.2), lag.max = 10,
 
 \details{
     
-    \bold{Autocorrelation Functions:}
-    \cr\cr
-    The functions \code{acfPlot} and \code{pacfPlot}, plot and estimate 
-    autocorrelation and partial autocorrelation function. The functions 
-    allow to get a first view on correlations within the time series. 
-    The functions are synonym function calls for R's \code{acf} and 
+  The following plots are described here:
+    
+  \tabular{ll}{
+    \code{acfPlot} \tab autocorrelation function plot, \cr
+    \code{pacfPlot} \tab partial autocorrelation function plot, \cr
+    \code{lacfPlot} \tab lagged autocorrelation function plot, \cr
+    \code{teffectPlot} \tab Taylor effect plot.}
+
+  
+  \subsection{Autocorrelation Functions}{
+
+    The functions \code{acfPlot} and \code{pacfPlot}, plot and estimate
+    autocorrelation and partial autocorrelation function. The functions
+    allow to get a first view on correlations within the time series.
+    The functions are synonym function calls for R's \code{acf} and
     \code{pacf} from the the \code{ts} package.
-    \cr
-        
-    \bold{Taylor Effect:}
-    \cr\cr
+  }
+
+  
+  \subsection{Taylor Effect}{
+
     The "Taylor Effect" describes the fact that absolute returns of
     speculative assets have significant serial correlation over long
-    lags. Even more, autocorrelations of absolute returns are
-    typically greater than those of squared returns. From these 
-    observations the Taylor effect states, that that the autocorrelations
-    of absolute returns to the the power of \code{delta}, 
-    \code{abs(x-mean(x))^delta} reach their maximum at \code{delta=1}.
+    lags. Even more, autocorrelations of absolute returns are typically
+    greater than those of squared returns. From these observations the
+    Taylor effect states, that that the autocorrelations of absolute
+    returns to the the power of \code{delta},
+    \code{abs(x-mean(x))^delta} reach their maximum at \code{delta = 1}.
     The function \code{teffect} explores this behaviour. A plot is
-    created which shows for each lag (from 1 to \code{max.lag}) the 
-    autocorrelations as a function of the exponent \code{delta}. 
-    In the case that the above formulated hypothesis is supported,
-    all the curves should peak at the same value around \code{delta=1}.
-    
+    created which shows for each lag (from 1 to \code{max.lag}) the
+    autocorrelations as a function of the exponent \code{delta}.  In the
+    case that the above formulated hypothesis is supported, all the
+    curves should peak at the same value around \code{delta = 1}.
+  }    
 }
 
 \value{
@@ -147,6 +152,28 @@ Ding Z., Granger C.W.J., Engle R.F. (1993);
     
 }
 
+\seealso{
+  \code{\link{seriesPlot}},
+  \code{\link{returnPlot}},
+  \code{\link{cumulatedPlot}},
+  \code{\link{drawdownPlot}}
+
+  \code{\link{qqnormPlot}},
+  \code{\link{qqnigPlot}},
+  \code{\link{qqghtPlot}},
+  \code{\link{qqgldPlot}}
+
+  \code{\link{histPlot}},
+  \code{\link{densityPlot}},
+  \code{\link{logDensityPlot}}
+
+  \code{\link{boxPlot}},
+  \code{\link{boxPercentilePlot}}
+
+  \code{\link{scalinglawPlot}}
+
+  \code{\link{returnSeriesGUI}}
+}
 \examples{
 ## data
 data(LPP2005REC, package = "timeSeries")

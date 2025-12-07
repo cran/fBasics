@@ -1,7 +1,22 @@
+# fBasics 4052.98
+
+- removed include directive for R_ext/PrtUtil.h from src/nig.c (R-devel throws
+  warning about it now).
+
+- removed other redundant include directives in src/nig.c
+
+- removed a superfluous tabular environment from 'plot-qqPlot.Rd' (it was
+  raising a NOTE in recent CRAN checks).
+  
+- the documentation of several plotting functions (e.g., `qqnigPlot`) was
+  stating that, besides `TRUE` or `FALSE`, argument `grid` could have values
+  requesting vertical or horizontal grid lines only. But the code doesn't handle
+  this. Fixed the documentation of those functions to reflect this.
+
+
 # fBasics 4041.97
 
 - fixed the missing package qualifier in a link to another ackage.
-
 
 
 # fBasics 4032.96

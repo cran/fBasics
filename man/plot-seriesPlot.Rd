@@ -30,16 +30,15 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
   \item{x}{
 
     an object of class \code{"timeSeries"} or any other object which can
-    be transformed by the function \code{as.timeSeries} into an object
-    of class \code{timeSeries}. The latter case, other then
-    \code{timeSeries} objects, is more or less untested.
+    be transformed by \code{as.timeSeries} into an object of class
+    \code{"timeSeries"}.
 
   }
   \item{index}{
 
-    a numeric value, by default 100. The function cumulates column by
-    columN the returns and multiplies the result with the index value:
-    \code{index * exp(colCumsums(x))}.
+    a numeric value, by default 100. Used by \code{cumulatedPlot} only.
+    The function cumulates column by column the returns and multiplies
+    the result with the index value: \code{index * exp(colCumsums(x))}.
 
   }
   \item{labels}{
@@ -51,16 +50,16 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
   \item{type}{
 
     what type of plot should be drawn? By default we use a line plot,
-    \code{type="l"}. An alternative plot style which produces nice
-    figures is for example \code{type="h"}.
+    \code{type = "l"}. An alternative plot style which produces nice
+    figures is for example \code{type = "h"}.
 
   }
   \item{col}{
 
     the color for the series. In the univariate case use just a color
-    name like the default, \code{col="steelblue"}, in the multivariate
+    name like the default, \code{col = "steelblue"}, in the multivariate
     case we recommend to select the colors from a color palette,
-    e.g. \code{col=heat.colors(ncol(x))}.
+    e.g. \code{col = heat.colors(ncol(x))}.
 
   } 
   \item{title}{
@@ -88,13 +87,14 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
 
   }
   \item{\dots}{
-    optional arguments to be passed.
+    optional arguments to be passed to \code{plot}.
   }
 }
 
 \details{
 
-  List of Functions:
+  The plot functions can be used to plot univariate and multivariate
+  time series of class \code{timeSeries}:
     
   \tabular{ll}{
   \code{seriesPlot} \tab Returns a tailored return series plot, \cr
@@ -102,9 +102,6 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
   \code{returnPlot} \tab Displays returns given the cumulated series, \cr
   \code{drawdownPlot} \tab Displays drawdowns given the return series.}
 
-  The plot functions can be used to plot univariate and multivariate
-  time series of class \code{timeSeries}.
-    
   The graphical parameters \code{type} and \code{col} can be set by the
   values specified through the argument list. In the case of multivariate
   time series \code{col} can be specified by the values returned by
@@ -121,16 +118,38 @@ drawdownPlot(x, labels = TRUE, type = "l", col = "steelblue",
   \code{ylab}, all other \code{par} arguments can be passed to the
   \code{plot} function.
     
-  If the \code{labels} flag is unset to \code{FALSE}, then no decorations 
-  will be added tothe  plot, and the plot can be fully decorated by the
-  user.
+  If the \code{labels} flag is unset to \code{FALSE}, then no
+  decorations will be added to the plot, and the plot can be fully
+  decorated by the user.
     
 } 
 
 \value{
-  displays a time series plot
+  \code{NULL} (invisibly)
 }
 
+\seealso{
+  \code{\link{qqnormPlot}},
+  \code{\link{qqnigPlot}},
+  \code{\link{qqghtPlot}},
+  \code{\link{qqgldPlot}}
+
+  \code{\link{histPlot}},
+  \code{\link{densityPlot}},
+  \code{\link{logDensityPlot}}
+
+  \code{\link{boxPlot}},
+  \code{\link{boxPercentilePlot}}
+
+  \code{\link{acfPlot}},
+  \code{\link{pacfPlot}},
+  \code{\link{teffectPlot}},
+  \code{\link{lacfPlot}}
+
+  \code{\link{scalinglawPlot}}
+
+  \code{\link{returnSeriesGUI}}
+}
 \examples{
 data(LPP2005REC, package = "timeSeries")
 tS <- as.timeSeries(LPP2005REC)

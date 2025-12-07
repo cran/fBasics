@@ -8,7 +8,7 @@
 
 \description{
     
-  Produce  a box plot or a box percentile plot.
+  Produce a box plot or a box percentile plot.
 
 }
 
@@ -23,16 +23,15 @@ boxPercentilePlot(x, col = "steelblue", title = TRUE, \dots)
     
     an object of class \code{"timeSeries"} or any other object which can
     be transformed by the function \code{as.timeSeries} into an object
-    of class \code{timeSeries}. The latter case, other then
-    \code{timeSeries} objects, is more or less untested.
-	
+    of class \code{"timeSeries"}.
+    
   }  
   \item{col}{
 
     the color for the series. In the univariate case use just a color
-    name like the default, \code{col="steelblue"}, in the multivariate
+    name like the default, \code{col = "steelblue"}, in the multivariate
     case we recommend to select the colors from a color palette,
-    e.g. \code{col=heat.colors(ncol(x))}.
+    e.g. \code{col = heat.colors(ncol(x))}.
 
   }
   \item{title}{
@@ -42,7 +41,7 @@ boxPercentilePlot(x, col = "steelblue", title = TRUE, \dots)
 
   }
   \item{\dots}{
-    optional arguments to be passed.
+    optional arguments to be passed to \code{\link{boxplot}}.
   }
     
 }
@@ -55,10 +54,33 @@ boxPercentilePlot(x, col = "steelblue", title = TRUE, \dots)
 }
 
 \value{
-  \code{NULL}, 
-  displays a time series plot
+  \code{NULL}
 }
 
+\seealso{
+  \code{\link{seriesPlot}},
+  \code{\link{returnPlot}},
+  \code{\link{cumulatedPlot}},
+  \code{\link{drawdownPlot}}
+
+  \code{\link{qqnormPlot}},
+  \code{\link{qqnigPlot}},
+  \code{\link{qqghtPlot}},
+  \code{\link{qqgldPlot}}
+
+  \code{\link{histPlot}},
+  \code{\link{densityPlot}},
+  \code{\link{logDensityPlot}}
+
+  \code{\link{acfPlot}},
+  \code{\link{pacfPlot}},
+  \code{\link{teffectPlot}},
+  \code{\link{lacfPlot}}
+
+  \code{\link{scalinglawPlot}}
+
+  \code{\link{returnSeriesGUI}}
+}
 \examples{
 ## data
 data(LPP2005REC, package = "timeSeries")
